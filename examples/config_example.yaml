@@ -1,0 +1,4 @@
+# Example configuration for Clawkeeper
+repo: openclaw/openclaw
+limit: 50
+output: ./reports/report.md
