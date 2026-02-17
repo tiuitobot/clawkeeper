@@ -1,0 +1,74 @@
+[
+  {
+    "id": "K001",
+    "info": "Merge rate real do OpenClaw no dataset enriquecido é 24.1% (39% era artefato de amostra pequena).",
+    "importance": "critical",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "reports/D01v3-enrichment-analysis.md",
+    "context": "Amostra expandida (1521 PRs enriquecidas) corrigiu viés da amostra inicial de 500 PRs."
+  },
+  {
+    "id": "K002",
+    "info": "Comentário de steipete é o sinal observável mais forte: ~74.5% merge quando presente (17x odds vs baseline ~13.3%).",
+    "importance": "critical",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "reports/D01v3-enrichment-analysis.md",
+    "context": "Feature útil no modelo mature; não usar no early model porque aparece tarde no ciclo da PR."
+  },
+  {
+    "id": "K003",
+    "info": "Greptile review não prediz merge positivamente no histórico atual (WITH 14.0% vs WITHOUT 17.7%).",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "reports/D01v3-enrichment-analysis.md",
+    "context": "Tratar has_greptile_review como controle/proxy de complexidade, com controle temporal (weeks_since_open)."
+  },
+  {
+    "id": "K004",
+    "info": "Há forte aceleração temporal no processo de merge (ex.: W05=6.7% vs W08=54.3%).",
+    "importance": "critical",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "reports/D01v3-enrichment-analysis.md",
+    "context": "weeks_since_open e/ou weekly_pr_volume são variáveis obrigatórias para reduzir confounding temporal."
+  },
+  {
+    "id": "K005",
+    "info": "Tamanho ótimo observado está em S-M-L por labels; por LoC real, L (~29.6%) é pico e XL cai forte.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "reports/D01v3-enrichment-analysis.md",
+    "context": "Usar duas representações de tamanho (label e LoC) para robustez no logit."
+  },
+  {
+    "id": "K006",
+    "info": "Engajamento alto (4+ comentários) está associado a maior merge rate (~21-27% vs baseline ~14%).",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "reports/D01v3-enrichment-analysis.md",
+    "context": "Criar feature high_engagement para modelo mature."
+  },
+  {
+    "id": "K007",
+    "info": "Stage 0 (historical ingest + enrichment) está completo: 3233 PRs históricas, 1521 enriquecidas (47% coverage).",
+    "importance": "critical",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "data/all_historical_prs.json + data/enriched_full.jsonl + commit 34039d9",
+    "context": "Pré-requisito para Stage 0.5 (model specification) e 0.7 (bootstrap)."
+  },
+  {
+    "id": "K008",
+    "info": "Estrutura inicial de código do repo foi scaffolded conforme PLAN-v4 (src/tests/benchmarks/examples).",
+    "importance": "high",
+    "status": "active",
+    "date": "2026-02-17",
+    "source": "commit 0743fe4",
+    "context": "Base pronta para implementação dos módulos do pipeline; ainda sem lógica funcional."
+  }
+]
