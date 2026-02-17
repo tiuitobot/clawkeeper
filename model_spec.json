@@ -1,0 +1,230 @@
+{
+  "version": "0.1.0",
+  "project": "clawkeeper",
+  "repo": "openclaw/openclaw",
+  "date": "2026-02-17",
+  "objective": "Estimate P(merge) for open PRs using historical maintainers' decisions",
+  "target": {
+    "name": "merged",
+    "type": "binary",
+    "encoding": {
+      "merged": 1,
+      "closed_not_merged": 0
+    }
+  },
+  "estimation": {
+    "method": "logistic_regression",
+    "regularization": "l2",
+    "class_weight": "balanced",
+    "solver": "liblinear",
+    "metrics": [
+      "auc_roc",
+      "pseudo_r2",
+      "brier_score",
+      "calibration_curve"
+    ]
+  },
+  "temporal_strategy": {
+    "approach": "dual_model_plus_weighted",
+    "models": [
+      {
+        "name": "quality_model",
+        "train_window": "2025-11 to 2026-01",
+        "rationale": "lower volume, decisions likely more careful"
+      },
+      {
+        "name": "triage_model",
+        "train_window": "2026-02",
+        "rationale": "high-volume period reflects current triage pressure"
+      }
+    ],
+    "weighted_regression": {
+      "weight": "1/weekly_pr_volume",
+      "control_features": [
+        "weeks_since_open",
+        "weekly_pr_volume"
+      ]
+    }
+  },
+  "feature_sets": {
+    "early_model": [
+      "size_label",
+      "loc_total",
+      "files_changed",
+      "has_tests",
+      "ci_green",
+      "category",
+      "author_prior_prs",
+      "author_prior_merge_rate",
+      "component_area",
+      "weeks_since_open",
+      "weekly_pr_volume",
+      "release_period"
+    ],
+    "mature_model": [
+      "size_label",
+      "loc_total",
+      "files_changed",
+      "has_tests",
+      "ci_green",
+      "category",
+      "author_prior_prs",
+      "author_prior_merge_rate",
+      "component_area",
+      "weeks_since_open",
+      "weekly_pr_volume",
+      "release_period",
+      "high_engagement",
+      "comment_count",
+      "has_top_contributor_comment",
+      "top_contributor_comment_count",
+      "has_maintainer_comment_steipete",
+      "greptile_score",
+      "has_greptile_review",
+      "pr_age_hours"
+    ]
+  },
+  "features": [
+    {
+      "name": "size_label",
+      "type": "categorical",
+      "phase": "early",
+      "expected_sign": "non_linear",
+      "notes": "S/M/L historically stronger than XS/XL"
+    },
+    {
+      "name": "loc_total",
+      "type": "numeric",
+      "phase": "early",
+      "expected_sign": "negative_after_threshold",
+      "notes": "L by LoC had local peak; XL drops"
+    },
+    {
+      "name": "files_changed",
+      "type": "numeric",
+      "phase": "early",
+      "expected_sign": "negative",
+      "notes": "proxy for complexity"
+    },
+    {
+      "name": "has_tests",
+      "type": "binary",
+      "phase": "early",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "ci_green",
+      "type": "binary",
+      "phase": "early",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "category",
+      "type": "categorical",
+      "phase": "early",
+      "expected_sign": "varies_by_type"
+    },
+    {
+      "name": "author_prior_prs",
+      "type": "numeric",
+      "phase": "early",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "author_prior_merge_rate",
+      "type": "numeric",
+      "phase": "early",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "component_area",
+      "type": "categorical",
+      "phase": "early",
+      "expected_sign": "varies"
+    },
+    {
+      "name": "weeks_since_open",
+      "type": "numeric",
+      "phase": "early",
+      "expected_sign": "positive",
+      "notes": "required due to strong temporal confounding"
+    },
+    {
+      "name": "weekly_pr_volume",
+      "type": "numeric",
+      "phase": "early",
+      "expected_sign": "negative",
+      "notes": "triage pressure control"
+    },
+    {
+      "name": "release_period",
+      "type": "categorical",
+      "phase": "early",
+      "expected_sign": "varies"
+    },
+    {
+      "name": "high_engagement",
+      "type": "binary",
+      "phase": "mature",
+      "expected_sign": "positive",
+      "notes": "4+ comments associated with higher merge"
+    },
+    {
+      "name": "comment_count",
+      "type": "numeric",
+      "phase": "mature",
+      "expected_sign": "non_linear"
+    },
+    {
+      "name": "has_top_contributor_comment",
+      "type": "binary",
+      "phase": "mature",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "top_contributor_comment_count",
+      "type": "numeric",
+      "phase": "mature",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "has_maintainer_comment_steipete",
+      "type": "binary",
+      "phase": "mature",
+      "expected_sign": "strong_positive",
+      "notes": "include only mature model to avoid leakage by timing"
+    },
+    {
+      "name": "greptile_score",
+      "type": "numeric",
+      "phase": "mature",
+      "expected_sign": "weak_or_zero",
+      "notes": "kept as control"
+    },
+    {
+      "name": "has_greptile_review",
+      "type": "binary",
+      "phase": "mature",
+      "expected_sign": "weak_or_negative",
+      "notes": "proxy complexity; not quality signal"
+    },
+    {
+      "name": "pr_age_hours",
+      "type": "numeric",
+      "phase": "mature",
+      "expected_sign": "positive_then_plateau"
+    }
+  ],
+  "selection_rule": {
+    "llm_scores_as_regressors": "disabled_by_default",
+    "enable_if": "pseudo_r2 < 0.50 on deterministic model",
+    "keep_disabled_if": "pseudo_r2 >= 0.60"
+  },
+  "outputs": [
+    "p_merge",
+    "confidence_interval",
+    "model_used (early|mature|quality|triage)",
+    "top_positive_drivers",
+    "top_negative_drivers"
+  ]
+}
