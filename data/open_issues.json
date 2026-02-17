@@ -1,0 +1,374 @@
+[
+  {
+    "number": 19142,
+    "title": "Windows binary update fails with 'Access is denied' error",
+    "user": "ycr0123",
+    "labels": [],
+    "created_at": "2026-02-17T12:37:42Z",
+    "updated_at": "2026-02-17T12:37:42Z"
+  },
+  {
+    "number": 19139,
+    "title": "Signal: base64 group IDs corrupted by session key normalization (toLowerCase)",
+    "user": "mgls23",
+    "labels": [],
+    "created_at": "2026-02-17T12:35:29Z",
+    "updated_at": "2026-02-17T12:35:29Z"
+  },
+  {
+    "number": 19138,
+    "title": "[macOS] launchd 快速重启被误判为崩溃循环导致服务被卸载",
+    "user": "forvendettaw",
+    "labels": [],
+    "created_at": "2026-02-17T12:33:14Z",
+    "updated_at": "2026-02-17T12:33:14Z"
+  },
+  {
+    "number": 19137,
+    "title": "gateway config.get leaks secrets into session transcript JSONL",
+    "user": "BoxiYu",
+    "labels": [],
+    "created_at": "2026-02-17T12:23:17Z",
+    "updated_at": "2026-02-17T12:23:17Z"
+  },
+  {
+    "number": 19133,
+    "title": "Feature request: Consider linking notifyOnExit with suppressToolErrors for exec tools",
+    "user": "Ramsbaby",
+    "labels": [],
+    "created_at": "2026-02-17T12:15:02Z",
+    "updated_at": "2026-02-17T12:17:55Z"
+  },
+  {
+    "number": 19131,
+    "title": "[Bug]: exec tool returns no stdout/stderr when gateway runs as Windows Scheduled Task",
+    "user": "MarkMolina",
+    "labels": [],
+    "created_at": "2026-02-17T12:13:53Z",
+    "updated_at": "2026-02-17T12:13:53Z"
+  },
+  {
+    "number": 19130,
+    "title": "Support DashScope (Alibaba Cloud Bailian) provider with role mapping (developer → system)",
+    "user": "Putzhuawa",
+    "labels": [],
+    "created_at": "2026-02-17T12:13:21Z",
+    "updated_at": "2026-02-17T12:13:21Z"
+  },
+  {
+    "number": 19127,
+    "title": "Double-compaction destroys conversation context: stale usage.totalTokens on kept messages",
+    "user": "tedwatson",
+    "labels": [],
+    "created_at": "2026-02-17T12:08:13Z",
+    "updated_at": "2026-02-17T12:12:57Z"
+  },
+  {
+    "number": 19124,
+    "title": "[Bug]: Unknown provider \"openai-codex\" via `models auth login`",
+    "user": "Nek-12",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2026-02-17T12:01:57Z",
+    "updated_at": "2026-02-17T12:01:57Z"
+  },
+  {
+    "number": 19123,
+    "title": "Bootstrap files silently truncated with no in-prompt warning to agent",
+    "user": "carlj-dev",
+    "labels": [],
+    "created_at": "2026-02-17T11:57:02Z",
+    "updated_at": "2026-02-17T11:57:02Z"
+  },
+  {
+    "number": 19121,
+    "title": "[Bug]: Agents: OpenAI Responses 400 \"reasoning required following item\" when history has orphaned reasoning (same model)",
+    "user": "arthurhan8888",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2026-02-17T11:56:43Z",
+    "updated_at": "2026-02-17T11:56:43Z"
+  },
+  {
+    "number": 19120,
+    "title": "Bug: OpenRouter Nous/Hermes models fail with 'list object has no element 1'",
+    "user": "kasparkastl",
+    "labels": [],
+    "created_at": "2026-02-17T11:56:01Z",
+    "updated_at": "2026-02-17T11:59:37Z"
+  },
+  {
+    "number": 19119,
+    "title": "Access Qwen3.5 & Latest Models Same-Day via Higress | OpenClaw 当天接入 Qwen3.5 等最新模型（Higress 集成）",
+    "user": "johnlanni",
+    "labels": [],
+    "created_at": "2026-02-17T11:54:32Z",
+    "updated_at": "2026-02-17T11:54:32Z"
+  },
+  {
+    "number": 19118,
+    "title": "[Bug]: Bug: exec tool returns \"(no output)\" on Windows",
+    "user": "Lzx-Xiu",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2026-02-17T11:48:21Z",
+    "updated_at": "2026-02-17T11:48:21Z"
+  },
+  {
+    "number": 19117,
+    "title": "Include project/agent context in 401 authentication errors",
+    "user": "jordiagi",
+    "labels": [],
+    "created_at": "2026-02-17T11:46:19Z",
+    "updated_at": "2026-02-17T11:46:19Z"
+  },
+  {
+    "number": 19107,
+    "title": "Exec tool returns empty output without PTY mode on Windows (regression in 2026.2.15)",
+    "user": "henrybottter",
+    "labels": [],
+    "created_at": "2026-02-17T11:31:58Z",
+    "updated_at": "2026-02-17T11:31:58Z"
+  },
+  {
+    "number": 19099,
+    "title": "[Bug]: Cumulative images in chat history cause HTTP 400 (Max images exceeded) on plain text messages",
+    "user": "lcuevastodoit",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2026-02-17T11:22:29Z",
+    "updated_at": "2026-02-17T11:22:29Z"
+  },
+  {
+    "number": 19097,
+    "title": "Sandbox-generated media files rejected by outbound media path validation",
+    "user": "bitflorist",
+    "labels": [],
+    "created_at": "2026-02-17T11:17:36Z",
+    "updated_at": "2026-02-17T11:17:36Z"
+  },
+  {
+    "number": 19096,
+    "title": "Reduce CVM Docker image size (2.3GB → 1.5GB target)",
+    "user": "h4x3rotab",
+    "labels": [],
+    "created_at": "2026-02-17T11:09:37Z",
+    "updated_at": "2026-02-17T11:09:37Z"
+  },
+  {
+    "number": 19092,
+    "title": "Discord CV2 component interactions always show 'expired' — bundling splits componentEntries Map",
+    "user": "pavkam",
+    "labels": [],
+    "created_at": "2026-02-17T10:57:05Z",
+    "updated_at": "2026-02-17T10:57:05Z"
+  },
+  {
+    "number": 19091,
+    "title": "[Bug]: Device token mismatch after upgrade to 2026.2.15 with gateway.bind=lan — probe succeeds, RPC fails",
+    "user": "bbrietzke",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2026-02-17T10:52:38Z",
+    "updated_at": "2026-02-17T11:19:40Z"
+  },
+  {
+    "number": 19089,
+    "title": "[Feature]: Request: Add Image Recognition / OCR Capability",
+    "user": "lbt12",
+    "labels": [
+      "enhancement"
+    ],
+    "created_at": "2026-02-17T10:47:08Z",
+    "updated_at": "2026-02-17T10:47:08Z"
+  },
+  {
+    "number": 19086,
+    "title": "Feature Request: Custom display name for Web UI sessions",
+    "user": "Movingtoleveltwo",
+    "labels": [],
+    "created_at": "2026-02-17T10:41:52Z",
+    "updated_at": "2026-02-17T10:41:52Z"
+  },
+  {
+    "number": 19085,
+    "title": "edit tool rejects empty string newText as 'Missing required parameter'",
+    "user": "haru217",
+    "labels": [],
+    "created_at": "2026-02-17T10:38:53Z",
+    "updated_at": "2026-02-17T11:18:44Z"
+  },
+  {
+    "number": 19081,
+    "title": "WhatsApp read receipts not sending despite sendReadReceipts: true",
+    "user": "armandokun",
+    "labels": [],
+    "created_at": "2026-02-17T10:29:54Z",
+    "updated_at": "2026-02-17T10:29:54Z"
+  },
+  {
+    "number": 19079,
+    "title": "feat: env var / tokenFile support for per-account bot tokens and skills apiKey",
+    "user": "drakulavich",
+    "labels": [],
+    "created_at": "2026-02-17T10:16:34Z",
+    "updated_at": "2026-02-17T10:16:34Z"
+  },
+  {
+    "number": 19076,
+    "title": "Feature Request: Max (VK) Messenger channel plugin",
+    "user": "Patr56",
+    "labels": [],
+    "created_at": "2026-02-17T10:05:42Z",
+    "updated_at": "2026-02-17T10:05:42Z"
+  },
+  {
+    "number": 19075,
+    "title": "[Feature]: Add baseUrl option for Brave Search provider",
+    "user": "jkoprax",
+    "labels": [
+      "enhancement"
+    ],
+    "created_at": "2026-02-17T10:05:40Z",
+    "updated_at": "2026-02-17T10:06:26Z"
+  },
+  {
+    "number": 19074,
+    "title": "[Bug]: run into Loop with Ollama glm-4.7",
+    "user": "System-9",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2026-02-17T10:03:25Z",
+    "updated_at": "2026-02-17T10:03:25Z"
+  },
+  {
+    "number": 19072,
+    "title": "First-class tool execution approvals: pause + interrupt + resume",
+    "user": "evgenyyy",
+    "labels": [],
+    "created_at": "2026-02-17T09:54:23Z",
+    "updated_at": "2026-02-17T09:57:12Z"
+  },
+  {
+    "number": 19071,
+    "title": "Upgrade tool schemas to JSON Schema draft 2020-12 for broader provider compatibility",
+    "user": "vedanth-jadhav",
+    "labels": [],
+    "created_at": "2026-02-17T09:43:57Z",
+    "updated_at": "2026-02-17T09:43:57Z"
+  },
+  {
+    "number": 19070,
+    "title": "[Bug]: Model Hallucination During Heartbeat Delivered to User",
+    "user": "adamsrog",
+    "labels": [
+      "bug"
+    ],
+    "created_at": "2026-02-17T09:40:32Z",
+    "updated_at": "2026-02-17T09:40:32Z"
+  },
+  {
+    "number": 19069,
+    "title": "Add explicit reply_to_message_id parameter for agent responses",
+    "user": "DKistenev",
+    "labels": [],
+    "created_at": "2026-02-17T09:33:43Z",
+    "updated_at": "2026-02-17T09:33:43Z"
+  },
+  {
+    "number": 19068,
+    "title": "Severe degradation in agent quality, identity persistence and context management since v2026.2.15",
+    "user": "brugillo",
+    "labels": [],
+    "created_at": "2026-02-17T09:30:34Z",
+    "updated_at": "2026-02-17T09:31:38Z"
+  },
+  {
+    "number": 19067,
+    "title": "Feature: Expose parent session's delivery context to cron/subagent sessions",
+    "user": "Manzojunior",
+    "labels": [],
+    "created_at": "2026-02-17T09:27:09Z",
+    "updated_at": "2026-02-17T09:27:09Z"
+  },
+  {
+    "number": 19066,
+    "title": "Feature: Cron subagents should auto-inherit delivery target (chatId) for message tool",
+    "user": "Manzojunior",
+    "labels": [],
+    "created_at": "2026-02-17T09:26:23Z",
+    "updated_at": "2026-02-17T09:26:23Z"
+  },
+  {
+    "number": 19065,
+    "title": "Audit safeguard logs destructive config writes but doesn't block them",
+    "user": "jtczville",
+    "labels": [],
+    "created_at": "2026-02-17T09:24:48Z",
+    "updated_at": "2026-02-17T09:24:48Z"
+  },
+  {
+    "number": 19062,
+    "title": "Telegram: unify inbound event handling for message-like updates",
+    "user": "obviyus",
+    "labels": [
+      "maintainer"
+    ],
+    "created_at": "2026-02-17T09:16:28Z",
+    "updated_at": "2026-02-17T09:16:37Z"
+  },
+  {
+    "number": 19060,
+    "title": "Telegram: Beginning of streamed messages being lost/truncated (beta 2026.2.15)",
+    "user": "demyte",
+    "labels": [],
+    "created_at": "2026-02-17T09:12:24Z",
+    "updated_at": "2026-02-17T09:22:45Z"
+  },
+  {
+    "number": 19053,
+    "title": "llm-task extension: broken import path in bundled/npm installs (2026.2.15)",
+    "user": "robwhite4",
+    "labels": [],
+    "created_at": "2026-02-17T08:52:32Z",
+    "updated_at": "2026-02-17T09:11:13Z"
+  },
+  {
+    "number": 19049,
+    "title": "Bug: sessions_send inter-session messages incorrectly attributed to user role instead of assistant",
+    "user": "kailking",
+    "labels": [],
+    "created_at": "2026-02-17T08:49:18Z",
+    "updated_at": "2026-02-17T08:49:18Z"
+  },
+  {
+    "number": 19048,
+    "title": "Auto-repair orphaned tool_use blocks in session history",
+    "user": "bharatindia123-a11y",
+    "labels": [],
+    "created_at": "2026-02-17T08:46:14Z",
+    "updated_at": "2026-02-17T08:46:14Z"
+  },
+  {
+    "number": 19047,
+    "title": "[Bug]: Telegram messages silently dropped when getFile fails (no retry)",
+    "user": "DrCaswellBarry",
+    "labels": [],
+    "created_at": "2026-02-17T08:45:46Z",
+    "updated_at": "2026-02-17T08:47:33Z"
+  },
+  {
+    "number": 19046,
+    "title": "[Feature]: Exec allowlist — support compound shell commands (&&, ;, |)",
+    "user": "xrom2863",
+    "labels": [],
+    "created_at": "2026-02-17T08:44:31Z",
+    "updated_at": "2026-02-17T08:47:42Z"
+  }
+]
