@@ -1,230 +1,450 @@
 {
-  "version": "0.1.0",
+  "version": "0.5.0",
+  "stage": "0.5",
   "project": "clawkeeper",
   "repo": "openclaw/openclaw",
   "date": "2026-02-17",
   "objective": "Estimate P(merge) for open PRs using historical maintainers' decisions",
+
+  "sources_read": [
+    "data/AGENTS.md (CLAUDE.md is symlink to AGENTS.md)",
+    "data/CONTRIBUTING.md",
+    "data/all_historical_prs.json (3233 PRs)",
+    "data/enriched_full.jsonl (1521 PRs with detailed data)",
+    "reports/D01v3-enrichment-analysis.md"
+  ],
+
+  "repo_profile": {
+    "total_historical_prs": 3233,
+    "merged": 780,
+    "closed_not_merged": 2453,
+    "merge_rate": 0.241,
+    "unique_authors": 1318,
+    "draft_prs": 57,
+    "temporal_window": "2025-11 to 2026-02",
+    "maintainer_label_merge_rate": 0.907,
+    "governance_doc": "AGENTS.md (CLAUDE.md is symlink)",
+    "project_type": "TypeScript (ESM), Node 22+, pnpm",
+    "testing_framework": "Vitest, coverage 70% threshold",
+    "ci_checks": ["pnpm build", "pnpm check", "pnpm test"]
+  },
+
   "target": {
     "name": "merged",
     "type": "binary",
-    "encoding": {
-      "merged": 1,
-      "closed_not_merged": 0
-    }
+    "encoding": { "merged": 1, "closed_not_merged": 0 },
+    "base_rate": 0.241
   },
+
   "estimation": {
     "method": "logistic_regression",
     "regularization": "l2",
     "class_weight": "balanced",
     "solver": "liblinear",
-    "metrics": [
-      "auc_roc",
-      "pseudo_r2",
-      "brier_score",
-      "calibration_curve"
-    ]
+    "metrics": ["auc_roc", "pseudo_r2", "brier_score", "calibration_curve"]
   },
+
   "temporal_strategy": {
     "approach": "dual_model_plus_weighted",
     "models": [
       {
         "name": "quality_model",
         "train_window": "2025-11 to 2026-01",
-        "rationale": "lower volume, decisions likely more careful"
+        "rationale": "Lower volume, maintainers had time to evaluate carefully"
       },
       {
         "name": "triage_model",
         "train_window": "2026-02",
-        "rationale": "high-volume period reflects current triage pressure"
+        "rationale": "High-volume period reflects current triage pressure"
       }
     ],
     "weighted_regression": {
       "weight": "1/weekly_pr_volume",
-      "control_features": [
+      "control_features": ["weeks_since_open", "weekly_pr_volume"]
+    }
+  },
+
+  "feature_sets": {
+    "early_model": {
+      "description": "Features available at PR creation (no interaction signals)",
+      "features": [
+        "loc_additions",
+        "loc_deletions",
+        "loc_total",
+        "files_changed",
+        "size_label",
+        "has_tests",
+        "ci_green",
+        "is_draft",
+        "category",
+        "component_area",
+        "author_prior_prs",
+        "author_prior_merge_rate",
+        "author_association",
+        "has_maintainer_label",
+        "has_trusted_contributor_label",
+        "has_experienced_contributor_label",
         "weeks_since_open",
-        "weekly_pr_volume"
+        "weekly_pr_volume",
+        "release_period"
+      ]
+    },
+    "mature_model": {
+      "description": "All features including interaction signals (comments, reviews, steipete)",
+      "features": [
+        "loc_additions",
+        "loc_deletions",
+        "loc_total",
+        "files_changed",
+        "size_label",
+        "has_tests",
+        "ci_green",
+        "is_draft",
+        "category",
+        "component_area",
+        "author_prior_prs",
+        "author_prior_merge_rate",
+        "author_association",
+        "has_maintainer_label",
+        "has_trusted_contributor_label",
+        "has_experienced_contributor_label",
+        "weeks_since_open",
+        "weekly_pr_volume",
+        "release_period",
+        "comment_count",
+        "high_engagement",
+        "review_count",
+        "has_approval",
+        "has_changes_requested",
+        "has_maintainer_comment_steipete",
+        "has_top_contributor_comment",
+        "top_contributor_comment_count",
+        "has_greptile_review",
+        "greptile_score",
+        "pr_age_hours",
+        "touches_multiple_channels",
+        "touches_extensions",
+        "is_fork_pr"
       ]
     }
   },
-  "feature_sets": {
-    "early_model": [
-      "size_label",
-      "loc_total",
-      "files_changed",
-      "has_tests",
-      "ci_green",
-      "category",
-      "author_prior_prs",
-      "author_prior_merge_rate",
-      "component_area",
-      "weeks_since_open",
-      "weekly_pr_volume",
-      "release_period"
-    ],
-    "mature_model": [
-      "size_label",
-      "loc_total",
-      "files_changed",
-      "has_tests",
-      "ci_green",
-      "category",
-      "author_prior_prs",
-      "author_prior_merge_rate",
-      "component_area",
-      "weeks_since_open",
-      "weekly_pr_volume",
-      "release_period",
-      "high_engagement",
-      "comment_count",
-      "has_top_contributor_comment",
-      "top_contributor_comment_count",
-      "has_maintainer_comment_steipete",
-      "greptile_score",
-      "has_greptile_review",
-      "pr_age_hours"
-    ]
-  },
+
   "features": [
     {
-      "name": "size_label",
-      "type": "categorical",
+      "name": "loc_additions",
+      "type": "numeric",
       "phase": "early",
-      "expected_sign": "non_linear",
-      "notes": "S/M/L historically stronger than XS/XL"
+      "extraction": "pr.additions",
+      "expected_sign": "negative_after_threshold",
+      "notes": "Raw additions count"
+    },
+    {
+      "name": "loc_deletions",
+      "type": "numeric",
+      "phase": "early",
+      "extraction": "pr.deletions",
+      "expected_sign": "positive_or_neutral",
+      "notes": "Deletions may signal cleanup/refactor"
     },
     {
       "name": "loc_total",
       "type": "numeric",
       "phase": "early",
+      "extraction": "pr.additions + pr.deletions",
       "expected_sign": "negative_after_threshold",
-      "notes": "L by LoC had local peak; XL drops"
+      "notes": "L by LoC had peak (~29.6%), XL drops hard"
     },
     {
       "name": "files_changed",
       "type": "numeric",
       "phase": "early",
+      "extraction": "pr.changed_files or len(pr.files)",
       "expected_sign": "negative",
-      "notes": "proxy for complexity"
+      "notes": "Proxy for scope/complexity. PR#279 had 236 files = instant reject"
+    },
+    {
+      "name": "size_label",
+      "type": "categorical",
+      "phase": "early",
+      "extraction": "label matching 'size: *'",
+      "expected_sign": "non_linear",
+      "notes": "S/M/L historically stronger merge rates than XS/XL. Use BOTH this and loc_total"
     },
     {
       "name": "has_tests",
       "type": "binary",
       "phase": "early",
-      "expected_sign": "positive"
+      "extraction": "any file in ['*.test.ts', '*.e2e.test.ts'] among pr.files",
+      "expected_sign": "positive",
+      "notes": "AGENTS.md: 'Run tests: pnpm build && pnpm check && pnpm test'. Vitest colocated"
     },
     {
       "name": "ci_green",
       "type": "binary",
       "phase": "early",
-      "expected_sign": "positive"
+      "extraction": "GitHub checks API or commit status",
+      "expected_sign": "positive",
+      "notes": "CI includes build, typecheck (tsgo), lint, test"
+    },
+    {
+      "name": "is_draft",
+      "type": "binary",
+      "phase": "early",
+      "extraction": "pr.draft",
+      "expected_sign": "negative",
+      "notes": "57 drafts in dataset. Signal of 'not ready'"
     },
     {
       "name": "category",
       "type": "categorical",
       "phase": "early",
-      "expected_sign": "varies_by_type"
-    },
-    {
-      "name": "author_prior_prs",
-      "type": "numeric",
-      "phase": "early",
-      "expected_sign": "positive"
-    },
-    {
-      "name": "author_prior_merge_rate",
-      "type": "numeric",
-      "phase": "early",
-      "expected_sign": "positive"
+      "extraction": "from labels: agents/gateway/cli/commands/docs/scripts/docker/security/extensions:*",
+      "expected_sign": "varies_by_type",
+      "notes": "Top categories: agents(1161), docs(594), gateway(578), commands(427), cli(328)"
     },
     {
       "name": "component_area",
       "type": "categorical",
       "phase": "early",
-      "expected_sign": "varies"
+      "extraction": "from labels: channel:*/app:* or from file paths (src/telegram, extensions/*, apps/*, docs/)",
+      "expected_sign": "varies",
+      "notes": "Channel PRs dominate. Telegram(347), discord(315), web-ui(336), slack(222), whatsapp(215)"
+    },
+    {
+      "name": "author_prior_prs",
+      "type": "numeric",
+      "phase": "early",
+      "extraction": "count of previous PRs by same author in dataset",
+      "expected_sign": "positive",
+      "notes": "1318 unique authors. Top: 0xRaini(134), arosstale(110), shtse8(94)"
+    },
+    {
+      "name": "author_prior_merge_rate",
+      "type": "numeric",
+      "phase": "early",
+      "extraction": "% of author's previous PRs merged",
+      "expected_sign": "positive",
+      "notes": "First-time contributors have 0 history. Use prior only, exclude current PR"
+    },
+    {
+      "name": "author_association",
+      "type": "categorical",
+      "phase": "early",
+      "extraction": "from enriched data: comments[].authorAssociation (MEMBER/CONTRIBUTOR/NONE for PR author)",
+      "expected_sign": "MEMBER > CONTRIBUTOR > NONE",
+      "notes": "GitHub association status. MEMBER/CONTRIBUTOR likely higher merge"
+    },
+    {
+      "name": "has_maintainer_label",
+      "type": "binary",
+      "phase": "early",
+      "extraction": "'maintainer' in labels",
+      "expected_sign": "strong_positive",
+      "notes": "90.7% merge rate when present (183 PRs). Very strong signal"
+    },
+    {
+      "name": "has_trusted_contributor_label",
+      "type": "binary",
+      "phase": "early",
+      "extraction": "'trusted-contributor' in labels",
+      "expected_sign": "positive",
+      "notes": "96 PRs with this label"
+    },
+    {
+      "name": "has_experienced_contributor_label",
+      "type": "binary",
+      "phase": "early",
+      "extraction": "'experienced-contributor' in labels",
+      "expected_sign": "positive",
+      "notes": "99 PRs with this label"
     },
     {
       "name": "weeks_since_open",
       "type": "numeric",
       "phase": "early",
+      "extraction": "isoweek(created_at) relative to repo creation (2025-11-24)",
       "expected_sign": "positive",
-      "notes": "required due to strong temporal confounding"
+      "notes": "CRITICAL: W05=6.7% → W08=54.3%. Strongest temporal confounding"
     },
     {
       "name": "weekly_pr_volume",
       "type": "numeric",
       "phase": "early",
+      "extraction": "count of PRs opened in same isoweek",
       "expected_sign": "negative",
-      "notes": "triage pressure control"
+      "notes": "Control: high volume → triage pressure → lower quality decisions"
     },
     {
       "name": "release_period",
       "type": "categorical",
       "phase": "early",
-      "expected_sign": "varies"
-    },
-    {
-      "name": "high_engagement",
-      "type": "binary",
-      "phase": "mature",
-      "expected_sign": "positive",
-      "notes": "4+ comments associated with higher merge"
+      "extraction": "closest release tag at PR creation time",
+      "expected_sign": "varies",
+      "notes": "Releases almost daily. May capture pre/post major-version effects"
     },
     {
       "name": "comment_count",
       "type": "numeric",
       "phase": "mature",
+      "extraction": "len(pr.comments)",
       "expected_sign": "non_linear"
+    },
+    {
+      "name": "high_engagement",
+      "type": "binary",
+      "phase": "mature",
+      "extraction": "comment_count >= 4",
+      "expected_sign": "positive",
+      "notes": "4+ comments = 21-27% merge vs 14% baseline"
+    },
+    {
+      "name": "review_count",
+      "type": "numeric",
+      "phase": "mature",
+      "extraction": "len(pr.reviews)",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "has_approval",
+      "type": "binary",
+      "phase": "mature",
+      "extraction": "any review with state='APPROVED'",
+      "expected_sign": "positive"
+    },
+    {
+      "name": "has_changes_requested",
+      "type": "binary",
+      "phase": "mature",
+      "extraction": "any review with state='CHANGES_REQUESTED'",
+      "expected_sign": "negative"
+    },
+    {
+      "name": "has_maintainer_comment_steipete",
+      "type": "binary",
+      "phase": "mature",
+      "extraction": "any comment by 'steipete'",
+      "expected_sign": "strong_positive",
+      "notes": "74.5% merge when steipete comments (17x odds). Only in mature model — timing bias"
     },
     {
       "name": "has_top_contributor_comment",
       "type": "binary",
       "phase": "mature",
+      "extraction": "any comment by top 10 contributors or authorAssociation=MEMBER",
       "expected_sign": "positive"
     },
     {
       "name": "top_contributor_comment_count",
       "type": "numeric",
       "phase": "mature",
+      "extraction": "count of comments by top contributors",
       "expected_sign": "positive"
-    },
-    {
-      "name": "has_maintainer_comment_steipete",
-      "type": "binary",
-      "phase": "mature",
-      "expected_sign": "strong_positive",
-      "notes": "include only mature model to avoid leakage by timing"
-    },
-    {
-      "name": "greptile_score",
-      "type": "numeric",
-      "phase": "mature",
-      "expected_sign": "weak_or_zero",
-      "notes": "kept as control"
     },
     {
       "name": "has_greptile_review",
       "type": "binary",
       "phase": "mature",
+      "extraction": "any comment/review by greptile bot",
       "expected_sign": "weak_or_negative",
-      "notes": "proxy complexity; not quality signal"
+      "notes": "14.0% with vs 17.7% without. Control only, not quality signal"
+    },
+    {
+      "name": "greptile_score",
+      "type": "numeric",
+      "phase": "mature",
+      "extraction": "extracted from greptile review body if available",
+      "expected_sign": "weak_or_zero"
     },
     {
       "name": "pr_age_hours",
       "type": "numeric",
       "phase": "mature",
+      "extraction": "hours since creation to current time (or resolution)",
       "expected_sign": "positive_then_plateau"
+    },
+    {
+      "name": "touches_multiple_channels",
+      "type": "binary",
+      "phase": "early",
+      "extraction": "2+ channel labels or files in 2+ src/{channel} dirs",
+      "expected_sign": "negative",
+      "notes": "AGENTS.md warns to 'consider all built-in + extension channels when refactoring shared logic'. Cross-channel = risky"
+    },
+    {
+      "name": "touches_extensions",
+      "type": "binary",
+      "phase": "early",
+      "extraction": "any file in extensions/*",
+      "expected_sign": "varies",
+      "notes": "Extensions are workspace packages with own deps. AGENTS.md has specific rules"
+    },
+    {
+      "name": "is_fork_pr",
+      "type": "binary",
+      "phase": "early",
+      "extraction": "PR from fork (head.repo != base.repo)",
+      "expected_sign": "negative",
+      "notes": "PR#279 was from fork with entire main branch merged. Common pattern for low-quality PRs"
     }
   ],
+
+  "repo_specific_discoveries": {
+    "from_governance_docs": [
+      "CLAUDE.md is just a symlink to AGENTS.md",
+      "Maintainers listed explicitly in CONTRIBUTING.md (10 people with specific domains)",
+      "AI-generated PRs explicitly welcome but must be marked",
+      "Files should stay under ~700 LOC (guideline, not hard limit)",
+      "PR template exists at .github/pull_request_template.md",
+      "Commit convention: concise, action-oriented (e.g. 'CLI: add verbose flag')",
+      "Multi-agent safety rules: don't create/apply stash, don't switch branches",
+      "Extensions have own package.json; avoid workspace:* in dependencies",
+      "Skills/plugins go to ClawHub, not core repo"
+    ],
+    "from_data_analysis": [
+      "maintainer label = 90.7% merge rate (strongest label signal)",
+      "trusted-contributor and experienced-contributor labels exist (99/96 PRs)",
+      "1318 unique authors, highly skewed (top 10 = 20% of PRs)",
+      "Label system is rich: functional (agents/gateway/cli) + component (channel:*/app:*) + size",
+      "57 draft PRs in dataset",
+      "Only 5 PRs had requested_reviewers (almost never used)"
+    ],
+    "repo_specific_features_proposed": [
+      "has_maintainer_label (90.7% merge, extremely strong)",
+      "has_trusted_contributor_label",
+      "has_experienced_contributor_label",
+      "touches_multiple_channels (AGENTS.md cross-channel warning)",
+      "touches_extensions (different dependency rules)",
+      "is_fork_pr (common pattern for low-quality submissions)",
+      "author_association (MEMBER/CONTRIBUTOR/NONE from GitHub)"
+    ]
+  },
+
+  "exclusions": [
+    {
+      "feature": "requested_reviewers",
+      "reason": "Only 5 PRs had this field populated. No discriminative power."
+    },
+    {
+      "feature": "milestone",
+      "reason": "Not explored yet. May add in v2 if data shows correlation."
+    },
+    {
+      "feature": "is_ai_generated",
+      "reason": "CONTRIBUTING.md asks contributors to mark AI PRs but compliance is unknown. Would need NLP extraction from PR body. Deferred to v2."
+    }
+  ],
+
   "selection_rule": {
     "llm_scores_as_regressors": "disabled_by_default",
     "enable_if": "pseudo_r2 < 0.50 on deterministic model",
     "keep_disabled_if": "pseudo_r2 >= 0.60"
   },
+
   "outputs": [
-    "p_merge",
-    "confidence_interval",
+    "p_merge (float 0-1)",
+    "confidence_interval (based on model uncertainty)",
     "model_used (early|mature|quality|triage)",
-    "top_positive_drivers",
-    "top_negative_drivers"
+    "top_positive_drivers (feature names + coefficients)",
+    "top_negative_drivers (feature names + coefficients)"
   ]
 }

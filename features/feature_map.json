@@ -1,0 +1,200 @@
+{
+  "version": "0.5.0",
+  "description": "Operational mapping: feature name → extraction rule. Used by signal_extractor.py.",
+  "features": {
+    "loc_additions": {
+      "source": "all_historical_prs",
+      "field": "additions",
+      "transform": "int",
+      "missing": "0"
+    },
+    "loc_deletions": {
+      "source": "all_historical_prs",
+      "field": "deletions",
+      "transform": "int",
+      "missing": "0"
+    },
+    "loc_total": {
+      "source": "computed",
+      "rule": "additions + deletions",
+      "transform": "int"
+    },
+    "files_changed": {
+      "source": "all_historical_prs",
+      "field": "changed_files",
+      "transform": "int",
+      "missing": "0"
+    },
+    "size_label": {
+      "source": "labels",
+      "rule": "first label matching 'size: *'",
+      "transform": "categorical(XS, S, M, L, XL, none)",
+      "missing": "none"
+    },
+    "has_tests": {
+      "source": "enriched (files)",
+      "rule": "any(f.path ends with '.test.ts' or '.e2e.test.ts' for f in files)",
+      "transform": "binary",
+      "missing": "0"
+    },
+    "ci_green": {
+      "source": "GitHub checks API (not in current dataset)",
+      "rule": "all required checks passed",
+      "transform": "binary",
+      "missing": "null (add to ingest)"
+    },
+    "is_draft": {
+      "source": "all_historical_prs",
+      "field": "draft",
+      "transform": "binary",
+      "missing": "0"
+    },
+    "category": {
+      "source": "labels",
+      "rule": "first label in [agents, docs, gateway, commands, cli, scripts, docker, security] or 'extensions:*' prefix",
+      "transform": "categorical",
+      "fallback": "LLM categorization if no matching label",
+      "missing": "unknown"
+    },
+    "component_area": {
+      "source": "labels + files",
+      "rule": "labels matching 'channel:*' or 'app:*', or dominant file path area",
+      "transform": "categorical",
+      "missing": "core"
+    },
+    "author_prior_prs": {
+      "source": "computed",
+      "rule": "count(PRs by same user.login where created_at < this PR's created_at)",
+      "transform": "int",
+      "leakage_guard": "strict temporal: only PRs BEFORE current"
+    },
+    "author_prior_merge_rate": {
+      "source": "computed",
+      "rule": "merged_count / total_count for same author (prior PRs only)",
+      "transform": "float",
+      "leakage_guard": "only resolved PRs before current PR's creation",
+      "missing": "0.241 (base rate for first-time)"
+    },
+    "author_association": {
+      "source": "enriched (first comment's authorAssociation for PR author, or gh API)",
+      "rule": "MEMBER / CONTRIBUTOR / NONE",
+      "transform": "categorical",
+      "missing": "NONE"
+    },
+    "has_maintainer_label": {
+      "source": "labels",
+      "rule": "'maintainer' in labels",
+      "transform": "binary"
+    },
+    "has_trusted_contributor_label": {
+      "source": "labels",
+      "rule": "'trusted-contributor' in labels",
+      "transform": "binary"
+    },
+    "has_experienced_contributor_label": {
+      "source": "labels",
+      "rule": "'experienced-contributor' in labels",
+      "transform": "binary"
+    },
+    "weeks_since_open": {
+      "source": "computed",
+      "rule": "isoweek(created_at) - isoweek('2025-11-24')",
+      "transform": "int",
+      "notes": "Repo created 2025-11-24. W01 = first week."
+    },
+    "weekly_pr_volume": {
+      "source": "computed",
+      "rule": "count(all PRs in same isoweek as this PR's created_at)",
+      "transform": "int"
+    },
+    "release_period": {
+      "source": "GitHub tags API",
+      "rule": "most recent release tag <= created_at",
+      "transform": "categorical or ordinal",
+      "missing": "unknown"
+    },
+    "comment_count": {
+      "source": "enriched",
+      "field": "len(comments)",
+      "transform": "int",
+      "phase": "mature"
+    },
+    "high_engagement": {
+      "source": "computed",
+      "rule": "comment_count >= 4",
+      "transform": "binary",
+      "phase": "mature"
+    },
+    "review_count": {
+      "source": "enriched",
+      "field": "len(reviews)",
+      "transform": "int",
+      "phase": "mature"
+    },
+    "has_approval": {
+      "source": "enriched",
+      "rule": "any(r.state == 'APPROVED' for r in reviews)",
+      "transform": "binary",
+      "phase": "mature"
+    },
+    "has_changes_requested": {
+      "source": "enriched",
+      "rule": "any(r.state == 'CHANGES_REQUESTED' for r in reviews)",
+      "transform": "binary",
+      "phase": "mature"
+    },
+    "has_maintainer_comment_steipete": {
+      "source": "enriched",
+      "rule": "any(c.author.login == 'steipete' for c in comments)",
+      "transform": "binary",
+      "phase": "mature"
+    },
+    "has_top_contributor_comment": {
+      "source": "enriched",
+      "rule": "any(c.authorAssociation in ['MEMBER','CONTRIBUTOR'] for c in comments)",
+      "transform": "binary",
+      "phase": "mature"
+    },
+    "top_contributor_comment_count": {
+      "source": "enriched",
+      "rule": "count(c for c in comments where c.authorAssociation in ['MEMBER','CONTRIBUTOR'])",
+      "transform": "int",
+      "phase": "mature"
+    },
+    "has_greptile_review": {
+      "source": "enriched",
+      "rule": "any(c.author.login matches greptile bot pattern)",
+      "transform": "binary",
+      "phase": "mature"
+    },
+    "greptile_score": {
+      "source": "enriched",
+      "rule": "parse score from greptile bot comment body",
+      "transform": "float",
+      "missing": "null",
+      "phase": "mature"
+    },
+    "pr_age_hours": {
+      "source": "computed",
+      "rule": "(closed_at or now()) - created_at, in hours",
+      "transform": "float",
+      "phase": "mature"
+    },
+    "touches_multiple_channels": {
+      "source": "labels + files",
+      "rule": "2+ labels matching 'channel:*' OR files in 2+ src/{channel} dirs",
+      "transform": "binary"
+    },
+    "touches_extensions": {
+      "source": "labels + files",
+      "rule": "any label matching 'extensions:*' OR any file under extensions/",
+      "transform": "binary"
+    },
+    "is_fork_pr": {
+      "source": "GitHub API (not in current dataset)",
+      "rule": "head.repo.full_name != base.repo.full_name",
+      "transform": "binary",
+      "missing": "null (add to ingest)"
+    }
+  }
+}

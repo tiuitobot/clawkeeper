@@ -79,5 +79,41 @@
     "date": "2026-02-17",
     "source": "plans/clawkeeper/PLAN-v4.md + RULES.md",
     "context": "Evita mismatch de capabilities entre bootstrap e produção e padroniza custo/qualidade de delegação."
+  },
+  {
+    "id": "K010",
+    "info": "CLAUDE.md é symlink pra AGENTS.md. Doc de governança real é AGENTS.md (21KB).",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "GitHub API (type=symlink, target=AGENTS.md)",
+    "context": "Vision alignment deve checar contra AGENTS.md, não CLAUDE.md separado."
+  },
+  {
+    "id": "K011",
+    "info": "Label maintainer = 90.7% merge rate (183 PRs). Strongest label signal. Labels trusted-contributor (96) e experienced-contributor (99) também existem.",
+    "importance": "critical",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "all_historical_prs.json label analysis",
+    "context": "Features repo-específicas pro modelo early. Extraíveis deterministicamente."
+  },
+  {
+    "id": "K012",
+    "info": "ci_green e is_fork_pr não estão no dataset atual. Precisam ser adicionados no Stage 1 (ingest).",
+    "importance": "high",
+    "status": "active",
+    "date": "2026-02-17",
+    "source": "model_spec.json viability check",
+    "context": "ci_green via GitHub checks API; is_fork_pr via head.repo != base.repo."
+  },
+  {
+    "id": "K013",
+    "info": "Stage 0.5 (model specification) completo. 33 features especificadas (19 early + 14 mature). 3 artefatos: model_spec.json, docs/model-spec-notes.md, features/feature_map.json.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "Stage 0.5 execution",
+    "context": "Próximo: Stage 0.7 (bootstrap sequencial) ou Stage 1 (ingest PRs abertas)."
   }
 ]
