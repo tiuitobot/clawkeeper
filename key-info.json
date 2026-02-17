@@ -19,7 +19,7 @@
   },
   {
     "id": "K003",
-    "info": "Greptile review não prediz merge positivamente no histórico atual (WITH 14.0% vs WITHOUT 17.7%).",
+    "info": "Greptile review não prediz merge positivamente no histórico atual (WITH 14.0% vs WITHOUT 17.7%); achado observacional sujeito a confounding temporal.",
     "importance": "high",
     "status": "confirmed",
     "date": "2026-02-17",
@@ -55,7 +55,7 @@
   },
   {
     "id": "K007",
-    "info": "Stage 0 (historical ingest + enrichment) está completo: 3233 PRs históricas, 1521 enriquecidas (47% coverage).",
+    "info": "Stage 0 (historical ingest + enrichment) está completo para janela nov/2025→fev/2026: 3233 PRs históricas, 1521 enriquecidas (47% coverage).",
     "importance": "critical",
     "status": "confirmed",
     "date": "2026-02-17",
@@ -66,9 +66,18 @@
     "id": "K008",
     "info": "Estrutura inicial de código do repo foi scaffolded conforme PLAN-v4 (src/tests/benchmarks/examples).",
     "importance": "high",
-    "status": "active",
+    "status": "confirmed",
     "date": "2026-02-17",
     "source": "commit 0743fe4",
     "context": "Base pronta para implementação dos módulos do pipeline; ainda sem lógica funcional."
+  },
+  {
+    "id": "K009",
+    "info": "Governança operacional do sprint: bootstrap deve rodar no modelo de produção; defaults de spawn por tipo são codex low (coding), sonnet medium (interpretação/escrita) e haiku medium (batch).",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-17",
+    "source": "plans/clawkeeper/PLAN-v4.md + RULES.md",
+    "context": "Evita mismatch de capabilities entre bootstrap e produção e padroniza custo/qualidade de delegação."
   }
 ]
