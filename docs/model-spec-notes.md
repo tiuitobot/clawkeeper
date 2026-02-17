@@ -7,7 +7,7 @@
 1. **AGENTS.md** (21KB) — project structure, coding conventions, CI requirements, multi-agent safety, extension rules
 2. **CONTRIBUTING.md** (5KB) — maintainer list (10 people), contribution workflow, AI PR policy
 3. **all_historical_prs.json** — 3233 PRs, keys: number/title/state/merged_at/user/labels/created_at/additions/deletions/changed_files/draft/requested_reviewers/milestone
-4. **enriched_full.jsonl** — 1521 PRs with comments/reviews/files detail
+4. **enriched_full.jsonl** — 3233 PRs with comments/reviews/files detail
 5. **D-01v3 enrichment analysis** — statistical findings from Stage 0
 
 ## Key governance insights for feature selection
@@ -61,9 +61,9 @@
 ## Early vs Mature model split
 
 - **Early:** features available at PR creation (no interaction needed)
-  - 19 features: size, tests, CI, category, component, author history, labels, temporal controls
+  - 18 features: size, tests, CI, category, component, author history, labels, temporal controls
 - **Mature:** adds interaction signals
-  - 33 features: all early + comments, reviews, steipete, greptile, engagement, age
+  - 33 features: all early + comments, reviews, maintainer/contributor, greptile, engagement, age
 
 **Rationale for split:** steipete's comment appears late in PR lifecycle. Including it in early model = look-ahead bias. The confidence interval narrows as PR matures.
 
@@ -81,7 +81,7 @@
 | has_maintainer_label | labels | 0% | none | ✅ keep |
 | weeks_since_open | created_at | 0% | none | ✅ keep (critical) |
 | comment_count | enriched | ~53% | none | ✅ keep (mature only) |
-| has_maintainer_comment_steipete | enriched | ~53% | timing | ✅ keep (mature only) |
+| has_maintainer_comment | enriched | ~53% | timing | ✅ keep (mature only) |
 | has_greptile_review | enriched | ~53% | none | ✅ keep (control only) |
 | touches_multiple_channels | labels + files | 0% (labels) / ~53% (files) | none | ✅ keep |
 | is_fork_pr | needs GitHub API | not in current data | none | ⚠️ add to ingest |
@@ -89,4 +89,4 @@
 ### Data gaps to address in Stage 1
 1. `ci_green` — not in current dataset, needs GitHub checks API
 2. `is_fork_pr` — not in current dataset, needs PR head/base repo comparison
-3. Enrichment coverage is 47% (1521/3233) — sufficient for estimation but more is better
+3. Enrichment coverage is 100% coverage (3233/3233) — full coverage confirmed

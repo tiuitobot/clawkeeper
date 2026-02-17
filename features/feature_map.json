@@ -143,21 +143,16 @@
       "transform": "binary",
       "phase": "mature"
     },
-    "has_maintainer_comment_steipete": {
-      "source": "enriched",
-      "rule": "any(c.author.login == 'steipete' for c in comments)",
-      "transform": "binary",
-      "phase": "mature"
-    },
     "has_top_contributor_comment": {
       "source": "enriched",
-      "rule": "any(c.authorAssociation in ['MEMBER','CONTRIBUTOR'] for c in comments)",
+      "rule": "any(c.author.login in top_contributors_by_activity or c.authorAssociation == 'MEMBER' for c in comments)",
       "transform": "binary",
-      "phase": "mature"
+      "phase": "mature",
+      "notes": "top_contributors_by_activity computed from historical comment/review frequency (non-hardcoded usernames)"
     },
     "top_contributor_comment_count": {
       "source": "enriched",
-      "rule": "count(c for c in comments where c.authorAssociation in ['MEMBER','CONTRIBUTOR'])",
+      "rule": "count(c for c in comments where c.author.login in top_contributors_by_activity or c.authorAssociation == 'MEMBER')",
       "transform": "int",
       "phase": "mature"
     },
@@ -195,6 +190,13 @@
       "rule": "head.repo.full_name != base.repo.full_name",
       "transform": "binary",
       "missing": "null (add to ingest)"
+    },
+    "has_maintainer_comment": {
+      "source": "enriched",
+      "rule": "any(c.author.login in maintainers_from_codeowners_or_top_history for c in comments)",
+      "transform": "binary",
+      "phase": "mature",
+      "notes": "maintainers_from_codeowners_or_top_history built from CODEOWNERS when available; fallback to top maintainer-frequency actors in historical PR comments/reviews"
     }
   }
 }

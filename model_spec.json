@@ -5,15 +5,13 @@
   "repo": "openclaw/openclaw",
   "date": "2026-02-17",
   "objective": "Estimate P(merge) for open PRs using historical maintainers' decisions",
-
   "sources_read": [
     "data/AGENTS.md (CLAUDE.md is symlink to AGENTS.md)",
     "data/CONTRIBUTING.md",
     "data/all_historical_prs.json (3233 PRs)",
-    "data/enriched_full.jsonl (1521 PRs with detailed data)",
+    "data/enriched_full.jsonl (3233 PRs with detailed data)",
     "reports/D01v3-enrichment-analysis.md"
   ],
-
   "repo_profile": {
     "total_historical_prs": 3233,
     "merged": 780,
@@ -26,24 +24,33 @@
     "governance_doc": "AGENTS.md (CLAUDE.md is symlink)",
     "project_type": "TypeScript (ESM), Node 22+, pnpm",
     "testing_framework": "Vitest, coverage 70% threshold",
-    "ci_checks": ["pnpm build", "pnpm check", "pnpm test"]
+    "ci_checks": [
+      "pnpm build",
+      "pnpm check",
+      "pnpm test"
+    ]
   },
-
   "target": {
     "name": "merged",
     "type": "binary",
-    "encoding": { "merged": 1, "closed_not_merged": 0 },
+    "encoding": {
+      "merged": 1,
+      "closed_not_merged": 0
+    },
     "base_rate": 0.241
   },
-
   "estimation": {
     "method": "logistic_regression",
     "regularization": "l2",
     "class_weight": "balanced",
     "solver": "liblinear",
-    "metrics": ["auc_roc", "pseudo_r2", "brier_score", "calibration_curve"]
+    "metrics": [
+      "auc_roc",
+      "pseudo_r2",
+      "brier_score",
+      "calibration_curve"
+    ]
   },
-
   "temporal_strategy": {
     "approach": "dual_model_plus_weighted",
     "models": [
@@ -60,10 +67,12 @@
     ],
     "weighted_regression": {
       "weight": "1/weekly_pr_volume",
-      "control_features": ["weeks_since_open", "weekly_pr_volume"]
+      "control_features": [
+        "weeks_since_open",
+        "weekly_pr_volume"
+      ]
     }
   },
-
   "feature_sets": {
     "early_model": {
       "description": "Features available at PR creation (no interaction signals)",
@@ -84,13 +93,12 @@
         "has_maintainer_label",
         "has_trusted_contributor_label",
         "has_experienced_contributor_label",
-        "weeks_since_open",
         "weekly_pr_volume",
         "release_period"
       ]
     },
     "mature_model": {
-      "description": "All features including interaction signals (comments, reviews, steipete)",
+      "description": "All features including interaction signals (comments, reviews, maintainer/contributor participation)",
       "features": [
         "loc_additions",
         "loc_deletions",
@@ -116,7 +124,7 @@
         "review_count",
         "has_approval",
         "has_changes_requested",
-        "has_maintainer_comment_steipete",
+        "has_maintainer_comment",
         "has_top_contributor_comment",
         "top_contributor_comment_count",
         "has_greptile_review",
@@ -128,7 +136,6 @@
       ]
     }
   },
-
   "features": [
     {
       "name": "loc_additions",
@@ -261,10 +268,10 @@
     {
       "name": "weeks_since_open",
       "type": "numeric",
-      "phase": "early",
+      "phase": "mature",
       "extraction": "isoweek(created_at) relative to repo creation (2025-11-24)",
       "expected_sign": "positive",
-      "notes": "CRITICAL: W05=6.7% → W08=54.3%. Strongest temporal confounding"
+      "notes": "Removido do early pra evitar proxy de engagement. VIF no D2."
     },
     {
       "name": "weekly_pr_volume",
@@ -319,19 +326,20 @@
       "expected_sign": "negative"
     },
     {
-      "name": "has_maintainer_comment_steipete",
+      "name": "has_maintainer_comment",
       "type": "binary",
       "phase": "mature",
-      "extraction": "any comment by 'steipete'",
-      "expected_sign": "strong_positive",
-      "notes": "74.5% merge when steipete comments (17x odds). Only in mature model — timing bias"
+      "extraction": "any comment by maintainer detected via CODEOWNERS membership or top maintainer frequency in historical activity",
+      "expected_sign": "positive",
+      "notes": "Generic maintainer participation signal; avoids hardcoded usernames. Mature model only (timing bias)."
     },
     {
       "name": "has_top_contributor_comment",
       "type": "binary",
       "phase": "mature",
-      "extraction": "any comment by top 10 contributors or authorAssociation=MEMBER",
-      "expected_sign": "positive"
+      "extraction": "any comment by top contributors (activity-ranked) or authorAssociation=MEMBER",
+      "expected_sign": "positive",
+      "notes": "Top contributor participation signal (non-hardcoded identities)."
     },
     {
       "name": "top_contributor_comment_count",
@@ -387,7 +395,6 @@
       "notes": "PR#279 was from fork with entire main branch merged. Common pattern for low-quality PRs"
     }
   ],
-
   "repo_specific_discoveries": {
     "from_governance_docs": [
       "CLAUDE.md is just a symlink to AGENTS.md",
@@ -418,7 +425,6 @@
       "author_association (MEMBER/CONTRIBUTOR/NONE from GitHub)"
     ]
   },
-
   "exclusions": [
     {
       "feature": "requested_reviewers",
@@ -433,13 +439,11 @@
       "reason": "CONTRIBUTING.md asks contributors to mark AI PRs but compliance is unknown. Would need NLP extraction from PR body. Deferred to v2."
     }
   ],
-
   "selection_rule": {
     "llm_scores_as_regressors": "disabled_by_default",
     "enable_if": "pseudo_r2 < 0.50 on deterministic model",
     "keep_disabled_if": "pseudo_r2 >= 0.60"
   },
-
   "outputs": [
     "p_merge (float 0-1)",
     "confidence_interval (based on model uncertainty)",

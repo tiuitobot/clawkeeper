@@ -18,7 +18,7 @@ LLM atua como econometrista: lê governance docs + dados históricos do OpenClaw
 | `data/AGENTS.md` | 21KB | Estrutura do projeto, CI, coding conventions, multi-agent safety, extensões |
 | `data/CONTRIBUTING.md` | 5KB | Lista de 10 maintainers, workflow de contribuição, política de AI PRs |
 | `all_historical_prs.json` | 3233 PRs | Metadata: labels, author, additions/deletions, draft, milestone |
-| `enriched_full.jsonl` | 1521 PRs | Comments, reviews, files detalhados |
+| `enriched_full.jsonl` | 3233 PRs | Comments, reviews, files detalhados |
 | `D01v3-enrichment-analysis.md` | Report | Achados estatísticos do Stage 0 |
 
 ## Artefatos entregues
@@ -32,7 +32,7 @@ LLM atua como econometrista: lê governance docs + dados históricos do OpenClaw
 
 ## Features especificadas
 
-### Early Model (19 features — disponíveis na criação da PR)
+### Early Model (18 features — disponíveis na criação da PR)
 
 | Feature | Tipo | Sinal esperado | Fonte |
 |---------|------|-----------------|-------|
@@ -52,7 +52,6 @@ LLM atua como econometrista: lê governance docs + dados históricos do OpenClaw
 | `has_maintainer_label` | binária | **forte positivo (90.7%)** | labels |
 | `has_trusted_contributor_label` | binária | positivo | labels |
 | `has_experienced_contributor_label` | binária | positivo | labels |
-| `weeks_since_open` | numérica | positivo (confounding) | computado |
 | `weekly_pr_volume` | numérica | negativo (controle) | computado |
 | `release_period` | categórica | varia | GitHub tags API |
 
@@ -65,7 +64,7 @@ LLM atua como econometrista: lê governance docs + dados históricos do OpenClaw
 | `review_count` | numérica | positivo | enriched |
 | `has_approval` | binária | positivo | enriched (review state) |
 | `has_changes_requested` | binária | negativo | enriched (review state) |
-| `has_maintainer_comment_steipete` | binária | **forte positivo (74.5%, 17x)** | enriched |
+| `has_maintainer_comment` | binária | positivo | enriched (maintainers via CODEOWNERS/frequência histórica) |
 | `has_top_contributor_comment` | binária | positivo | enriched (authorAssociation) |
 | `top_contributor_comment_count` | numérica | positivo | enriched |
 | `has_greptile_review` | binária | fraco/negativo (controle) | enriched |
@@ -74,6 +73,7 @@ LLM atua como econometrista: lê governance docs + dados históricos do OpenClaw
 | `touches_multiple_channels` | binária | negativo | labels + paths |
 | `touches_extensions` | binária | varia | labels + paths |
 | `is_fork_pr` | binária | negativo | ⚠️ GitHub API (gap) |
+| `weeks_since_open` | numérica | positivo (confounding) | computado |
 
 ## Achados repo-específicos
 
@@ -99,12 +99,28 @@ LLM atua como econometrista: lê governance docs + dados históricos do OpenClaw
 1. **`ci_green`** — não está no dataset. Precisa GitHub checks API no ingest
 2. **`is_fork_pr`** — não está no dataset. Precisa head.repo vs base.repo no ingest
 
+## Correções pós-review
+
+1. **Abstração de identidade hardcoded (`steipete`)**
+   - `has_maintainer_comment_steipete` → `has_maintainer_comment`
+   - Regras em `feature_map.json` agora detectam maintainers via **CODEOWNERS** ou **frequência histórica de participação** (sem usernames fixos)
+   - `has_top_contributor_comment` consolidada como sinal genérico por atividade
+
+2. **Ajuste temporal de `weeks_since_open`**
+   - Removida do **early model** para evitar proxy de engagement
+   - Mantida apenas no **mature model**
+   - Nota adicionada: *"Removido do early pra evitar proxy de engagement. VIF no D2."*
+
+3. **Cobertura de enrichment corrigida**
+   - Verificação executada: `3233/3233`
+   - Cobertura atualizada para **100%** em docs e report
+
 ## Viabilidade
 
 - **100% das features têm mapeamento executável** (feature_map.json)
 - **0 feature sem origem identificada**
 - **2 features precisam de dados adicionais** (ci_green, is_fork_pr) → resolver no Stage 1
-- **Cobertura de enrichment: 47%** (1521/3233) — suficiente para estimação
+- **Cobertura de enrichment: 100%** (3233/3233) — base completa para estimação
 
 ## Próximo passo
 
