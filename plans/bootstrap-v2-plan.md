@@ -36,9 +36,11 @@ O Bootstrap v1 (5 rounds × 50 PRs) **validou** que Haiku extrai sinais de gover
 │            SAMPLER (por round)                   │
 │  100 PRs do pool de treino (2.263)               │
 │  ├─ ~80 PRs normais (estratificados)             │
-│  └─ ~20 PRs de dedupe (6-8 clusters injetados)  │
+│  └─ ~20 PRs de dedupe (6-8 clusters)            │
 │  Sem repetição entre rounds                      │
 │  Preserva merge rate ~24%                        │
+│  ⚠️ DEDUPE DIRIGIDO: membros do mesmo cluster   │
+│     caem no mesmo batch (não distribuídos)       │
 └───────────────┬─────────────────────────────────┘
                 │
                 ▼
@@ -59,7 +61,8 @@ O Bootstrap v1 (5 rounds × 50 PRs) **validou** que Haiku extrai sinais de gover
 │                                                  │
 │  Task A: Para cada PR, predizer MERGE ou CLOSE   │
 │          + confidence (0-1) + reasoning           │
-│          + extrair 33 features do model_spec      │
+│          + extrair 34 features do model_spec      │
+│          (inclui is_low_merge_author)            │
 │                                                  │
 │  Task B: Entre os PRs do batch, identificar      │
 │          pares/trios que parecem duplicados       │
@@ -67,6 +70,22 @@ O Bootstrap v1 (5 rounds × 50 PRs) **validou** que Haiku extrai sinais de gover
 │          (file overlap, title similarity, etc.)   │
 │                                                  │
 │  Batches de 10 PRs (limite de output tokens)     │
+│  ⚠️ Clusters de dedupe agrupados no mesmo batch  │
+└───────────────┬─────────────────────────────────┘
+                │
+                ▼
+┌─────────────────────────────────────────────────┐
+│       PATTERN EXTRACTOR (pós-round, R1-R3+)     │
+│                                                  │
+│  Analisa erros do round:                         │
+│  ├─ Extrai patterns ABSTRATOS (sem PR numbers)   │
+│  ├─ Ex: "PRs com approval mas sem maintainer     │
+│  │   label tendem a fechar quando duplicatas"    │
+│  └─ Acumula para injetar em R4-R10              │
+│                                                  │
+│  R1-R3: sem patterns (baseline puro)             │
+│  R4-R10: patterns abstratos de rounds anteriores │
+│          injetados no prompt                     │
 └───────────────┬─────────────────────────────────┘
                 │
                 ▼
@@ -88,7 +107,8 @@ O Bootstrap v1 (5 rounds × 50 PRs) **validou** que Haiku extrai sinais de gover
 ┌─────────────────────────────────────────────────┐
 │        CONSOLIDADOR (após 10 rounds)             │
 │                                                  │
-│  ├─ Learning curve (accuracy por round)          │
+│  ├─ Learning curve: baseline (R1-3) vs           │
+│  │   learning (R4-10). Delta = paper metric.    │
 │  ├─ Patterns que sobrevivem 5+ rounds → promote  │
 │  ├─ Erros persistentes → análise de categoria    │
 │  ├─ Logit weights iniciais (features × outcome)  │
@@ -104,7 +124,7 @@ O Bootstrap v1 (5 rounds × 50 PRs) **validou** que Haiku extrai sinais de gover
 | Regra | Descrição |
 |-------|-----------|
 | **Cold start** | Zero sinais/patterns do v1 entram no v2. V1 informou o *design*, não o *modelo*. |
-| **Sem cross-round leakage** | Cada round recebe apenas: model_spec (features) + prompt. Sem signals de rounds anteriores. |
+| **Cross-round: patterns abstratos only** | R1-R3: zero contexto (baseline puro). R4-R10: patterns abstratos extraídos dos erros de rounds anteriores. Patterns NÃO citam PR numbers nem outcomes específicos — são generalizações. |
 | **Sanitização de outcomes** | Comments sanitizados. Sem merge status, sem timestamps de outcome, sem bot messages de triage com resultado. |
 | **Dedupe closure stripped** | PRs de dedupe perdem: "closing as duplicate of #X", "superseded by", referências ao PR vencedor. |
 | **Holdout intocável** | 30% do dataset (970 PRs + ~115 clusters) NUNCA é visto pelo modelo. Só abre no Stage 1 final. |
@@ -149,9 +169,20 @@ O Bootstrap v1 (5 rounds × 50 PRs) **validou** que Haiku extrai sinais de gover
 ### Lógica de amostragem por round
 1. **Pool disponível** = treino (2.263) − já usados em rounds anteriores
 2. **Injetar dedupe:** selecionar 6-8 clusters do pool de treino de dedupe (~269 clusters) → ~15-20 PRs
-3. **Completar com normais:** estratificação por outcome × size × category até 100
-4. **Preservar merge rate:** ~24 merged, ~76 closed (±3)
-5. **Registrar** quais PRs e clusters foram usados
+3. **Agrupar dedupe em batches:** membros do mesmo cluster vão pro mesmo batch de 10. Completar batch com PRs normais até 10.
+4. **Completar com normais:** estratificação por outcome × size × category até 100 PRs
+5. **Preservar merge rate:** ~24 merged, ~76 closed (±3)
+6. **Registrar** quais PRs e clusters foram usados, e qual batch contém cada cluster
+
+### Injeção dirigida de dedupe (CORREÇÃO v2.1)
+**Problema:** Com distribuição aleatória, P(2 membros de cluster no mesmo batch de 10) ≈ 9%. O modelo veria ~0.63 pares/round — quase zero oportunidade de detectar dedupe.
+
+**Solução:** Forçar membros do mesmo cluster no mesmo batch.
+- Cluster de 2 PRs → ambos no batch X, completar com 8 normais
+- Cluster de 3 PRs → todos no batch X, completar com 7 normais
+- Cluster de 4+ PRs → todos no batch X (se cabe), senão dividir em sub-batches com overlap de 1 PR
+- ~6-8 clusters/round → ~6-8 dos 10 batches contêm pelo menos 1 cluster
+- Batches restantes (~2-4) são 100% PRs normais (controle)
 
 ### Capacidade
 - 10 rounds × 100 PRs = 1.000 PRs
@@ -203,6 +234,7 @@ STRIP_PATTERNS = [
 
 ## 7. Prompt — Tarefa Dual
 
+### Fase Baseline (R1-R3) — sem patterns
 ```
 You are analyzing pull requests from an open-source project.
 Merge rate is approximately 24%. You do not know the outcome of any PR below.
@@ -215,7 +247,7 @@ Provide:
 - reasoning: key factors driving your prediction
 
 Also extract these features from each PR:
-{feature_spec_from_model_spec.json — 33 features}
+{feature_spec_from_model_spec.json — 34 features, includes is_low_merge_author}
 
 ## Task B — Duplicate Detection
 Among the PRs in this batch, identify any pairs or groups that appear
@@ -249,7 +281,49 @@ For each suspected pair:
 {batch_of_10_prs}
 ```
 
-**Nota:** Batches de 10 PRs. Task B só pode detectar duplicados *dentro* do batch. Design deliberado — simula o cenário real onde o modelo vê um subset, não o dataset completo. Cross-batch dedup é tarefa do Stage 1 (embeddings + similarity search).
+### Fase Learning (R4-R10) — com patterns abstratos
+Mesmo prompt acima + seção adicional antes dos PRs:
+
+```
+## Learned Patterns (from prior rounds)
+The following patterns were observed in previous rounds. They are
+abstract generalizations — no specific PR numbers or outcomes.
+Use them to inform your predictions, but do not assume they apply
+to every case.
+
+{accumulated_abstract_patterns}
+```
+
+### Extração de Patterns Abstratos (pós-round)
+Após scoring de cada round (R1+), analisar os erros e extrair generalizações:
+- **Input:** lista de erros (PR features que o modelo viu + se errou pra merge ou close)
+- **Output:** patterns abstratos como:
+  - "PRs with maintainer approval but no maintainer label tend to close when they overlap with existing PRs"
+  - "Large PRs (>500 LOC) with no CI green signal have <10% merge rate"
+  - "Authors with 5+ PRs and <5% merge rate are effectively blocked"
+- **Constraints:** NÃO citar PR numbers. NÃO mencionar outcomes específicos. Só generalizações.
+- R1-R3: patterns extraídos mas NÃO injetados (acumulam pra R4)
+- R4-R10: patterns de R1 até R(N-1) injetados no prompt
+
+### Medição de Learning
+- **Baseline:** média accuracy R1-R3 (sem patterns)
+- **Learning:** média accuracy R4-R10 (com patterns)
+- **Delta = learning effect.** Se positivo e significativo → patterns abstratos têm valor. Essa é a métrica do paper.
+- **Teste estatístico:** t-test R1-R3 vs R4-R10 (7 observações cada lado — poder estatístico baixo, mas direcional)
+
+**Nota:** Batches de 10 PRs. Task B detecta duplicados *dentro* do batch. Clusters de dedupe são dirigidos ao mesmo batch pelo sampler. Cross-batch dedup é tarefa do Stage 1 (embeddings + similarity search).
+
+### Feature `is_low_merge_author` (CORREÇÃO v2.1)
+**Problema:** O R1 do v1 revelou que certos autores (e.g. shtse8: 94 PRs, 5.3% merge) são quase determinísticos. Sem essa informação, Haiku erra sistematicamente ~3-5% das predições.
+
+**Solução:** Adicionar ao model_spec como feature #34:
+- **Nome:** `is_low_merge_author`
+- **Definição:** autor com 5+ PRs no histórico e <5% merge rate
+- **Tipo:** binária
+- **Custo:** zero (lookup no dataset)
+- **Impacto estimado:** 34 autores, 336 PRs (10.4% do dataset)
+
+O Haiku recebe a informação do author name + número de PRs anteriores. A feature é computável deterministicamente mas o modelo precisa *saber que é relevante*. Alternativa: incluir no prompt como contexto ("Author X has submitted N PRs, M merged (P%)") e deixar o modelo inferir.
 
 ---
 
@@ -294,14 +368,17 @@ python3 scripts/bootstrap_v2.py --rounds 10 --prs-per-round 100 --seed 42
 O script:
 1. Carrega/cria split global (`data/split.json`)
 2. Para cada round 1-10:
-   a. Amostra 100 PRs (com injeção de dedupe)
+   a. Amostra 100 PRs (com injeção dirigida de dedupe — clusters no mesmo batch)
    b. Sanitiza comments
-   c. Chama Haiku em batches de 10
-   d. Parseia resposta JSON
-   e. Faz scoring contra ground truth
-   f. Salva `data/bootstrap_v2/round_{N}_results.jsonl`
-   g. Salva `data/bootstrap_v2/round_{N}_scores.json`
-3. Consolida: learning curve, patterns, logit weights iniciais, dedupe F1
+   c. Se round ≥ 4: carrega patterns abstratos acumulados dos rounds anteriores
+   d. Chama Haiku em batches de 10 (dedupe clusters co-located)
+   e. Parseia resposta JSON
+   f. Faz scoring contra ground truth (merge + dedupe)
+   g. Extrai patterns abstratos dos erros (sem PR numbers, sem outcomes)
+   h. Salva `data/bootstrap_v2/round_{N}_results.jsonl`
+   i. Salva `data/bootstrap_v2/round_{N}_scores.json`
+   j. Salva `data/bootstrap_v2/round_{N}_patterns.json`
+3. Consolida: learning curve (baseline R1-3 vs learning R4-10), patterns, logit weights, dedupe F1
 4. Salva `data/bootstrap_v2/consolidated.json`
 
 ### Custo estimado
@@ -342,11 +419,12 @@ data/
 
 | Gate | Critério | Ação se falhar |
 |------|----------|---------------|
-| G1 | Merge accuracy ≥ 70% no round 10 | Investigar — features insuficientes? |
-| G2 | Learning curve não-flat (R10 > R1) | Se flat: prompt não aprende, redesenhar |
-| G3 | Dedupe F1 ≥ 0.5 (dentro do batch) | Se <0.5: dedupe intra-batch não funciona, mudar pra embeddings |
+| G1 | Merge accuracy ≥ 70% na média geral (R1-R10) | Investigar — features insuficientes? |
+| G2 | Learning effect: média(R4-R10) > média(R1-R3) | Se flat/negativo: patterns abstratos não ajudam, reportar como finding |
+| G3 | Dedupe F1 ≥ 0.5 nos batches com clusters dirigidos | Se <0.5: dedupe intra-batch com co-location não funciona, mudar pra embeddings |
 | G4 | Calibration razoável (confidence ~= accuracy) | Se descalibrado: modelo confiante demais ou de menos |
 | G5 | ≤10 erros persistentes políticos | Se >10: ceiling mais baixo que estimado |
+| G6 | `is_low_merge_author` erros ≤ 2% | Se >2%: feature não está sendo usada pelo modelo |
 
 ---
 
@@ -378,19 +456,45 @@ data/
 ## 14. Sequência de Implementação
 
 ```
-1. [ ] build_split.py        — split global 70/30 + validação
-2. [ ] sanitize.py           — sanitizador de comments + testes
-3. [ ] sample_v2.py          — sampler com injeção de dedupe
-4. [ ] bootstrap_v2.py       — orquestrador principal (rounds + batches)
-5. [ ] score_round.py        — scoring merge + dedupe
-6. [ ] consolidate_v2.py     — consolidação final
-7. [ ] Audit manual          — 10 PRs sanitizados, conferir manualmente
-8. [ ] Execução              — `python3 scripts/bootstrap_v2.py`
-9. [ ] Report + PDF          — step report com resultados
+1. [ ] build_split.py         — split global 70/30 com cluster constraint + validação
+2. [ ] sanitize.py            — sanitizador de comments + testes
+3. [ ] sample_v2.py           — sampler com injeção DIRIGIDA de dedupe (clusters no mesmo batch)
+4. [ ] extract_patterns.py    — extrai patterns abstratos dos erros (sem PR#, sem outcomes)
+5. [ ] bootstrap_v2.py        — orquestrador: rounds + batches + fases (baseline/learning)
+6. [ ] score_round.py         — scoring merge + dedupe por round
+7. [ ] consolidate_v2.py      — consolidação: learning curve, delta, promoted patterns
+8. [ ] Atualizar model_spec   — adicionar is_low_merge_author como feature #34
+9. [ ] Audit manual           — 10 PRs sanitizados, conferir leakage residual
+10. [ ] Execução              — `python3 scripts/bootstrap_v2.py --rounds 10 --seed 42`
+11. [ ] Report + PDF          — step report com resultados + learning curve
 ```
 
-**Estimativa:** Scripts 1-6 em ~2h (Codex). Audit + execução + report em ~2h. Total: ~4h.
+**Estimativa:** Scripts 1-7 em ~2-3h (Codex). Spec update + audit + execução + report em ~2h. Total: ~5h.
+
+---
+
+## 15. Addendum — Review Bruno (2026-02-17, 8.5/10)
+
+Três correções aplicadas ao plano original:
+
+### 15.1 Learning phased (ESTRUTURAL)
+**Problema:** Sem cross-round learning, cada round é independente. G2 (learning curve) era impossível de satisfazer — R10 identicamente informado que R1. Diferença entre rounds = variância amostral.
+
+**Correção:** R1-R3 baseline puro (sem patterns). R4-R10 com patterns abstratos extraídos dos erros de rounds anteriores. Patterns não citam PR numbers nem outcomes — são generalizações. Delta (média R4-R10 − média R1-R3) é a métrica real de learning.
+
+**Nota:** v1 tentava fazer learning mas implementou errado (signals com outcomes = lookup). v2 original corrigiu jogando fora o mecanismo. v2.1 reimplementa o mecanismo limpo.
+
+### 15.2 Dedupe dirigido (PROBABILÍSTICO)
+**Problema:** Com distribuição aleatória de clusters em batches de 10, P(par no mesmo batch) ≈ 9%. Com 7 clusters/round, ~0.63 pares aterrisam no mesmo batch. Modelo vê quase zero oportunidade de dedupe.
+
+**Correção:** Sampler garante que membros do mesmo cluster caem no mesmo batch. ~6-8 batches contêm pelo menos 1 cluster, 2-4 batches são controle puro.
+
+### 15.3 `is_low_merge_author` (FEATURE GAP)
+**Problema:** Feature descoberta no v1 R1 (34 autores, 336 PRs, ~0% merge) não estava no model_spec. Sem ela, Haiku erra sistematicamente ~3-5%.
+
+**Correção:** Adicionar como feature #34 ao model_spec antes da execução. Incluir author merge history no contexto do PR.
 
 ---
 
 *Este documento é o contrato de execução. Qualquer desvio deve ser justificado e registrado aqui como addendum datado.*
+*v2.1 — incorpora review Bruno 2026-02-17 (learning phased, dedupe dirigido, is_low_merge_author).*
