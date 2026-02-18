@@ -223,5 +223,23 @@
     "date": "2026-02-18",
     "source": "gh GraphQL closingIssuesReferences + author comparison",
     "context": "Maintainers não abrem issues (0 hits). Feature candidata: issue_author_is_pr_author (bool). Ownership do problema > issue linkada genérica."
+  },
+  {
+    "id": "K026",
+    "info": "Features de issue devem ser separadas para interação no logit: has_linked_issue (bool), issue_is_self_filed (bool), issue_is_maintainer_filed (bool). Colapsar em categórico perde interações. Termos multiplicativos no logit (e.g. has_linked_issue × author_prior_merge_rate) separam contribuidor legítimo de bot farming.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "Discussão Bruno-Tiuito 2026-02-18",
+    "context": "Self-filed 38% vs community 27% vs no-issue 31%. Interação com merge rate do autor é chave: bots têm alto volume + baixo merge rate + linkam issues de outros."
+  },
+  {
+    "id": "K027",
+    "info": "Bot farming pattern confirmado nos dados: autores de community-issue com alto volume e baixo merge rate (shtse8: 93 PRs/5%, BinHPdev: 56/5%, Limitless2023: 32/3%). 62% dos autores de community-issue são one-shot. Padrão: encontrar issue aberta → gerar PR automatizada → linkar issue pra parecer legítimo.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "gh GraphQL closingIssuesReferences + author analysis, N=2000",
+    "context": "Explica por que community-issue tem merge rate menor que sem issue (26.6% vs 31.2%). Não é que linkar issue é ruim — é que a população está contaminada por farming. Feature author_prior_merge_rate já captura parcialmente, mas has_linked_issue × low_merge_rate é sinal de bot mais específico."
   }
 ]
