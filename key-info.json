@@ -366,5 +366,97 @@
       "metrics",
       "bugs"
     ]
+  },
+  {
+    "id": "K037",
+    "title": "Pipeline is specification, not learning — auditor reframe",
+    "description": "Auditor-externo reframed the bootstrap pipeline: it's not a learning system (patterns don't improve F1 vs baseline), it's a specification system — identifying latent variables for a logit model. Value = discovering which features matter, not teaching Haiku to classify. Bruno accepted this reframe.",
+    "category": "architecture",
+    "severity": "high",
+    "source": "auditor-externo analysis, Bruno validation",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "architecture",
+      "auditor",
+      "reframe"
+    ]
+  },
+  {
+    "id": "K038",
+    "title": "v3 R3 = peak performance WITHOUT patterns — patterns degrade, not improve",
+    "description": "v3 R3 (91% acc, F1 0.830) was the best round, achieved with 0 patterns. R4+ with patterns: accuracy dropped, FN exploded (2→12). v3 F1-learning (0.732) < F1-baseline (0.739). The bootstrap loop produces patterns that degrade performance relative to baseline. Combined with K033 (signal inversion), this explains WHY: patterns actively prescribe error-causing behavior.",
+    "category": "empirical",
+    "severity": "critical",
+    "source": "v3 R1-R10 data",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "v3",
+      "patterns",
+      "overcorrection",
+      "empirical"
+    ]
+  },
+  {
+    "id": "K039",
+    "title": "Enrichment > patterns — better data gives more ROI than learning loop",
+    "description": "v3 R1 (81%) already beat v2.1 best (74.6%) purely from enriched data (more features, better PR representation). Patterns added in R4+ degraded rather than improved. Implication: invest in feature engineering and data quality, not in teaching the LLM heuristics via patterns.",
+    "category": "architecture",
+    "severity": "high",
+    "source": "v3 vs v2.1 comparison",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "enrichment",
+      "data-quality",
+      "roi"
+    ]
+  },
+  {
+    "id": "K040",
+    "title": "40 patterns → 8 latent variables — auditor found massive redundancy",
+    "description": "Auditor analysis of v3's 40 promoted patterns: they collapsed to ~8 distinct latent variables. Most patterns were surface variations of the same underlying signal. This validates the v4 consolidation-by-latent-variable directive and the ≤15 pattern target.",
+    "category": "empirical",
+    "severity": "medium",
+    "source": "auditor-externo analysis",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "v3",
+      "auditor",
+      "consolidation",
+      "redundancy"
+    ]
+  },
+  {
+    "id": "K041",
+    "title": "Direct error feedback > pattern-mediated feedback",
+    "description": "Bruno's hypothesis: R5 (which gets direct prior_errors injection) should correct better than R4 (which only gets patterns). Mechanism: patterns add an interpretation layer that can invert signals (K033). Direct errors preserve polarity — 'I predicted merge on PR X and was wrong' is unambiguous. Pattern-mediated: 'Greptile 5/5 is a strong signal' is ambiguous about direction.",
+    "category": "architecture",
+    "severity": "high",
+    "source": "Bruno hypothesis (untested, v4.1 will provide data)",
+    "date": "2026-02-19",
+    "tags": [
+      "bootstrap",
+      "feedback",
+      "learning-mechanism",
+      "hypothesis"
+    ]
+  },
+  {
+    "id": "K042",
+    "title": "Bot contamination in ground truth — unquantified but confirmed present",
+    "description": "K027-K029 confirmed bot farming patterns in dataset. Impact on ground truth not yet quantified: bots generate FP-heavy closes that inflate 'closed' class. Baseline metrics (merge rate 24.1%) may be skewed. Decontamination needed before final logit training. v4 population filter (Greptile-only, 2787 PRs) partially mitigates but doesn't eliminate.",
+    "category": "data-quality",
+    "severity": "medium",
+    "source": "K027-K029 analysis",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "bots",
+      "ground-truth",
+      "contamination"
+    ]
   }
 ]
