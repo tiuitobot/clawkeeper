@@ -506,5 +506,20 @@
       "gates",
       "comparability"
     ]
+  },
+  {
+    "id": "K046",
+    "title": "Dedupe as bootstrap subproduct fails — massive over-prediction",
+    "description": "R1: 22 predicted pairs, 2 correct (precision 9%). R2: 20 predicted pairs, 0 correct (precision 0%). Ground truth has 1-3 pairs per 100-PR sample, Haiku predicts 20+. Task C (dedupe) generates noise, not signal. Confirms need for dedicated dedupe pipeline with Greptile summary as semantic representation. Dedupe should be removed from bootstrap or made non-scoring to avoid polluting the process.",
+    "category": "architecture",
+    "severity": "medium",
+    "source": "v4.1.1 R1-R2 results",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "dedupe",
+      "haiku",
+      "precision"
+    ]
   }
 ]
