@@ -47,7 +47,11 @@ def get_token() -> tuple[str, str]:
     auth_file = Path.home() / ".openclaw" / "agents" / "main" / "agent" / "auth-profiles.json"
     if auth_file.exists():
         profiles = json.load(auth_file.open())
-        for profile_name in ["anthropic:eva-new", "anthropic:bruno-new", "anthropic:openclaw"]:
+        preferred = os.environ.get("ANTHROPIC_PROFILE")
+        profile_order = ["anthropic:eva-new", "anthropic:bruno-new", "anthropic:openclaw"]
+        if preferred:
+            profile_order = [preferred] + [p for p in profile_order if p != preferred]
+        for profile_name in profile_order:
             p = profiles.get("profiles", {}).get(profile_name, {})
             token = p.get("token") or p.get("access")
             if token:
@@ -55,7 +59,7 @@ def get_token() -> tuple[str, str]:
     raise RuntimeError("No Anthropic token found")
 
 
-def call_haiku(prompt: str, max_tokens: int = 2500) -> dict:
+def call_haiku(prompt: str, max_tokens: int = 8000) -> dict:
     token, auth_type = get_token()
     payload = {
         "model": MODEL_ID,
@@ -72,19 +76,37 @@ def call_haiku(prompt: str, max_tokens: int = 2500) -> dict:
     else:
         headers["x-api-key"] = token
 
-    req = urllib.request.Request(
-        "https://api.anthropic.com/v1/messages",
-        data=json.dumps(payload).encode(),
-        headers=headers,
-        method="POST",
-    )
-    with urllib.request.urlopen(req, timeout=180) as resp:
-        data = json.loads(resp.read())
+    for attempt in range(3):
+        req = urllib.request.Request(
+            "https://api.anthropic.com/v1/messages",
+            data=json.dumps(payload).encode(),
+            headers=headers,
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=180) as resp:
+                data = json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < 2:
+                print(f"rate limited; sleeping 30s (attempt {attempt+1}/3)")
+                time.sleep(30)
+                continue
+            raise
 
-    text = data["content"][0]["text"]
-    if "```json" in text:
-        text = text.split("```json", 1)[1].split("```", 1)[0]
-    return json.loads(text)
+        text = data["content"][0]["text"]
+        if "```json" in text:
+            text = text.split("```json", 1)[1].split("```", 1)[0]
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError as e:
+            if attempt < 2:
+                print(f"JSON parse error at char {e.pos}/{len(text)}; retrying (attempt {attempt+1}/3)")
+                payload["max_tokens"] = min(payload["max_tokens"] + 2000, 8192)
+                time.sleep(2)
+                continue
+            print(f"JSON parse FATAL: {e}. Last 200 chars: {text[-200:]}")
+            raise
+    raise RuntimeError("call_haiku failed after 3 attempts")
 
 
 def sanitize_batch(batch: List[dict]) -> List[dict]:

@@ -23,7 +23,11 @@ def _token_from_profiles() -> tuple[str, str]:
     auth_file = Path.home() / ".openclaw" / "agents" / "main" / "agent" / "auth-profiles.json"
     if auth_file.exists():
         profiles = json.load(auth_file.open())
-        for profile_name in ["anthropic:eva-new", "anthropic:bruno-new", "anthropic:openclaw"]:
+        preferred = os.environ.get("ANTHROPIC_PROFILE")
+        profile_order = ["anthropic:eva-new", "anthropic:bruno-new", "anthropic:openclaw"]
+        if preferred:
+            profile_order = [preferred] + [p for p in profile_order if p != preferred]
+        for profile_name in profile_order:
             p = profiles.get("profiles", {}).get(profile_name, {})
             token = p.get("token") or p.get("access")
             if token:
@@ -48,15 +52,25 @@ def call_haiku(prompt: str, max_tokens: int = 1200) -> str:
     else:
         headers["x-api-key"] = token
 
-    req = urllib.request.Request(
-        "https://api.anthropic.com/v1/messages",
-        data=json.dumps(payload).encode(),
-        headers=headers,
-        method="POST",
-    )
-    with urllib.request.urlopen(req, timeout=180) as resp:
-        data = json.loads(resp.read())
-    return data["content"][0]["text"]
+    for attempt in range(3):
+        req = urllib.request.Request(
+            "https://api.anthropic.com/v1/messages",
+            data=json.dumps(payload).encode(),
+            headers=headers,
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=180) as resp:
+                data = json.loads(resp.read())
+            return data["content"][0]["text"]
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < 2:
+                import time
+                print(f"extract_patterns: rate limited, sleeping 30s (attempt {attempt+1}/3)")
+                time.sleep(30)
+                continue
+            raise
+    raise RuntimeError("extract_patterns: call_haiku failed after 3 attempts")
 
 
 def _sanitize_pattern_text(text: str) -> str:
