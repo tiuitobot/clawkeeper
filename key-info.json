@@ -490,5 +490,21 @@
       "time-series",
       "omitted-variable-bias"
     ]
+  },
+  {
+    "id": "K045",
+    "title": "v3 vs v4 scores not comparable — different population difficulty",
+    "description": "v3 used full dataset (3233 PRs including pre-Greptile epoch with simpler dynamics). v4 uses population filter (2787 Greptile-only PRs from complex epoch). Pre-Greptile PRs were easier to classify (simpler repo, fewer bots, less triage). v3 accuracy was inflated by easy samples. The drop from v3 R1 (87%) to v4 R1 (80%) is not model regression — it is a harder sample. All v3-calibrated gates (G-ACC >74.6%, G-REG >69.3%) need recalibration for v4 population.",
+    "category": "econometrics",
+    "severity": "high",
+    "source": "Bruno correction",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "population",
+      "sample-bias",
+      "gates",
+      "comparability"
+    ]
   }
 ]
