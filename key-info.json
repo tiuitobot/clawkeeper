@@ -259,5 +259,13 @@
     "date": "2026-02-18",
     "source": "gh API users/{user}/events, 6 autores amostrados",
     "context": "Completa o perfil bot: velocity (max_same_day, median_interval) + spread (unique_repos) + history (merge_rate, account_age). Os 3 juntos cobrem todos os tipos de farming."
+  },
+  {
+    "id": "K030",
+    "date": "2026-02-18",
+    "category": "strategic",
+    "title": "Clawkeeper como módulo de QA epistêmico",
+    "content": "Compliance sweeper = enforcement horizontal (agente segue padrão). Falta enforcement vertical (padrão merece existir). Clawkeeper module fecha gap: lê promoted patterns + signals, classifica qualidade (sustentado/inflado/ruído/contraditório), alimenta DREAM_CYCLE com prune/revise/promote. Bootstrap v3 é prova empírica (40 patterns → 8 variáveis, overcorrection sem auditoria). Produto: QA do learning como módulo embutido. API genérica. Tiuito = primeiro cliente.",
+    "source": "auditor-externo sessão 2026-02-18"
   }
 ]
