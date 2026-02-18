@@ -283,5 +283,88 @@
     "title": "Clawkeeper como camada de segurança — burner accounts e supply chain risk",
     "content": "OpenClaw roda com acesso total ao sistema do usuário (shell, arquivos, mensagens). PR malicioso que passa review → merge → update → execução na máquina. Vetor: burner accounts fludeando PRs (trust building ou complexity overwhelming). Features já capturadas no enrichment v2 (velocity, spread, account age) funcionam como detector de burner accounts. Reframe: Clawkeeper não é só governance de qualidade — é camada de segurança. Detectar PRs anômalos antes do merge é security. Casos documentados: xz-utils (2024, trust building 2 anos), tj-actions (2025, CI exploitation), University of Minnesota (2021, patches bugados deliberados no Linux kernel).",
     "source": "análise Bruno+Tiuito 2026-02-18"
+  },
+  {
+    "id": "K033",
+    "title": "Signal Inversion Bug — Sonnet consolidator reinforces error mechanisms instead of correcting them",
+    "description": "P-1-1, P-1-2, P-1-9, P-1-11 prescribe the exact behavior that caused the FP errors they were derived from. Sonnet reads Haiku reasoning 'I over-trusted Greptile 5/5' and extracts 'Greptile 5/5 is a strong merge signal'. The consolidator confuses 'mechanism of the error' with 'rule to follow'. 4/13 patterns correct (31%), rest are noise or actively inverted signals. R2 FP increased 20→22, confirming patterns amplify rather than correct errors.",
+    "category": "architecture",
+    "severity": "critical",
+    "source": "Bruno analysis + R1/R2 data validation",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "sonnet",
+      "pattern-extraction",
+      "signal-inversion",
+      "v4"
+    ],
+    "evidence": {
+      "inverted_patterns": [
+        "P-1-1 (Greptile 5/5)",
+        "P-1-2 (duplicate=merge intent)",
+        "P-1-9 (config PRs)",
+        "P-1-11 (experienced contributors)"
+      ],
+      "correct_patterns": [
+        "P-1-4 (ban=no merge)",
+        "P-1-5 (superseded=closed)",
+        "P-1-8 (squash-merge receipt)",
+        "P-1-6 (security+new contributor)"
+      ],
+      "r1_fp": 20,
+      "r2_fp": 22,
+      "correct_ratio": "4/13 (31%)"
+    }
+  },
+  {
+    "id": "K034",
+    "title": "Consolidation by reflection has systematic polarity problem",
+    "description": "Error reflection text is structurally ambiguous: 'I predicted merge because of X' describes both (a) the wrong action and (b) the feature X. Without explicit polarity marking, a consolidator naturally extracts 'X → merge' rather than 'X → NOT merge'. This is not a prompt tuning issue — it's a structural information loss problem. The error description must be reformatted to make polarity unambiguous before consolidation.",
+    "category": "architecture",
+    "severity": "high",
+    "source": "Bruno diagnosis",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "pattern-extraction",
+      "epistemic",
+      "architecture"
+    ],
+    "implications": [
+      "Feedback mediated by patterns is less robust than direct error feedback (confirmed by v3 R5 prediction)",
+      "Clawkeeper-as-module would catch this: 'pattern prescribes behavior that caused its source errors' is mechanically verifiable",
+      "Fix requires explicit polarity in error format + self-check in consolidation prompt"
+    ]
+  },
+  {
+    "id": "K035",
+    "title": "Correct vs inverted pattern taxonomy — deterministic signals survive, qualitative judgment inverts",
+    "description": "The 4 correct patterns (P-1-4 ban, P-1-5 superseded, P-1-6 security block, P-1-8 squash receipt) are all deterministic: mechanically verifiable from PR metadata. The inverted patterns (P-1-1 Greptile, P-1-2 duplicate intent, P-1-9 config, P-1-11 experienced author) are all qualitative: requiring judgment about what a signal 'means'. Deterministic patterns survive consolidation because they have clear polarity. Qualitative patterns invert because the consolidator must infer polarity from ambiguous reasoning text.",
+    "category": "architecture",
+    "severity": "high",
+    "source": "pattern analysis from R1 data",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "pattern-extraction",
+      "deterministic-vs-qualitative"
+    ],
+    "design_implication": "Separate deterministic and qualitative pattern extraction paths. Deterministic: mechanical extraction, no consolidation needed. Qualitative: require explicit polarity marking + self-check."
+  },
+  {
+    "id": "K036",
+    "title": "v4 R1-R2 baseline metrics and bug inventory",
+    "description": "R1: acc=79%, F1=0.704, FP=20, FN=1. R2: acc=76%, F1=0.667, FP=22, FN=2. R3-R10 not executed (process died). Three bugs identified: (1) Signal inversion in consolidator [K033], (2) reasoning field mismatch (qualitative_signals not mapped to reasoning in score_round.py — fix applied but not committed), (3) Feature regression status unclear — model_spec.json features ARE loaded in build_prompt but format_pr_for_prompt may not inject all numeric fields. Patterns at R2: P-1-1 through P-1-13 (4 revised, 9 active), P-2-1 and P-2-2 added.",
+    "category": "execution",
+    "severity": "medium",
+    "source": "data/bootstrap_v4/ files",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "v4",
+      "metrics",
+      "bugs"
+    ]
   }
 ]
