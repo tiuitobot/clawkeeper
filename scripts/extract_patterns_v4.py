@@ -644,7 +644,7 @@ def apply_updates(
     for p in patterns:
         if p.get("status") == "retired":
             continue
-        rounds = sorted({int(a.get("round")) for a in p.get("attributions", []) if not a.get("ambiguous")})
+        rounds = sorted({int(a["round"]) for a in p.get("attributions", []) if not a.get("ambiguous") and a.get("round") is not None})
         streak = 1
         max_streak = 1 if rounds else 0
         for i in range(1, len(rounds)):
