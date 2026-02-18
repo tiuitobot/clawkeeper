@@ -275,5 +275,13 @@
     "title": "PR flooding e ataques supply chain documentados",
     "content": "Ataques por PR documentados em 4 categorias: (1) Complexity overwhelming — PRs grandes onde código malicioso se perde no ruído (Kusari top 5 PR risks). (2) Trust building → poisoning — contribuições legítimas por meses/anos, depois injeção maliciosa (xz-utils 2024, caso canônico). (3) CI/pipeline exploitation — PR sem merge dispara GitHub Actions que roubam secrets (Ultralytics, tj-actions/changed-files 2025). (4) Dependency confusion via automated PRs — comprometer upstream, bot cria PR de update, maintainer aprova por rotina. Bots no dataset OpenClaw (94 PRs, 0% merge) provavelmente são product promotion/coding agents, não ataques. Mas feature submission_mechanism capturaria ambos. Trust building detectável por velocity+spread (conta nova com alta atividade em múltiplos repos).",
     "source": "web search + análise Bruno 2026-02-18"
+  },
+  {
+    "id": "K032",
+    "date": "2026-02-18",
+    "category": "strategic",
+    "title": "Clawkeeper como camada de segurança — burner accounts e supply chain risk",
+    "content": "OpenClaw roda com acesso total ao sistema do usuário (shell, arquivos, mensagens). PR malicioso que passa review → merge → update → execução na máquina. Vetor: burner accounts fludeando PRs (trust building ou complexity overwhelming). Features já capturadas no enrichment v2 (velocity, spread, account age) funcionam como detector de burner accounts. Reframe: Clawkeeper não é só governance de qualidade — é camada de segurança. Detectar PRs anômalos antes do merge é security. Casos documentados: xz-utils (2024, trust building 2 anos), tj-actions (2025, CI exploitation), University of Minnesota (2021, patches bugados deliberados no Linux kernel).",
+    "source": "análise Bruno+Tiuito 2026-02-18"
   }
 ]
