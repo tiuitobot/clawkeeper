@@ -89,6 +89,7 @@
         "component_area",
         "author_prior_prs",
         "author_prior_merge_rate",
+        "is_low_merge_author",
         "author_association",
         "has_maintainer_label",
         "has_trusted_contributor_label",
@@ -112,6 +113,7 @@
         "component_area",
         "author_prior_prs",
         "author_prior_merge_rate",
+        "is_low_merge_author",
         "author_association",
         "has_maintainer_label",
         "has_trusted_contributor_label",
@@ -279,7 +281,7 @@
       "phase": "early",
       "extraction": "count of PRs opened in same isoweek",
       "expected_sign": "negative",
-      "notes": "Control: high volume → triage pressure → lower quality decisions"
+      "notes": "Control: high volume \u2192 triage pressure \u2192 lower quality decisions"
     },
     {
       "name": "release_period",
@@ -393,6 +395,12 @@
       "extraction": "PR from fork (head.repo != base.repo)",
       "expected_sign": "negative",
       "notes": "PR#279 was from fork with entire main branch merged. Common pattern for low-quality PRs"
+    },
+    {
+      "name": "is_low_merge_author",
+      "type": "binary",
+      "phase": "early",
+      "notes": "Author with 5+ PRs and <5% merge rate. 34 authors, 336 PRs (10.4%). Deterministic lookup."
     }
   ],
   "repo_specific_discoveries": {

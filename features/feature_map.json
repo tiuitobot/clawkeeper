@@ -1,6 +1,6 @@
 {
   "version": "0.5.0",
-  "description": "Operational mapping: feature name → extraction rule. Used by signal_extractor.py.",
+  "description": "Operational mapping: feature name \u2192 extraction rule. Used by signal_extractor.py.",
   "features": {
     "loc_additions": {
       "source": "all_historical_prs",
@@ -197,6 +197,12 @@
       "transform": "binary",
       "phase": "mature",
       "notes": "maintainers_from_codeowners_or_top_history built from CODEOWNERS when available; fallback to top maintainer-frequency actors in historical PR comments/reviews"
+    },
+    "is_low_merge_author": {
+      "source": "computed",
+      "rule": "author_prior_prs >= 5 and author_prior_merge_rate < 0.05",
+      "transform": "binary",
+      "leakage_guard": "strict temporal: prior PRs only"
     }
   }
 }
