@@ -1,0 +1,79 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors with XS/S size labels receive significant merge probability boost despite lacking prior history, with XS/S labels correlating to 26-28% merge rates and providing 2-4% uplift over baseline",
+      "confidence": 0.92,
+      "support": 8
+    },
+    {
+      "pattern": "High-priority categories (agents, gateway, commands) provide 15-25% baseline merge rate uplift independent of author credentials, partially compensating for weak author signals",
+      "confidence": 0.89,
+      "support": 12
+    },
+    {
+      "pattern": "Fix-type changes receive 10-20% merge probability boost over feature additions, with narrow scope fixes receiving additional 5-10% boost",
+      "confidence": 0.87,
+      "support": 14
+    },
+    {
+      "pattern": "Authors with 0% historical merge rate across 3+ prior PRs face deterministic rejection risk unless compensated by explicit credibility labels (maintainer, trusted-contributor, experienced-contributor) or high-priority category with narrow scope",
+      "confidence": 0.85,
+      "support": 6
+    },
+    {
+      "pattern": "Missing critical metadata (LoC, files_changed, test coverage, CI status) consistently imposes 7-8% confidence penalty, but penalty is substantially mitigated by explicit size labels or established author history",
+      "confidence": 0.88,
+      "support": 18
+    },
+    {
+      "pattern": "Experienced-contributor or trusted-contributor labels provide 5-15% credibility boost that can offset poor historical merge performance when paired with high-priority categories",
+      "confidence": 0.81,
+      "support": 4
+    },
+    {
+      "pattern": "Multi-component scope (touching multiple channels/areas) reduces merge likelihood by 25-30% for weak authors but has minimal penalty for established contributors with strong merge history",
+      "confidence": 0.79,
+      "support": 3
+    },
+    {
+      "pattern": "Authors with established PR volume (50+ prior PRs) demonstrate consistent contribution patterns and retain moderate merge likelihood even when merge rate is below 24% baseline",
+      "confidence": 0.84,
+      "support": 5
+    },
+    {
+      "pattern": "Critical-path infrastructure changes (cron, session management, authentication) require explicit credibility signals (maintainer label or established merge history) from first-time contributors, and fix classification alone does not compensate",
+      "confidence": 0.8,
+      "support": 3
+    },
+    {
+      "pattern": "Authors with 100% merge rate history (even single prior PR) signal strong credibility and exceed 50% merge likelihood when paired with focused scope and high-priority categories",
+      "confidence": 0.86,
+      "support": 2
+    },
+    {
+      "pattern": "L and XL size labels (large scope) are strong rejection signals correlating with 15-20% merge rates, overriding compensatory signals and creating deterministic rejection risk for first-time contributors",
+      "confidence": 0.88,
+      "support": 3
+    },
+    {
+      "pattern": "Documentation-only PRs from first-time contributors have depressed baseline (20-30% merge rate), further reduced by 10-15% when touching multiple component areas",
+      "confidence": 0.77,
+      "support": 2
+    },
+    {
+      "pattern": "Authors demonstrating persistence through multiple revision attempts (v2, v3 submissions) on same issue show commitment signal that partially compensates for 0% merge history in high-priority categories",
+      "confidence": 0.68,
+      "support": 2
+    },
+    {
+      "pattern": "Narrow component scope (single channel, single area) provides 5-10% merge boost for first-time contributors, with maximum benefit when paired with fix-type classification",
+      "confidence": 0.83,
+      "support": 8
+    },
+    {
+      "pattern": "Issue references provide specificity boost (particularly when addressing documented bugs) that can elevate merge probability by 5-10%, indicating targeted, intentional contributions",
+      "confidence": 0.74,
+      "support": 3
+    }
+  ]
+}

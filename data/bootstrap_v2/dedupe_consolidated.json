@@ -1,0 +1,115 @@
+{
+  "rounds": [
+    {
+      "round": 1,
+      "precision": 0.6875,
+      "recall": 0.916667,
+      "f1": 0.785714,
+      "tp": 11,
+      "fp": 5,
+      "fn": 1,
+      "gt_pairs": 12,
+      "pred_pairs": 16
+    },
+    {
+      "round": 2,
+      "precision": 0.727273,
+      "recall": 0.941176,
+      "f1": 0.820513,
+      "tp": 16,
+      "fp": 6,
+      "fn": 1,
+      "gt_pairs": 17,
+      "pred_pairs": 22
+    },
+    {
+      "round": 3,
+      "precision": 0.823529,
+      "recall": 0.823529,
+      "f1": 0.823529,
+      "tp": 14,
+      "fp": 3,
+      "fn": 3,
+      "gt_pairs": 17,
+      "pred_pairs": 17
+    },
+    {
+      "round": 4,
+      "precision": 0.8125,
+      "recall": 0.619048,
+      "f1": 0.702703,
+      "tp": 13,
+      "fp": 3,
+      "fn": 8,
+      "gt_pairs": 21,
+      "pred_pairs": 16
+    },
+    {
+      "round": 5,
+      "precision": 0.758621,
+      "recall": 0.956522,
+      "f1": 0.846154,
+      "tp": 22,
+      "fp": 7,
+      "fn": 1,
+      "gt_pairs": 23,
+      "pred_pairs": 29
+    },
+    {
+      "round": 6,
+      "precision": 0.5,
+      "recall": 0.818182,
+      "f1": 0.62069,
+      "tp": 9,
+      "fp": 9,
+      "fn": 2,
+      "gt_pairs": 11,
+      "pred_pairs": 18
+    },
+    {
+      "round": 7,
+      "precision": 0.642857,
+      "recall": 0.642857,
+      "f1": 0.642857,
+      "tp": 9,
+      "fp": 5,
+      "fn": 5,
+      "gt_pairs": 14,
+      "pred_pairs": 14
+    },
+    {
+      "round": 8,
+      "precision": 0.75,
+      "recall": 0.666667,
+      "f1": 0.705882,
+      "tp": 6,
+      "fp": 2,
+      "fn": 3,
+      "gt_pairs": 9,
+      "pred_pairs": 8
+    },
+    {
+      "round": 9,
+      "precision": 0.636364,
+      "recall": 0.777778,
+      "f1": 0.7,
+      "tp": 7,
+      "fp": 4,
+      "fn": 2,
+      "gt_pairs": 9,
+      "pred_pairs": 11
+    },
+    {
+      "round": 10,
+      "precision": 0.842105,
+      "recall": 0.888889,
+      "f1": 0.864865,
+      "tp": 16,
+      "fp": 3,
+      "fn": 2,
+      "gt_pairs": 18,
+      "pred_pairs": 19
+    }
+  ],
+  "mean_f1": 0.7512907
+}

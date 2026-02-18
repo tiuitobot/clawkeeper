@@ -1,0 +1,217 @@
+{
+  "rounds_scored": 10,
+  "learning_curve": {
+    "baseline_rounds_1_3_mean_accuracy": 0.6933333333333334,
+    "learning_rounds_4_10_mean_accuracy": 0.7457142857142857,
+    "delta": 0.052380952380952306,
+    "welch_t_stat": 2.513670196944663
+  },
+  "promoted_patterns": [],
+  "persistent_error_count": 0,
+  "logit": {
+    "available": true,
+    "weights": [
+      {
+        "feature": "has_maintainer_label",
+        "coef": 2.7721345849856105
+      },
+      {
+        "feature": "size_label=L",
+        "coef": 2.325782474216488
+      },
+      {
+        "feature": "size_label=M",
+        "coef": 1.775450285816562
+      },
+      {
+        "feature": "size_label=S",
+        "coef": 1.6966832804682965
+      },
+      {
+        "feature": "component_area=telegram",
+        "coef": 1.3852806971941516
+      },
+      {
+        "feature": "touches_extensions",
+        "coef": -1.3569977643154423
+      },
+      {
+        "feature": "prior_merges",
+        "coef": 1.3086723158614215
+      },
+      {
+        "feature": "is_low_merge_author",
+        "coef": -1.2990819627544148
+      },
+      {
+        "feature": "component_area=whatsapp-web",
+        "coef": -1.1617343787764112
+      },
+      {
+        "feature": "suspected_duplicate",
+        "coef": -1.0643716668974084
+      },
+      {
+        "feature": "category=cli",
+        "coef": 1.0433389743568857
+      },
+      {
+        "feature": "has_trusted_contributor_label",
+        "coef": 1.0294896340637785
+      },
+      {
+        "feature": "size_label=XS",
+        "coef": 1.0236181878322272
+      },
+      {
+        "feature": "component_area=commands",
+        "coef": 0.9670001655228292
+      },
+      {
+        "feature": "change_type=docs",
+        "coef": -0.8627386370860374
+      },
+      {
+        "feature": "multi_category_count",
+        "coef": 0.8377595106598004
+      },
+      {
+        "feature": "category=docs",
+        "coef": 0.8194726497866197
+      },
+      {
+        "feature": "is_draft",
+        "coef": -0.8063973522545973
+      },
+      {
+        "feature": "component_area=bluebubbles",
+        "coef": 0.7955099310248455
+      },
+      {
+        "feature": "components_touched",
+        "coef": 0.7824958697269281
+      },
+      {
+        "feature": "component_area=docker",
+        "coef": -0.7758321903468857
+      },
+      {
+        "feature": "size_label=UNKNOWN",
+        "coef": -0.7702425823926529
+      },
+      {
+        "feature": "author_association=MEMBER",
+        "coef": 0.738338533584967
+      },
+      {
+        "feature": "component_area=matrix",
+        "coef": 0.7325792622275862
+      },
+      {
+        "feature": "component_area=signal",
+        "coef": -0.7318784544619225
+      },
+      {
+        "feature": "category=docker",
+        "coef": -0.7266765703484008
+      },
+      {
+        "feature": "is_top_contributor",
+        "coef": 0.7088990137064718
+      },
+      {
+        "feature": "category=docs,app:web-ui,gateway,commands,docker,agents",
+        "coef": 0.7033985487709805
+      },
+      {
+        "feature": "is_critical_path",
+        "coef": 0.6982640795949014
+      },
+      {
+        "feature": "category=app: web-ui",
+        "coef": 0.6902243940772697
+      },
+      {
+        "feature": "component_area=infrastructure",
+        "coef": -0.6804022669406085
+      },
+      {
+        "feature": "missing_critical_metadata",
+        "coef": -0.6287496124020389
+      },
+      {
+        "feature": "component_area=runtime",
+        "coef": 0.6277192835875596
+      },
+      {
+        "feature": "component_area=agents",
+        "coef": 0.6275783164522585
+      },
+      {
+        "feature": "category=feature",
+        "coef": -0.6066012414444777
+      },
+      {
+        "feature": "change_type=feat",
+        "coef": 0.6005900425658914
+      },
+      {
+        "feature": "component_area=gateway",
+        "coef": 0.5890317701836925
+      },
+      {
+        "feature": "first_time_contributor",
+        "coef": -0.5857177622357146
+      },
+      {
+        "feature": "weekly_pr_volume=moderate",
+        "coef": 0.5744013378443429
+      },
+      {
+        "feature": "has_issue_reference",
+        "coef": -0.5712545417893853
+      },
+      {
+        "feature": "channel_count",
+        "coef": -0.5635191079946307
+      },
+      {
+        "feature": "component_area=chrome-extension",
+        "coef": 0.5635088555794807
+      },
+      {
+        "feature": "author=Bridgerz",
+        "coef": 0.5622411127105982
+      },
+      {
+        "feature": "multi_component_scope",
+        "coef": 0.5622411127105982
+      },
+      {
+        "feature": "note=XL size + first-time contributor + multi-component = deterministic rejection risk",
+        "coef": 0.5622411127105982
+      },
+      {
+        "feature": "size_rejection_signal",
+        "coef": 0.5622411127105982
+      },
+      {
+        "feature": "multi_component",
+        "coef": 0.5526441190585311
+      },
+      {
+        "feature": "category=channel",
+        "coef": 0.5391644427346847
+      },
+      {
+        "feature": "category=infrastructure",
+        "coef": -0.520621954708328
+      },
+      {
+        "feature": "component_area=cli",
+        "coef": -0.5184084230765043
+      }
+    ],
+    "intercept": -0.7318204090255431
+  }
+}

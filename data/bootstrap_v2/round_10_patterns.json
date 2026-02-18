@@ -1,0 +1,89 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors with missing critical metadata (LoC, files_changed, has_tests, ci_green) face a persistent -7-8% penalty that compounds other rejection signals",
+      "confidence": 0.92,
+      "support": 28
+    },
+    {
+      "pattern": "Authors with perfect or near-perfect prior merge rates (\u226580% across \u22651 prior PR) receive +15-25% credibility bonus that substantially overrides scope/metadata concerns",
+      "confidence": 0.89,
+      "support": 5
+    },
+    {
+      "pattern": "XS and S size labels act as compensatory signals (+2-4% boost), correlating with 26-28% merge rates and partially mitigating metadata penalties and weak author credentials",
+      "confidence": 0.88,
+      "support": 8
+    },
+    {
+      "pattern": "L and XL size labels function as deterministic rejection signals overriding category/type compensations, correlating with 15-20% merge rates regardless of other positive signals",
+      "confidence": 0.85,
+      "support": 4
+    },
+    {
+      "pattern": "Fix-type changes receive consistent +10-20% boost over feature-type additions, particularly in high-priority categories",
+      "confidence": 0.91,
+      "support": 22
+    },
+    {
+      "pattern": "Maintainer labels or high-priority credibility signals (+15-25% bonus) enable multi-component/multi-category scope acceptance that would otherwise trigger -25-30% scope creep penalty",
+      "confidence": 0.87,
+      "support": 4
+    },
+    {
+      "pattern": "Authors with established high-volume history (50+ prior PRs) retain moderate merge likelihood (25-30%) despite below-baseline merge rates, indicating persistence/credibility signal",
+      "confidence": 0.83,
+      "support": 6
+    },
+    {
+      "pattern": "Low-merge-history authors (0% merge rate across 5+ prior PRs, is_low_merge_author=true) face near-deterministic rejection (~0-5% likelihood) that cannot be overcome by single-PR compensatory signals",
+      "confidence": 0.82,
+      "support": 2
+    },
+    {
+      "pattern": "Authors with above-baseline merge rates (+5-10% delta over 24% baseline) substantially mitigate missing metadata penalties and enable moderate-to-strong merge likelihood even without explicit size labels",
+      "confidence": 0.86,
+      "support": 7
+    },
+    {
+      "pattern": "Critical-path infrastructure changes (agents, gateway, routing) receive +15-25% category uplift, partially compensating for first-time contributor or weak credibility status in narrow-scope fixes",
+      "confidence": 0.84,
+      "support": 9
+    },
+    {
+      "pattern": "Documentation-only PRs from first-time contributors have depressed baseline (20-30% merge rate) that requires compensatory signals (XS size, high-priority infrastructure context, issue reference) to reach baseline",
+      "confidence": 0.81,
+      "support": 3
+    },
+    {
+      "pattern": "Multi-component scope (\u22653 categories/areas) imposes -25-30% penalty for weak/first-time authors but is substantially mitigated by maintainer status or established above-baseline merge rate (\u226530%)",
+      "confidence": 0.85,
+      "support": 4
+    },
+    {
+      "pattern": "Narrow, focused scope (single component/channel, single logical fix) provides consistent +5-10% boost that accumulates with other positive signals",
+      "confidence": 0.88,
+      "support": 18
+    },
+    {
+      "pattern": "Authors demonstrating persistent submission history (4+ prior PRs) receive +2-5% persistence/commitment signal even with below-baseline merge rates, indicating credibility independent of merge rate",
+      "confidence": 0.79,
+      "support": 5
+    },
+    {
+      "pattern": "Channel plugin work without maintainer approval or experienced contributor status faces elevated -10-15% risk penalty, reducing baseline acceptance likelihood",
+      "confidence": 0.76,
+      "support": 2
+    },
+    {
+      "pattern": "Security-related or critical-path fixes receive preferential +5-10% treatment from established authors (\u22652 prior PRs) independent of category uplift, signaling infrastructure priority",
+      "confidence": 0.78,
+      "support": 3
+    },
+    {
+      "pattern": "Explicit issue references provide +5-10% specificity boost, particularly valuable for first-time contributors to overcome credibility gaps",
+      "confidence": 0.74,
+      "support": 4
+    }
+  ]
+}

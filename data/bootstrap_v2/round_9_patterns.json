@@ -1,0 +1,94 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors (0 prior PRs) with large size label face deterministic rejection despite high-priority categories",
+      "confidence": 0.92,
+      "support": 2
+    },
+    {
+      "pattern": "Missing critical metadata (LoC, files_changed, has_tests, ci_green) imposes consistent 7-8% confidence penalty across all author types",
+      "confidence": 0.89,
+      "support": 18
+    },
+    {
+      "pattern": "XS and S size labels provide strongest compensatory signal for weak author credentials, correlating with 26-28% merge rates and +2-4% boost over baseline",
+      "confidence": 0.87,
+      "support": 7
+    },
+    {
+      "pattern": "High-priority categories (agents, gateway) provide +15-25% baseline uplift independent of author history",
+      "confidence": 0.85,
+      "support": 12
+    },
+    {
+      "pattern": "Fix-type changes receive consistent +10-20% merge boost over feature-type additions",
+      "confidence": 0.84,
+      "support": 14
+    },
+    {
+      "pattern": "Authors with 0% historical merge rate across 2+ prior PR attempts face rejection pattern unless compensated by explicit credibility labels or XS size",
+      "confidence": 0.81,
+      "support": 4
+    },
+    {
+      "pattern": "Multi-category scope from first-time/low-credibility authors imposes -25-30% penalty (scope creep risk signal)",
+      "confidence": 0.79,
+      "support": 2
+    },
+    {
+      "pattern": "Authors with 50+ prior PRs retain moderate merge likelihood (25-30%) even with below-baseline merge rates, due to persistence/commitment signal",
+      "confidence": 0.82,
+      "support": 4
+    },
+    {
+      "pattern": "Trusted-contributor and experienced-contributor labels provide +5-15% credibility boost and can override below-baseline author merge rates",
+      "confidence": 0.83,
+      "support": 3
+    },
+    {
+      "pattern": "Perfect author merge history (100% across prior PRs) provides +15-25% credibility bonus even with single prior PR",
+      "confidence": 0.8,
+      "support": 2
+    },
+    {
+      "pattern": "Extension-related work carries elevated rejection risk (-10-15% penalty) for first-time contributors absent maintainer approval",
+      "confidence": 0.75,
+      "support": 1
+    },
+    {
+      "pattern": "Narrow scope (single component, focused logical change) provides consistent +5-10% merge probability boost",
+      "confidence": 0.78,
+      "support": 8
+    },
+    {
+      "pattern": "Large size label (L) creates deterministic rejection signal correlating with 15-20% merge rates, overriding compensatory signals from high-priority categories for weak authors",
+      "confidence": 0.86,
+      "support": 2
+    },
+    {
+      "pattern": "Author merge rate above baseline (>24%) demonstrates predictive capability independent of PR scope and provides +5-10% delta bonus",
+      "confidence": 0.81,
+      "support": 4
+    },
+    {
+      "pattern": "Multi-channel touches from weak-credibility authors impose -25-30% penalty; narrow single-component focus provides mitigation",
+      "confidence": 0.76,
+      "support": 2
+    },
+    {
+      "pattern": "Feature-type additions require stronger compensatory signals (maintainer labels, established author history) compared to fix-type changes",
+      "confidence": 0.77,
+      "support": 3
+    },
+    {
+      "pattern": "Critical-path infrastructure changes from first-time contributors face elevated scrutiny and require explicit credibility signals or size-label compensation",
+      "confidence": 0.79,
+      "support": 3
+    },
+    {
+      "pattern": "Author persistence (multiple prior PR attempts) partially mitigates low merge rate by +5% when accompanied by narrow scope",
+      "confidence": 0.72,
+      "support": 3
+    }
+  ]
+}

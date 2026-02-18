@@ -1,0 +1,89 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors with maintainer label have significantly higher merge likelihood regardless of missing metadata",
+      "confidence": 0.92,
+      "support": 2
+    },
+    {
+      "pattern": "XS and S size labels correlate with ~26-28% merge rates, providing 2-4% boost over baseline and compensating for weak author history",
+      "confidence": 0.89,
+      "support": 8
+    },
+    {
+      "pattern": "Authors with 0% merge rate across 5+ prior PRs (low-merge authors) face deterministic rejection despite compensatory signals like size labels or fix classification",
+      "confidence": 0.87,
+      "support": 3
+    },
+    {
+      "pattern": "Fix-type changes boost merge likelihood by 10-20% over baseline, particularly when focused on single components",
+      "confidence": 0.85,
+      "support": 6
+    },
+    {
+      "pattern": "High-priority categories (agents, commands, gateway) provide 15-25% baseline uplift over general categories",
+      "confidence": 0.84,
+      "support": 7
+    },
+    {
+      "pattern": "Maintainer labels override weak author credentials and missing metadata with ~90% merge rate signal",
+      "confidence": 0.88,
+      "support": 3
+    },
+    {
+      "pattern": "Documentation-only PRs from first-time contributors have depressed baseline (20-30%) that XS size labels can offset",
+      "confidence": 0.81,
+      "support": 3
+    },
+    {
+      "pattern": "Authors with >40% prior merge rate or experienced-contributor labels are strong merge candidates independent of size/scope",
+      "confidence": 0.86,
+      "support": 3
+    },
+    {
+      "pattern": "Missing critical metadata (LoC, files_changed, tests, CI status) increases uncertainty but can be compensated by strong author history or explicit size labels",
+      "confidence": 0.79,
+      "support": 12
+    },
+    {
+      "pattern": "Narrow, single-component scope provides 5-10% merge boost for first-time contributors with no other signals",
+      "confidence": 0.77,
+      "support": 5
+    },
+    {
+      "pattern": "Multi-channel or multi-component touches from unknown authors signal scope creep and depress merge likelihood",
+      "confidence": 0.76,
+      "support": 2
+    },
+    {
+      "pattern": "Feature additions from first-time contributors require compensatory signals (maintainer label, XS size, high-priority category) or face below-baseline merge likelihood",
+      "confidence": 0.82,
+      "support": 3
+    },
+    {
+      "pattern": "L size labels provide no merge boost and may indicate scope risk requiring established author trust",
+      "confidence": 0.74,
+      "support": 1
+    },
+    {
+      "pattern": "Authors with baseline-to-above merge rates (20-50%) paired with category uplift and size S/XS labels achieve 50%+ merge likelihood",
+      "confidence": 0.83,
+      "support": 4
+    },
+    {
+      "pattern": "Security-adjacent or critical-path infrastructure fixes from underperforming authors (12% merge rate) still face below-baseline merge likelihood",
+      "confidence": 0.78,
+      "support": 1
+    },
+    {
+      "pattern": "100% author merge rate history (even with single prior PR) signals strong credibility and >50% merge likelihood when paired with focused scope",
+      "confidence": 0.8,
+      "support": 1
+    },
+    {
+      "pattern": "Non-draft status is baseline expectation; draft status is primary negative signal but not decisive alone",
+      "confidence": 0.72,
+      "support": 15
+    }
+  ]
+}

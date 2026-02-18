@@ -1,0 +1,668 @@
+{
+  "round": 3,
+  "merge": {
+    "accuracy": 0.66,
+    "precision": 0.386364,
+    "recall": 0.708333,
+    "f1": 0.5,
+    "confusion": {
+      "tp": 17,
+      "fp": 27,
+      "tn": 49,
+      "fn": 7
+    }
+  },
+  "dedupe": {
+    "precision": 0.823529,
+    "recall": 0.823529,
+    "f1": 0.823529,
+    "tp": 14,
+    "fp": 3,
+    "fn": 3,
+    "gt_pairs": 17,
+    "pred_pairs": 17
+  },
+  "calibration": [
+    {
+      "bin": 0.5,
+      "count": 6,
+      "avg_confidence": 0.576667,
+      "accuracy": 0.5
+    },
+    {
+      "bin": 0.6,
+      "count": 39,
+      "avg_confidence": 0.662564,
+      "accuracy": 0.487179
+    },
+    {
+      "bin": 0.7,
+      "count": 39,
+      "avg_confidence": 0.741282,
+      "accuracy": 0.794872
+    },
+    {
+      "bin": 0.8,
+      "count": 10,
+      "avg_confidence": 0.84,
+      "accuracy": 0.9
+    },
+    {
+      "bin": 0.9,
+      "count": 6,
+      "avg_confidence": 0.923333,
+      "accuracy": 0.666667
+    }
+  ],
+  "errors": [
+    {
+      "pr_number": 6824,
+      "error_type": "fn",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "component_area": "discord",
+        "category": "channel",
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "author_association": "NONE"
+      },
+      "reasoning": "First-time contributor (gavinbmoore, 0 prior PRs). Single channel focus (discord) suggests narrow scope which could be positive, but no prior history, no size data, no maintainer labels to offset risk. Discord is high-volume component area (315 PRs) which may increase triage pressure."
+    },
+    {
+      "pr_number": 8387,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 8,
+        "author_prior_merge_rate": 0.0,
+        "has_experienced_contributor_label": true,
+        "size_label": "XS",
+        "is_draft": false,
+        "category": "channel/extensions",
+        "component_area": "nextcloud-talk",
+        "touches_extensions": true
+      },
+      "reasoning": "Has 'experienced-contributor' label (99 PRs with this historically strong signal). XS size = historically strong merge (~26%+). Focused scope: nextcloud-talk workspace dependencies. Author has 8 prior PRs (shows commitment despite 0% historical merge\u2014likely earlier rejections). Label presence overrides low author merge rate."
+    },
+    {
+      "pr_number": 9004,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "category": "agents",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": "XS",
+        "has_tests": false,
+        "ci_green": false
+      },
+      "reasoning": "First-time contributor but labeled XS (historically strong merge rate for small fixes). JSON validation is a focused, low-risk fix in agents category. XS size label typically ~27% merge rate. Missing LoC data is limitation but small scope implied by XS label. No red flags besides author inexperience."
+    },
+    {
+      "pr_number": 9377,
+      "error_type": "fn",
+      "features": {
+        "category": "docs",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null
+      },
+      "reasoning": "First-time contributor (0 prior PRs, 0.0% merge rate) with docs category. Docs PRs have moderate merge rates (~25%), but new authors without track record and missing LoC data (None values suggest incomplete metadata) signal lower likelihood. No maintainer label or engagement signals present."
+    },
+    {
+      "pr_number": 9495,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 12,
+        "author_prior_merge_rate": 0.0,
+        "category": "agents",
+        "is_draft": false,
+        "component_area": "agents/anthropic"
+      },
+      "reasoning": "Author arosstale = top-5 contributor (110 historical PRs). Though current 0/12 merge seems odd (data lag?), serial submission of 3 agent fixes in 5 seconds suggests intentional batch. Agents = #1 category (1161 PRs). Narrowly scoped: Anthropic delivery-mirror tool_use ordering. High author volume + focused agents category + core logic fix = strong merge signal despite zero recent merges."
+    },
+    {
+      "pr_number": 9496,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 13,
+        "author_prior_merge_rate": 0.0,
+        "category": "agents",
+        "is_draft": false
+      },
+      "reasoning": "Same author (arosstale, top-5), agents category, narrowly scoped (compaction lanes). Performance/concurrency fix suggests infrastructure improvement. Part of 3-PR serial batch. Tight focus on session-level parallelization = lower refactor risk than cross-channel."
+    },
+    {
+      "pr_number": 9497,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 14,
+        "author_prior_merge_rate": 0.0,
+        "category": "agents",
+        "is_draft": false
+      },
+      "reasoning": "Same author (arosstale), agents category, 3rd fix in batch. Sub-agent announce bug fix\u2014core concurrency issue. Slightly lower confidence than #9495/#9496 as third in series (possible diminishing returns on review), but arosstale's authority + focused scope maintain strong signal."
+    },
+    {
+      "pr_number": 10112,
+      "error_type": "fp",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null,
+        "has_tests": null,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "docs",
+        "component_area": "multi-channel",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": null,
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "is_low_merge_author": false,
+        "touches_multiple_channels": true,
+        "touches_extensions": false,
+        "is_fork_pr": null
+      },
+      "reasoning": "First-time contributor (0 prior PRs) with docs + multi-channel labels (discord, signal, slack, telegram, gateway, commands, agents). Broad scope touching 8 areas suggests coordinated update. Missing LoC data is concerning but label diversity and docs category (+594 baseline merge rate for docs) suggest legitimate maintenance. Model update (Claude Opus 4.6) is feature, not risky refactor."
+    },
+    {
+      "pr_number": 10116,
+      "error_type": "fp",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null,
+        "has_tests": null,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "chore",
+        "component_area": "multi-channel",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": null,
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "is_low_merge_author": false,
+        "touches_multiple_channels": true,
+        "touches_extensions": false,
+        "is_fork_pr": null
+      },
+      "reasoning": "First-time contributor (marcusbuildsthings-droid bot-like name) performing coordinated model reference update (claude-opus-4-5 \u2192 4-6). Multi-channel labels (discord, signal, slack, telegram, gateway, commands, agents) indicate systematic refactor. Chore category suggests low-risk maintenance. Missing LoC data is negative but coherent scope across 7 areas suggests automated/validated change."
+    },
+    {
+      "pr_number": 10205,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 90,
+        "author_prior_merge_rate": 0.089,
+        "category": "agents",
+        "component_area": "discord",
+        "touches_multiple_channels": false,
+        "size_label": null,
+        "is_draft": false,
+        "has_maintainer_label": false
+      },
+      "reasoning": "Author arosstale is top-5 contributor (90 prior PRs, though current merge rate shows 0/37 on recent history, but older history has 8/90=8.9% lifetime). Fix category (cron duplicate bug) is high-value. Narrow scope (discord + agents only, not multi-channel). No XL/XS size flags. Bug fixes generally have stronger merge rates than features. Moderate confidence due to recent poor merge rate but historical contributor status provides some weight."
+    },
+    {
+      "pr_number": 10304,
+      "error_type": "fn",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "component_area": "agents",
+        "category": "agents",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "is_draft": false,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null,
+        "has_tests": null,
+        "ci_green": null,
+        "is_low_merge_author": false
+      },
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge history). Feature addition (new provider: Together AI) in agents category. Docs/CLI/commands labels suggest user-facing feature, but new authors have ~20% baseline merge rate. No maintainer labels, no test/CI confirmation, no size data. Feature PRs from unknowns are riskier than bug fixes; high touch area (agents category has 1161 PRs = triage pressure)."
+    },
+    {
+      "pr_number": 10426,
+      "error_type": "fp",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null,
+        "has_tests": null,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "docker",
+        "component_area": "docker",
+        "author_prior_prs": 12,
+        "author_prior_merge_rate": 0.333,
+        "author_association": null,
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "is_low_merge_author": false,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": null
+      },
+      "reasoning": "Author lailoo has 33.3% merge rate (4/12 merged, above 24% baseline). Fix targeting docker-specific bash issue (associative array replacement). Single category label (docker) = focused scope. References #10316 (valid cross-reference). Missing LoC is weakness but author history + fix nature + narrow scope support merge."
+    },
+    {
+      "pr_number": 11263,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 14,
+        "author_prior_merge_rate": 1.0,
+        "category": "scripts",
+        "has_maintainer_label": true,
+        "is_draft": false,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null
+      },
+      "reasoning": "Author sebslight has exceptional track record: 14/14 merged (100% merge rate). Maintainer label present (90.7% merge rate baseline). CI optimization for docs-only changes is low-risk maintenance. Strong signals across all dimensions."
+    },
+    {
+      "pr_number": 11378,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 9,
+        "author_prior_merge_rate": 0.0,
+        "is_low_merge_author": true,
+        "has_tests": true,
+        "category": null,
+        "size_label": null,
+        "is_draft": false,
+        "has_maintainer_label": false
+      },
+      "reasoning": "Test addition PR (unit tests for sessions/model-overrides.ts). Author WeatherPal-AI has 9 prior PRs with 0.0% merge rate, but test additions have structural value. No negative size flags (no XL). No category/channel labels suggest internal/infrastructure work. Test PRs historically merge at reasonable rates despite author history. Moderate-low confidence due to author merge rate but test content provides offsetting signal."
+    },
+    {
+      "pr_number": 11383,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 13,
+        "author_prior_merge_rate": 0.0,
+        "is_low_merge_author": true,
+        "category": "commands",
+        "size_label": null,
+        "is_draft": false,
+        "has_maintainer_label": false
+      },
+      "reasoning": "Bug fix (skip config warning for symlinks) in doctor/commands. Author WeatherPal-AI: 13 prior PRs, 0.0% merge rate. However: (1) fix type generally merges better, (2) commands category is top-5 (427 PRs), (3) no XL/multi-channel complexity. Low author merge rate is main risk factor. Moderate confidence: fix nature + category strength vs author history."
+    },
+    {
+      "pr_number": 11729,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "category": "agents",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null
+      },
+      "reasoning": "First-time contributor but agents category fix with clear, focused title. Likely higher quality than typical new-contributor PR given narrow scope (skip synthetic tool results). However, 0 prior merge history and potential superseding of #6831 adds uncertainty. Agents is high-volume category (1161 PRs). Baseline merge for new contributors ~24%, but specific focus elevates to ~68%."
+    },
+    {
+      "pr_number": 12266,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 5,
+        "author_prior_merge_rate": 0.4,
+        "category": "agents",
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": null,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "author_association": "CONTRIBUTOR"
+      },
+      "reasoning": "Yida-Dev has 40% merge rate (2/5 prior PRs) \u2014 above 24% baseline. Fix for cron job logic is core infrastructure (agents category implicit). No XL/risky size labels visible. No maintainer label but author track record is positive. Moderate confidence due to missing LoC/size data and lack of explicit maintainer signals."
+    },
+    {
+      "pr_number": 12372,
+      "error_type": "fp",
+      "features": {
+        "category": "channel",
+        "component_area": "googlechat",
+        "author_prior_prs": 6,
+        "author_prior_merge_rate": 0.333,
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "is_low_merge_author": false,
+        "loc_additions": null
+      },
+      "reasoning": "Author Yida-Dev has moderate track record (6 prior PRs, 2 merged, 33.3% merge rate) \u2014 above-average baseline. Channel: googlechat is focused scope. Likely related to/addresses same issue as PR#12330, but with more credible author. Size XS/S implicit from channel label. Moderate confidence due to missing LoC data and size confirmation."
+    },
+    {
+      "pr_number": 13974,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 0.5,
+        "category": "agents",
+        "is_draft": false,
+        "component_area": "agents"
+      },
+      "reasoning": "Author zerone0x has 50% merge rate (1/2)\u2014extremely rare positive signal. Agents category = #1. Fix addresses tool_use/tool_result repair after truncation\u2014core logic. Despite limited history, 50% success rate + focused agents + truncation safety issue = strong merge odds."
+    },
+    {
+      "pr_number": 14167,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 68,
+        "author_prior_merge_rate": 0.176,
+        "author_association": "CONTRIBUTOR",
+        "category": "UNLABELED",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": "UNKNOWN",
+        "has_tests": false,
+        "ci_green": false
+      },
+      "reasoning": "Experienced contributor (0xRaini: 68 prior PRs, 17.6% merge rate - above-median for prolific authors). Infrastructure fix (port diagnostics fallback) is focused and low-risk. However: no size label, no category labels (unlabeled), 17.6% historical rate is below 24% baseline. Modest positive from author credibility but no boost signals present."
+    },
+    {
+      "pr_number": 14233,
+      "error_type": "fn",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "size_label": "S",
+        "category": "agents",
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "author_association": "NONE"
+      },
+      "reasoning": "First-time contributor (tomron87, 0 prior PRs). Size: S label is historically favorable category, but insufficient to overcome no prior history. Cron timer fix is plausible but unvalidated by author track record. Missing LoC/test signals. Baseline ~24% merge rate for unknowns."
+    },
+    {
+      "pr_number": 14976,
+      "error_type": "fn",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 0.0,
+        "size_label": "S",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "category": "commands/reply"
+      },
+      "reasoning": "First-time contributor (Diaspar4u, 2 prior PRs, 0 merged). S size is positive (historically ~26% merge), but zero merge history + no labels + reply mode auto-injection (touch point for multiple channels) = moderate risk. Size label helps but author inexperience dominates."
+    },
+    {
+      "pr_number": 15010,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 84,
+        "author_prior_merge_rate": 0.048,
+        "size_label": "S",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "category": null
+      },
+      "reasoning": "shtse8 is a top contributor (84 PRs, 4.8% merge rate\u2014low but above true low_merge_author threshold <5%). Small fix (config redaction, size S) is low-risk scope. Size S historically stronger merge rate than baseline. However, author's weak historical merge rate prevents high confidence. Security/config-related fix may attract maintainer attention despite lack of explicit label."
+    },
+    {
+      "pr_number": 15167,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "category": "cli",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": "XS"
+      },
+      "reasoning": "First-time contributor but Size: XS label (historically stronger merge rate per guidelines). Session file validation is focused, low-risk fix. XS scope compensates for new-contributor status. No negative signals (not draft, not low-merge-author, not fork PR). Baseline ~24%, XS boost to ~60%."
+    },
+    {
+      "pr_number": 15447,
+      "error_type": "fn",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "touches_multiple_channels": true,
+        "component_area": [
+          "slack",
+          "feishu"
+        ],
+        "size_label": "S"
+      },
+      "reasoning": "First-time contributor (0 prior PRs) with no merge history. Touches multiple channels (slack, feishu) flagged by AGENTS.md as risky pattern\u2014cross-channel changes require deeper review. Size S is favorable, but author credibility absent. Two channel labels suggest scope creep or incomplete focus. New contributor + cross-channel scope = closure likely."
+    },
+    {
+      "pr_number": 15474,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "is_low_merge_author": false,
+        "category": "agents",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "size_label": "XS",
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "has_tests": null,
+        "ci_green": null
+      },
+      "reasoning": "First-time contributor (0 prior PRs), but favorable signals: size XS label (historically strong), security-focused fix (session file path validation), non-draft. XS size class shows ~27-28% merge rates (better than S/M due to low complexity/review burden). Missing LoC/test/ci_green data, but XS scope + security focus + non-draft support marginal merge probability. Borderline case."
+    },
+    {
+      "pr_number": 16463,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": null,
+        "category": "agents",
+        "size_label": "M",
+        "is_draft": false,
+        "has_maintainer_label": false
+      },
+      "reasoning": "First-time contributor (0 prior PRs) = no author history signal. However: (1) Fix type (guardrails for security/elevated mode) is high-value, (2) agents category (top category, 1161 PRs), (3) M size is neutral, (4) Security/safety guardrails are prioritized. First-time contributor risk offset by strong feature type and category. Moderate confidence."
+    },
+    {
+      "pr_number": 16702,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 5,
+        "author_prior_merge_rate": 0.4,
+        "size_label": "S",
+        "has_maintainer_label": false,
+        "is_draft": false,
+        "category": "cli"
+      },
+      "reasoning": "xinhuagu has solid 40% merge rate (2/5 PRs)\u2014well above baseline. Bug fix in Windows CI (safeBins) is high-value: tests are infrastructure, fixes unlock CI reliability. Size S is historically favorable. Author shows competence. Fix is targeted and non-invasive. Moderate confidence due to author's limited PR volume, but strong fundamentals."
+    },
+    {
+      "pr_number": 18056,
+      "error_type": "fp",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": "S",
+        "has_tests": null,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": null,
+        "author_prior_prs": 107,
+        "author_prior_merge_rate": 0.15,
+        "author_association": null,
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": true,
+        "is_low_merge_author": false,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": null
+      },
+      "reasoning": "Author arosstale: 15.0% merge rate (16/107) = slightly below baseline but prolific contributor (107 prior PRs). Has experienced-contributor label (99 PRs with this label in dataset). Size: S = focused scope. Fix targeting config loading resilience (partial loading + warnings on invalid entries) = low-risk improvement. Label + author volume + small size support merge."
+    },
+    {
+      "pr_number": 18202,
+      "error_type": "fp",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "size_label": "S",
+        "has_tests": null,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": null,
+        "author_prior_prs": 22,
+        "author_prior_merge_rate": 0.909,
+        "author_association": null,
+        "has_maintainer_label": true,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "is_low_merge_author": false,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": null
+      },
+      "reasoning": "Author gumadeiras: 90.9% merge rate (20/22) = top-tier. Has maintainer label (90.7% merge rate signal, very strong). Size: S = focused. Docs + agents labels. Bootstrap prompt caps opt-in default = safe, low-risk config change. All positive signals align: high author credibility + maintainer status + small scope + docs presence."
+    },
+    {
+      "pr_number": 18277,
+      "error_type": "fn",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "size_label": "L",
+        "category": "gateway",
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "author_association": "NONE"
+      },
+      "reasoning": "First-time contributor (Dithilli, 0 prior PRs). Size: L is mid-tier (historically ~24% merge baseline). 'feat' (not 'fix') indicates new feature, higher risk than bugfix. Gateway category is substantial (578 PRs) but no maintainer label or author credibility. Health monitor is infrastructure-touching which increases scrutiny. Missing LoC/test confirmation."
+    },
+    {
+      "pr_number": 18427,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "size_label": "XS",
+        "category": "docker",
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "author_association": "NONE"
+      },
+      "reasoning": "JnyRoad is first-time contributor BUT size: XS is strong positive signal (typically higher merge rate than baseline). Docker/container security refactor is lower-risk than core logic changes. 'refactor' tag suggests cleanup/maintenance. However: no prior author history, no maintainer label, no explicit test/CI signals. Moderate confidence \u2014 size advantage vs. unknown author risk."
+    },
+    {
+      "pr_number": 18513,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 7,
+        "author_prior_merge_rate": 0.571,
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": true,
+        "size_label": "S",
+        "category": "agents",
+        "is_draft": false
+      },
+      "reasoning": "MisterGuy420 has strong 57.1% merge rate (4/7 PRs)\u2014well above 24% baseline. **Trusted-contributor label** present (+5-10% boost). Bug fix (tool call ID sanitization) is critical for OpenAI-compatible API compatibility\u2014high value. Size S is favorable. Multiple positive signals align. Author credibility + label + technical importance = high merge likelihood."
+    },
+    {
+      "pr_number": 18692,
+      "error_type": "fp",
+      "features": {
+        "author_prior_prs": 25,
+        "author_prior_merge_rate": 0.24,
+        "size_label": "L",
+        "category": [
+          "agents",
+          "channel"
+        ],
+        "component_area": [
+          "discord",
+          "slack",
+          "telegram"
+        ],
+        "touches_multiple_channels": true,
+        "has_trusted_contributor_label": true,
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": null,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "author_association": "CONTRIBUTOR"
+      },
+      "reasoning": "Clawborn is established contributor (25 prior PRs, 24% merge rate = at baseline). KEY: Has 'trusted-contributor' label (96 PRs with this label in dataset \u2014 strong signal). Size: L is mid-tier. Touches multiple channels (discord, slack, telegram) which is risky BUT author credibility + trusted label offset. Slack system event suppression is targeted bugfix (fix tag). 'dirty' label suggests known issue but paired with trusted-contributor suggests maintainer awareness."
+    }
+  ]
+}

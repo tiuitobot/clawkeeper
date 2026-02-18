@@ -1,0 +1,9 @@
+{
+  "patterns": [
+    {
+      "pattern": "Large changes without strong maintainer alignment tend to underperform.",
+      "confidence": 0.5,
+      "support": 1
+    }
+  ]
+}

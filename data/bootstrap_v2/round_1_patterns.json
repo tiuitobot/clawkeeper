@@ -1,0 +1,89 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributor with focused, single-category scope and narrow component area has moderate merge likelihood, offset by lack of prior engagement history",
+      "confidence": 0.72,
+      "support": 8
+    },
+    {
+      "pattern": "Author with prior merge rate significantly above 24% baseline demonstrates predictive capability independent of PR scope; higher rates correlate with acceptance",
+      "confidence": 0.85,
+      "support": 7
+    },
+    {
+      "pattern": "Low merge authors (5+ prior PRs with <5% merge rate) are deterministic rejection signal even in high-priority categories",
+      "confidence": 0.91,
+      "support": 3
+    },
+    {
+      "pattern": "Multi-channel PRs from first-time contributors violate architectural constraints and carry high rejection risk",
+      "confidence": 0.88,
+      "support": 2
+    },
+    {
+      "pattern": "Explicit size labels (XS, S, M) provide independent quality signal; XS and S historically stronger merge rates than L/XL",
+      "confidence": 0.79,
+      "support": 9
+    },
+    {
+      "pattern": "Bug fixes and maintenance changes (targeted scope, clear intent, referenced issues) have higher acceptance than feature additions or refactors for equivalent author credentials",
+      "confidence": 0.76,
+      "support": 8
+    },
+    {
+      "pattern": "Documentation-only PRs from first-time contributors have lower baseline success (~20-30%) despite low code risk",
+      "confidence": 0.68,
+      "support": 2
+    },
+    {
+      "pattern": "Revert PRs require consensus and are contentious; first-time contributors lack social capital for reversals",
+      "confidence": 0.74,
+      "support": 1
+    },
+    {
+      "pattern": "Infrastructure/daemon-level changes from first-time contributors face higher scrutiny despite technical correctness; system-wide impact requires established trust",
+      "confidence": 0.81,
+      "support": 3
+    },
+    {
+      "pattern": "Experienced-contributor or trusted-contributor labels strongly predict merge when combined with author merge rate >24%",
+      "confidence": 0.88,
+      "support": 2
+    },
+    {
+      "pattern": "Missing LoC data combined with first-time author status and unknown size label increases uncertainty and lowers merge probability",
+      "confidence": 0.7,
+      "support": 4
+    },
+    {
+      "pattern": "Bot accounts with trivial scope changes (model list additions, generic maintenance) lack credibility signals and face dismissal",
+      "confidence": 0.82,
+      "support": 1
+    },
+    {
+      "pattern": "Extension-related work carries elevated risk per architectural guidelines; requires explicit maintainer approval or experienced contributor status",
+      "confidence": 0.75,
+      "support": 2
+    },
+    {
+      "pattern": "High-priority categories (agents, gateway, commands, cli) elevate merge likelihood for focused fixes; baseline uplift ~15-25% over docs/low-volume areas",
+      "confidence": 0.77,
+      "support": 6
+    },
+    {
+      "pattern": "Critical path changes (cron logic, race conditions, security hardening) require higher evidence threshold from new contributors; scope risk outweighs category strength",
+      "confidence": 0.79,
+      "support": 3
+    },
+    {
+      "pattern": "Author engagement history (2-10 prior PRs with 50%+ merge rate) indicates capability and offsets first-time author rejection bias for focused changes",
+      "confidence": 0.81,
+      "support": 3
+    },
+    {
+      "pattern": "Maintainer labels (has_maintainer_label, trusted_contributor) act as credibility amplifiers; presence strongly improves acceptance probability",
+      "confidence": 0.83,
+      "support": 4
+    }
+  ]
+}

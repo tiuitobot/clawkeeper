@@ -1,0 +1,79 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors (0 prior PRs) with missing critical metadata (LoC, files_changed, test coverage, CI status) face 7-8% confidence penalty and baseline merge rejection unless compensated by explicit credibility signals (maintainer/trusted/experienced labels) or strong structural signals (XS size label)",
+      "confidence": 0.92,
+      "support": 12
+    },
+    {
+      "pattern": "XS and S size labels correlate with 26-28% merge rates and provide +2-4% boost over baseline; XS label is strongest compensatory signal for weak author history and missing metadata",
+      "confidence": 0.89,
+      "support": 11
+    },
+    {
+      "pattern": "L and XL size labels are strong rejection signals correlating with 15-20% merge rates, overriding compensatory signals and creating deterministic rejection risk, particularly for first-time contributors",
+      "confidence": 0.87,
+      "support": 4
+    },
+    {
+      "pattern": "Multi-category touches (3+ categories or multi-channel PRs) impose 25-30% penalty on merge likelihood for weak authors, signaling scope creep or misclassification risk",
+      "confidence": 0.81,
+      "support": 3
+    },
+    {
+      "pattern": "High-priority categories (agents, gateway, commands, cli) provide +15-25% baseline uplift; infrastructure/signals areas provide mid-tier +10-20% uplift; low-priority areas (docker, docs-only) provide minimal or negative uplift",
+      "confidence": 0.86,
+      "support": 9
+    },
+    {
+      "pattern": "Fix-type changes provide +10-20% merge probability boost over feature additions; documentation-only changes from first-time contributors have depressed baseline (20-30%)",
+      "confidence": 0.84,
+      "support": 8
+    },
+    {
+      "pattern": "Authors with 100% prior merge rate history (even single prior PR ) signal >50% merge likelihood when paired with focused scope, narrow category, and fix classification",
+      "confidence": 0.88,
+      "support": 3
+    },
+    {
+      "pattern": "Authors with 40%+ prior merge rate significantly exceed 24% baseline and are strong merge candidates independent of size/scope, particularly when paired with experienced-contributor label",
+      "confidence": 0.85,
+      "support": 2
+    },
+    {
+      "pattern": "Authors with established history (50+ prior PRs) demonstrate persistence/commitment signal and retain moderate merge likelihood (25-30%) even when merge rate is below baseline, especially with XS size label",
+      "confidence": 0.79,
+      "support": 2
+    },
+    {
+      "pattern": "Experienced-contributor label provides +5-15% credibility boost and substantially mitigates missing metadata penalties for authors with 6+ prior PRs",
+      "confidence": 0.82,
+      "support": 3
+    },
+    {
+      "pattern": "Maintainer label acts as powerful credibility amplifier (90%+ merge rate signal) and overrides size/scope rejection signals, enabling high-priority cross-channel work approval",
+      "confidence": 0.83,
+      "support": 1
+    },
+    {
+      "pattern": "Authors with 15-25% prior merge rate near baseline benefit from narrow scope and fix-type classification for moderate (34-40%) merge likelihood; XS/S size labels provide necessary compensatory boost",
+      "confidence": 0.78,
+      "support": 3
+    },
+    {
+      "pattern": "Authors with 0% prior merge rate across 2+ attempts (low-merge-author trajectory) face rejection pattern, particularly when combined with L size label or feature-type changes",
+      "confidence": 0.81,
+      "support": 2
+    },
+    {
+      "pattern": "Narrow scope (single component/channel) provides +5-10% boost; issue references provide +5-10% specificity boost; these mitigate but do not overcome first-time author baseline without compensatory size/category signals",
+      "confidence": 0.76,
+      "support": 4
+    },
+    {
+      "pattern": "Missing all critical metadata (LoC, files_changed, has_tests, ci_green) imposes consistent 7-8% confidence penalty; penalty is substantially mitigated (reduced to 1-3%) by explicit size labels (XS) or established author history (50%+ merge rate)",
+      "confidence": 0.88,
+      "support": 8
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributor (0 prior PRs, 0.0% merge rate) lacks baseline credibility and requires compensatory signals (maintainer label, explicit size label XS/S, high-priority category) to achieve moderate merge likelihood",
+      "confidence": 0.92,
+      "support": 8
+    },
+    {
+      "pattern": "XS size label provides strongest compensatory signal (+2-4% boost, 26-28% merge rate correlation) for weak author credentials or missing metadata, substantially mitigating merge risk",
+      "confidence": 0.89,
+      "support": 12
+    },
+    {
+      "pattern": "L and XL size labels are deterministic rejection signals correlating with 15-20% merge rates, overriding compensatory signals for first-time or low-merge-history contributors",
+      "confidence": 0.87,
+      "support": 3
+    },
+    {
+      "pattern": "Missing critical metadata (LoC, files_changed, has_tests, ci_green) imposes 7-8% confidence penalty, but penalty is substantially mitigated by explicit size labels (XS/S) or maintainer label presence",
+      "confidence": 0.85,
+      "support": 11
+    },
+    {
+      "pattern": "Maintainer label presence is powerful credibility amplifier (+5-15% boost, ~90% merge rate correlation) that overrides weak author history and missing metadata",
+      "confidence": 0.91,
+      "support": 1
+    },
+    {
+      "pattern": "High-priority categories (agents, gateway, commands) provide +15-25% baseline uplift and can partially compensate for weak author credentials when paired with narrow scope or fix-type classification",
+      "confidence": 0.83,
+      "support": 7
+    },
+    {
+      "pattern": "Fix-type changes receive +10-20% boost over feature additions; critical-path/infrastructure fixes receive preferential treatment even from underperforming authors",
+      "confidence": 0.84,
+      "support": 9
+    },
+    {
+      "pattern": "Multi-component scope (touching 3+ categories or channels) reduces merge likelihood by 25-30% for weak authors; signals scope creep or misclassification",
+      "confidence": 0.82,
+      "support": 4
+    },
+    {
+      "pattern": "Authors with 40%+ prior merge rate are strong merge candidates independent of size/scope; XS/S size labels with 40%+ author history achieve >80% merge likelihood",
+      "confidence": 0.85,
+      "support": 2
+    },
+    {
+      "pattern": "Authors with above-baseline merge history (>24%) paired with XS size label, high-priority category, and fix-type classification achieve 50-70% estimated merge likelihood despite missing metadata",
+      "confidence": 0.81,
+      "support": 6
+    },
+    {
+      "pattern": "Low-merge-history authors (0-10% prior merge rate) with 50+ prior PRs at persistence threshold retain moderate merge likelihood (25-30%) due to demonstrated commitment signal",
+      "confidence": 0.79,
+      "support": 3
+    },
+    {
+      "pattern": "Trusted-contributor label provides +5-15% credibility boost; when paired with high-priority categories and fix-type classification, substantially mitigates weak author history",
+      "confidence": 0.8,
+      "support": 1
+    },
+    {
+      "pattern": "S size label correlates with 26-28% merge rates (+2-4% boost); provides meaningful compensatory signal for first-time authors in high-priority categories with fix-type changes",
+      "confidence": 0.78,
+      "support": 3
+    },
+    {
+      "pattern": "Narrow scope (single component focus, no multi-channel touches) provides +5-10% boost; particularly valuable compensatory signal for weak authors when paired with fix-type classification",
+      "confidence": 0.76,
+      "support": 5
+    },
+    {
+      "pattern": "Authors with 15-25% prior merge rate near baseline require narrow scope and fix-type classification for moderate (34-40%) merge likelihood; additional positive signals (size label, test focus) substantially improve outcomes",
+      "confidence": 0.74,
+      "support": 2
+    }
+  ]
+}

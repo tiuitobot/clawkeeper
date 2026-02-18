@@ -1,0 +1,219 @@
+[2026-02-18T03:02:07Z] === Pipeline start ===
+[2026-02-18T03:02:07Z] Stage 0.8: enrich_ground_truth.py starting...
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 1/91 done | pairs_total=3
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 2/91 done | pairs_total=4
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 3/91 done | pairs_total=7
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 4/91 done | pairs_total=33
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 5/91 done | pairs_total=56
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 6/91 done | pairs_total=59
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 7/91 done | pairs_total=66
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 8/91 done | pairs_total=69
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 9/91 done | pairs_total=75
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 10/91 done | pairs_total=92
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 11/91 done | pairs_total=95
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 12/91 done | pairs_total=96
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 13/91 done | pairs_total=99
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 14/91 done | pairs_total=100
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 15/91 done | pairs_total=101
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 16/91 done | pairs_total=106
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 17/91 done | pairs_total=107
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 18/91 done | pairs_total=107
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 19/91 done | pairs_total=110
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 20/91 done | pairs_total=113
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 21/91 done | pairs_total=113
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 22/91 done | pairs_total=113
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 23/91 done | pairs_total=117
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 24/91 done | pairs_total=119
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 25/91 done | pairs_total=123
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 26/91 done | pairs_total=128
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 27/91 done | pairs_total=131
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 28/91 done | pairs_total=134
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 29/91 done | pairs_total=138
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 30/91 done | pairs_total=155
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 31/91 done | pairs_total=160
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 32/91 done | pairs_total=164
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 33/91 done | pairs_total=167
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 34/91 done | pairs_total=175
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 35/91 done | pairs_total=179
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 36/91 done | pairs_total=185
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 37/91 done | pairs_total=194
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 38/91 done | pairs_total=196
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 39/91 done | pairs_total=202
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 40/91 done | pairs_total=202
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 41/91 done | pairs_total=208
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 42/91 done | pairs_total=210
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 43/91 done | pairs_total=213
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 44/91 done | pairs_total=215
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 45/91 done | pairs_total=216
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 46/91 done | pairs_total=222
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 47/91 done | pairs_total=226
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 48/91 done | pairs_total=229
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 49/91 done | pairs_total=232
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 50/91 done | pairs_total=245
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 51/91 done | pairs_total=250
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 52/91 done | pairs_total=254
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 53/91 done | pairs_total=256
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 54/91 done | pairs_total=256
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 55/91 done | pairs_total=261
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 56/91 done | pairs_total=269
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 57/91 done | pairs_total=273
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 58/91 done | pairs_total=276
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 59/91 done | pairs_total=279
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 60/91 done | pairs_total=287
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 61/91 done | pairs_total=291
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 62/91 done | pairs_total=295
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 63/91 done | pairs_total=297
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 64/91 done | pairs_total=303
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 65/91 done | pairs_total=304
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 66/91 done | pairs_total=307
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 67/91 done | pairs_total=312
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 68/91 done | pairs_total=318
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 69/91 done | pairs_total=329
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 70/91 done | pairs_total=332
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 71/91 done | pairs_total=343
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 72/91 done | pairs_total=345
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 73/91 done | pairs_total=348
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 74/91 done | pairs_total=355
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 75/91 done | pairs_total=358
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 76/91 done | pairs_total=385
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 77/91 done | pairs_total=387
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 78/91 done | pairs_total=393
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 79/91 done | pairs_total=425
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 80/91 done | pairs_total=446
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 81/91 done | pairs_total=455
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 82/91 done | pairs_total=456
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 83/91 done | pairs_total=459
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 84/91 done | pairs_total=460
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 85/91 done | pairs_total=464
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 86/91 done | pairs_total=466
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 87/91 done | pairs_total=469
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 88/91 done | pairs_total=479
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 89/91 done | pairs_total=480
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 90/91 done | pairs_total=485
+model claude-sonnet-4-5-20250514 not found; falling back to claude-sonnet-4-5
+batch 91/91 done | pairs_total=487
+wrote /home/linuxadmin/repos/clawkeeper/data/dedupe_ground_truth_enriched.json
+updated /home/linuxadmin/repos/clawkeeper/data/split.json
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_1_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_2_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_3_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_4_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_5_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_6_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_7_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_8_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_9_sample.json | merge_rate=0.240 | dedupe_clusters=7
+wrote /home/linuxadmin/repos/clawkeeper/data/bootstrap_v2/round_10_sample.json | merge_rate=0.240 | dedupe_clusters=7
+re-generated round samples via sample_v2.py
+[2026-02-18T03:20:53Z] Stage 0.8: COMPLETE
+[2026-02-18T03:20:53Z] Bootstrap v2.1: bootstrap_v2.py starting...
+Traceback (most recent call last):
+  File "/home/linuxadmin/repos/clawkeeper/scripts/bootstrap_v2.py", line 341, in <module>
+    main()
+  File "/home/linuxadmin/repos/clawkeeper/scripts/bootstrap_v2.py", line 277, in main
+    out = call_haiku(prompt)
+          ^^^^^^^^^^^^^^^^^^
+  File "/home/linuxadmin/repos/clawkeeper/scripts/bootstrap_v2.py", line 91, in call_haiku
+    return json.loads(text)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Unterminated string starting at: line 198 column 19 (char 8087)
+[2026-02-18T03:21:13Z] Bootstrap v2.1: FAILED (exit 1)

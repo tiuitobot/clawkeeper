@@ -50,10 +50,13 @@ def train_logit(round_results: List[dict], all_prs_by_num: Dict[int, dict]):
     if not X:
         return {"available": True, "weights": []}
 
-    vec = DictVectorizer(sparse=True)
+    vec = DictVectorizer(sparse=False)
     Xv = vec.fit_transform(X)
     if Xv.shape[1] == 0:
         return {"available": True, "weights": [], "note": "No features available in round results."}
+    # Impute NaN with 0 (missing features from Haiku extraction)
+    import numpy as np
+    Xv = np.nan_to_num(Xv, nan=0.0)
     clf = LogisticRegression(max_iter=200, class_weight="balanced")
     clf.fit(Xv, y)
 

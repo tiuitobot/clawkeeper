@@ -1,0 +1,84 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors (0 prior PRs) with no merge history have baseline ~24% merge rate; XS/S size labels boost this to ~26-28%, while L/M sizes remain at baseline",
+      "confidence": 0.85,
+      "support": 8
+    },
+    {
+      "pattern": "Experienced-contributor or trusted-contributor labels provide +5-15% boost to merge probability regardless of recent merge rate, offsetting poor historical performance",
+      "confidence": 0.82,
+      "support": 6
+    },
+    {
+      "pattern": "Maintainer label presence correlates with ~90%+ merge rates and overrides negative author history signals",
+      "confidence": 0.88,
+      "support": 4
+    },
+    {
+      "pattern": "Authors with 40%+ merge rates (2+ prior successful merges) are strong merge candidates even with limited PR volume or missing metadata",
+      "confidence": 0.8,
+      "support": 5
+    },
+    {
+      "pattern": "Bug fixes and security fixes merge at higher rates than feature additions, particularly from unknown authors",
+      "confidence": 0.78,
+      "support": 5
+    },
+    {
+      "pattern": "Narrow, focused scope (single component/category) improves merge odds for new contributors by ~15-20% compared to multi-channel/multi-component changes",
+      "confidence": 0.75,
+      "support": 7
+    },
+    {
+      "pattern": "Touching multiple channels simultaneously is a risk signal for new/low-history authors, reducing merge probability by ~25-30%",
+      "confidence": 0.72,
+      "support": 3
+    },
+    {
+      "pattern": "Missing LoC/test/CI data weakens predictions but does not override positive author history or maintainer labels",
+      "confidence": 0.7,
+      "support": 8
+    },
+    {
+      "pattern": "High-volume component areas (agents: 1161 PRs, commands: 427 PRs) may increase triage pressure, slightly reducing merge rates for new contributors by ~5-10%",
+      "confidence": 0.65,
+      "support": 4
+    },
+    {
+      "pattern": "Top-contributor status (50+ prior PRs) can sustain merge probability despite recent 0% merge rate if paired with focused scope and fix-type changes",
+      "confidence": 0.73,
+      "support": 3
+    },
+    {
+      "pattern": "Test-focused PRs from low-merge-history authors have moderate boost (~10-15% above baseline) due to structural value",
+      "confidence": 0.68,
+      "support": 2
+    },
+    {
+      "pattern": "Chore/docs/infrastructure category changes from unknown authors merge at rates comparable to baseline (~24-25%), independent of scope breadth",
+      "confidence": 0.7,
+      "support": 3
+    },
+    {
+      "pattern": "Authors with 0% historical merge rate but 5+ prior PRs show commitment signal; paired with focused fixes/small sizes, merge probability reaches ~40-50%",
+      "confidence": 0.71,
+      "support": 4
+    },
+    {
+      "pattern": "Non-draft status is assumed positive baseline; draft status is strong negative signal reducing merge probability by ~20-30%",
+      "confidence": 0.79,
+      "support": 2
+    },
+    {
+      "pattern": "XS size class consistently outperforms other size classes for merge probability (~26-28%), particularly for first-time contributors",
+      "confidence": 0.81,
+      "support": 5
+    },
+    {
+      "pattern": "Author association labels (NONE, CONTRIBUTOR) provide minimal discriminative power; trusted/experienced labels far more predictive",
+      "confidence": 0.74,
+      "support": 4
+    }
+  ]
+}

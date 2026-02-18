@@ -1,0 +1,79 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors (0 prior PRs) with missing critical metadata (LoC, files changed, tests, CI status) face significant merge uncertainty despite category or change-type signals",
+      "confidence": 0.85,
+      "support": 5
+    },
+    {
+      "pattern": "Experienced-contributor or trusted-contributor labels provide +5-15% credibility boost and can compensate for weak author merge history",
+      "confidence": 0.82,
+      "support": 4
+    },
+    {
+      "pattern": "XS/S size labels correlate with 26-28% merge rates and provide strongest compensatory signal for weak author credentials",
+      "confidence": 0.88,
+      "support": 6
+    },
+    {
+      "pattern": "Authors with 100% prior merge rate history (even single PR) signal strong credibility and >50% merge likelihood when paired with focused scope",
+      "confidence": 0.79,
+      "support": 2
+    },
+    {
+      "pattern": "Authors with prior merge rate significantly above 24% baseline demonstrate predictive capability independent of PR scope and metadata",
+      "confidence": 0.81,
+      "support": 3
+    },
+    {
+      "pattern": "Fix-type changes in high-priority categories (agents, gateway) provide +15-25% baseline uplift",
+      "confidence": 0.8,
+      "support": 6
+    },
+    {
+      "pattern": "Low-merge authors (merge rate <5% across 5+ prior PRs) face deterministic rejection risk that size labels and category signals cannot overcome",
+      "confidence": 0.84,
+      "support": 2
+    },
+    {
+      "pattern": "Multi-channel or multi-component changes from first-time/weak-history authors create elevated risk requiring compensatory signals (maintainer labels, explicit approvals)",
+      "confidence": 0.76,
+      "support": 3
+    },
+    {
+      "pattern": "Critical-path infrastructure changes from new or underperforming authors require explicit credibility signals (maintainer label, prior merge history) to offset systemic risk",
+      "confidence": 0.78,
+      "support": 3
+    },
+    {
+      "pattern": "Documentation-only PRs from first-time contributors have depressed baseline (~20-25%) that XS size labels can partially offset to 26-28% range",
+      "confidence": 0.72,
+      "support": 1
+    },
+    {
+      "pattern": "Authors with 15-25% prior merge rate near baseline benefit from narrow scope and fix-type classification for moderate merge likelihood",
+      "confidence": 0.74,
+      "support": 4
+    },
+    {
+      "pattern": "Missing metadata (LoC, test coverage, CI status) imposes ~7-8% confidence penalty but is mitigated by established author track record or explicit labels",
+      "confidence": 0.77,
+      "support": 8
+    },
+    {
+      "pattern": "Trusted-contributor labels paired with above-baseline merge history enable strong merge signal even on multi-component or multi-channel changes",
+      "confidence": 0.75,
+      "support": 2
+    },
+    {
+      "pattern": "Narrow, focused scope (single component/category) provides +5-10% boost for first-time contributors but insufficient alone without compensatory signals",
+      "confidence": 0.73,
+      "support": 5
+    },
+    {
+      "pattern": "Authors with 40%+ prior merge rate or experienced-contributor labels are strong merge candidates independent of size and scope signals",
+      "confidence": 0.8,
+      "support": 2
+    }
+  ]
+}

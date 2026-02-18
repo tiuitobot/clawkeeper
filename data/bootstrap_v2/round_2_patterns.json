@@ -1,0 +1,69 @@
+{
+  "patterns": [
+    {
+      "pattern": "First-time contributors (0 prior PRs) have significantly lower merge rates than established contributors, especially in non-critical categories",
+      "confidence": 0.92,
+      "support": 8
+    },
+    {
+      "pattern": "XS and S size labels correlate with higher merge rates (~26-30%) regardless of author history",
+      "confidence": 0.89,
+      "support": 7
+    },
+    {
+      "pattern": "Top-tier categories (agents, gateway, commands) have higher baseline merge rates and can partially compensate for weak author credentials",
+      "confidence": 0.87,
+      "support": 9
+    },
+    {
+      "pattern": "Security and critical path fixes (authorization, validation, session management) receive preferential treatment despite author history",
+      "confidence": 0.85,
+      "support": 6
+    },
+    {
+      "pattern": "Low merge rate authors (5+ prior PRs with <5% merge rate) are strong negative predictors of future merges, even in favorable categories",
+      "confidence": 0.88,
+      "support": 2
+    },
+    {
+      "pattern": "Missing critical feature data (LoC, files_changed, has_tests, ci_green) increases prediction uncertainty and tends toward conservative (negative) predictions",
+      "confidence": 0.91,
+      "support": 11
+    },
+    {
+      "pattern": "Documentation category PRs have lower merge rates than feature/fix categories and require stronger compensatory signals",
+      "confidence": 0.83,
+      "support": 3
+    },
+    {
+      "pattern": "Large scope PRs (XL size, multiple categories, extensive LoC) are strong negative signals even with experienced authors",
+      "confidence": 0.86,
+      "support": 2
+    },
+    {
+      "pattern": "Established contributors (10+ prior PRs) with above-baseline merge rates (>20%) are reliable positive signals across most categories",
+      "confidence": 0.84,
+      "support": 5
+    },
+    {
+      "pattern": "Issue references and bug-fix classification provide specificity signals that improve merge likelihood",
+      "confidence": 0.78,
+      "support": 4
+    },
+    {
+      "pattern": "Maintainer and experience contributor labels are strong positive signals that can override weak author history",
+      "confidence": 0.81,
+      "support": 3
+    },
+    {
+      "pattern": "Test-focused PRs have stronger merge likelihood than equivalent non-test changes, especially from low-credibility authors",
+      "confidence": 0.79,
+      "support": 2
+    },
+    {
+      "pattern": "Multi-category/multi-channel touches indicate scope creep or misclassification and reduce merge likelihood without compensatory signals",
+      "confidence": 0.82,
+      "support": 3
+    }
+  ]
+}
