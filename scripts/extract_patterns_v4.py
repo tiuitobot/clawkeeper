@@ -211,6 +211,10 @@ def normalize_pattern(raw: Dict[str, Any], round_num: int, fallback_id: str) -> 
     # Compute confidence from CLT
     attrs = p.get("attributions", [])
     attrs = attrs if isinstance(attrs, list) else []
+    # Sanitize: ensure every attribution has a valid round
+    for a in attrs:
+        if isinstance(a, dict) and a.get("round") is None:
+            a["round"] = round_num
     rounds_with_match = len({
         int(a.get("round", 0)) for a in attrs
         if isinstance(a, dict) and not a.get("ambiguous")
