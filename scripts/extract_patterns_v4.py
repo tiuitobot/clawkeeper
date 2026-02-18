@@ -325,6 +325,9 @@ def _build_prompt(
         n = int(e.get("pr_number", -1))
         pr = all_prs.get(n, {"number": n, "title": "", "comments": [], "reviews": [], "files": []})
         etype = str(e.get("error_type", "")).lower()
+        # Prefer reflection (model's self-critique of why it erred) over reasoning (original prediction logic)
+        # Reasoning describes the WRONG thinking; reflection describes what SHOULD change.
+        reflection = e.get("reflection", "") or ""
         reasoning = e.get("reasoning", "") or e.get("qualitative_signals", "") or ""
         if etype == "fp":
             polarity_note = (
@@ -345,7 +348,8 @@ def _build_prompt(
                 "pr_number": n,
                 "error_type": etype,
                 "polarity_note": polarity_note,
-                "reasoning": reasoning,
+                "original_reasoning": reasoning,
+                "reflection": reflection if reflection else "(no reflection available)",
                 "features": e.get("features", {}),
                 "pr_content": format_pr_for_prompt(pr),
             }
@@ -355,10 +359,13 @@ def _build_prompt(
         "You analyze FP/FN model errors and maintain a lifecycle pattern catalog for future unseen PRs.\n"
         "CRITICAL: Output ONLY the JSON object. No analysis, no explanations, no markdown before/after the JSON.\n\n"
         "## CRITICAL: ERROR SIGNAL POLARITY\n"
-        "Each error tells you what went WRONG, not what went right. The model's reasoning explains WHY it made a mistake.\n"
+        "Each error contains TWO fields:\n"
+        "- `original_reasoning`: what the model THOUGHT when it made the prediction (this thinking was WRONG)\n"
+        "- `reflection`: the model's SELF-CRITIQUE after learning it was wrong (this is more reliable)\n"
+        "Use the REFLECTION to understand what went wrong. The original_reasoning shows the FLAWED logic.\n"
         "You must extract CORRECTIVE patterns — rules that PREVENT the error from recurring.\n\n"
         "- FALSE POSITIVE (FP): model predicted MERGE but ground truth was CLOSED.\n"
-        "  The model's reasoning describes features it INCORRECTLY trusted as merge signals.\n"
+        "  The original_reasoning describes features it INCORRECTLY trusted as merge signals.\n"
         "  → Corrective pattern: 'When [feature], do NOT assume merge because [why it fails].'\n"
         "  → WRONG pattern: 'When [feature], predict merge.' (This REINFORCES the error!)\n\n"
         "- FALSE NEGATIVE (FN): model predicted CLOSED but ground truth was MERGED.\n"
