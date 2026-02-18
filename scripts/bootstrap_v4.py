@@ -310,7 +310,7 @@ def build_sample(population: List[dict], round_num: int, prs_per_round: int, see
     rng.shuffle(nums)
     selected = nums[:prs_per_round]
 
-    batch_size = 20
+    batch_size = 10
     batches: Dict[str, List[int]] = {}
     for i in range(0, len(selected), batch_size):
         batch_key = str(i // batch_size + 1)
