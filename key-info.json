@@ -115,5 +115,68 @@
     "date": "2026-02-17",
     "source": "Stage 0.5 execution",
     "context": "Próximo: Stage 0.7 (bootstrap sequencial) ou Stage 1 (ingest PRs abertas)."
+  },
+  {
+    "id": "K014",
+    "info": "Bootstrap v3 R1 accuracy (81%) já supera o melhor round do v2.1 inteiro (74.6% média). Salto atribuído a: dados enriquecidos (comments/reviews/files), Sonnet per-round patterns com 4 campos, anti-pattern field.",
+    "importance": "critical",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "data/bootstrap_v3/round_1_scores.json vs data/bootstrap_v2/",
+    "context": "v2.1 R1 era 70% acc / 0.464 F1. v3 R1: 81% / 0.708. Múltiplas variáveis mudaram — não é possível isolar contribuição individual."
+  },
+  {
+    "id": "K015",
+    "info": "FP caiu de 18 (R1) para 6 (R4) — patterns de Sonnet efetivamente ensinam Haiku a evitar falsos positivos. Principal driver: patterns sobre first-time contributors sem maintainer engagement.",
+    "importance": "critical",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "data/bootstrap_v3/round_{1-4}_scores.json",
+    "context": "FP era o problema dominante do v2.1. Redução de 18→6 em 4 rounds confirma que pattern injection funciona."
+  },
+  {
+    "id": "K016",
+    "info": "FN subiu de 1 (R1) para 6 (R4) — overcorrection. Haiku ficou conservador demais ao aplicar patterns anti-merge, passando a rejeitar PRs que deveriam ser merge.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "data/bootstrap_v3/round_{1-4}_scores.json",
+    "context": "Tradeoff FP↓/FN↑ é esperado, mas 6 FN no R4 é overcorrection. Anti-pattern field deveria mitigar mas não foi suficiente. Candidato a correção no pós-treino CLT."
+  },
+  {
+    "id": "K017",
+    "info": "R3 foi o pico de performance: 91% accuracy, F1 0.830, 7 FP / 2 FN. R4 regressou para 88% / 0.750. Patterns acumulados podem ter ultrapassado o ponto ótimo.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "data/bootstrap_v3/round_{3,4}_scores.json",
+    "context": "Possível que excesso de patterns cause confusão no Haiku. Pós-treino CLT com confidence thresholds (apply/consider/tiebreaker) pode resolver."
+  },
+  {
+    "id": "K018",
+    "info": "Pattern lifecycle funcionando: de 24 patterns gerados em 4 rounds, 4 foram retired e 2 revised. Pruning automático por error-attribution está operacional.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "data/bootstrap_v3/patterns_state.json",
+    "context": "v2.1 não tinha lifecycle — patterns só acumulavam, contribuindo para regressão no R10. v3 resolve com pruning após 2+ rounds de erro sem revisão eficaz."
+  },
+  {
+    "id": "K019",
+    "info": "Calibração estável: apenas 1 bin overconfident em R1, R3, R4 (2 em R2). Melhor que v2.1 onde overconfidence era sistêmica.",
+    "importance": "medium",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "data/bootstrap_v3/round_{1-4}_scores.json calibration",
+    "context": "Gate G-CAL (≤1 overconfident bin em R10) está passando nos rounds intermediários."
+  },
+  {
+    "id": "K020",
+    "info": "Processo bootstrap morreu no R5 porque nohup+disown não isolou suficientemente do shell pai. setsid necessário para session-independent lifecycle.",
+    "importance": "medium",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "execution_log.txt + /tmp/bootstrap_v3.log",
+    "context": "P089 aplicado. Shell do exec session morreu e levou o processo filho. Re-run R5-R10 com setsid."
   }
 ]
