@@ -214,5 +214,14 @@
     "date": "2026-02-18",
     "source": "Discussão Bruno-Tiuito 2026-02-18",
     "context": "Dimensão 3 seria diferencial real do Clawkeeper. Hard mode: precisa LLM lendo issue+diff. Candidato a Stage 2+."
+  },
+  {
+    "id": "K025",
+    "info": "Issue linkada segmentada por autor: self-filed (autor=PR=issue) 38.1% merge, community issue (outro abriu) 26.6%, no issue 31.2%. N=2000. Self-filed tem sinal positivo modesto. Community issue pior que sem issue.",
+    "importance": "medium",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "gh GraphQL closingIssuesReferences + author comparison",
+    "context": "Maintainers não abrem issues (0 hits). Feature candidata: issue_author_is_pr_author (bool). Ownership do problema > issue linkada genérica."
   }
 ]
