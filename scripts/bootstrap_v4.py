@@ -241,7 +241,7 @@ def format_pr_for_prompt(pr: dict) -> str:
     return text
 
 
-def build_prompt(batch: List[dict], feature_spec: List[dict], patterns: List[Dict[str, str]]) -> str:
+def build_prompt(batch: List[dict], feature_spec: List[dict], patterns: List[Dict[str, str]], prior_errors: List[Dict[str, Any]] = None) -> str:
     # Original model_spec features (v3 compatible)
     ftxt = "\n".join(f"- {f['name']} ({f['type']}/{f['phase']}): {f.get('notes', '')}" for f in feature_spec)
 
@@ -253,6 +253,17 @@ def build_prompt(batch: List[dict], feature_spec: List[dict], patterns: List[Dic
 
     batch_md = "\n---\n".join(format_pr_for_prompt(pr) for pr in batch)
 
+    # Prior round errors as concrete learning examples
+    errors_section = ""
+    if prior_errors:
+        error_lines = []
+        for e in prior_errors[:10]:  # cap at 10 to manage context
+            etype = e.get("error_type", "?")
+            desc = "predicted merged, was actually closed" if etype == "fp" else "predicted closed, was actually merged"
+            refl = e.get("reflection", "") or e.get("reasoning", "")
+            error_lines.append(f"- PR #{e.get('pr_number', '?')} ({etype.upper()}): {desc}\n  Lesson: {refl[:300]}")
+        errors_section = "\n## Previous Round Errors (learn from these mistakes)\n" + "\n".join(error_lines) + "\n"
+
     return f"""You are analyzing pull requests from an open-source project.
 Merge rate is approximately 26%. You do not know outcomes.
 
@@ -262,7 +273,7 @@ Your reasoning should cover BOTH quantitative observations AND qualitative judgm
 - What do the features tell you?
 - What qualitative signals (review tone, contributor engagement, code quality) go beyond the numbers?
 {ptxt}
-
+{errors_section}
 ## Task B — Duplicate Detection
 Among PRs in this batch, identify possible duplicate/superseded groups.
 Use the Greptile review summary as semantic representation to compare PR purposes.
@@ -377,6 +388,17 @@ def main() -> None:
                     and p.get("pattern")
                 ]
 
+        # Load prior round errors for R5+ (concrete examples of mistakes)
+        prior_errors: List[Dict[str, Any]] = []
+        if r >= 5:
+            prev_errors_path = OUT / f"round_{r - 1}_errors.json"
+            if prev_errors_path.exists():
+                try:
+                    prev_data = json.load(prev_errors_path.open())
+                    prior_errors = prev_data.get("errors", []) if isinstance(prev_data, dict) else prev_data
+                except Exception:
+                    pass
+
         predictions = []
         dedupes = []
 
@@ -395,7 +417,7 @@ def main() -> None:
                 pr.update(st)
                 batch_raw.append(pr)
             batch = sanitize_batch(batch_raw)
-            prompt = build_prompt(batch, feature_spec, patterns)
+            prompt = build_prompt(batch, feature_spec, patterns, prior_errors if r >= 5 else None)
 
             if args.dry_run:
                 out = {
