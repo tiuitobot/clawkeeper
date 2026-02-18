@@ -1,0 +1,29 @@
+{
+  "rounds": [
+    {
+      "round": 2,
+      "correct": 48,
+      "total": 50,
+      "accuracy": 0.96
+    },
+    {
+      "round": 3,
+      "correct": 47,
+      "total": 50,
+      "accuracy": 0.94
+    },
+    {
+      "round": 4,
+      "correct": 47,
+      "total": 50,
+      "accuracy": 0.94
+    },
+    {
+      "round": 5,
+      "correct": 47,
+      "total": 50,
+      "accuracy": 0.94
+    }
+  ],
+  "note": "R1=supervised, R2-R5=blind prediction. Accuracy measured against actual merge outcomes."
+}

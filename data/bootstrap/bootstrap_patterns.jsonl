@@ -1,0 +1,15 @@
+{"signal": "maintainer", "frequency": 47, "correct_predictions": 44, "precision": 0.936, "promoted": true}
+{"signal": "ci", "frequency": 47, "correct_predictions": 44, "precision": 0.936, "promoted": true}
+{"signal": "comment", "frequency": 47, "correct_predictions": 44, "precision": 0.936, "promoted": true}
+{"signal": "age", "frequency": 46, "correct_predictions": 43, "precision": 0.935, "promoted": true}
+{"signal": "scope", "frequency": 43, "correct_predictions": 40, "precision": 0.93, "promoted": true}
+{"signal": "review", "frequency": 43, "correct_predictions": 40, "precision": 0.93, "promoted": true}
+{"signal": "closure", "frequency": 38, "correct_predictions": 36, "precision": 0.947, "promoted": true}
+{"signal": "size", "frequency": 36, "correct_predictions": 33, "precision": 0.917, "promoted": true}
+{"signal": "label", "frequency": 32, "correct_predictions": 29, "precision": 0.906, "promoted": true}
+{"signal": "engagement", "frequency": 31, "correct_predictions": 28, "precision": 0.903, "promoted": true}
+{"signal": "approval", "frequency": 27, "correct_predictions": 25, "precision": 0.926, "promoted": true}
+{"signal": "contributor", "frequency": 11, "correct_predictions": 11, "precision": 1.0, "promoted": true}
+{"signal": "superseded", "frequency": 9, "correct_predictions": 9, "precision": 1.0, "promoted": true}
+{"signal": "test", "frequency": 7, "correct_predictions": 7, "precision": 1.0, "promoted": false}
+{"signal": "bot", "frequency": 6, "correct_predictions": 6, "precision": 1.0, "promoted": false}

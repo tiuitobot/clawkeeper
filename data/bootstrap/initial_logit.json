@@ -1,0 +1,24 @@
+{
+  "version": "0.7.5",
+  "model": "haiku (bootstrap)",
+  "n_rounds": 5,
+  "n_prs": 50,
+  "binary_weights": {
+    "has_maintainer_label": 3.708,
+    "ci_green": 2.307,
+    "has_top_contributor_comment": 2.307,
+    "has_approval": 2.045,
+    "high_engagement": 1.682,
+    "touches_extensions": -1.609,
+    "has_experienced_contributor_label": 1.182,
+    "has_tests": 1.125,
+    "is_draft": 1.125,
+    "has_trusted_contributor_label": 1.125,
+    "is_fork_pr": 1.125,
+    "has_maintainer_comment": 0.474,
+    "touches_multiple_channels": -0.302,
+    "has_greptile_review": 0.127,
+    "has_changes_requested": 0.0
+  },
+  "note": "Log-odds weights from 50-PR bootstrap sample. Superseded by Stage 1 scikit-learn logit on full dataset."
+}
