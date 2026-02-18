@@ -169,13 +169,29 @@ def format_pr_for_prompt(pr: dict) -> str:
     body = (pr.get("body") or "")[:500]
     greptile_summary = extract_greptile_summary(pr.get("body") or "")
 
+    # Enrichment v2 fields
+    max_same_day = pr.get("author_max_prs_same_day", "?")
+    median_interval = pr.get("author_median_interval_hours", "?")
+    prs_per_day = pr.get("author_prs_per_day", "?")
+    unique_repos = pr.get("author_unique_repos", "?")
+    account_age = pr.get("author_account_age_days", "?")
+    followers = pr.get("author_followers", "?")
+    public_repos = pr.get("author_public_repos", "?")
+    has_linked_issue = pr.get("has_linked_issue", False)
+    issue_self_filed = pr.get("issue_is_self_filed", False)
+    linked_issue_count = pr.get("linked_issue_count", 0)
+
     text = f"""## PR #{pr['number']}: {pr.get('title', '')}
 
 - **Author:** {author} ({prior_prs} prior PRs, {prior_merged} merged, {merge_rate * 100:.1f}% merge rate)
+- **Author Profile:** account age {account_age} days, {followers} followers, {public_repos} public repos
+- **Author Velocity:** max {max_same_day} PRs/same day, median interval {median_interval}h, {prs_per_day} PRs/day avg
+- **Author Spread:** {unique_repos} unique repos (recent events)
 - **Created:** {pr.get('created_at', '')}
 - **Labels:** {labels}
 - **Size:** +{pr.get('additions', 0)} / -{pr.get('deletions', 0)} ({pr.get('changed_files', pr.get('changedFiles', 0))} files)
 - **Draft:** {pr.get('draft', False)}
+- **Linked Issues:** {linked_issue_count} (self-filed: {issue_self_filed})
 - **Body (truncated):** {body}
 """
 
@@ -244,6 +260,9 @@ Features to extract for each PR:
 - human_review_type (string): "maintainer" if MEMBER/OWNER review, "contributor" if other human, "none" if no human review
 - is_triage_rejected (bool): 0 files changed OR 270+ files changed (mechanical triage rejection signals)
 - greptile_score (int 0-5): extract numeric score from Greptile review in body, 0 if not found
+- is_bot_like (bool): author has max PRs/same day >= 20 OR median interval < 0.5h OR unique repos >= 10
+- has_linked_issue (bool): PR has linked issues (from metadata)
+- issue_is_self_filed (bool): linked issue was filed by the same author as the PR
 
 ## Task B — Merge Prediction (Qualitative Judgment)
 For each PR, predict merged/closed with confidence [0,1] and reasoning.
@@ -273,7 +292,10 @@ Output JSON:
         "has_human_review": true,
         "human_review_type": "maintainer",
         "is_triage_rejected": false,
-        "greptile_score": 3
+        "greptile_score": 3,
+        "is_bot_like": false,
+        "has_linked_issue": true,
+        "issue_is_self_filed": false
       }},
       "qualitative_signals": "reasoning about non-feature aspects..."
     }}
@@ -404,6 +426,9 @@ def main() -> None:
                                 "human_review_type": "none",
                                 "is_triage_rejected": False,
                                 "greptile_score": 0,
+                                "is_bot_like": False,
+                                "has_linked_issue": False,
+                                "issue_is_self_filed": False,
                             },
                             "qualitative_signals": "dry-run",
                         }
