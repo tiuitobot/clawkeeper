@@ -324,11 +324,28 @@ def _build_prompt(
     for e in errors:
         n = int(e.get("pr_number", -1))
         pr = all_prs.get(n, {"number": n, "title": "", "comments": [], "reviews": [], "files": []})
+        etype = str(e.get("error_type", "")).lower()
+        reasoning = e.get("reasoning", "") or e.get("qualitative_signals", "") or ""
+        if etype == "fp":
+            polarity_note = (
+                "⚠️ FALSE POSITIVE: Model predicted MERGE but this PR was CLOSED. "
+                "The reasoning below explains WHY the model incorrectly predicted merge. "
+                "These reasons FAILED — extract patterns that CORRECT this mistake, not patterns that repeat it."
+            )
+        elif etype == "fn":
+            polarity_note = (
+                "⚠️ FALSE NEGATIVE: Model predicted CLOSED but this PR was MERGED. "
+                "The reasoning below explains WHY the model incorrectly predicted close. "
+                "These reasons FAILED — extract patterns that CORRECT this mistake, not patterns that repeat it."
+            )
+        else:
+            polarity_note = ""
         error_blocks.append(
             {
                 "pr_number": n,
-                "error_type": str(e.get("error_type", "")).lower(),
-                "reasoning": e.get("reasoning", ""),
+                "error_type": etype,
+                "polarity_note": polarity_note,
+                "reasoning": reasoning,
                 "features": e.get("features", {}),
                 "pr_content": format_pr_for_prompt(pr),
             }
@@ -337,6 +354,22 @@ def _build_prompt(
     return (
         "You analyze FP/FN model errors and maintain a lifecycle pattern catalog for future unseen PRs.\n"
         "CRITICAL: Output ONLY the JSON object. No analysis, no explanations, no markdown before/after the JSON.\n\n"
+        "## CRITICAL: ERROR SIGNAL POLARITY\n"
+        "Each error tells you what went WRONG, not what went right. The model's reasoning explains WHY it made a mistake.\n"
+        "You must extract CORRECTIVE patterns — rules that PREVENT the error from recurring.\n\n"
+        "- FALSE POSITIVE (FP): model predicted MERGE but ground truth was CLOSED.\n"
+        "  The model's reasoning describes features it INCORRECTLY trusted as merge signals.\n"
+        "  → Corrective pattern: 'When [feature], do NOT assume merge because [why it fails].'\n"
+        "  → WRONG pattern: 'When [feature], predict merge.' (This REINFORCES the error!)\n\n"
+        "- FALSE NEGATIVE (FN): model predicted CLOSED but ground truth was MERGED.\n"
+        "  The model's reasoning describes features it INCORRECTLY trusted as close signals.\n"
+        "  → Corrective pattern: 'When [feature], do NOT assume close because [why it fails].'\n"
+        "  → WRONG pattern: 'When [feature], predict close.' (This REINFORCES the error!)\n\n"
+        "SELF-CHECK (mandatory before finalizing EACH pattern):\n"
+        "  Ask: 'If the model had followed this pattern in the round that generated these errors,\n"
+        "  would it have made MORE of the same errors, or FEWER?'\n"
+        "  If MORE → you have inverted the signal. FLIP the pattern.\n"
+        "  If the pattern prescribes the same behavior that caused the errors it was derived from → REJECT it.\n\n"
         "## CONSOLIDATION BY LATENT VARIABLE\n"
         "Each pattern MUST represent exactly ONE latent variable — a distinct causal factor that influences merge decisions.\n"
         "If two patterns would collapse to the same logit feature in a regression model, they ARE the same pattern — MERGE them.\n"
@@ -354,12 +387,12 @@ def _build_prompt(
         "Generalization directive: each pattern must apply to PRs you have not seen. "
         "No PR numbers, no author names, and no specific library names in pattern or anti_pattern.\n\n"
         "Input contains:\n"
-        "1) ALL round errors with PR content\n"
+        "1) ALL round errors with PR content, each marked with ERROR TYPE and POLARITY REMINDER\n"
         "2) inherited patterns in full structured form\n\n"
         "Tasks:\n"
-        "- Create NEW patterns from this round's errors. Each = 1 latent variable.\n"
+        "- Create NEW corrective patterns from this round's errors. Each = 1 latent variable.\n"
         "- For EACH error, attempt attribution to inherited pattern IDs.\n"
-        "- Revise inherited patterns that caused errors.\n"
+        "- Revise inherited patterns that caused errors (especially if an inherited pattern REINFORCED an error).\n"
         "- If any inherited patterns map to the same latent variable, merge them (set one to 'retired', update the other).\n"
         "- Keep mechanism causal (not correlational).\n\n"
         "Required JSON output schema:\n"

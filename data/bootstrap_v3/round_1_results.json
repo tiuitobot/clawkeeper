@@ -1,0 +1,2576 @@
+{
+  "round": 1,
+  "predictions": [
+    {
+      "pr_number": 7313,
+      "prediction": "merged",
+      "confidence": 0.95,
+      "reasoning": "Strong signals: (1) has_maintainer_label=true (90.7% merge rate baseline), (2) author joshp123 has 100% prior merge rate (3/3), (3) maintainer has already merged via fast-forward (visible in comments: 'Merged to main via fast-forward'), (4) positive testing/validation from contributors (jiulingyun), (5) active maintainer engagement. Draft status is minor negative but overridden by other signals.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 42,
+        "size_label": "M",
+        "has_tests": true,
+        "ci_green": true,
+        "is_draft": true,
+        "category": "channel",
+        "component_area": "feishu",
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 1.0,
+        "author_association": "CONTRIBUTOR",
+        "has_maintainer_label": true,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 22,
+        "high_engagement": true,
+        "review_count": 3,
+        "has_approval": null,
+        "has_changes_requested": false,
+        "has_maintainer_comment": true,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 7358,
+      "prediction": "closed",
+      "confidence": 0.72,
+      "reasoning": "Strong negative signals: (1) author alberthild has 0% merge rate (0/2 prior PRs), (2) size:L label historically drops hard in merge rate, (3) competing approach in comments (ashbrener mentions rclone alternative #19052), (4) infrastructure/dependency-heavy NATS JetStream approach may face organizational resistance. Moderate: greptile reviewed but no approval. Some positive: battle-tested claim (157k events), comprehensive test suite. However, low-merge-rate author + competing solution + L-size = rejection likely.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 11,
+        "size_label": "L",
+        "has_tests": true,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "gateway",
+        "component_area": "gateway",
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 7,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 7518,
+      "prediction": "closed",
+      "confidence": 0.78,
+      "reasoning": "Strong closure signal: author self-closed with explicit reasoning 'Closing: 13 files across auth boundary is too broad for a single PR.' This indicates recognized scope/review burden. Negative factors: (1) is_low_merge_author=true (hclsys: 1/9 prior = 11.1%), (2) greptile identified P0 sandbox auth bug that author claims fixed but reasoning unclear, (3) broad file scope (13 files across sensitive browser/auth boundary) creates risk. However, closure is author-initiated and acknowledged, suggesting quality-aware triage.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 13,
+        "size_label": "M",
+        "has_tests": true,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": "browser",
+        "author_prior_prs": 9,
+        "author_prior_merge_rate": 0.111,
+        "author_association": "CONTRIBUTOR",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 3,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": true,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 13445,
+      "prediction": "closed",
+      "confidence": 0.88,
+      "reasoning": "Author self-closed with technical justification: 'the existing regex already matches rate_limit_exceeded' + 'real fix belongs upstream in pi-ai'. This indicates: (1) duplicate/redundant fix, (2) author recognizes upstream is proper location, (3) first-time contributor (0 prior PRs) attempting fix that already exists. Minimal scope (1 file) but closure is warranted based on technical analysis.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 1,
+        "size_label": "XS",
+        "has_tests": false,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": "error-handling",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": null,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 0,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 13766,
+      "prediction": "closed",
+      "confidence": 0.85,
+      "reasoning": "Author self-closed with explicit reason: 'Closing \u2014 guard already addressed by upstream refactoring.' This is a duplicate/superseded fix. Negative factors: (1) is_low_merge_author=true (0xRaini: 3/41 = 7.3%), (2) security-adjacent nature creates caution, (3) upstream already fixed. Positive: author proactively closed when recognized upstream addressed it, suggesting responsible behavior. CI green but fix is no longer needed.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 4,
+        "size_label": "S",
+        "has_tests": true,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "commands",
+        "component_area": "gateway-auth",
+        "author_prior_prs": 41,
+        "author_prior_merge_rate": 0.073,
+        "author_association": "CONTRIBUTOR",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 3,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 14778,
+      "prediction": "merged",
+      "confidence": 0.82,
+      "reasoning": "Strong merge signals: (1) author lailoo has solid 32.1% merge rate (9/28), (2) size:S label historically stronger, (3) maintainer comment indicates successful merge upstream: 'now merged' + references #14786 with full implementation details, (4) feature is GLM-5 forward-compat which is model infrastructure (strategic), (5) greptile reviewed. Comment from steipete (CONTRIBUTOR) explicitly states '(now merged)' \u2014 this PR appears to have already merged or superseded by #14786.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 4,
+        "size_label": "S",
+        "has_tests": true,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": "models",
+        "author_prior_prs": 28,
+        "author_prior_merge_rate": 0.321,
+        "author_association": "CONTRIBUTOR",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": true,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 16934,
+      "prediction": "closed",
+      "confidence": 0.74,
+      "reasoning": "Author self-closed with clear intent: 'Recreated from clean branch as #19111' \u2014 this is a superseded PR, author manually recreated in cleaner form. Negative: (1) is_low_merge_author=true (Clawborn: 0/10 = 0%), (2) has_trusted_contributor_label present but no merge history, suggesting label doesn't guarantee success. Positive: (1) size:S, (2) greptile reviewed, (3) author's proactive recreation shows responsibility. Closure is intentional/expected, not a rejection.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 11,
+        "size_label": "S",
+        "has_tests": true,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "commands",
+        "component_area": "config-validation",
+        "author_prior_prs": 10,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": true,
+        "has_experienced_contributor_label": false,
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 18171,
+      "prediction": "closed",
+      "confidence": 0.81,
+      "reasoning": "Author self-closed with strategic pivot: 'Closing this PR in favor of a standalone plugin approach' + published to npm as @vainplex/nats-eventstore. This is intentional supersession, not rejection. However, if treated as independent PR: (1) is_low_merge_author=true (alberthild: 0/3), (2) size:XL is hard ceiling, (3) community suggestion to move to plugin (HenryLoenwind). Author's closure is voluntary/strategic, showing market-aware decision-making. The merged version likely exists as plugin, not in main.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 11,
+        "size_label": "XL",
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "gateway",
+        "component_area": "event-store",
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 4,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": true,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 18808,
+      "prediction": "merged",
+      "confidence": 0.78,
+      "reasoning": "Positive signals: (1) author MisterGuy420 has strong 60% merge rate (6/10), (2) size:S, (3) has_trusted_contributor_label=true, (4) files are documentation/config (AGENTS.md, BOOTSTRAP.md, etc.) \u2014 low-risk changes. Minimal concern: (1) no comments/reviews visible but doc-only PRs often skip review, (2) description is vague ('fix: short description'). Trust signal from high prior merge rate + trusted-contributor label outweighs lack of visibility.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 6,
+        "size_label": "S",
+        "has_tests": false,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "docs",
+        "component_area": "documentation",
+        "author_prior_prs": 10,
+        "author_prior_merge_rate": 0.6,
+        "author_association": "CONTRIBUTOR",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": true,
+        "has_experienced_contributor_label": false,
+        "comment_count": 0,
+        "high_engagement": false,
+        "review_count": 0,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 18853,
+      "prediction": "closed",
+      "confidence": 0.95,
+      "reasoning": "Multiple decisive closure signals: (1) Author TheAmSpeed is first-time contributor (0 prior PRs), (2) Automated closure by openclaw-barnacle with explicit reason: 'Closing this PR because it looks dirty (too many unrelated commits)' repeated 10 times across comments, (3) size:XL (261 files) is historically hard reject, (4) touches_multiple_channels=true + massive file scope across unrelated subsystems (IC memory vault spanning all channels, web-ui, gateway, cli, commands, agents), (5) architecture violation of separation of concerns. This is textbook scope-creep rejection.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 261,
+        "size_label": "XL",
+        "has_tests": false,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "multi-category",
+        "component_area": "multi-channel",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": null,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 22,
+        "high_engagement": true,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "weekly_pr_volume": null,
+        "touches_multiple_channels": true,
+        "touches_extensions": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 2395,
+      "prediction": "closed",
+      "confidence": 0.99,
+      "reasoning": "Explicitly closed by maintainer (grp06) as duplicate of #8815. Member noted: 'currently CONFLICTING with main and has failing CI'. Conflicting state + duplicate + failing CI = deterministic closure.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "category": "commands, agents",
+        "files_changed": 4,
+        "has_maintainer_comment": true,
+        "ci_status": "failing",
+        "merge_conflict": true,
+        "duplicate_of": 8815
+      }
+    },
+    {
+      "pr_number": 8815,
+      "prediction": "merged",
+      "confidence": 0.72,
+      "reasoning": "Minimal, focused fix (2 files, preferred solution per maintainer). Supersedes #2395. Small scope targets specific OpenRouter model reference bug. Author has 4 prior PRs (zero merge history, but focused scope overcomes this). No CI failures noted. XS/S category historically stronger. Greptile review present but no blocking feedback.",
+      "features": {
+        "author_prior_prs": 4,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "category": "commands",
+        "files_changed": 2,
+        "size_label": "XS",
+        "has_maintainer_comment": false,
+        "supersedes_pr": 2395,
+        "ci_status": "unknown"
+      }
+    },
+    {
+      "pr_number": 8840,
+      "prediction": "merged",
+      "confidence": 0.68,
+      "reasoning": "Single-file bug fix with clear business justification (batch jobs failing due to insufficient error context). Minimal scope (1 file) in agents category (top merge category at 1161 PRs). Author provided context: model lacks error explanation. No blocking CI/conflict signals. Low complexity + clear value = merge likely.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "category": "agents",
+        "files_changed": 1,
+        "size_label": "XS",
+        "has_maintainer_comment": false,
+        "has_test_updates": false,
+        "ci_status": "unknown"
+      }
+    },
+    {
+      "pr_number": 9137,
+      "prediction": "merged",
+      "confidence": 0.65,
+      "reasoning": "Single-file targeted fix in commands category. Symlink resolution issue in doctor command is narrow, low-risk change. No CI failures, no conflicts noted. First-time contributor but scope is minimal and focused. Maintainer engagement pattern absent (no blocking signals).",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "category": "commands",
+        "files_changed": 1,
+        "size_label": "XS",
+        "has_maintainer_comment": false,
+        "ci_status": "unknown"
+      }
+    },
+    {
+      "pr_number": 13526,
+      "prediction": "closed",
+      "confidence": 0.95,
+      "reasoning": "Author explicitly closed PR stating root cause already fixed in main by refactoring into schema.hints.ts. Self-closed with maintainer acknowledgment. Changes declared 'no longer necessary'.",
+      "features": {
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "files_changed": 2,
+        "pr_status": "self_closed",
+        "superseded_by_main": true
+      }
+    },
+    {
+      "pr_number": 16981,
+      "prediction": "closed",
+      "confidence": 0.98,
+      "reasoning": "Author (xinhuagu) explicitly closed stating 'fixed upstream in main'. Clear upstream resolution. Author has moderate track record (7 prior PRs, 28.6% merge rate) but closure is intentional/self-driven.",
+      "features": {
+        "author_prior_prs": 7,
+        "author_prior_merge_rate": 0.286,
+        "is_draft": false,
+        "category": "gateway",
+        "files_changed": 1,
+        "size_label": "XS",
+        "pr_status": "self_closed",
+        "superseded_by_main": true
+      }
+    },
+    {
+      "pr_number": 17967,
+      "prediction": "merged",
+      "confidence": 0.7,
+      "reasoning": "Single-file performance/correctness fix: prevents cron spin loop (high-value bug fix). XS size, includes test coverage (2 files: test + implementation). No blocking signals. First-time contributor but narrow, well-scoped change addresses real edge case.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "files_changed": 2,
+        "size_label": "XS",
+        "has_tests": true,
+        "ci_status": "unknown"
+      }
+    },
+    {
+      "pr_number": 17984,
+      "prediction": "merged",
+      "confidence": 0.62,
+      "reasoning": "Medium-scope skills prompt bloat fix (4 files, M size). Agents category (high volume = 1161 PRs). Includes tests + config changes. Automated Codex review present (suggests engagement). Author has 1 prior PR (zero merge history is slight negative). M-sized PRs have ~19% peak merge rate per guidelines, but fix targets important bloat issue + test coverage helps.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "category": "agents",
+        "files_changed": 4,
+        "size_label": "M",
+        "has_tests": true,
+        "has_code_review": true,
+        "ci_status": "unknown"
+      }
+    },
+    {
+      "pr_number": 18016,
+      "prediction": "merged",
+      "confidence": 0.71,
+      "reasoning": "Small-scope validation fix (2 files, S size). Multi-agent session path validation correctness issue. Author xinhuagu has solid track record: 8 prior PRs, 25% merge rate (above baseline). Includes test coverage. S-sized PRs historically stronger merge (~24%). No blocking signals.",
+      "features": {
+        "author_prior_prs": 8,
+        "author_prior_merge_rate": 0.25,
+        "is_draft": false,
+        "files_changed": 2,
+        "size_label": "S",
+        "has_tests": true,
+        "ci_status": "unknown"
+      }
+    },
+    {
+      "pr_number": 18797,
+      "prediction": "closed",
+      "confidence": 0.92,
+      "reasoning": "Author (andrey-esipov) explicitly states 'Superseded \u2014 will resubmit after formatting fix'. Self-closure is intentional, author plans to resubmit. XS scope in CLI category, but current PR is abandoned.",
+      "features": {
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.0,
+        "is_draft": false,
+        "category": "cli",
+        "files_changed": 1,
+        "size_label": "XS",
+        "pr_status": "self_closed_for_resubmit"
+      }
+    },
+    {
+      "pr_number": 7035,
+      "prediction": "closed",
+      "confidence": 0.92,
+      "reasoning": "Author explicitly closed PR with comment 'Closing - PR created without explicit owner approval.' This is a self-closed PR, not a merge. First-time contributor (0 prior PRs) with no merge history. Greptile review flagged type signature issues but author chose not to pursue. Early signal of abandonment.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "category": "agents",
+        "files_changed": 3,
+        "has_tests": false,
+        "has_maintainer_label": false,
+        "comment_count": 2,
+        "review_count": 1,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 11041,
+      "prediction": "merged",
+      "confidence": 0.71,
+      "reasoning": "Experienced author with 66.7% prior merge rate (2/3 PRs merged). Small scope (2 files, agents category). Focused on skills metadata parsing. Greptile review present but no major blockers evident. Above-baseline merge likelihood for established contributors.",
+      "features": {
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.667,
+        "category": "agents",
+        "files_changed": 2,
+        "has_tests": false,
+        "has_maintainer_label": false,
+        "comment_count": 0,
+        "review_count": 1,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 11539,
+      "prediction": "merged",
+      "confidence": 0.68,
+      "reasoning": "Large XL PR (24 files) with heavy engagement (32 comments, 48 reviews). Author is engaged CONTRIBUTOR actively addressing Greptile review comments across 4+ review cycles, demonstrating commitment and iterative fixes (GCP validation, Zod schema alignment, error typing). Multi-category (docs, gateway, cli) indicates broad scope. High comment + maintainer engagement signals quality iteration, but XL size penalizes merge likelihood. Greptile review presence and author responsiveness pushes above 50% baseline despite size risk.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "category": [
+          "docs",
+          "gateway",
+          "cli"
+        ],
+        "files_changed": 24,
+        "size_label": "XL",
+        "has_tests": false,
+        "has_maintainer_label": false,
+        "comment_count": 32,
+        "review_count": 48,
+        "high_engagement": true,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 11736,
+      "prediction": "merged",
+      "confidence": 0.62,
+      "reasoning": "First-time contributor adding new AI provider (AIsa) with multi-category coverage (docs, commands, agents). 13 files is moderate scope. Feature addition to core provider system likely valuable for user base. Greptile review present. However, 0% prior merge rate as first-time author creates uncertainty. No explicit maintainer engagement yet, but provider additions are common merge candidates.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "category": [
+          "docs",
+          "commands",
+          "agents"
+        ],
+        "files_changed": 13,
+        "has_tests": false,
+        "has_maintainer_label": false,
+        "comment_count": 0,
+        "review_count": 1,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 12969,
+      "prediction": "closed",
+      "confidence": 0.88,
+      "reasoning": "Maintainer comment 'Dirty PR' is explicit negative signal. Huge scope (59 files, 7 channels touched) with low author credibility (1 prior PR, 0 merged). Touches multiple channels (discord, matrix, slack, telegram, feishu) = high-risk per AGENTS.md guidance. Maintainer label present but negative comment overrides. PR appears to have failed quality bar.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "category": [
+          "gateway",
+          "commands",
+          "agents"
+        ],
+        "files_changed": 59,
+        "touches_multiple_channels": true,
+        "has_maintainer_label": true,
+        "has_maintainer_comment": true,
+        "comment_count": 1,
+        "review_count": 1,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 14194,
+      "prediction": "closed",
+      "confidence": 0.81,
+      "reasoning": "Author with 0% merge rate (0/3 prior PRs merged) submitting large, unfocused PR (49 files) titled only 'Skills' with vague scope. Touches infrastructure (CI/CD, Docker, deployment scripts), docs, web-ui, and config simultaneously = unclear intent. Greptile found 5 issues. File list suggests possible incomplete/draft work with duplicated CLAUDE.md entries. Pattern matches low-quality, over-scoped submissions from struggling contributors.",
+      "features": {
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.0,
+        "is_low_merge_author": true,
+        "category": [
+          "docs",
+          "gateway"
+        ],
+        "files_changed": 49,
+        "has_tests": false,
+        "has_maintainer_label": false,
+        "comment_count": 0,
+        "review_count": 1,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 14195,
+      "prediction": "closed",
+      "confidence": 0.83,
+      "reasoning": "Same author (jhs129) as PR #14194, submitted 1 minute later, with identical file list (49 files) and same vague title 'Skills'. Duplicate/superseded PR. Author still at 0% merge rate (0/4 PRs). Greptile review found 3 issues. This appears to be a resubmission attempt without substantive changes. Combined with PR#14194, signals author struggle with project standards.",
+      "features": {
+        "author_prior_prs": 4,
+        "author_prior_merge_rate": 0.0,
+        "is_low_merge_author": true,
+        "category": [
+          "docs",
+          "gateway"
+        ],
+        "files_changed": 49,
+        "has_tests": false,
+        "has_maintainer_label": false,
+        "comment_count": 0,
+        "review_count": 1,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 16322,
+      "prediction": "merged",
+      "confidence": 0.95,
+      "reasoning": "Author's own comment states PR was 'Merged with squash into main'. This is post-hoc confirmation of merge. Author is experienced (11 prior PRs, 36.4% merge rate). Medium scope (7 files), security-focused (LFI hardening in bluebubbles channel). Has maintainer label (90.7% merge rate signal). Greptile review completed. Author comment documents the merge commit, confirming successful merge.",
+      "features": {
+        "author_prior_prs": 11,
+        "author_prior_merge_rate": 0.364,
+        "category": [
+          "docs"
+        ],
+        "component_area": "bluebubbles",
+        "files_changed": 7,
+        "size_label": "M",
+        "has_maintainer_label": true,
+        "has_maintainer_comment": true,
+        "comment_count": 1,
+        "review_count": 2,
+        "is_draft": false,
+        "has_greptile_review": true
+      }
+    },
+    {
+      "pr_number": 16384,
+      "prediction": "closed",
+      "confidence": 0.97,
+      "reasoning": "Author explicitly closed PR with comment 'Superseded by English re-submission: https://github.com/openclaw/openclaw/pull/16411'. This is a self-closed, superseded PR. Not a merge. Author abandoned this version in favor of PR#16411.",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 0.0,
+        "category": "agents",
+        "files_changed": 2,
+        "size_label": "XS",
+        "has_tests": true,
+        "has_maintainer_label": false,
+        "comment_count": 1,
+        "review_count": 0,
+        "is_draft": false,
+        "has_greptile_review": false
+      }
+    },
+    {
+      "pr_number": 18275,
+      "prediction": "merged",
+      "confidence": 0.58,
+      "reasoning": "First-time contributor (0 prior PRs) submitting focused fix (4 files, daemon/runtime-paths for macOS version manager) in gateway category. Medium scope, test coverage present (2 test files), clean scope. No negative signals (draft=false, no maintainer comments). However, 0% author history = baseline uncertainty. No review/comments yet, but technical quality appears reasonable for daemon runtime path management.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "category": "gateway",
+        "files_changed": 4,
+        "size_label": "M",
+        "has_tests": true,
+        "has_maintainer_label": false,
+        "comment_count": 0,
+        "review_count": 0,
+        "is_draft": false,
+        "has_greptile_review": false
+      }
+    },
+    {
+      "pr_number": 7936,
+      "prediction": "closed",
+      "confidence": 0.75,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Member comment appears dismissive ('If this is incorrect, comment and we can reopen') suggesting PR was closed as incorrect. Only 2 files changed (signal channel plugin), but lack of approval, test confirmation, or positive engagement signals closure. Small scope alone insufficient without author credibility.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 2,
+        "loc_total": "Unknown (not provided)",
+        "has_tests": true,
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "signal",
+        "component_area": "signal",
+        "comment_count": 1,
+        "has_maintainer_comment": true,
+        "has_approval": false,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": false
+      }
+    },
+    {
+      "pr_number": 8356,
+      "prediction": "merged",
+      "confidence": 0.62,
+      "reasoning": "First-time contributor with focused Telegram fix (3 files, metadata preservation during debounce). Has Greptile + Codex automated reviews suggesting bot engagement. Telegram is high-volume channel (347 PRs in dataset). No approval yet but reviews indicate scrutiny. Narrow scope + channel label + bot reviews push above baseline (24%), though first-time author status and lack of explicit approval creates uncertainty.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 3,
+        "loc_total": "Unknown",
+        "has_tests": "Unknown",
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "channel",
+        "component_area": "telegram",
+        "has_greptile_review": true,
+        "review_count": 2,
+        "has_approval": false,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": false
+      }
+    },
+    {
+      "pr_number": 9539,
+      "prediction": "closed",
+      "confidence": 0.68,
+      "reasoning": "Second attempt from author with 0% merge rate (2 prior PRs, 0 merged). Out-of-scope fix (tmux shell script, not core agent/channel code). Only 1 file changed but touches infrastructure tooling (find-sessions.sh). Greptile + Codex reviews present but no human approval. Low author credibility + marginal scope = closure likely.",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 1,
+        "loc_total": "Small",
+        "has_tests": false,
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "scripts",
+        "component_area": "tooling",
+        "has_greptile_review": true,
+        "review_count": 2,
+        "has_approval": false,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": false
+      }
+    },
+    {
+      "pr_number": 9832,
+      "prediction": "closed",
+      "confidence": 0.92,
+      "reasoning": "EXPLICIT CLOSURE SIGNAL: Member grp06 states 'Closing this PR to avoid duplicate review' and opened replacement PR #9885 (xAI-only). This PR combines unrelated changes (tagline, DeepSeek, xAI, package.json). XL scope (20 files) with multiple concerns flagged by Greptile. First-time contributor. Member prefers narrower replacement PR. Duplicate/superseded status confirmed.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 20,
+        "loc_total": "XL",
+        "has_tests": true,
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "agents, commands, cli",
+        "component_area": "core",
+        "comment_count": 3,
+        "has_maintainer_comment": true,
+        "has_approval": false,
+        "review_count": 1,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": false
+      }
+    },
+    {
+      "pr_number": 10412,
+      "prediction": "closed",
+      "confidence": 0.88,
+      "reasoning": "EXPLICIT CLOSURE SIGNAL: Author states 'Closing \u2014 the fixes in this PR... have been fully addressed by #10776, which landed a more comprehensive cron reliability overhaul'. This is superseded by #10776. Although Greptile reviewed and acastellana approved, the author explicitly indicates broader fix exists elsewhere. Duplicate/replaced status confirmed.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 4,
+        "loc_total": "Small-Medium",
+        "has_tests": true,
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "cron",
+        "component_area": "gateway",
+        "comment_count": 2,
+        "has_maintainer_comment": false,
+        "has_approval": true,
+        "review_count": 2,
+        "has_greptile_review": true,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": false
+      }
+    },
+    {
+      "pr_number": 11646,
+      "prediction": "merged",
+      "confidence": 0.58,
+      "reasoning": "First-time contributor with narrow, focused change (4 files, adds GitHub Copilot to xhigh model list). Touches auto-reply + thinking logic, which is core feature. No maintainer comments, no approval, but minimal scope + clear purpose (model list expansion) are low-risk. No explicit rejection signals. Slight above-baseline due to clarity, but new author status and lack of review approval create uncertainty.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 4,
+        "loc_total": "Small",
+        "has_tests": true,
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "agents",
+        "component_area": "core",
+        "comment_count": 0,
+        "has_maintainer_comment": false,
+        "has_approval": false,
+        "review_count": 0,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": false
+      }
+    },
+    {
+      "pr_number": 12589,
+      "prediction": "closed",
+      "confidence": 0.95,
+      "reasoning": "EXPLICIT CLOSURE SIGNAL: Author states 'Closing - created in error, should not have touched OpenClaw platform repo'. Self-closed with clear statement of mistake. Wrong repo entirely. 8 files changed including CI config + test tier scripts indicate scope creep for wrong project.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 8,
+        "loc_total": "Medium",
+        "has_tests": false,
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "docs, scripts",
+        "component_area": "testing",
+        "comment_count": 1,
+        "has_maintainer_comment": false,
+        "has_approval": false,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": false
+      }
+    },
+    {
+      "pr_number": 18240,
+      "prediction": "closed",
+      "confidence": 0.85,
+      "reasoning": "EXPLICIT CLOSURE SIGNAL: Author (victorGPT, CONTRIBUTOR) states 'Closing per author request for now; may reopen after local rollout strategy is settled'. Tentative closure pending rollout. Touches 2 channels (Discord + Feishu) with reaction listener latency fix. Author is CONTRIBUTOR (higher credibility than first-time), but explicit conditional closure is clear signal.",
+      "features": {
+        "author_prior_prs": "Unknown (CONTRIBUTOR status)",
+        "author_prior_merge_rate": "Unknown",
+        "files_changed": 2,
+        "loc_total": "Small",
+        "has_tests": "Unknown",
+        "ci_green": "Unknown",
+        "is_draft": false,
+        "category": "channel",
+        "component_area": "discord, feishu",
+        "comment_count": 1,
+        "has_maintainer_comment": false,
+        "has_approval": false,
+        "is_low_merge_author": false,
+        "touches_multiple_channels": true
+      }
+    },
+    {
+      "pr_number": 18948,
+      "prediction": "closed",
+      "confidence": 0.99,
+      "reasoning": "CRITICAL CLOSURE SIGNAL: Marked XL (1121 files changed). Bot 'openclaw-barnacle' closed 10 times with identical message: 'Closing this PR because it looks dirty (too many unrelated commits). Please recreate the PR from a clean branch.' Touches ALL channels + extensions + multiple components (see label spam). This is textbook dirty PR - improper branch management, unrelated commits bundled. Author has 0% merge rate. Deterministic rejection.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 1121,
+        "loc_total": "XL",
+        "size_label": "XL",
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "multi (all)",
+        "component_area": "multi (all)",
+        "comment_count": 33,
+        "has_maintainer_comment": true,
+        "has_approval": false,
+        "review_count": 1,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": true,
+        "touches_extensions": true
+      }
+    },
+    {
+      "pr_number": 19018,
+      "prediction": "closed",
+      "confidence": 0.99,
+      "reasoning": "CRITICAL CLOSURE SIGNAL: Identical to PR #18948 \u2014 XL (1115 files), same bot closure pattern (10 identical messages: 'too many unrelated commits'). Author chetaniitbhilai with 2 prior PRs, 0% merge rate. Touches ALL channels + extensions. Greptile explicitly flagged '1115 files found, 100 file limit'. Dirty branch recreation required. Deterministic rejection.",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 1115,
+        "loc_total": "XL",
+        "size_label": "XL",
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "multi (all)",
+        "component_area": "multi (all)",
+        "comment_count": 34,
+        "has_maintainer_comment": true,
+        "has_approval": false,
+        "review_count": 1,
+        "is_low_merge_author": true,
+        "touches_multiple_channels": true,
+        "touches_extensions": true
+      }
+    },
+    {
+      "pr_number": 6435,
+      "prediction": "closed",
+      "confidence": 0.95,
+      "reasoning": "Author explicitly closed PR in comment citing duplicate/quality issues and linking to PR hygiene discussion #11907. Low-quality signal: author is low-merge contributor (0.0% rate, 3 PRs), minimal LoC data, Greptile flagged. Self-closure is deterministic signal.",
+      "features": {
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "CONTRIBUTOR",
+        "is_low_merge_author": true,
+        "component_area": "discord",
+        "files_changed": 1,
+        "has_tests": false,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "channel",
+        "has_maintainer_label": false,
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 1,
+        "pr_closed_by_author": true
+      }
+    },
+    {
+      "pr_number": 9789,
+      "prediction": "merged",
+      "confidence": 0.98,
+      "reasoning": "Landed via rebase (already merged per comment). Author is top-tier: 100% merge rate (7/7 PRs), CONTRIBUTOR status, Telegram-specific fix addressing 2 closed issues (#9545, #9351). Test coverage (7 files), CI green. No negative signals.",
+      "features": {
+        "author_prior_prs": 7,
+        "author_prior_merge_rate": 1.0,
+        "author_association": "CONTRIBUTOR",
+        "is_low_merge_author": false,
+        "component_area": "telegram",
+        "files_changed": 7,
+        "has_tests": true,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "channel",
+        "has_maintainer_label": false,
+        "has_approval": false,
+        "review_count": 0,
+        "comment_count": 1,
+        "is_issue_fix": true,
+        "issue_count": 2
+      }
+    },
+    {
+      "pr_number": 10910,
+      "prediction": "merged",
+      "confidence": 0.72,
+      "reasoning": "APPROVED by realmikewestfall304-wq (reviewer signal). Agents category, narrow scope (3 files, shell-utils), has test coverage. Negative: author Zazarothh has 0% merge rate (8 PRs), but approval + narrow fix scope + Windows-specific issue fix outweighs. Greptile review present (neutral).",
+      "features": {
+        "author_prior_prs": 8,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "agents",
+        "files_changed": 3,
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "agents",
+        "has_maintainer_label": false,
+        "has_approval": true,
+        "has_greptile_review": true,
+        "review_count": 2,
+        "comment_count": 0,
+        "touches_multiple_channels": false,
+        "issue_fix": true,
+        "issue_number": 10868
+      }
+    },
+    {
+      "pr_number": 10917,
+      "prediction": "closed",
+      "confidence": 0.88,
+      "reasoning": "Duplicate of #10910 (v4 iteration). Same author, same files (bash-tools.exec.ts, shell-utils.test.ts, shell-utils.ts), same issue #10868, created 10 minutes later. PR #10910 has approval; this is superseded. Greptile review present but no approval on this version.",
+      "features": {
+        "author_prior_prs": 11,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "agents",
+        "files_changed": 3,
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "agents",
+        "has_maintainer_label": false,
+        "has_approval": false,
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 0,
+        "is_duplicate": true,
+        "duplicate_of": 10910
+      }
+    },
+    {
+      "pr_number": 10920,
+      "prediction": "closed",
+      "confidence": 0.9,
+      "reasoning": "Duplicate of #10910 (v5 iteration). Same author, same files, same issue #10868, created ~7 minutes after #10910. Part of iterative version chain. #10910 has approval, making later versions superseded.",
+      "features": {
+        "author_prior_prs": 13,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "agents",
+        "files_changed": 3,
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "agents",
+        "has_maintainer_label": false,
+        "has_approval": false,
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 0,
+        "is_duplicate": true,
+        "duplicate_of": 10910
+      }
+    },
+    {
+      "pr_number": 10922,
+      "prediction": "closed",
+      "confidence": 0.91,
+      "reasoning": "Duplicate of #10910 (v6 iteration). Same author, same files, same issue #10868, created ~2 min after #10910. Latest in iterative chain but #10910 already has approval, rendering this superseded.",
+      "features": {
+        "author_prior_prs": 15,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "agents",
+        "files_changed": 3,
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "agents",
+        "has_maintainer_label": false,
+        "has_approval": false,
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 0,
+        "is_duplicate": true,
+        "duplicate_of": 10910
+      }
+    },
+    {
+      "pr_number": 13903,
+      "prediction": "closed",
+      "confidence": 0.85,
+      "reasoning": "Duplicate signal from reviewer @striking: 'appears duplicative with PR #13906 (very similar changes)'. Author 0xRaini confirms it's 'same fix, slightly cleaner'. Agents category, narrow scope (2 files). Author has 11.1% merge rate (5/45 PRs). Reviewer explicitly recommends closing one. #13906 likely preferred.",
+      "features": {
+        "author_prior_prs": 45,
+        "author_prior_merge_rate": 0.111,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "agents",
+        "files_changed": 2,
+        "has_tests": false,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "agents",
+        "has_maintainer_label": false,
+        "has_approval": false,
+        "has_greptile_review": false,
+        "review_count": 1,
+        "comment_count": 2,
+        "high_engagement": false,
+        "has_top_contributor_comment": true,
+        "duplicate_signal": true,
+        "duplicate_of": 13906
+      }
+    },
+    {
+      "pr_number": 14399,
+      "prediction": "merged",
+      "confidence": 0.78,
+      "reasoning": "Author 0xRaini (18% merge rate, 89 prior PRs, NONE assoc), XS size (strong category), Telegram-specific media parsing fix. Has comments showing engagement + author responding to Greptile feedback (address line 906552e). CI green mentioned. Narrow scope (1 file). Negative: low merge rate author, but XS size + Greptile response + specific fix outweigh.",
+      "features": {
+        "author_prior_prs": 89,
+        "author_prior_merge_rate": 0.18,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "telegram",
+        "files_changed": 1,
+        "has_tests": false,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "media",
+        "has_maintainer_label": false,
+        "size_label": "XS",
+        "has_approval": false,
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 3,
+        "high_engagement": true,
+        "author_addressed_feedback": true
+      }
+    },
+    {
+      "pr_number": 18505,
+      "prediction": "closed",
+      "confidence": 0.58,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate), no approval/merge history. Gateway+web-ui, M-size scope (2 files, test included). Greptile flagged (comment present). Baseline: 24% merge. First-timers typically 10-15%. No author engagement, no approval signal. Moderate probability of closure due to triage/quality.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "gateway",
+        "files_changed": 2,
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": false,
+        "category": "gateway",
+        "has_maintainer_label": false,
+        "size_label": "M",
+        "has_approval": false,
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 0,
+        "is_first_time_author": true
+      }
+    },
+    {
+      "pr_number": 18720,
+      "prediction": "closed",
+      "confidence": 0.92,
+      "reasoning": "DRAFT status (instant signal: only ~2.4% of drafts merge). New extension (fogclaw/) with 14 files, feature not fix. Author sidmohan0 has 1 prior PR (0% merge). No labels, no approval. Touches extensions (workspace packages with own deps = complexity). Draft PRs indicate 'not ready'. Strong closure signal.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "is_low_merge_author": false,
+        "component_area": "extensions",
+        "files_changed": 14,
+        "has_tests": true,
+        "ci_green": false,
+        "is_draft": true,
+        "category": "extensions",
+        "has_maintainer_label": false,
+        "has_approval": false,
+        "has_greptile_review": false,
+        "review_count": 0,
+        "comment_count": 0,
+        "touches_extensions": true,
+        "is_feature": true,
+        "is_first_time_author": false
+      }
+    },
+    {
+      "pr_number": 4491,
+      "prediction": "closed",
+      "confidence": 0.98,
+      "reasoning": "Multiple fatal signals: (1) Maintainer explicitly closed PR with comment 'Closing this PR because it has more than 20 labels, which usually means the branch is too noisy. Please recreate the PR from a clean branch.' (2) Prior comment states 'The rebase completely failed.' (3) 1536 files changed with unclear LoC indicates branch contamination (4) Author has 0% merge rate (0/3 prior PRs). This is a definitive close, not a prediction.",
+      "features": {
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.0,
+        "is_low_merge_author": true,
+        "files_changed": 1536,
+        "is_draft": false,
+        "category": [
+          "docs",
+          "gateway",
+          "commands",
+          "cli",
+          "scripts",
+          "docker",
+          "agents"
+        ],
+        "component_area": [
+          "bluebubbles",
+          "discord",
+          "imessage",
+          "line",
+          "matrix",
+          "msteams",
+          "nostr",
+          "signal",
+          "slack",
+          "telegram",
+          "voice-call",
+          "whatsapp-web",
+          "zalo",
+          "zalouser",
+          "web-ui"
+        ],
+        "size_label": "XL",
+        "touch_multiple_channels": true,
+        "touches_extensions": true,
+        "has_maintainer_comment": true,
+        "comment_count": 2
+      }
+    },
+    {
+      "pr_number": 7240,
+      "prediction": "closed",
+      "confidence": 0.95,
+      "reasoning": "Author's own comment indicates 'Already fixed in c6b4de5', suggesting this PR is superseded by an earlier commit. First-time contributor (0 prior PRs). Minimal scope (2 files, focused telegram fix) would normally be positive, but supersession signal is strong. Very likely author will close or this addresses a non-issue.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 2,
+        "size_label": "XS",
+        "loc_total": "small",
+        "is_draft": false,
+        "category": [
+          "channel: telegram"
+        ],
+        "component_area": [
+          "telegram"
+        ],
+        "comment_count": 1,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 7673,
+      "prediction": "merged",
+      "confidence": 0.72,
+      "reasoning": "Strong positive signals: (1) Maintainer (sebslight/MEMBER) actively engaged and closed with implicit approval pattern. (2) Author responded to greptile-apps review with acceptable fix (updated to ^2026.2.1). (3) Fixes critical user-facing bug ('current release is actually broken for users'). (4) Single file change (low risk). (5) Greptile review shows engagement. Slight concern: first-time contributor, but maintainer participation + bug-fix criticality + responsive iteration suggests merge.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 1,
+        "size_label": "XS",
+        "is_draft": false,
+        "category": [
+          "channel: voice-call"
+        ],
+        "component_area": [
+          "voice-call"
+        ],
+        "has_maintainer_comment": true,
+        "has_greptile_review": true,
+        "comment_count": 4,
+        "high_engagement": true,
+        "review_count": 1
+      }
+    },
+    {
+      "pr_number": 10139,
+      "prediction": "closed",
+      "confidence": 0.68,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Greptile review shows 3 comments (suggests issues raised). Feature addition (new sandbox config) is scope-increase, not core fix. 7 files spanning docs/scripts/docker suggests coordinated effort but no maintainer approval visible. Greptile commentary without explicit approval + first-timer + feature-scope = modest merge chance, slightly leaning closed due to absence of maintainer endorsement.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 7,
+        "size_label": "S",
+        "is_draft": false,
+        "category": [
+          "docs",
+          "scripts",
+          "docker"
+        ],
+        "component_area": [
+          "docs"
+        ],
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 0,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 10254,
+      "prediction": "merged",
+      "confidence": 0.68,
+      "reasoning": "Mixed signals: (1) Author is contributor with 50% prior merge rate (1/2 PRs merged), suggesting competence. (2) Responsive to greptile-apps feedback\u2014added fallback parsing and hardened logic. (3) Focused scope (5 files, commands category). (4) Maintenance-heavy activity (rebases, CI retriggers) suggests genuine effort to unblock. Concern: 6 comments + multiple rebase iterations suggest complexity/conflict. No explicit maintainer approval yet. Slight lean toward merge due to author track record + fixes to review comments.",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 0.5,
+        "files_changed": 5,
+        "size_label": "S",
+        "is_draft": false,
+        "category": [
+          "commands"
+        ],
+        "component_area": [
+          "commands"
+        ],
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 6,
+        "high_engagement": true,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 10342,
+      "prediction": "closed",
+      "confidence": 0.75,
+      "reasoning": "Author's own comment explicitly references '#10254 which addresses the same issue', indicating this is a **duplicate/superseded PR**. Author (leszekszpunar) is a contributor with 33.3% merge rate (1/3 PRs), but PR is intentionally redundant. Greptile review present but supersession is deterministic close signal. Very likely author will close or maintainer will consolidate into #10254.",
+      "features": {
+        "author_prior_prs": 3,
+        "author_prior_merge_rate": 0.333,
+        "files_changed": 4,
+        "size_label": "S",
+        "is_draft": false,
+        "category": [
+          "commands"
+        ],
+        "component_area": [
+          "commands"
+        ],
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 1,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 13708,
+      "prediction": "closed",
+      "confidence": 0.72,
+      "reasoning": "Author (0xRaini) is prolific (26 prior PRs) but has extremely low merge rate (1/26 = 3.8%), indicating consistent quality/fit issues. PR is low-risk docs + logging (3 files), but author's track record is deterministically poor. Codex review limit reached (unusual signal\u2014bot exhausted). Author's own comment suggests scope narrowing, but pattern of rejections dominates. Confidence: close due to author pattern.",
+      "features": {
+        "author_prior_prs": 26,
+        "author_prior_merge_rate": 0.038,
+        "is_low_merge_author": true,
+        "files_changed": 3,
+        "size_label": "XS",
+        "is_draft": false,
+        "category": [
+          "docs",
+          "channel: telegram"
+        ],
+        "component_area": [
+          "telegram"
+        ],
+        "comment_count": 2,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 14983,
+      "prediction": "merged",
+      "confidence": 0.62,
+      "reasoning": "Author (shtse8) is highly prolific (82 prior PRs) with low but stable merge rate (3/82 = 3.7%)\u2014high volume suggests utility despite low %), suggesting maintainer trusts PRs overall. Fixes specific bug (#14783 reference). Size M, focused scope (6 files, agents/runtime). Greptile review found issue with empty string override handling\u2014author should address. Response is missing, which is slight concern. However, author's high volume + explicit issue reference + size label suggest this will likely be merged or quickly updated.",
+      "features": {
+        "author_prior_prs": 82,
+        "author_prior_merge_rate": 0.037,
+        "files_changed": 6,
+        "size_label": "M",
+        "is_draft": false,
+        "category": [
+          "agents"
+        ],
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 1,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 16690,
+      "prediction": "closed",
+      "confidence": 0.88,
+      "reasoning": "Greptile-apps explicitly states: 'No reviewable files after applying ignore patterns.' This PR has 0 files changed (XS size label but no actual content). First-time contributor. Empty PR is auto-rejected. Clear close signal.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 0,
+        "size_label": "XS",
+        "is_draft": false,
+        "category": [
+          "app: macos"
+        ],
+        "component_area": [
+          "macos"
+        ],
+        "has_greptile_review": true,
+        "comment_count": 1,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 18515,
+      "prediction": "merged",
+      "confidence": 0.76,
+      "reasoning": "Author (widingmarcus-cyber) has strong track record: 7 prior PRs with 57.1% merge rate (4/7 merged), well above 24% baseline. Docs + troubleshooting (low risk, high value). XS size. Greptile review shows 2 comments but no explicit blockers visible. Author's historical success + focused scope + docs category + above-average merge rate strongly suggest merge.",
+      "features": {
+        "author_prior_prs": 7,
+        "author_prior_merge_rate": 0.571,
+        "files_changed": 1,
+        "size_label": "XS",
+        "is_draft": false,
+        "category": [
+          "docs"
+        ],
+        "component_area": [
+          "cron"
+        ],
+        "has_greptile_review": true,
+        "review_count": 1,
+        "comment_count": 0,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 3124,
+      "prediction": "closed",
+      "confidence": 0.72,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). No maintainer label. Member comment is terse ('If this is incorrect, comment and we can reopen') \u2014 suggests closure. Small scope (2 files) is positive, but author inexperience + lack of explicit approval + member's conditional tone indicates rejection.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 2,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "has_maintainer_comment": true,
+        "category": "auto-reply",
+        "comment_count": 1,
+        "high_engagement": false
+      }
+    },
+    {
+      "pr_number": 7167,
+      "prediction": "closed",
+      "confidence": 0.68,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Single-file docker fix. No maintainer label, no approval signal. Greptile review only. Small scope partially offsets inexperience, but lack of any human endorsement and new contributor pattern \u2192 likely closed.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 1,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "category": "docker",
+        "comment_count": 0,
+        "high_engagement": false
+      }
+    },
+    {
+      "pr_number": 9518,
+      "prediction": "merged",
+      "confidence": 0.92,
+      "reasoning": "STRONG MERGE SIGNAL: Member comment explicitly states 'Landed via temp rebase onto main' with gate/land/merge commit references. This is a post-merge documentation comment. Security-critical fix (auth bypass). Author has 14.3% merge rate but this PR crossed the finish line. Gateway + agents + cli labels (key categories). 9 files, M/L scope.",
+      "features": {
+        "author_prior_prs": 7,
+        "author_prior_merge_rate": 0.143,
+        "files_changed": 9,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "has_maintainer_comment": true,
+        "category": "gateway, agents, cli",
+        "comment_count": 1,
+        "high_engagement": false,
+        "ci_green": true
+      }
+    },
+    {
+      "pr_number": 10575,
+      "prediction": "closed",
+      "confidence": 0.81,
+      "reasoning": "CLOSED BY AUTHOR: heyhudson's final comment states 'Closing: low priority and the debounce approach may need rethinking.' Despite perfect prior merge rate (100%, 2/2), author self-closed. 3-line surgical fix with regression test (positive signals), but author decided not to pursue. Size M label supports quality, but explicit closure wins.",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 1.0,
+        "files_changed": 2,
+        "is_draft": false,
+        "size_label": "M",
+        "has_maintainer_label": false,
+        "comment_count": 4,
+        "high_engagement": true,
+        "ci_green": false
+      }
+    },
+    {
+      "pr_number": 10762,
+      "prediction": "closed",
+      "confidence": 0.96,
+      "reasoning": "EXPLICITLY SUPERSEDED: Member comment from tyler6204 states 'Superseded by https://github.com/openclaw/openclaw/pull/10776 (merge commit: ). The 60s timer clamp in the merged PR addresses the watchdog use case.' This is a definitive supersession signal. First-time contributor attempting same fix as merged PR #10776.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 3,
+        "is_draft": false,
+        "has_maintainer_label": false,
+        "has_maintainer_comment": true,
+        "category": "cron",
+        "comment_count": 1,
+        "high_engagement": false
+      }
+    },
+    {
+      "pr_number": 12963,
+      "prediction": "merged",
+      "confidence": 0.95,
+      "reasoning": "MAINTAINER LABEL PRESENT (90.7% merge rate signal). Author grp06 is perfect (2/2, 100% merge rate). Trivial scope (1 file, CHANGELOG.md entry). No risk, pure maintenance. Small scope + maintainer label + perfect author record \u2192 high confidence merge.",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 1.0,
+        "files_changed": 1,
+        "is_draft": false,
+        "has_maintainer_label": true,
+        "category": "docs",
+        "comment_count": 0,
+        "high_engagement": false
+      }
+    },
+    {
+      "pr_number": 13382,
+      "prediction": "closed",
+      "confidence": 0.78,
+      "reasoning": "CLOSED BY AUTHOR: mcaxtr comments 'Closing \u2014 this issue was fixed upstream by PR #17150 (`ade11ec89`), which uses deterministic idempotency keys to prevent duplicate subagent announces.' Author closing because upstream PR already solved the problem. Size S + experienced-contributor label are positive, but explicit closure and supersession by #17150 \u2192 closed.",
+      "features": {
+        "author_prior_prs": 38,
+        "author_prior_merge_rate": 0.395,
+        "files_changed": 2,
+        "is_draft": false,
+        "has_experienced_contributor_label": true,
+        "category": "agents",
+        "size_label": "S",
+        "comment_count": 1,
+        "high_engagement": false
+      }
+    },
+    {
+      "pr_number": 15636,
+      "prediction": "merged",
+      "confidence": 0.89,
+      "reasoning": "STRONG MERGE SIGNAL: Member comment (thewilloftheshadow) states 'Landed via temp rebase onto main' with full gate/land/merge commit chain. Post-merge documentation. Gateway + size L scope. 6 files, key infrastructure. First-time author (0 prior) but PR passed all gates and was merged.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 6,
+        "is_draft": false,
+        "size_label": "L",
+        "has_maintainer_label": false,
+        "has_maintainer_comment": true,
+        "category": "gateway",
+        "comment_count": 2,
+        "high_engagement": false,
+        "ci_green": true
+      }
+    },
+    {
+      "pr_number": 17349,
+      "prediction": "closed",
+      "confidence": 0.74,
+      "reasoning": "XL size label is a major red flag (size XL historically drops hard in merge rates). 8 files but broad scope (scripts, GitHub Actions, web-ui). Second PR from olivier-motium (0/1 merged = 0% merge rate). No maintainer label, no approval. Feature PR (AI PR triage) is risky for new contributor. XL scope alone pushes toward closure.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "files_changed": 8,
+        "is_draft": false,
+        "size_label": "XL",
+        "has_maintainer_label": false,
+        "category": "scripts, web-ui",
+        "comment_count": 0,
+        "high_engagement": false
+      }
+    },
+    {
+      "pr_number": 18430,
+      "prediction": "closed",
+      "confidence": 0.99,
+      "reasoning": "EXPLICIT REJECTION: openclaw-barnacle (bot) repeatedly closes with 'Closing this PR because it looks dirty (too many unrelated commits).' PR has 5722 files changed (extreme), XL label, touches_extensions, touches_multiple_channels, is_fork_pr pattern. Greptile explicitly states 'Too many files changed for review (3000 files found, 100 file limit)'. Author 60% merge rate cannot overcome this catastrophic scope violation. Already closed.",
+      "features": {
+        "author_prior_prs": 5,
+        "author_prior_merge_rate": 0.6,
+        "files_changed": 5722,
+        "is_draft": false,
+        "size_label": "XL",
+        "has_maintainer_label": false,
+        "category": "announce, docs, gateway, agents",
+        "comment_count": 46,
+        "high_engagement": true,
+        "touches_extensions": true,
+        "touches_multiple_channels": true,
+        "is_fork_pr": true
+      }
+    },
+    {
+      "pr_number": 2208,
+      "prediction": "closed",
+      "confidence": 0.95,
+      "reasoning": "Explicitly superseded by #15063. Maintainer comment states 'we reused your copy and credited you in the changelog. Closing this one in favor of that approach.' This is a clear duplicate/superseded signal. First-time contributor with no prior merge history.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "loc_total": 1,
+        "files_changed": 1,
+        "size_label": "XS",
+        "has_tests": false,
+        "is_draft": false,
+        "category": "channel",
+        "component_area": "signal",
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 3,
+        "has_greptile_review": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false,
+        "author_association": "NONE"
+      }
+    },
+    {
+      "pr_number": 6569,
+      "prediction": "merged",
+      "confidence": 0.62,
+      "reasoning": "Medium-sized feature PR (24 files, docs+agents categories) with active discussion showing complementary approaches rather than conflict. Author engagement with community (pauloportella responds constructively). However, first-time contributor with 0 prior merge rate and multiple greptile comments suggest iterative review. Size (24 files) is moderate risk but not extreme.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "loc_total": 24,
+        "files_changed": 24,
+        "size_label": "M",
+        "has_tests": true,
+        "is_draft": false,
+        "category": "agents,docs",
+        "component_area": "multi-component",
+        "comment_count": 3,
+        "high_engagement": true,
+        "review_count": 5,
+        "has_greptile_review": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false,
+        "author_association": "CONTRIBUTOR"
+      }
+    },
+    {
+      "pr_number": 6708,
+      "prediction": "closed",
+      "confidence": 0.75,
+      "reasoning": "Member comment ending with 'If this is incorrect, comment and we can reopen' is a soft close/stall pattern. Cross-platform bash\u2192TypeScript conversion is reasonable but membership comment lacks strong approval. First-time contributor with 0 merge history. Comment timing suggests PR was auto-closed by maintainer decision.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "loc_total": 3,
+        "files_changed": 3,
+        "size_label": "S",
+        "has_tests": false,
+        "is_draft": false,
+        "category": "scripts",
+        "component_area": "build-scripts",
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_greptile_review": true,
+        "has_maintainer_comment": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false,
+        "author_association": "NONE"
+      }
+    },
+    {
+      "pr_number": 9119,
+      "prediction": "merged",
+      "confidence": 0.58,
+      "reasoning": "Simple docs-only change (lore.md, 1 file) reverting naming convention. Low complexity and risk. However, first-time contributor with 0 merge history and no explicit approval/discussion in PR. Docs changes historically have moderate merge rates. No size label provided but XS scope.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "loc_total": 1,
+        "files_changed": 1,
+        "size_label": "XS",
+        "has_tests": false,
+        "is_draft": false,
+        "category": "docs",
+        "component_area": "documentation",
+        "comment_count": 0,
+        "high_engagement": false,
+        "review_count": 0,
+        "has_greptile_review": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": false,
+        "author_association": "NONE"
+      }
+    },
+    {
+      "pr_number": 9182,
+      "prediction": "merged",
+      "confidence": 0.81,
+      "reasoning": "Strong signals: author has 100% merge rate (2/2 prior PRs), security hardening topic (high-value), 6 files with CHANGELOG update, greptile + copilot reviews present. Some concern: greptile flags docs-behavior conflict in message-tool.ts schema. However, prior success + security focus + maintainer engagement likely sufficient for merge despite the concern flagged.",
+      "features": {
+        "author_prior_prs": 2,
+        "author_prior_merge_rate": 1.0,
+        "loc_total": 6,
+        "files_changed": 6,
+        "size_label": "S",
+        "has_tests": true,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": "docker,agents",
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 2,
+        "has_greptile_review": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false,
+        "author_association": "CONTRIBUTOR"
+      }
+    },
+    {
+      "pr_number": 11372,
+      "prediction": "merged",
+      "confidence": 0.71,
+      "reasoning": "Routing fix across 3 channels (Discord, Telegram, WhatsApp). High engagement (6 comments showing author responsiveness to greptile feedback). Author addresses config consistency concerns iteratively. CI issues mentioned (macOS timeout) but author requests re-run suggesting confidence. 6 files with CHANGELOG. First-time contributor but strong engagement pattern and technical depth in responses.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "loc_total": 6,
+        "files_changed": 6,
+        "size_label": "S",
+        "has_tests": true,
+        "is_draft": false,
+        "category": "routing",
+        "component_area": "discord,telegram,whatsapp",
+        "comment_count": 6,
+        "high_engagement": true,
+        "review_count": 2,
+        "has_greptile_review": true,
+        "touches_multiple_channels": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false,
+        "author_association": "CONTRIBUTOR"
+      }
+    },
+    {
+      "pr_number": 12321,
+      "prediction": "closed",
+      "confidence": 0.88,
+      "reasoning": "Fork sync PR with 37 files across multiple categories (docs/gateway/scripts/agents/extensions). 'sync fork with main repo (upstream)' title signals this is maintenance/backport of upstream changes, not original contribution. First-time contributor. Large file count (37) with scattered categories = high complexity + low signal. Pattern matches PR#279 fork-merge anti-pattern.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "loc_total": 37,
+        "files_changed": 37,
+        "size_label": "XL",
+        "has_tests": false,
+        "is_draft": false,
+        "category": "docs,gateway,scripts,agents",
+        "component_area": "multi-component",
+        "comment_count": 0,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_greptile_review": true,
+        "is_fork_pr": true,
+        "is_low_merge_author": false,
+        "author_association": "NONE"
+      }
+    },
+    {
+      "pr_number": 14833,
+      "prediction": "closed",
+      "confidence": 0.98,
+      "reasoning": "Author (shtse8) explicitly blocked by maintainer for 'spamming PRs and letting AI agents send slop and clogging our review queue'. Member comment auto-closes PR. This is a clear administrative closure due to author conduct, not technical merit. Despite S-label and 43 prior PRs, author's 4.7% merge rate and blocking justifies highest confidence in closed prediction.",
+      "features": {
+        "author_prior_prs": 43,
+        "author_prior_merge_rate": 0.047,
+        "loc_total": 3,
+        "files_changed": 3,
+        "size_label": "S",
+        "has_tests": true,
+        "is_draft": false,
+        "category": "channel",
+        "component_area": "googlechat",
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_greptile_review": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": true,
+        "author_association": "CONTRIBUTOR"
+      }
+    },
+    {
+      "pr_number": 14941,
+      "prediction": "merged",
+      "confidence": 0.99,
+      "reasoning": "Already merged \u2014 member comment states 'Landed via maintainer fix + squash merge onto main' with explicit merge commit reference. Has trusted-contributor + experienced-contributor labels. Author has strong track record (47 prior PRs, 48.9% merge rate). Technical fix for Slack voice message MIME type handling is straightforward and already landed.",
+      "features": {
+        "author_prior_prs": 47,
+        "author_prior_merge_rate": 0.489,
+        "loc_total": 3,
+        "files_changed": 3,
+        "size_label": "S",
+        "has_tests": true,
+        "is_draft": false,
+        "category": "channel",
+        "component_area": "slack",
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 0,
+        "has_greptile_review": false,
+        "has_trusted_contributor_label": true,
+        "has_experienced_contributor_label": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false,
+        "author_association": "CONTRIBUTOR"
+      }
+    },
+    {
+      "pr_number": 16921,
+      "prediction": "closed",
+      "confidence": 0.95,
+      "reasoning": "Author self-closes: 'Closing \u2014 overlaps with #8078 which addresses the same class of issue.' Explicit duplicate signal. Proto-pollution security fix is good, but #8078 is the canonical fix. XS size (2 files) and 8 prior PRs with 0% merge rate (is_low_merge_author=true) reinforce closure. Clear duplicate.",
+      "features": {
+        "author_prior_prs": 8,
+        "author_prior_merge_rate": 0.0,
+        "loc_total": 2,
+        "files_changed": 2,
+        "size_label": "XS",
+        "has_tests": true,
+        "is_draft": false,
+        "category": "config",
+        "component_area": "config",
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 0,
+        "has_greptile_review": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true,
+        "author_association": "NONE"
+      }
+    },
+    {
+      "pr_number": 4389,
+      "prediction": "closed",
+      "confidence": 0.85,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Lukavyi's comment indicates PR #11194 supersedes this with better edge-case handling (empty-string protection). Greptile raised concerns in review. Author association NONE. No maintainer label. Duplicate/superseded signal is very strong.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 1,
+        "size_label": "XS",
+        "has_tests": false,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": "slack",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 2,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": true,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 7212,
+      "prediction": "closed",
+      "confidence": 0.72,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Author association NONE. Only 2 files changed but Greptile raised P1 concerns in multiple reviews (reset-command check ignores attachment-only sends). Closed by member with 'If this is incorrect, comment and we can reopen' message suggests formal rejection. Multiple review cycles with changes requested indicate quality issues.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 2,
+        "size_label": "XS",
+        "has_tests": true,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "commands",
+        "component_area": "web-ui",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 2,
+        "high_engagement": false,
+        "review_count": 5,
+        "has_approval": false,
+        "has_changes_requested": true,
+        "has_maintainer_comment": true,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": true,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 8199,
+      "prediction": "merged",
+      "confidence": 0.58,
+      "reasoning": "Author has 7 prior PRs with 14.3% merge rate (above first-time baseline but below median). Category 'agents' is top category (strong). Only 1 comment from member. Greptile raised concern but single file review suggests minor issue. Tests present. Size appears small. Below-average author merge rate is significant negative, but specificity of fix (rate limit before context overflow) and test coverage are positive.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 2,
+        "size_label": "S",
+        "has_tests": true,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": null,
+        "author_prior_prs": 7,
+        "author_prior_merge_rate": 0.143,
+        "author_association": "CONTRIBUTOR",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": true,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": true,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 9593,
+      "prediction": "closed",
+      "confidence": 0.68,
+      "reasoning": "First-time contributor (1 prior PR, 0% merge rate). Author states 'Splitting into separate PRs for each fix' \u2014 indicates this is an interim/abandoned PR in favor of split PRs. 8 files changed is relatively large scope spanning multiple components (agents, auto-reply, browser, feishu), touching multiple channels. Touches extensions. No reviews, no comments from reviewers, only author comment about splitting work.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 8,
+        "size_label": "M",
+        "has_tests": true,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": "feishu",
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 0,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": false,
+        "touches_multiple_channels": true,
+        "touches_extensions": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 11112,
+      "prediction": "merged",
+      "confidence": 0.62,
+      "reasoning": "First-time contributor but demonstrates high engagement: 6 comments with detailed technical explanations and proactive communication with maintainers. Author explicitly states 'This PR is ready for merge. All required CI checks pass (lint, build, test, windows, android)'. Greptile unable to review due to access, but author's responses show competence. Single file modification minimizes risk. Channel: line is moderate-priority channel. Author shows persistence addressing CI concerns.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 0,
+        "size_label": "XS",
+        "has_tests": false,
+        "ci_green": true,
+        "is_draft": false,
+        "category": "channels",
+        "component_area": "line",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 6,
+        "high_engagement": true,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": true,
+        "touches_multiple_channels": false,
+        "touches_extensions": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 13305,
+      "prediction": "merged",
+      "confidence": 0.71,
+      "reasoning": "Docs category has strong merge rates historically (594 docs PRs). First-time contributor but has prior interaction with steipete (CONTRIBUTOR). 3 comments show active collaboration and receptiveness to feedback. Author demonstrates professionalism (addressed concerns about pricing info). Single file change (low risk). Positive sentiment from steipete ('Thanks Andr\u00e9'). Docs PRs generally have higher acceptance.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 1,
+        "size_label": "XS",
+        "has_tests": false,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "docs",
+        "component_area": null,
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "CONTRIBUTOR",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 3,
+        "high_engagement": true,
+        "review_count": 0,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": false,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 15420,
+      "prediction": "closed",
+      "confidence": 0.65,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Feature addition (new model support) is lower-priority than fixes. Greptile identified critical issue: 'Omni not marked multimodal' \u2014 hardcoded input: ['text'] breaks the feature. 6 files changed across multiple components (models-config, image-tool, onboard-auth). Only 1 review with blocking concern. Size labeled S but scope suggests M-complexity.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 6,
+        "size_label": "S",
+        "has_tests": true,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "commands",
+        "component_area": null,
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 1,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": true,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": true,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": true
+      }
+    },
+    {
+      "pr_number": 16580,
+      "prediction": "merged",
+      "confidence": 0.92,
+      "reasoning": "Extremely strong signals: (1) Author gumadeiras has 19 prior PRs with 89.5% merge rate (top-tier contributor). (2) Has 'maintainer' label (90.7% merge rate when present). (3) Size: S, files_changed: 5 (manageable scope). (4) Categories: gateway, cli (both top categories). (5) Two positive reviews from greptile and copilot-reviewer. (6) CHANGELOG updated (professionalism). No negative signals.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 5,
+        "size_label": "S",
+        "has_tests": true,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "cli",
+        "component_area": "gateway",
+        "author_prior_prs": 19,
+        "author_prior_merge_rate": 0.895,
+        "author_association": "MEMBER",
+        "has_maintainer_label": true,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 0,
+        "high_engagement": false,
+        "review_count": 2,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": true,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 17343,
+      "prediction": "merged",
+      "confidence": 0.68,
+      "reasoning": "First-time contributor but minimal risk: single file change in gateway/server-methods. Fixes specific issue ('/new command not working in Control UI WebChat'). Categories gateway (578 PRs) and web-ui (336 PRs) are both high-volume. Size: S. Only 1 review from greptile (comment-only, no blocking concerns visible). No negative author signals. Clean scope suggests straightforward fix.",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 1,
+        "size_label": "S",
+        "has_tests": false,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "gateway",
+        "component_area": "web-ui",
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 0,
+        "high_engagement": false,
+        "review_count": 1,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": true,
+        "touches_multiple_channels": false,
+        "touches_extensions": false,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 17623,
+      "prediction": "merged",
+      "confidence": 0.73,
+      "reasoning": "First-time contributor but addresses critical infrastructure: 'load rolling compaction extension and re-enable SDK compaction'. Category 'agents' is top priority (1161 PRs). Size: M with 9 files is substantial but coherent scope (all compaction-related). Spec document updated (SPEC-ROLLING-CONTEXT.md) indicates deliberate design work. No reviews yet but PR appears complete and well-structured. Touches extensions but within defined scope (compaction-rolling).",
+      "features": {
+        "loc_additions": null,
+        "loc_deletions": null,
+        "loc_total": null,
+        "files_changed": 9,
+        "size_label": "M",
+        "has_tests": true,
+        "ci_green": null,
+        "is_draft": false,
+        "category": "agents",
+        "component_area": null,
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "has_maintainer_label": false,
+        "has_trusted_contributor_label": false,
+        "has_experienced_contributor_label": false,
+        "comment_count": 0,
+        "high_engagement": false,
+        "review_count": 0,
+        "has_approval": false,
+        "has_changes_requested": false,
+        "has_maintainer_comment": false,
+        "has_top_contributor_comment": false,
+        "has_greptile_review": false,
+        "touches_multiple_channels": false,
+        "touches_extensions": true,
+        "is_fork_pr": false,
+        "is_low_merge_author": false
+      }
+    },
+    {
+      "pr_number": 3109,
+      "prediction": "closed",
+      "confidence": 0.85,
+      "reasoning": "First-time contributor (0 prior PRs) with 0% merge history. Critical red flag: maintainer triage note identifies PR #7064 as duplicate/superseding implementation. Comment from Glucksberg explicitly recommends consolidation. Author CI note indicates unrelated failures on main. Greptile review present but duplication + new contributor + existing alternative = high closure likelihood.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "CONTRIBUTOR",
+        "category": "agents",
+        "files_changed": 3,
+        "has_maintainer_comment": true,
+        "has_greptile_review": true,
+        "is_draft": false,
+        "comment_count": 6,
+        "duplicate_note_present": true
+      }
+    },
+    {
+      "pr_number": 6583,
+      "prediction": "closed",
+      "confidence": 0.78,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Greptile identifies API key config inconsistency (P1 severity): Tavily provider ignores standard `tools.web.search.apiKey` config path, only checks Tavily-specific key. Clawdinator closure signal suggests maintainer assessment of quality/fit. New feature from untrusted author with design issues = rejection likely.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "CONTRIBUTOR",
+        "category": "agents",
+        "files_changed": 3,
+        "has_greptile_review": true,
+        "comment_count": 2,
+        "greptile_severity": "P1"
+      }
+    },
+    {
+      "pr_number": 6783,
+      "prediction": "closed",
+      "confidence": 0.72,
+      "reasoning": "Very low prior success (1 prior PR, 0 merged, 0% merge rate). No category label (missing/incorrect classification). Minimal engagement (1 Greptile review only, no comments). Binary audio file handling is niche fix. Small scope (2 files) helps slightly, but author credibility + lack of engagement = triage closure more likely than merge.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "category": null,
+        "files_changed": 2,
+        "has_tests": true,
+        "comment_count": 0,
+        "has_greptile_review": true,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 9378,
+      "prediction": "closed",
+      "confidence": 0.81,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). Docker infrastructure refactor on single file. Greptile review with 2 comments suggests issues identified. Infrastructure changes from untrusted authors require high confidence; new contributor + minor infrastructure change = risky. 'docker' label uncommon in top categories.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "category": "docker",
+        "files_changed": 1,
+        "has_greptile_review": true,
+        "comment_count": 0
+      }
+    },
+    {
+      "pr_number": 9824,
+      "prediction": "closed",
+      "confidence": 0.75,
+      "reasoning": "First-time contributor (0 prior PRs, 0% merge rate). No category label. QMD memory manager edge case fix (treating 'No results found.' as empty JSON). Greptile review present with 1 comment. Small scope (2 files) but no maintainer/community engagement. Niche fix from untrusted author without validation signals triage closure.",
+      "features": {
+        "author_prior_prs": 0,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "category": null,
+        "files_changed": 2,
+        "has_tests": true,
+        "has_greptile_review": true,
+        "comment_count": 0
+      }
+    },
+    {
+      "pr_number": 9903,
+      "prediction": "merged",
+      "confidence": 0.92,
+      "reasoning": "STRONG POSITIVE SIGNALS: Author grp06 (MEMBER) landed PR via 'temp rebase onto main' with explicit gate verification ('pnpm build && pnpm check && pnpm test'). Member involvement + documented rebase path = approval already executed. Addresses issue #9790 (string coercion for allowlist). 7 files across agents + cli with test coverage. Member comment with merge commit reference = effectively merged.",
+      "features": {
+        "author_prior_prs": 10,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "author_comment_from_member": true,
+        "category": "agents,cli",
+        "files_changed": 7,
+        "has_tests": true,
+        "comment_count": 1,
+        "has_maintainer_comment": true,
+        "member_landed": true
+      }
+    },
+    {
+      "pr_number": 11666,
+      "prediction": "closed",
+      "confidence": 0.88,
+      "reasoning": "PR SELF-CLOSED by author. Author comment explicitly states: force-run schedule grid corruption 'was addressed as part of broader cron refactor in #11641' which rewrote the affected code path. The `forced` flag is now unused. This is superseded/duplicate fix of broader refactor. Author chose to close recognizing supersession.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "category": null,
+        "files_changed": 1,
+        "comment_count": 1,
+        "author_closed_pr": true,
+        "superseded_by_pr": 11641
+      }
+    },
+    {
+      "pr_number": 14125,
+      "prediction": "merged",
+      "confidence": 0.96,
+      "reasoning": "VERY STRONG SIGNALS: Author sebslight (23 prior PRs, 22 merged = 95.7% merge rate) is senior contributor/maintainer. Has 'maintainer' label. Docs-only change (Mintlify skill reference update). Minimal scope (1 file). Author's track record = near-guaranteed approval. Documentation maintenance by trusted maintainer.",
+      "features": {
+        "author_prior_prs": 23,
+        "author_prior_merge_rate": 0.957,
+        "author_association": "MEMBER",
+        "has_maintainer_label": true,
+        "category": "docs",
+        "files_changed": 1,
+        "loc_total": "small",
+        "comment_count": 0
+      }
+    },
+    {
+      "pr_number": 14256,
+      "prediction": "merged",
+      "confidence": 0.68,
+      "reasoning": "Small contributor (1 prior PR, 0 merged = 0% merge rate) but XS size label + solid cron fix (duplicate fire prevention). 2 files with test coverage in cron/schedule (critical path). No negative signals (no draft, no conflicts). Author's first PR failed but this appears technically sound. XS label historically strong merge signal (~26-27%). Lacks maintainer confirmation but reasonable scope/quality ratio.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 0.0,
+        "author_association": "NONE",
+        "size_label": "XS",
+        "category": null,
+        "files_changed": 2,
+        "has_tests": true,
+        "comment_count": 0,
+        "has_maintainer_comment": false
+      }
+    },
+    {
+      "pr_number": 15592,
+      "prediction": "merged",
+      "confidence": 0.93,
+      "reasoning": "STRONG POSITIVE SIGNALS: Author thewilloftheshadow (1 prior PR, 1 merged = 100% merge rate) + 'maintainer' label. Gateway security fix (WebSocket log header sanitization). XS size. Author responded to Greptile review with Unicode format character (Cf) stripping fix + commit reference (49d6a49c6). High-trust author + security hardening + responsive to review = high merge likelihood.",
+      "features": {
+        "author_prior_prs": 1,
+        "author_prior_merge_rate": 1.0,
+        "author_association": "MEMBER",
+        "has_maintainer_label": true,
+        "size_label": "XS",
+        "category": "gateway",
+        "files_changed": 2,
+        "has_tests": false,
+        "comment_count": 1,
+        "has_maintainer_comment": true,
+        "has_greptile_review": true
+      }
+    }
+  ],
+  "duplicates": [
+    {
+      "prs": [
+        7358,
+        18171
+      ],
+      "confidence": 0.88,
+      "evidence": "Both authored by alberthild; both implement NATS JetStream event-store infrastructure for agents/gateway. Identical file signatures: docs/concepts/event-store.md, src/config/types.eventstore.ts, src/config/types.openclaw.ts, src/config/zod-schema.ts, src/gateway/server-close.ts, src/gateway/server.impl.ts, src/infra/__test__/event-store.helpers.ts, src/infra/event-store.test.ts, src/infra/event-store.ts, src/types/nats.d.ts (11/11 overlap). PR #18171 explicitly closes in favor of standalone plugin; PR #7358 likely earlier version. Both are competing implementations of same feature."
+    },
+    {
+      "prs": [
+        13445,
+        13766,
+        16934
+      ],
+      "confidence": 0.72,
+      "evidence": "All three are author-initiated closures with explicit reasoning about upstream fixes or supersession: (1) #13445: 'real fix belongs upstream in pi-ai' (2) #13766: 'guard already addressed by upstream refactoring' (3) #16934: 'Recreated from clean branch as #19111' \u2014 indicates batch of submissions where author discovered fix already exists or recreated cleanly. All are small-scope, first or low-success-rate authors encountering redundancy."
+    },
+    {
+      "prs": [
+        2395,
+        8815
+      ],
+      "confidence": 0.99,
+      "evidence": "PR #2395 explicitly closed by maintainer grp06 as duplicate of #8815. Both address OpenRouter auto/default model reference issue. #8815 is preferred 'minimal, focused fix'. #2395 includes additional unrelated skills-install changes and is conflicting with main."
+    },
+    {
+      "prs": [
+        16981,
+        18016
+      ],
+      "confidence": 0.45,
+      "evidence": "Both authored by xinhuagu, both small-scope fixes in overlapping areas (gateway WebUI + sessions). However, distinct issues (scope/CORS vs path validation). Weak signal; likely independent PRs from same author."
+    },
+    {
+      "prs": [
+        14194,
+        14195
+      ],
+      "confidence": 0.97,
+      "evidence": "Identical author (jhs129), submitted 58 seconds apart (2026-02-11T17:09:55Z vs 17:10:43Z). Identical file lists (49 files, exact same paths). Identical labels (docs, app: web-ui, gateway, scripts, docker). Same vague title 'Skills'. Same size/scope. PR#14195 has one fewer prior PR merged (0/4 vs 0/3 at submission). This is a resubmission attempt, likely after author realized first submission had issues. Both should be closed as duplicates; PR#14195 should be closed in favor of #14194 if either is to proceed."
+    },
+    {
+      "prs": [
+        16384,
+        16411
+      ],
+      "confidence": 0.99,
+      "evidence": "PR#16384 author explicitly states superseded by PR#16411 in commit comment. Same author (ciberponk), same fix topic (CJK sentence punctuation in block chunker), same files modified. PR#16384 is the non-English version, PR#16411 is the 'English re-submission'. PR#16384 is already closed/superseded."
+    },
+    {
+      "prs": [
+        18948,
+        19018
+      ],
+      "confidence": 0.95,
+      "evidence": "Both PRs from author chetaniitbhilai (0% merge rate) opened 1 day apart (Feb 17 06:23 vs 07:59). Nearly identical scope: both XL (~1120 files), both touch ALL channels + extensions, both flagged by bot for 'too many unrelated commits', both closed by openclaw-barnacle with identical closure message repeated 10x. PR #19018 is titled 'noramlising' (typo variant) of #18948 'normalising'. Clear re-attempt after first rejection."
+    },
+    {
+      "prs": [
+        9832,
+        9885
+      ],
+      "confidence": 0.98,
+      "evidence": "PR #9832 contains xAI + DeepSeek + tagline + package.json changes (20 files). Member grp06 explicitly states 'I narrowed this down to xAI-only and opened a replacement PR: #9885. Rationale: Drops unrelated tagline + package.json gate changes, Drops DeepSeek entirely, Leaves only xAI...'. PR #9832 closed with 'Closing this PR to avoid duplicate review.' Clear supersession: #9885 is intended replacement with narrower scope."
+    },
+    {
+      "prs": [
+        10412,
+        10776
+      ],
+      "confidence": 0.97,
+      "evidence": "Author of #10412 explicitly states: 'Closing \u2014 the fixes in this PR (overdue job catch-up on restart, timer re-arm on early return, post-recompute due-job sweep) have been fully addressed by #10776, which landed a more comprehensive cron reliability overhaul covering the same root causes.' While #10776 is not in this batch, #10412 is confirmed superseded/duplicate."
+    },
+    {
+      "prs": [
+        10910,
+        10917,
+        10920,
+        10922
+      ],
+      "confidence": 0.92,
+      "evidence": "Iterative version chain (v3\u2192v4\u2192v5\u2192v6 in titles). Same author (Zazarothh), identical file changes (src/agents/bash-tools.exec.ts, src/agents/shell-utils.test.ts, src/agents/shell-utils.ts), same issue reference (#10868), created in rapid succession (2026-02-07, 10 min span). #10910 has approval; later versions superseded."
+    },
+    {
+      "prs": [
+        13903,
+        13906
+      ],
+      "confidence": 0.87,
+      "evidence": "Explicit duplicate signal from reviewer @striking: 'appears duplicative with PR #13906 (very similar changes)'. Author 0xRaini self-confirms: 'same fix, slightly cleaner'. Same category (agents), narrow scope. Reviewer recommends closing one."
+    },
+    {
+      "prs": [
+        10254,
+        10342
+      ],
+      "confidence": 0.92,
+      "evidence": "PR #10342 author (leszekszpunar) explicitly states in comment: 'which addresses the same issue' in reference to #10254. Both PRs target doctor env-template/env-var preservation in config writes (same category: commands, same file overlap: src/commands/doctor.ts + src/commands/doctor-config-flow.ts). #10254 created 2026-02-06 08:15, #10342 created 2026-02-06 10:35 (2h20m gap). #10254 has 6 comments showing active iteration; #10342 should be superseded by #10254's resolution."
+    },
+    {
+      "prs": [
+        3124,
+        10575
+      ],
+      "confidence": 0.85,
+      "evidence": "Both PRs address 'prevent inline commands from being handled twice' in Signal channel. PR #3124 (travisp, first-time contributor) vs PR #10575 (heyhudson, 100% merge rate). Both modify identical files: src/auto-reply/reply/get-reply-inline-actions.ts. PR #10575 explicitly mentions '#10556' reference and includes regression test. PR #3124 appears earlier (2026-01-28) but #10575 (2026-02-06) is the accepted version with author approval and maintainer engagement. #3124 was closed in favor of #10575."
+    },
+    {
+      "prs": [
+        10762,
+        15636
+      ],
+      "confidence": 0.62,
+      "evidence": "Both involve crash/failure recovery mechanisms (watchdog timer vs delivery queue). Both touch cron/infra timing. However, scope differs: #10762 is cron watchdog (superseded by #10776, not #15636), while #15636 is outbound delivery queue for crash recovery. Not direct duplicates but share architectural concern (resilience). Low confidence \u2014 likely distinct features."
+    },
+    {
+      "prs": [
+        13382,
+        10762
+      ],
+      "confidence": 0.45,
+      "evidence": "Both close with author stating upstream PR already fixed the issue. #13382 \u2192 superseded by #17150 (idempotency keys). #10762 \u2192 superseded by #10776 (timer clamp). Similar pattern but different root causes and upstream PRs. Low confidence \u2014 no direct overlap, just both resolved by upstream work."
+    },
+    {
+      "prs": [
+        2208,
+        15063
+      ],
+      "confidence": 0.99,
+      "evidence": "PR #2208 maintainer comment explicitly states: 'we ended up taking an alternate implementation in #15063... Closing this one in favor of that approach.' Direct supersession by duplicate with shared validator + tests."
+    },
+    {
+      "prs": [
+        16921,
+        8078
+      ],
+      "confidence": 0.99,
+      "evidence": "PR #16921 author self-closes: 'Closing \u2014 overlaps with #8078 which addresses the same class of issue.' Both are proto-pollution security fixes in merge-config. Canonical fix is #8078."
+    },
+    {
+      "prs": [
+        4389,
+        11194
+      ],
+      "confidence": 0.92,
+      "evidence": "PR #4389 comment from Lukavyi explicitly references #11194 as superseding this PR with superior implementation: 'I ran into the same issue and submitted #11194 which builds on this approach but adds empty-string edge case protection'. Both address Slack thread_ts string handling. #11194 has additional validation (`threadId != null && threadId !== \"\"`) addressing concerns raised by Greptile review in #4389."
+    },
+    {
+      "prs": [
+        7212,
+        9593
+      ],
+      "confidence": 0.55,
+      "evidence": "Both are first-time contributor fixes from non-members touching similar areas (commands/auto-reply message handling). Both have Greptile P1-level concerns flagged in reviews. However, #9593 explicitly states 'Splitting into separate PRs' suggesting intentional redesign rather than exact duplication. Different scopes (7212: web-ui reset-command, 9593: feishu sender ID auth) prevent high-confidence duplicate classification."
+    },
+    {
+      "prs": [
+        3109,
+        7064
+      ],
+      "confidence": 0.95,
+      "evidence": "Glucksberg triage comment explicitly flags: 'PR #7064 appears to implement the same fix. Consider consolidating efforts or closing one in favor of the other.' Both address model resolution in compaction context via runtime when ctx.model is undefined. PR #3109 was submitted first (2026-01-28) but #7064 appears to be the maintained alternative."
+    }
+  ]
+}

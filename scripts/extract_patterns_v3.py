@@ -291,6 +291,7 @@ def _build_prompt(
 
     return (
         "You analyze FP/FN model errors and maintain a lifecycle pattern catalog for future unseen PRs.\n"
+        "CRITICAL: Output ONLY the JSON object. No analysis, no explanations, no markdown before/after the JSON.\n"
         "Generalization directive: each pattern must apply to PRs you have not seen. "
         "No PR numbers, no author names, and no specific library names in pattern or anti_pattern.\n\n"
         "Input contains:\n"
@@ -400,7 +401,7 @@ def _run_batch(
         return _dry_run_batch(round_num, errors, inherited_patterns)
 
     prompt = _build_prompt(round_num, errors, all_prs, inherited_patterns)
-    raw = call_sonnet(prompt, max_tokens=4096)
+    raw = call_sonnet(prompt, max_tokens=8192)
     try:
         parsed = _extract_json(raw)
     except Exception:

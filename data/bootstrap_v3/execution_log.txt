@@ -1,0 +1,187 @@
+[2026-02-18T15:06:55.882613+00:00] round 1 start
+[2026-02-18T15:10:59.308442+00:00] round 1 start
+[2026-02-18T15:14:28.997533+00:00] round 1 start
+[2026-02-18T15:15:54.797628+00:00] round 1 start
+[2026-02-18T15:20:56.826650+00:00] round 1 start
+[2026-02-18T15:21:34.106004+00:00] round 1 batch 1 done predictions=10
+[2026-02-18T15:22:01.112020+00:00] round 1 batch 2 done predictions=10
+[2026-02-18T15:22:35.086160+00:00] round 1 batch 3 done predictions=10
+[2026-02-18T15:23:06.616466+00:00] round 1 batch 4 done predictions=10
+[2026-02-18T15:23:35.697397+00:00] round 1 batch 5 done predictions=10
+[2026-02-18T15:24:15.652962+00:00] round 1 batch 6 done predictions=10
+[2026-02-18T15:24:46.081503+00:00] round 1 batch 7 done predictions=10
+[2026-02-18T15:25:17.788823+00:00] round 1 batch 8 done predictions=10
+[2026-02-18T15:25:50.224097+00:00] round 1 batch 9 done predictions=10
+[2026-02-18T15:26:25.933073+00:00] round 1 batch 10 done predictions=10
+[2026-02-18T15:26:53.111450+00:00] round 1 start
+[2026-02-18T15:27:27.815104+00:00] round 1 batch 1 done predictions=10
+[2026-02-18T15:27:55.171898+00:00] round 1 batch 2 done predictions=10
+[2026-02-18T15:28:38.216379+00:00] round 1 batch 3 done predictions=10
+[2026-02-18T15:29:08.286760+00:00] round 1 batch 4 done predictions=10
+[2026-02-18T15:29:42.003750+00:00] round 1 batch 5 done predictions=10
+[2026-02-18T15:30:21.804770+00:00] round 1 batch 6 done predictions=10
+[2026-02-18T15:30:58.879146+00:00] round 1 batch 7 done predictions=10
+[2026-02-18T15:31:33.721630+00:00] round 1 batch 8 done predictions=10
+[2026-02-18T15:32:18.248498+00:00] round 1 batch 9 done predictions=10
+[2026-02-18T15:32:49.835586+00:00] round 1 batch 10 done predictions=10
+[2026-02-18T15:33:41.169293+00:00] round 1 start
+[2026-02-18T15:34:20.412731+00:00] round 1 batch 1 done predictions=10
+[2026-02-18T15:34:45.324219+00:00] round 1 batch 2 done predictions=10
+[2026-02-18T15:35:13.668051+00:00] round 1 batch 3 done predictions=10
+[2026-02-18T15:35:45.238181+00:00] round 1 batch 4 done predictions=10
+[2026-02-18T15:36:15.106103+00:00] round 1 batch 5 done predictions=10
+[2026-02-18T15:36:49.168213+00:00] round 1 batch 6 done predictions=10
+[2026-02-18T15:37:19.381457+00:00] round 1 batch 7 done predictions=10
+[2026-02-18T15:37:48.588306+00:00] round 1 batch 8 done predictions=10
+[2026-02-18T15:38:24.867203+00:00] round 1 batch 9 done predictions=10
+[2026-02-18T15:38:51.051284+00:00] round 1 batch 10 done predictions=10
+[2026-02-18T15:40:21.461790+00:00] round 1 complete
+[2026-02-18T15:40:21.461855+00:00] round 2 start
+[2026-02-18T15:41:45.369928+00:00] round 2 batch 1 done predictions=10
+[2026-02-18T15:42:13.263664+00:00] round 2 batch 2 done predictions=10
+[2026-02-18T15:42:59.806109+00:00] round 2 batch 3 done predictions=10
+[2026-02-18T15:43:33.271300+00:00] round 2 batch 4 done predictions=10
+[2026-02-18T15:44:15.782388+00:00] round 2 batch 5 done predictions=10
+[2026-02-18T15:44:50.588049+00:00] round 2 batch 6 done predictions=10
+[2026-02-18T15:45:21.053153+00:00] round 2 batch 7 done predictions=10
+[2026-02-18T15:45:55.984035+00:00] round 2 batch 8 done predictions=10
+[2026-02-18T15:46:31.394528+00:00] round 2 batch 9 done predictions=10
+[2026-02-18T15:47:17.634732+00:00] round 2 batch 10 done predictions=10
+[2026-02-18T15:48:57.898225+00:00] round 2 complete
+[2026-02-18T15:48:57.898310+00:00] round 3 start
+[2026-02-18T15:49:22.738626+00:00] round 3 batch 1 done predictions=10
+[2026-02-18T15:49:56.963176+00:00] round 3 batch 2 done predictions=10
+[2026-02-18T15:50:40.260956+00:00] round 3 batch 3 done predictions=10
+[2026-02-18T15:51:12.307093+00:00] round 3 batch 4 done predictions=10
+[2026-02-18T15:51:59.202536+00:00] round 1 start
+[2026-02-18T15:52:35.469518+00:00] round 1 batch 1 done predictions=10
+[2026-02-18T15:53:00.551355+00:00] round 1 batch 2 done predictions=10
+[2026-02-18T15:53:32.092003+00:00] round 1 batch 3 done predictions=10
+[2026-02-18T15:54:07.330786+00:00] round 1 batch 4 done predictions=10
+[2026-02-18T15:54:37.855227+00:00] round 1 batch 5 done predictions=10
+[2026-02-18T15:55:12.351308+00:00] round 1 batch 6 done predictions=10
+[2026-02-18T15:55:50.645765+00:00] round 1 batch 7 done predictions=10
+[2026-02-18T15:56:23.444386+00:00] round 1 batch 8 done predictions=10
+[2026-02-18T15:57:05.250956+00:00] round 1 batch 9 done predictions=10
+[2026-02-18T15:57:35.028922+00:00] round 1 batch 10 done predictions=10
+[2026-02-18T15:58:55.648489+00:00] round 1 complete
+[2026-02-18T15:58:55.648555+00:00] round 2 start
+[2026-02-18T15:59:29.251472+00:00] round 2 batch 1 done predictions=10
+[2026-02-18T15:59:57.627565+00:00] round 2 batch 2 done predictions=10
+[2026-02-18T16:00:33.508360+00:00] round 2 batch 3 done predictions=10
+[2026-02-18T16:01:12.258906+00:00] round 2 batch 4 done predictions=10
+[2026-02-18T16:01:50.172671+00:00] round 2 batch 5 done predictions=10
+[2026-02-18T16:02:28.122388+00:00] round 2 batch 6 done predictions=10
+[2026-02-18T16:03:04.950978+00:00] round 2 batch 7 done predictions=10
+[2026-02-18T16:03:43.886592+00:00] round 2 batch 8 done predictions=10
+[2026-02-18T16:04:14.874729+00:00] round 2 batch 9 done predictions=10
+[2026-02-18T16:05:00.214630+00:00] round 2 batch 10 done predictions=10
+[2026-02-18T16:06:03.613309+00:00] round 2 complete
+[2026-02-18T16:06:03.613420+00:00] round 3 start
+[2026-02-18T16:06:30.892613+00:00] round 3 batch 1 done predictions=10
+[2026-02-18T16:07:00.538332+00:00] round 3 batch 2 done predictions=10
+[2026-02-18T16:07:34.500410+00:00] round 3 batch 3 done predictions=10
+[2026-02-18T16:08:05.349350+00:00] round 3 batch 4 done predictions=10
+[2026-02-18T16:08:38.947691+00:00] round 3 batch 5 done predictions=10
+[2026-02-18T16:09:08.938563+00:00] round 3 batch 6 done predictions=10
+[2026-02-18T16:09:56.722938+00:00] round 3 batch 7 done predictions=10
+[2026-02-18T16:10:32.001908+00:00] round 3 batch 8 done predictions=10
+[2026-02-18T16:11:03.565782+00:00] round 3 batch 9 done predictions=10
+[2026-02-18T16:11:41.646861+00:00] round 3 batch 10 done predictions=10
+[2026-02-18T16:13:07.755549+00:00] round 3 complete
+[2026-02-18T16:13:07.755609+00:00] round 4 start
+[2026-02-18T16:13:51.166825+00:00] round 4 batch 1 done predictions=10
+[2026-02-18T16:14:26.298248+00:00] round 4 batch 2 done predictions=10
+[2026-02-18T16:14:57.073142+00:00] round 4 batch 3 done predictions=10
+[2026-02-18T16:15:33.773480+00:00] round 4 batch 4 done predictions=10
+[2026-02-18T16:16:22.589037+00:00] round 4 batch 5 done predictions=10
+[2026-02-18T16:17:08.210476+00:00] round 4 batch 6 done predictions=10
+[2026-02-18T16:17:47.910092+00:00] round 4 batch 7 done predictions=10
+[2026-02-18T16:18:31.731982+00:00] round 4 batch 8 done predictions=10
+[2026-02-18T16:19:15.471256+00:00] round 4 batch 9 done predictions=10
+[2026-02-18T16:19:54.006341+00:00] round 4 batch 10 done predictions=10
+[2026-02-18T16:21:07.803857+00:00] round 4 complete
+[2026-02-18T16:21:07.804097+00:00] round 5 start
+[2026-02-18T16:21:52.644313+00:00] round 5 batch 1 done predictions=10
+[2026-02-18T16:49:22.865212+00:00] round 5 start
+[2026-02-18T16:50:01.298862+00:00] round 5 batch 1 done predictions=10
+[2026-02-18T16:50:08.336183+00:00] round 5 start
+[2026-02-18T16:50:42.456201+00:00] round 5 batch 2 done predictions=10
+[2026-02-18T16:50:55.321657+00:00] round 5 batch 1 done predictions=10
+[2026-02-18T16:51:09.858327+00:00] round 5 batch 3 done predictions=10
+[2026-02-18T16:51:35.427288+00:00] round 5 batch 2 done predictions=10
+[2026-02-18T16:51:49.255611+00:00] round 5 batch 4 done predictions=10
+[2026-02-18T16:52:07.089156+00:00] round 5 batch 3 done predictions=10
+[2026-02-18T16:52:30.394502+00:00] round 5 batch 5 done predictions=10
+[2026-02-18T16:53:07.926660+00:00] round 5 batch 6 done predictions=10
+[2026-02-18T16:53:43.589897+00:00] round 5 batch 7 done predictions=10
+[2026-02-18T16:54:28.632741+00:00] round 5 batch 8 done predictions=10
+[2026-02-18T16:55:06.507466+00:00] round 5 batch 9 done predictions=10
+[2026-02-18T16:55:49.431605+00:00] round 5 batch 10 done predictions=10
+[2026-02-18T16:57:41.967378+00:00] round 5 complete
+[2026-02-18T16:57:41.967516+00:00] round 6 start
+[2026-02-18T16:58:18.189442+00:00] round 6 batch 1 done predictions=10
+[2026-02-18T16:59:06.097836+00:00] round 6 batch 2 done predictions=10
+[2026-02-18T16:59:45.752711+00:00] round 6 batch 3 done predictions=10
+[2026-02-18T17:00:25.048277+00:00] round 6 batch 4 done predictions=10
+[2026-02-18T17:01:08.765486+00:00] round 6 batch 5 done predictions=10
+[2026-02-18T17:01:49.264900+00:00] round 6 batch 6 done predictions=10
+[2026-02-18T17:02:27.037483+00:00] round 6 batch 7 done predictions=10
+[2026-02-18T17:03:14.527734+00:00] round 6 batch 8 done predictions=10
+[2026-02-18T17:03:51.788524+00:00] round 6 batch 9 done predictions=10
+[2026-02-18T17:04:43.843589+00:00] round 6 batch 10 done predictions=10
+[2026-02-18T17:06:49.920759+00:00] round 6 complete
+[2026-02-18T17:06:49.921008+00:00] round 7 start
+[2026-02-18T17:07:32.840048+00:00] round 7 batch 1 done predictions=10
+[2026-02-18T17:08:12.544607+00:00] round 7 batch 2 done predictions=10
+[2026-02-18T17:08:53.473889+00:00] round 7 batch 3 done predictions=10
+[2026-02-18T17:09:30.081809+00:00] round 7 batch 4 done predictions=10
+[2026-02-18T17:10:08.041426+00:00] round 7 batch 5 done predictions=10
+[2026-02-18T17:10:48.118155+00:00] round 7 batch 6 done predictions=10
+[2026-02-18T17:11:25.608962+00:00] round 7 batch 7 done predictions=10
+[2026-02-18T17:11:57.580520+00:00] round 7 batch 8 done predictions=10
+[2026-02-18T17:12:39.025914+00:00] round 7 batch 9 done predictions=10
+[2026-02-18T17:13:25.903788+00:00] round 7 batch 10 done predictions=10
+[2026-02-18T17:44:18.015916+00:00] round 7 start
+[2026-02-18T17:44:52.512974+00:00] round 7 batch 1 done predictions=10
+[2026-02-18T17:45:35.184205+00:00] round 7 batch 2 done predictions=10
+[2026-02-18T17:46:22.743074+00:00] round 7 batch 3 done predictions=10
+[2026-02-18T17:47:00.601833+00:00] round 7 batch 4 done predictions=10
+[2026-02-18T17:47:40.988146+00:00] round 7 batch 5 done predictions=10
+[2026-02-18T17:47:52.293143+00:00] round 8 start
+[2026-02-18T17:48:16.274226+00:00] round 7 batch 6 done predictions=10
+[2026-02-18T17:48:23.495510+00:00] round 8 batch 1 done predictions=10
+[2026-02-18T17:48:59.192803+00:00] round 8 batch 2 done predictions=10
+[2026-02-18T17:49:32.966668+00:00] round 8 batch 3 done predictions=10
+[2026-02-18T17:50:06.428460+00:00] round 8 batch 4 done predictions=10
+[2026-02-18T17:50:54.000488+00:00] round 8 batch 5 done predictions=10
+[2026-02-18T17:51:26.247704+00:00] round 8 batch 6 done predictions=10
+[2026-02-18T17:52:10.903523+00:00] round 8 batch 7 done predictions=10
+[2026-02-18T17:52:41.767608+00:00] round 8 batch 8 done predictions=10
+[2026-02-18T17:53:23.318826+00:00] round 8 batch 9 done predictions=10
+[2026-02-18T17:54:02.720051+00:00] round 8 batch 10 done predictions=10
+[2026-02-18T17:55:23.173570+00:00] round 8 complete
+[2026-02-18T17:55:23.173630+00:00] round 9 start
+[2026-02-18T17:56:04.051000+00:00] round 9 batch 1 done predictions=10
+[2026-02-18T17:56:56.511336+00:00] round 9 batch 2 done predictions=10
+[2026-02-18T17:57:35.915499+00:00] round 9 batch 3 done predictions=10
+[2026-02-18T17:58:18.233972+00:00] round 9 batch 4 done predictions=10
+[2026-02-18T17:59:06.813191+00:00] round 9 batch 5 done predictions=10
+[2026-02-18T18:00:13.464681+00:00] round 9 batch 6 done predictions=10
+[2026-02-18T18:00:51.322009+00:00] round 9 batch 7 done predictions=10
+[2026-02-18T18:01:26.577130+00:00] round 9 batch 8 done predictions=10
+[2026-02-18T18:02:09.989744+00:00] round 9 batch 9 done predictions=10
+[2026-02-18T18:02:52.841745+00:00] round 9 batch 10 done predictions=10
+[2026-02-18T18:04:27.402499+00:00] round 9 complete
+[2026-02-18T18:04:27.402564+00:00] round 10 start
+[2026-02-18T18:04:49.714574+00:00] round 10 batch 1 done predictions=10
+[2026-02-18T18:05:25.177976+00:00] round 10 batch 2 done predictions=10
+[2026-02-18T18:06:14.989065+00:00] round 10 batch 3 done predictions=10
+[2026-02-18T18:06:53.392098+00:00] round 10 batch 4 done predictions=10
+[2026-02-18T18:07:21.582550+00:00] round 10 batch 5 done predictions=10
+[2026-02-18T18:07:59.884908+00:00] round 10 batch 6 done predictions=10
+[2026-02-18T18:08:49.892314+00:00] round 10 batch 7 done predictions=10
+[2026-02-18T18:09:26.637585+00:00] round 10 batch 8 done predictions=10
+[2026-02-18T18:10:02.267510+00:00] round 10 batch 9 done predictions=10
+[2026-02-18T18:10:45.811525+00:00] round 10 batch 10 done predictions=10
+[2026-02-18T18:12:32.219120+00:00] round 10 complete

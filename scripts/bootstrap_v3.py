@@ -89,8 +89,9 @@ def call_haiku(prompt: str, max_tokens: int = 8000) -> dict:
                 data = json.loads(resp.read())
         except urllib.error.HTTPError as e:
             if e.code == 429 and attempt < 2:
-                print(f"rate limited; sleeping 30s (attempt {attempt+1}/3)")
-                time.sleep(30)
+                wait = 60 * (attempt + 1)  # 60s, 120s
+                print(f"rate limited; sleeping {wait}s (attempt {attempt+1}/3)")
+                time.sleep(wait)
                 continue
             raise
 

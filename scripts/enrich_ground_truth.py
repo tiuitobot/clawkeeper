@@ -16,7 +16,7 @@ from typing import Dict, List, Set, Tuple
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 SCRIPTS = ROOT / "scripts"
-MODEL_ID = "claude-sonnet-4-5-20241022"
+MODEL_ID = "claude-sonnet-4-5-20250514"
 FALLBACK_MODEL_ID = "claude-sonnet-4-5"
 
 
@@ -27,7 +27,11 @@ def get_token() -> tuple[str, str]:
     auth_file = Path.home() / ".openclaw" / "agents" / "main" / "agent" / "auth-profiles.json"
     if auth_file.exists():
         profiles = json.load(auth_file.open())
-        for profile_name in ["anthropic:eva-new", "anthropic:bruno-new", "anthropic:openclaw"]:
+        preferred = os.environ.get("ANTHROPIC_PROFILE")
+        profile_order = ["anthropic:eva-new", "anthropic:bruno-new", "anthropic:openclaw"]
+        if preferred:
+            profile_order = [preferred] + [p for p in profile_order if p != preferred]
+        for profile_name in profile_order:
             p = profiles.get("profiles", {}).get(profile_name, {})
             token = p.get("token") or p.get("access")
             if token:

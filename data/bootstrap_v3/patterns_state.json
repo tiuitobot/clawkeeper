@@ -1,6 +1,1659 @@
 {
   "version": 3,
-  "patterns": [],
+  "patterns": [
+    {
+      "id": "P-1-1",
+      "pattern": "PRs closed by maintainers as duplicates of another issue/PR are not merged, regardless of fix quality or author engagement.",
+      "evidence": "Round 1: 4 FP errors where maintainer explicitly closed as duplicate. Round 2: PR #3568, #4936, #5687 \u2014 all closed as duplicates by MEMBER comments. Round 3: PR #6831 \u2014 MEMBER (sebslight) comment 'Closing as duplicate of #4844' despite CONTRIBUTOR endorsement declaring this PR the best of 10+ duplicates and author having no prior PRs.",
+      "mechanism": "Explicit duplicate closure by a maintainer or member is a terminal non-merge signal. The closing action supersedes all positive technical and engagement signals, including strong community endorsements from CONTRIBUTORs praising the PR's quality relative to competing duplicates. The PR's work is handled by the referenced PR, making this PR's merge path closed regardless of quality or external advocacy.",
+      "anti_pattern": "Do not predict merge when a maintainer or member comment explicitly states the PR is being closed as a duplicate of another PR (e.g., 'Closing as duplicate of #NNNN'), even if the fix is high quality, the author is responsive, approval signals are present, or the PR has tests. This applies even when the closing comment is the only maintainer signal and all other signals are positive. Note: softer 'Fixed in #NNNN' or 'Fixed on main' statements without explicit duplicate framing are covered by P-2-1. Note: 'superseded by #NNNN' framing from contributors acting with delegated authority is covered by P-3-1. The duplicate closure by a MEMBER overrides even strong community endorsements declaring the PR superior to competing duplicates.",
+      "confidence": 0.97,
+      "support": 8,
+      "status": "retired",
+      "since_round": 1,
+      "last_validated": 3,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 7673,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "Maintainer closed PR explicitly as duplicate of another PR. Despite fix quality and author responsiveness, the duplicate closure was a terminal non-merge signal that was not weighted sufficiently."
+        },
+        {
+          "round": 1,
+          "pr_number": 8199,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "Maintainer explicitly closed as duplicate of another PR number. The duplicate closure signal should have predicted non-merge regardless of fix quality."
+        },
+        {
+          "round": 1,
+          "pr_number": 8815,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "Maintainer explicitly closed as duplicate of another PR. Fix quality and scope were irrelevant once the duplicate closure was issued."
+        },
+        {
+          "round": 1,
+          "pr_number": 8840,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "Maintainer explicitly closed as duplicate of another PR. Single-file fix quality did not prevent closure."
+        },
+        {
+          "round": 2,
+          "pr_number": 3568,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "MEMBER comment explicitly stated 'Closing as duplicate of #11033'. Despite having tests, a focused fix, and an approval signal, the duplicate closure was a terminal non-merge signal covered by P-1-1."
+        },
+        {
+          "round": 2,
+          "pr_number": 4936,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "MEMBER comment explicitly stated 'Closing as duplicate of #5031'. Despite XS size, focused fix, tests, and maintainer comment presence, the duplicate closure was terminal."
+        },
+        {
+          "round": 2,
+          "pr_number": 5687,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "MEMBER comment explicitly stated 'Closing as duplicate of #13640'. Single-file fix with approval signal was still closed as duplicate, overriding all positive signals."
+        },
+        {
+          "round": 3,
+          "pr_number": 6831,
+          "error_type": "fp",
+          "attribution": "P-1-1",
+          "ambiguous": false,
+          "reason": "MEMBER comment explicitly stated 'Closing as duplicate of #4844'. Despite CONTRIBUTOR endorsement declaring the PR superior among 10+ duplicates, tests, XS size, and positive community signals, the explicit duplicate closure by a MEMBER is a terminal non-merge signal per P-1-1."
+        }
+      ]
+    },
+    {
+      "id": "P-1-2",
+      "pattern": "PRs superseded by a comment explicitly stating another PR has been merged with equivalent or expanded functionality are not merged.",
+      "evidence": "A PR was predicted as merge but a contributor comment stated it was superseded by another PR that was 'now merged', indicating the work landed elsewhere. Despite strong author metrics, the PR was effectively obsolete.",
+      "mechanism": "When a community comment explicitly declares a PR superseded and identifies the merged successor, maintainers will close the original without merging. The supersession signal is terminal regardless of author track record.",
+      "anti_pattern": "Do not predict merge when a comment explicitly states the PR has been superseded by another PR that is already merged, even if the author has a strong prior merge rate.",
+      "confidence": 0.9,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 14778,
+          "error_type": "fp",
+          "attribution": "P-1-2",
+          "ambiguous": false,
+          "reason": "Contributor comment explicitly stated the PR was superseded by another PR that was 'now merged'. Supersession signal should have predicted non-merge despite strong author metrics."
+        }
+      ]
+    },
+    {
+      "id": "P-1-3",
+      "pattern": "Draft PRs with maintainer labels and explicit merge confirmation comments from the author (stating 'merged to main') should be predicted as merged.",
+      "evidence": "A draft PR with a maintainer label had an author comment explicitly stating 'Merged to main via fast-forward' with commit hashes listed. Despite draft status, the merge had already occurred.",
+      "mechanism": "Draft status is a workflow artifact that can persist even after a merge occurs or is imminent. An author comment with specific commit hashes and a 'merged to main' statement provides direct evidence of merge completion, overriding draft status.",
+      "anti_pattern": "Do not let draft status override a direct author statement of 'merged to main' with commit hashes, especially when a maintainer label is present.",
+      "confidence": 0.88,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 7313,
+          "error_type": "fp",
+          "attribution": "P-1-3",
+          "ambiguous": false,
+          "reason": "Draft PR predicted as non-merge, but author explicitly stated 'Merged to main via fast-forward' with commit hashes. Draft status should have been overridden by direct merge confirmation."
+        }
+      ]
+    },
+    {
+      "id": "P-1-4",
+      "pattern": "First-time contributor PRs without maintainer engagement, approval, or explicit positive signals default to non-merge even when technically focused and small in scope.",
+      "evidence": "Multiple FP errors involved first-time contributors (0 prior PRs, 0% merge rate) with small, focused fixes (1-3 files, XS/S size). Despite clean scope and category fit, these PRs were not merged. Only automated bot reviews were present with no human maintainer approval.",
+      "mechanism": "First-time contributors face high triage friction. Without a human reviewer approval or maintainer engagement, even technically sound small fixes do not clear the merge threshold. Automated bot reviews alone are insufficient positive signals.",
+      "anti_pattern": "Do not predict merge for first-time contributors (0 prior PRs) based solely on small scope, focused fix, and automated bot reviews. Require at least one human reviewer approval or explicit positive maintainer comment.",
+      "confidence": 0.82,
+      "support": 6,
+      "status": "retired",
+      "since_round": 1,
+      "last_validated": 1,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 8356,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor with only automated bot reviews and no human approval. Small focused fix was insufficient without human reviewer engagement."
+        },
+        {
+          "round": 1,
+          "pr_number": 9137,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor with single-file fix but zero reviews and zero comments. No human engagement signal was present to support merge prediction."
+        },
+        {
+          "round": 1,
+          "pr_number": 11041,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "Small focused PR with only automated review and no comments. Despite moderate prior merge rate, lack of human reviewer engagement was a blocking signal."
+        },
+        {
+          "round": 1,
+          "pr_number": 17343,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor with only automated bot review and no human approval. Small focused fix was insufficient without human reviewer engagement."
+        },
+        {
+          "round": 2,
+          "pr_number": 6978,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate) with no human reviewer approval, no maintainer comment, and only automated review. Focused XS scope was insufficient without human engagement per P-1-4."
+        },
+        {
+          "round": 2,
+          "pr_number": 9506,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "Author with 1 prior PR and 0% merge rate, no human approval (only COMMENTED reviews, no APPROVED), and self-requested greptile re-reviews without maintainer response. Absence of human approval was the blocking signal."
+        },
+        {
+          "round": 2,
+          "pr_number": 13640,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs) with no human reviewer approval, no maintainer comment, only automated review cycles and author self-comments about CI. Technical quality and tests were insufficient without human approval per P-1-4."
+        },
+        {
+          "round": 2,
+          "pr_number": 14817,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate), no comments, no human approval, only automated greptile review. Medium scope (7 files) did not overcome the absence of human engagement per P-1-4."
+        },
+        {
+          "round": 2,
+          "pr_number": 15578,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs) with 14 files, no human approval, only automated review and self-review. No maintainer engagement despite multi-label scope per P-1-4."
+        },
+        {
+          "round": 2,
+          "pr_number": 17751,
+          "error_type": "fp",
+          "attribution": "P-1-4",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate), no human approval, no maintainer comment, only automated review. Tests and focused scope were insufficient without human engagement per P-1-4."
+        }
+      ]
+    },
+    {
+      "id": "P-1-5",
+      "pattern": "Authors with 0% merge rate across multiple prior PRs (4+) are unlikely to merge new PRs even with approval signals from non-maintainer reviewers.",
+      "evidence": "A PR with an APPROVED review from a non-maintainer reviewer and narrow scope was predicted as merge but not merged. The author had 8 prior PRs with 0% merge rate, indicating a persistent pattern of non-acceptance.",
+      "mechanism": "A persistent 0% merge rate across many PRs signals either quality issues with the author's work style or a pattern of submitting PRs that don't align with project direction. Non-maintainer approvals do not substitute for maintainer acceptance, and the author's track record indicates systemic rejection.",
+      "anti_pattern": "Do not predict merge for authors with 0% merge rate across 4+ prior PRs based on a non-maintainer approval alone. Require maintainer approval or maintainer label.",
+      "confidence": 0.78,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 10910,
+          "error_type": "fp",
+          "attribution": "P-1-5",
+          "ambiguous": false,
+          "reason": "Author with 0% merge rate across 8 prior PRs. Non-maintainer approval was insufficient to overcome the persistent 0% merge rate pattern."
+        },
+        {
+          "round": 5,
+          "pr_number": 8293,
+          "error_type": "fp",
+          "attribution": "P-1-5",
+          "ambiguous": false,
+          "reason": "Author had 0% merge rate across 2 prior PRs (is_low_merge_author=true). The clawdinator bot approval emoji and author self-reviews do not constitute human reviewer approval. P-1-5 applies: 0% merge rate authors with non-maintainer/bot approval signals do not reliably merge. The model over-weighted community engagement signals and author technical responsiveness."
+        },
+        {
+          "round": 8,
+          "pr_number": 7997,
+          "error_type": "fp",
+          "attribution": "P-1-5",
+          "ambiguous": false,
+          "reason": "Author had 0% merge rate across 2 prior PRs (is_low_merge_author=true). Per P-1-5, non-maintainer approvals are insufficient for 0% merge-rate authors. The approval from an affected user (drkraft, NONE role) is a non-maintainer approval. New pattern P-8-1 further refines this: even domain-affected user approvals do not override the 0% merge rate without maintainer engagement. P-1-5 is the primary attribution."
+        }
+      ]
+    },
+    {
+      "id": "P-1-6",
+      "pattern": "Large feature PRs (XL size, 20+ files) from first-time contributors without maintainer labels are unlikely to merge regardless of author engagement or review cycles.",
+      "evidence": "Round 1: PR #11539 (XL, 24 files, first-time contributor, no maintainer label). Round 8: PR #12970 (XL, 21 files, first-time contributor, 14 automated reviews, 10 author self-ping comments, no human reviewer approval, no maintainer label \u2014 correctly predicted non-merge). Repeated automated review cycles do not substitute for human reviewer engagement in XL PRs from first-time contributors.",
+      "mechanism": "XL PRs require significant maintainer investment. First-time contributors lack established trust. Repeated automated review cycles without human reviewer approval indicate the PR is not on the maintainer's active review queue. Author self-pinging automated bots is a compensatory behavior that does not accelerate maintainer attention.",
+      "anti_pattern": "Do not predict merge for XL-sized PRs (20+ files) from first-time contributors even when the author is highly engaged and responsive to automated reviews, unless a maintainer label, explicit maintainer approval comment, or commit-hash-backed merge receipt is present. XL-sized PRs with repeated automated review cycles but only author self-comments and no human reviewer approval remain unlikely to merge. A top trusted contributor comment noting safety concerns and later approving informally ('Looks good now') without a formal APPROVED review state is insufficient for XL-sized first-time contributor PRs.",
+      "confidence": 0.82,
+      "support": 3,
+      "status": "revised",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 11539,
+          "error_type": "fp",
+          "attribution": "P-1-6",
+          "ambiguous": false,
+          "reason": "XL-sized PR with 24 files from first-time contributor. High review cycle engagement and author responsiveness did not overcome size and first-time author barriers without maintainer label."
+        },
+        {
+          "round": 8,
+          "pr_number": 12970,
+          "error_type": "fn",
+          "attribution": "P-1-6",
+          "ambiguous": false,
+          "reason": "XL-sized PR (21 files) from first-time contributor, 14 automated reviews, 10 author self-ping comments, no human reviewer approval, no maintainer label. The model correctly predicted non-merge per P-1-6 (XL first-time contributor, no maintainer label). The PR was actually merged without a visible merge receipt, suggesting external bulk-landing. P-1-6 is the primary applicable pattern."
+        }
+      ]
+    },
+    {
+      "id": "P-1-7",
+      "pattern": "PRs with vague or placeholder titles/descriptions combined with no review activity are unreliable merge candidates even from experienced contributors with trusted labels.",
+      "evidence": "A PR with a placeholder title ('fix: short description') and no comments or reviews was predicted as merge based on a trusted-contributor label and strong prior merge rate. Despite these positive signals, the lack of any substantive description or review engagement was a warning sign.",
+      "mechanism": "Vague PR descriptions indicate incomplete submission. Without review activity, the PR has not cleared any quality gate. Even experienced contributors with trusted labels may submit placeholder or incomplete PRs that do not progress to merge.",
+      "anti_pattern": "Do not predict merge based solely on trusted-contributor label and prior merge rate when the PR title/description is a placeholder and there are zero reviews or comments.",
+      "confidence": 0.72,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 18808,
+          "error_type": "fp",
+          "attribution": "P-1-7",
+          "ambiguous": false,
+          "reason": "Vague placeholder title ('fix: short description') with zero reviews and zero comments. Trusted-contributor label and prior merge rate were insufficient signals without substantive PR description or review activity."
+        }
+      ]
+    },
+    {
+      "id": "P-1-8",
+      "pattern": "New AI provider addition PRs from first-time contributors without tests, maintainer engagement, or approval rarely merge.",
+      "evidence": "A PR adding a new regional AI provider with 13 files, multi-category scope, no tests, no comments, and only a single automated review was predicted as merge but not merged.",
+      "mechanism": "New provider integrations require vetting of API compatibility, security posture, and long-term maintenance commitment. First-time contributors without established trust are unlikely to have their provider additions merged without explicit maintainer sponsorship or community validation.",
+      "anti_pattern": "Do not predict merge for new provider addition PRs from first-time contributors that lack tests, have no human reviewer engagement, and have no maintainer comment or label.",
+      "confidence": 0.75,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 11736,
+          "error_type": "fp",
+          "attribution": "P-1-8",
+          "ambiguous": false,
+          "reason": "New provider addition from first-time contributor without tests, no human comments, and only automated review. Provider additions require maintainer sponsorship."
+        }
+      ]
+    },
+    {
+      "id": "P-1-9",
+      "pattern": "Medium-sized feature PRs from first-time contributors with complementary community discussion but no maintainer approval or label do not reliably merge.",
+      "evidence": "A PR with 24 files, active community discussion showing complementary approaches, and iterative author responses was predicted as merge. Despite positive community engagement and tests, first-time contributor status and lack of maintainer approval resulted in non-merge.",
+      "mechanism": "Community discussion indicating interest does not substitute for maintainer approval. Medium-to-large feature PRs from first-time contributors require explicit maintainer buy-in to merge.",
+      "anti_pattern": "Do not predict merge for medium-sized feature PRs from first-time contributors based on active community discussion alone. Require maintainer label or approval.",
+      "confidence": 0.77,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 6569,
+          "error_type": "fp",
+          "attribution": "P-1-9",
+          "ambiguous": false,
+          "reason": "Medium-sized feature PR from first-time contributor with community discussion but no maintainer approval or label. Community engagement was mistaken as a merge signal."
+        },
+        {
+          "round": 8,
+          "pr_number": 8382,
+          "error_type": "fp",
+          "attribution": "P-1-9",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate) with M-sized feature PR. A CONTRIBUTOR-role approval (yofabr) with no maintainer comment, no maintainer label, no tests, and no author engagement. P-1-9 applies: medium-sized feature PRs from first-time contributors require explicit maintainer buy-in. New pattern P-8-2 further refines this for CONTRIBUTOR-role approvals specifically."
+        }
+      ]
+    },
+    {
+      "id": "P-1-10",
+      "pattern": "PRs with no reviews and no comments from first-time contributors, even with tests and focused scope, have low merge probability.",
+      "evidence": "A medium-sized fix PR from a first-time contributor with no reviews and no comments was predicted as merge based on focused scope, tests, and important infrastructure area. Without any review signal, the PR showed no evidence of progressing through the merge pipeline.",
+      "mechanism": "Zero reviews and zero comments indicates the PR has not attracted maintainer or community attention. Without engagement, PRs stall in triage regardless of technical quality.",
+      "anti_pattern": "Do not predict merge for PRs with zero reviews and zero comments from first-time contributors, even if the scope is focused and tests are present.",
+      "confidence": 0.78,
+      "support": 1,
+      "status": "retired",
+      "since_round": 1,
+      "last_validated": 4,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 17623,
+          "error_type": "fp",
+          "attribution": "P-1-10",
+          "ambiguous": false,
+          "reason": "First-time contributor with zero reviews and zero comments. No review engagement signal despite focused scope and tests."
+        },
+        {
+          "round": 5,
+          "pr_number": 13908,
+          "error_type": "fp",
+          "attribution": "P-1-10",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate) with zero reviews and zero comments. P-1-10 applies: PRs with zero reviews and zero comments from first-time contributors have low merge probability regardless of focused scope. The model over-weighted narrow scope and technical specificity of the fix."
+        },
+        {
+          "round": 6,
+          "pr_number": 16014,
+          "error_type": "fp",
+          "attribution": "P-1-10",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate), zero human reviewer comments, zero human approvals, only automated greptile review, no maintainer label. P-1-10 applies: PRs with zero reviews and zero comments from first-time contributors have low merge probability regardless of focused scope and security importance."
+        }
+      ]
+    },
+    {
+      "id": "P-1-11",
+      "pattern": "Authors self-reporting maintenance activity (rebases, CI retriggers, empty commits) without maintainer engagement signal a stalled PR unlikely to merge.",
+      "evidence": "A PR where the author posted multiple maintenance-oriented comments about rebasing, conflict resolution, and CI retriggers with no maintainer response was predicted as merge. The author's self-driven maintenance without any maintainer acknowledgment indicated a stalled PR.",
+      "mechanism": "Authors performing repeated maintenance operations without maintainer engagement suggests the PR is not on the maintainer's active review queue. Self-driven maintenance is a compensatory signal, not a positive merge indicator.",
+      "anti_pattern": "Do not interpret repeated author maintenance comments (rebases, CI retriggers, empty commits) as positive merge signals when no maintainer has engaged with the PR.",
+      "confidence": 0.73,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 10254,
+          "error_type": "fp",
+          "attribution": "P-1-11",
+          "ambiguous": false,
+          "reason": "Author self-reporting repeated maintenance activity (rebases, CI retriggers, empty commits) without any maintainer engagement. Self-driven maintenance was mistaken for a positive merge signal."
+        }
+      ]
+    },
+    {
+      "id": "P-1-12",
+      "pattern": "First-time contributors with high comment engagement but no human reviewer approval have low merge probability even when CI passes and scope is narrow.",
+      "evidence": "A first-time contributor PR with 6 detailed technical comments, CI passing, and narrow scope was predicted as merge based on engagement signals. Despite demonstrated technical competence and persistent maintainer pings, the absence of any human reviewer approval resulted in non-merge.",
+      "mechanism": "High comment volume from the author alone does not constitute reviewer engagement. Maintainer pings without response indicate the PR is deprioritized. Self-advocacy does not substitute for human reviewer approval in the merge pipeline.",
+      "anti_pattern": "Do not predict merge based on first-time contributor self-advocacy comments and maintainer pings when no human reviewer has approved or positively engaged with the PR content.",
+      "confidence": 0.8,
+      "support": 1,
+      "status": "active",
+      "since_round": 1,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 1,
+          "pr_number": 11112,
+          "error_type": "fp",
+          "attribution": "P-1-12",
+          "ambiguous": false,
+          "reason": "First-time contributor with high self-advocacy comment volume and maintainer pings but no human reviewer approval. Author engagement was mistaken for a merge signal."
+        },
+        {
+          "round": 4,
+          "pr_number": 18568,
+          "error_type": "fn",
+          "attribution": "P-1-12",
+          "ambiguous": false,
+          "reason": "First-time contributor with L-sized feature PR, only automated reviews and author self-review comments (natefikru reviewed their own PR twice), no human reviewer approval. P-1-12 applies: author self-comments and self-reviews do not constitute human reviewer engagement. The model predicted non-merge correctly in direction but this was labeled FN, suggesting the PR was actually merged despite the engagement gap."
+        },
+        {
+          "round": 8,
+          "pr_number": 12967,
+          "error_type": "fn",
+          "attribution": "P-1-12",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs), XS-sized single-file PR, zero comments, zero reviews (not even automated), no maintainer label, no human engagement whatsoever. The model correctly predicted non-merge per P-1-12 (first-time contributor, no human reviewer engagement). However the PR was actually merged without any visible merge receipt in the content, suggesting an external merge path. P-1-12 is the primary applicable pattern for what the model applied."
+        },
+        {
+          "round": 8,
+          "pr_number": 18559,
+          "error_type": "fn",
+          "attribution": "P-1-12",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, CONTRIBUTOR association), XS-sized PR (1 file), only one automated greptile review, zero human comments, zero human reviews, no maintainer label, no approval. The model correctly predicted non-merge per P-1-12 (first-time contributor, no human reviewer engagement). PR was actually merged without a visible merge receipt. P-1-12 is the primary applicable pattern."
+        }
+      ]
+    },
+    {
+      "id": "P-2-1",
+      "pattern": "A maintainer comment stating a PR is 'Fixed in #NNNN' or 'Fixed on main' indicates the fix landed elsewhere and the PR will not be merged independently, regardless of author history or fix quality.",
+      "evidence": "Round 2: PR #16345 ('Fixed in #16288. Thanks!'), PR #17383 ('Fixed on main'). Round 5: PR #10620 ('Fixed in #12988. This will go out in the next OpenClaw release') \u2014 trusted contributor confirming fix absorbed into successor PR without a commit hash on the original PR. All three resulted in non-merge of the original PR.",
+      "mechanism": "Maintainer or trusted contributor comments confirming a fix landed elsewhere (on main or in another PR) are terminal non-merge signals. The original PR becomes redundant. 'This will go out in the next release' language confirms the absorption is intentional and release-bound, reinforcing the non-merge signal. Unlike commit-hash receipts on the original PR itself, these comments describe absorption elsewhere.",
+      "anti_pattern": "Do not predict merge when a maintainer or member comment states the issue/fix is 'Fixed on main', 'Fixed in #NNNN', or equivalent phrasing indicating the change landed elsewhere, even if the PR itself is not formally labeled as duplicate and the fix quality is high. Also treat 'Fixed in #NNNN. This will go out in the next release' from a trusted contributor as a supersession/non-merge signal for the original PR. Distinguish from commit-hash-backed merge receipts on the original PR (which are terminal positive signals per P-2-2).",
+      "confidence": 0.89,
+      "support": 3,
+      "status": "revised",
+      "since_round": 2,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 2,
+          "pr_number": 16345,
+          "error_type": "fp",
+          "attribution": "P-2-1",
+          "ambiguous": false,
+          "reason": "MEMBER comment 'Fixed in #16288. Thanks!' indicated the fix landed in another PR. This soft duplicate signal was misread as a positive approval comment rather than a terminal non-merge signal."
+        },
+        {
+          "round": 2,
+          "pr_number": 17383,
+          "error_type": "fp",
+          "attribution": "P-2-1",
+          "ambiguous": false,
+          "reason": "MEMBER comment 'Fixed on main' indicated the fix was absorbed into the main branch via another path. This terminal non-merge signal was not recognized as equivalent to a duplicate closure."
+        },
+        {
+          "round": 7,
+          "pr_number": 14806,
+          "error_type": "fp",
+          "attribution": "P-2-1",
+          "ambiguous": false,
+          "reason": "Author's own comment 'Duplicate of #14807' is an author self-declared supersession signal. Per P-6-4 (author supersession comment is terminal non-merge signal) and P-2-1 (duplicate/superseded signals), the author explicitly indicating this is a duplicate of another PR they submitted is equivalent to a supersession notice. The model predicted merge based on the author's above-baseline merge rate without recognizing the author's own closure comment."
+        },
+        {
+          "round": 7,
+          "pr_number": 16283,
+          "error_type": "fp",
+          "attribution": "P-2-1",
+          "ambiguous": false,
+          "reason": "Author's own comment 'Duplicate of #16231 \u2014 same fix, submitted a few minutes earlier. Closing in favour of that PR.' is an explicit self-declared supersession/duplicate signal. Per P-6-4 and P-2-1, author self-declared supersession is a terminal non-merge signal for the original PR. The subsequent comment confirming 'this fix landed on main' refers to the fix landing via the duplicate PR #16231, not this PR. The model incorrectly interpreted the author's acknowledgment of the fix landing (via a different PR) as a merge receipt for this PR."
+        }
+      ]
+    },
+    {
+      "id": "P-2-2",
+      "pattern": "A contributor comment with explicit merge metadata (commit hash, verification steps, contributor credit) constitutes a confirmed merge signal and should predict merge even when other negative signals are present.",
+      "evidence": "Round 2: PRs #6878, #12356, #14108 \u2014 trusted contributor merge receipts with commit hashes. Round 4: PR #14068 \u2014 bulk-landing receipt with commit hash overrode 0% merge rate. Round 5: PR #12341 \u2014 merge receipt with commit hash overrode 0% merge rate across 65 prior PRs. PR #13983 \u2014 bulk-landing receipt overrode 15.4% merge rate. PR #14006 \u2014 member merge receipt confirmed merge despite post-hoc critical commentary. Round 6: PR #16620 \u2014 member squash receipt with prepared-head-SHA + merge-commit-hash confirmed merge despite zero reviews, zero comments, first-time contributor. Round 6: PR #3711 \u2014 CONTRIBUTOR cherry-pick into side branch (ios-new-alpha-core) was incorrectly treated as a merge receipt; PR not merged. Cherry-picks to non-default branches are excluded. Round 7: PR #6715 \u2014 MEMBER 'Landed on main with:' plus two commit hashes confirmed merge for first-time contributor XS docs PR. PR #11755 \u2014 CONTRIBUTOR 'Landed on main via squash commits:' with commit hash confirmed merge for 0% merge rate author XL PR. PR #11756 \u2014 same contributor pattern, 49-file XL PR, confirmed merge. PR #16504 \u2014 MEMBER squash receipt with prepared-head-SHA + merge-commit confirmed merge despite active critical contributor objections (P-5-5 applies). PR #13541 \u2014 CONTRIBUTOR squash receipt with prepared-head-SHA + merge-commit confirmed merge for first-time contributor XL PR.",
+      "mechanism": "Commit-hash-backed merge receipts from maintainers, members, or trusted contributors targeting the default/main branch are near-deterministic evidence of completed merges regardless of author history or engagement absence. The commit hash is an externally verifiable artifact of a completed repository action. 'Landed on main with:' followed by commit hashes is functionally equivalent to 'Merged via squash' with commit hash. A member's critical-objection-resolved merge (P-5-5) can include post-merge critical commentary that does not undo the merge. Cherry-picks to side branches produce commit hash pairs but do not merge the original PR. The prepared-head-SHA + merge-commit double-hash format is an even stronger variant of the receipt.",
+      "anti_pattern": "Do not predict non-merge when a comment from any maintainer, member, or trusted contributor includes explicit merge language ('Merged via squash', 'Landed on main with:', 'Landed via rebase onto main', 'bulk landing', 'Merged via squash in bulk landing', 'Prepared head SHA: ... Merge commit: ...', 'Landed on `main` via squash commits:') accompanied by one or more commit hashes, where the merge target is the default/main branch or unspecified. Treat commit-hash-backed merge statements as terminal positive signals overriding author history, review absence, label absence, low merge rate, and even 0% merge rate across 65+ prior PRs. For 'Fixed in #NNNN. This will go out in the next release' language from a trusted contributor (without commit hash), treat as a supersession/non-merge signal for the original PR (see P-5-4). Author self-reports of 'landed manually' without a commit hash from an external party are insufficient for override. Cherry-pick receipts into non-default side branches (e.g., 'Porting into ios-new-alpha-core') are NOT merge receipts for the original PR and do not trigger this override (see P-6-1). 'Landed on main with:' followed by commit hashes from a member is equivalent to 'Merged via squash' with commit hash. Member 'We've now landed this in main' language without an explicit commit hash is a strong but not terminal positive signal \u2014 require at least one commit hash for terminal override.",
+      "confidence": 0.95,
+      "support": 16,
+      "status": "retired",
+      "since_round": 2,
+      "last_validated": 7,
+      "attributions": [
+        {
+          "round": 2,
+          "pr_number": 6878,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "Contributor comment included 'Merged via squash' with commit hash and verification steps. This explicit merge receipt was not recognized as a terminal positive signal despite 'under discussion' framing in an earlier comment."
+        },
+        {
+          "round": 2,
+          "pr_number": 12356,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "Contributor comment included 'Landed via temp rebase onto main' with explicit land commit hash and CI verification. This merge receipt should have predicted merge despite low author merge rate."
+        },
+        {
+          "round": 2,
+          "pr_number": 14108,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "Contributor comment included 'Merged via squash in bulk landing' with explicit commit hash and contributor credit. First-time contributor status and absent labels should not have overridden this explicit merge receipt."
+        },
+        {
+          "round": 4,
+          "pr_number": 14068,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "Model correctly applied P-2-4 (0% merge rate, no human engagement) predicting non-merge, but missed the CONTRIBUTOR bulk-landing merge receipt comment ('Merged via squash in bulk landing. Commit: 39e3d58fe1c7e2dd37963ddea437372accaad92f'). P-2-2 covers commit-hash-backed merge statements as terminal positive signals. New pattern P-4-2 further extends this to bulk-landing scenarios for low-merge-rate authors."
+        },
+        {
+          "round": 4,
+          "pr_number": 15406,
+          "error_type": "fp",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "Author self-comment 'Landed manually via maintainer flow' described a squash merge process with local validation but without an external verifiable commit hash posted by a third-party contributor. P-2-2 was misapplied: the pattern requires a commit hash from a trusted third-party contributor, not an author self-report of a manual process. PR was not merged per ground truth. Revised P-2-2 now distinguishes third-party commit-hash receipts from author self-reported landing descriptions."
+        },
+        {
+          "round": 5,
+          "pr_number": 6570,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "A CONTRIBUTOR (steipete) posted 'Merged via squash. Merge commit: 6c6f1e9660bd81424a25a9a4d1a9c66b9bae5a6c' with follow-up fix reference. This commit-hash-backed merge receipt is a terminal positive signal per P-2-2. The model incorrectly applied P-1-10 (zero reviews/comments from first-time contributor) without recognizing the merge receipt override."
+        },
+        {
+          "round": 5,
+          "pr_number": 14006,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) posted 'Merged via squash. Merge commit: 66ca5746ce84aeb6b51490f87aef7946f2f7599d'. The commit-hash-backed merge receipt is a terminal positive signal per P-2-2. The model incorrectly weighted HenryLoenwind's critical post-comment ('no need to twiddle with the symptoms') as a non-merge signal; per P-5-5, critical comments posted after a commit-hash receipt do not override the merge confirmation."
+        },
+        {
+          "round": 7,
+          "pr_number": 6715,
+          "error_type": "fp",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment 'Landed on main with: - 63c9fac9f ... - 0fa55ed2b ...' includes explicit merge language with two commit hashes targeting main. Per P-2-2, this is a terminal positive merge signal. The model predicted FP (merge) which is correct per ground truth \u2014 this is a model reasoning error where the model correctly predicted merge but the ground truth is also merge, making it not actually an FP. Attribution to P-2-2 as the applicable pattern."
+        },
+        {
+          "round": 7,
+          "pr_number": 7165,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment 'Merged via squash. ... SHAs: - prep head [SHA implied]' with explicit squash merge language and SHA documentation. The comment describes rebasing, running gates, and merging via squash \u2014 a standard merge receipt. P-2-2 applies: the model should have predicted merge based on the member merge receipt language despite first-time contributor status and only automated reviews."
+        },
+        {
+          "round": 7,
+          "pr_number": 11755,
+          "error_type": "fp",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (mbelinky) comment 'Landed on main via squash commits: - 730f86dd5 Gateway/Plugins: device pairing + phone control plugins (#11755)' with explicit commit hash is a terminal positive merge signal per P-2-2. The model predicted FP (merge) which matches ground truth \u2014 this should have been predicted as merge. The reasoning error was predicting merge for the wrong reasons rather than recognizing the merge receipt."
+        },
+        {
+          "round": 7,
+          "pr_number": 11756,
+          "error_type": "fp",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (mbelinky) comment 'Landed on main via squash commits: - 6aedc54bd iOS: alpha node app + setup-code onboarding (#11756)' with explicit commit hash is a terminal positive merge signal per P-2-2. XL size (49 files) and 0% author merge rate are overridden by the commit-hash-backed merge receipt."
+        },
+        {
+          "round": 7,
+          "pr_number": 13541,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (steipete) posted 'Merged via squash. - Prepared head SHA: 9c179c9c3192ec76059f5caac1e8de8bdfb257ce - Merge commit: c179f71f42bcb9a3d8cc3e5da4dacdb6970189d1 Thanks @smartprogrammer93!' \u2014 a double-hash squash receipt. This is a terminal positive merge signal per P-2-2 and P-6-5. The model incorrectly applied P-4-1 (first-time contributor, no human reviewer, no maintainer label) without recognizing the merge receipt override."
+        },
+        {
+          "round": 7,
+          "pr_number": 16395,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "MEMBER (gumadeiras) posted 'Merged via squash. - Prepared head SHA: 1554137ae34b8183a924d48e3894e9d60c4e2dde - Merge commit: 4734f99108d69cff647d9017e0ccf4adbbe3892c Thanks @BinHPdev!' \u2014 a double-hash squash receipt. This is a terminal positive merge signal per P-2-2 and P-6-5. The model incorrectly applied P-1-5 (0% merge rate across 4 prior PRs) without recognizing the merge receipt override."
+        },
+        {
+          "round": 7,
+          "pr_number": 16504,
+          "error_type": "fn",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "MEMBER (gumadeiras) posted 'Merged via squash. - Prepared head SHA: a57718c09e9b601087edcb3ee15dd7ac6b96fee2 - Merge commit: ceb934299bf08561eb43b6702dc4edb9cdb419df Thanks @robbyczgw-cla!' \u2014 a double-hash squash receipt. Per P-2-2 and P-5-5, the merge receipt is a terminal positive signal that overrides subsequent critical contributor objections (HenryLoenwind's post-receipt objections do not undo the merge). The model incorrectly weighted the contributor dispute as a non-merge signal."
+        },
+        {
+          "round": 7,
+          "pr_number": 17581,
+          "error_type": "fp",
+          "attribution": "P-2-2",
+          "ambiguous": false,
+          "reason": "MEMBER (shakkernerd) comment 'We've now landed this in main with the same core goal...' contains merge language but no explicit commit hash. Per revised P-2-2, member 'landed in main' language without a commit hash is a strong but not terminal positive signal. The model predicted merge (FP indicates ground truth is non-merge), suggesting the fix was landed via a different mechanism or rewrite rather than this specific PR being merged. The absence of a commit hash makes this an ambiguous case; the model over-weighted the merge language without the hash confirmation."
+        }
+      ]
+    },
+    {
+      "id": "P-2-3",
+      "pattern": "PRs with 270+ files and 20+ labels are closed by automated triage as 'too noisy' regardless of content quality or author association.",
+      "evidence": "PR #5689: 270 files, 24 labels, automated comment citing >20 labels as closure reason. Maintainer-level automated bot explicitly closed with instruction to recreate from clean branch. Predicted as FN (should have been non-merge).",
+      "mechanism": "High label count and file count exceed automated triage thresholds, triggering bot closure independent of content merit. The noisy-branch heuristic is enforced programmatically and is not overridable by fix quality or author credentials.",
+      "anti_pattern": "Do not predict merge for PRs with more than 20 labels or more than 100 files changed when an automated triage bot comment is present citing label count or file count as a closure trigger. These are terminal non-merge signals.",
+      "confidence": 0.92,
+      "support": 1,
+      "status": "active",
+      "since_round": 2,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 2,
+          "pr_number": 5689,
+          "error_type": "fn",
+          "attribution": "P-2-3",
+          "ambiguous": false,
+          "reason": "270 files and 24 labels triggered automated triage bot closure. The noisy-branch threshold is a terminal non-merge signal that was not recognized as such."
+        },
+        {
+          "round": 4,
+          "pr_number": 6619,
+          "error_type": "fn",
+          "attribution": "P-2-3",
+          "ambiguous": false,
+          "reason": "Greptile comment explicitly stated '316 files found, 100 file limit' \u2014 automated triage rejection due to excessive file count. This is the file-count variant of P-2-3's automated triage closure threshold. The model predicted non-merge (correct direction) but the reasoning attributed it to the wrong mechanism; P-2-3 covers automated triage bot closures due to file or label count thresholds."
+        }
+      ]
+    },
+    {
+      "id": "P-2-4",
+      "pattern": "XL-sized PRs (15+ files) from authors with 0% merge rate across multiple prior PRs and no human reviewer engagement are very unlikely to merge.",
+      "evidence": "Round 2: PRs #18472, #13746 (0% merge rate, no engagement). Round 3: PR #18252 (0% merge rate, zero files). Round 4: PR #14068 (0% merge rate, bulk-landing receipt \u2014 exception). Round 4: PR #18527 (0% merge rate, no receipt visible). Round 5: PR #12341 (0% merge rate across 65 PRs, merge receipt \u2014 exception). Round 8: PR #8816 (0% merge rate, 13 comments all author self-pings to automated bot, 9 automated reviews, no human engagement \u2014 merged without visible receipt, suggests external merge path).",
+      "mechanism": "0% merge rate combined with no human engagement is a strong non-merge signal. Bulk-landing and direct maintainer merges can absorb any PR regardless of author history, but these are evidenced by commit-hash receipts. Repeated automated bot self-pings without human response are a compensatory behavior that does not constitute human engagement. When no merge receipt is visible and the only engagement is automated, the 0% rate pattern holds as a reliable predictor.",
+      "anti_pattern": "Do not predict merge for PRs from authors with 0% merge rate across 2+ prior PRs when combined with no human reviewer engagement (zero comments, zero human reviews) and either XL size, failing CI, zero files changed, or repeated automated bot self-pings \u2014 UNLESS a commit-hash-backed merge receipt comment is present from a maintainer, member, or trusted contributor (see P-2-2, P-4-2, P-5-2). Repeated self-pings to automated bots without any human response are a compounded non-merge signal equivalent to zero human engagement. The bulk-landing merge receipt exception applies even when the 0% merge rate spans 65+ prior PRs. The combination of persistent non-acceptance history and engagement absence is overridden only by external commit-hash evidence.",
+      "confidence": 0.82,
+      "support": 7,
+      "status": "retired",
+      "since_round": 2,
+      "last_validated": 8,
+      "attributions": [
+        {
+          "round": 2,
+          "pr_number": 13746,
+          "error_type": "fn",
+          "attribution": "P-2-4",
+          "ambiguous": false,
+          "reason": "Author with 0% merge rate across 2 prior PRs, no reviews, no comments, failing CI. Compounded non-merge signals per P-2-4 should have predicted non-merge."
+        },
+        {
+          "round": 2,
+          "pr_number": 18472,
+          "error_type": "fp",
+          "attribution": "P-2-4",
+          "ambiguous": false,
+          "reason": "Author with 0% merge rate across 8 prior PRs, XL size (17 files), no reviews, no comments, failing CI. Compounded non-merge signals per P-2-4."
+        },
+        {
+          "round": 4,
+          "pr_number": 18527,
+          "error_type": "fn",
+          "attribution": "P-2-4",
+          "ambiguous": false,
+          "reason": "Author echo931 has 0% merge rate across 6 prior PRs (is_low_merge_author=true), zero human comments, zero reviews, no maintainer label. P-2-4 applies: compounded non-merge signal from persistent 0% merge rate and zero engagement. However PR was actually merged \u2014 no merge receipt comment is visible in PR content. Attribution to P-2-4 as the pattern that should have predicted non-merge but the actual merge was not captured by available data."
+        },
+        {
+          "round": 7,
+          "pr_number": 11560,
+          "error_type": "fn",
+          "attribution": "P-2-4",
+          "ambiguous": false,
+          "reason": "Author with 0% merge rate across 2 prior PRs (is_low_merge_author=true), L-sized PR (7 files), no human reviewer approval, no maintainer label, only automated and author self-reviews. P-2-4 applies: 0% merge rate + no human engagement is a strong non-merge signal. The model predicted non-merge but ground truth is merge. No explicit merge receipt is visible in PR content, suggesting the merge may have occurred outside normal pipeline or via a receipt not captured in the data. P-2-4 is the applicable pattern for what the model applied."
+        },
+        {
+          "round": 8,
+          "pr_number": 8816,
+          "error_type": "fn",
+          "attribution": "P-2-4",
+          "ambiguous": false,
+          "reason": "Author with 0% merge rate across 3 prior PRs, M-sized PR, 13 comments all consisting of author self-pings to automated review bot, 9 automated reviews, no human reviewer approval, no maintainer label, no maintainer comment, no visible merge receipt. P-2-4 applies: 0% merge rate + no human engagement. The model correctly predicted non-merge but the PR was actually merged, likely via an external bulk-landing path not captured in the PR content. P-2-4 is the applicable pattern; new P-8-3 captures the bot-ping-only variant."
+        },
+        {
+          "round": 8,
+          "pr_number": 18129,
+          "error_type": "fn",
+          "attribution": "P-2-4",
+          "ambiguous": false,
+          "reason": "Author with 0% merge rate across 3 prior PRs, XS-sized PR (1 file), only one automated greptile review, zero human comments, zero human reviews, no maintainer label. The model correctly predicted non-merge per P-2-4 (0% merge rate + no human engagement). PR was actually merged without a visible merge receipt, suggesting external merge path. P-2-4 is the primary applicable pattern."
+        }
+      ]
+    },
+    {
+      "id": "P-3-1",
+      "pattern": "A contributor comment stating a PR is 'superseded by #NNNN' or 'Closing with [name] approval: superseded by #NNNN' indicates the work was absorbed by another PR and the original will not be merged, regardless of technical quality or author history.",
+      "evidence": "PR #14654: CONTRIBUTOR comment 'Closing with Tak approval: superseded by #14882' \u2014 PR not merged despite tests, L size, and reasonable technical scope. The supersession framing, even from a non-MEMBER, acted as a terminal non-merge signal.",
+      "mechanism": "When a trusted contributor acting in a closing/landing capacity posts a supersession comment referencing a replacement PR, the original PR is effectively retired. The work lives on in the successor PR. This pattern differs from P-1-2 (external supersession notice) in that the closing party is acting with apparent maintainer delegation ('Tak approval'), making the closure authoritative.",
+      "anti_pattern": "Do not predict merge when a comment explicitly states the PR is superseded by another PR number, even if the commenter is a CONTRIBUTOR rather than a MEMBER, and even if the phrasing implies delegated authority (e.g., 'Closing with [name] approval: superseded by #NNNN'). Treat supersession comments from any role as terminal non-merge signals.",
+      "confidence": 0.88,
+      "support": 2,
+      "status": "active",
+      "since_round": 3,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 3,
+          "pr_number": 14654,
+          "error_type": "fp",
+          "attribution": "P-3-1",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR comment stated 'Closing with Tak approval: superseded by #14882' \u2014 a supersession signal indicating the work was absorbed by another PR. Despite tests, reasonable scope, and technical merit, the supersession comment was a terminal non-merge signal now codified in P-3-1."
+        }
+      ]
+    },
+    {
+      "id": "P-3-2",
+      "pattern": "XL-sized PRs (40+ files) where a maintainer comment reveals the proposed change conflicts with intentional design decisions are not merged, regardless of author engagement or iterative fixes.",
+      "evidence": "PR #16178: 53 files, maintainer comment explicitly stating the behavior was 'intentional design' and directing the author to take a different approach. Despite author responsiveness and greptile review, the maintainer's design rejection was a terminal signal.",
+      "mechanism": "When a maintainer explicitly states that the behavior being fixed is intentional, the premise of the PR is invalidated. XL-sized PRs have no margin for fundamental design disagreement \u2014 the review cost is too high for a PR whose core assumption has been rejected. Author responsiveness cannot overcome a maintainer's architectural veto.",
+      "anti_pattern": "Do not predict merge for XL-sized PRs when a maintainer comment explicitly states the changed behavior is 'intentional design' or equivalent, even if the author is responsive and provides technical justification. Treat maintainer design-intent statements as terminal non-merge signals for large-scope PRs.",
+      "confidence": 0.85,
+      "support": 1,
+      "status": "active",
+      "since_round": 3,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 3,
+          "pr_number": 16178,
+          "error_type": "fp",
+          "attribution": "P-3-2",
+          "ambiguous": false,
+          "reason": "MEMBER comment explicitly stated the changed behavior was 'intentional design', invalidating the PR's premise. Combined with XL size (53 files), the maintainer design-intent rejection was a terminal signal per P-3-2. Author responsiveness and iterative fixes could not overcome a fundamental design disagreement."
+        }
+      ]
+    },
+    {
+      "id": "P-3-3",
+      "pattern": "PRs with zero files changed (0 files in diff) are not merged regardless of label, size designation, or feature description.",
+      "evidence": "PR #18252: size XS label, slack channel label, feature PR title, but 0 files changed. No comments, no reviews. Despite favorable category and size signals, the absence of any diff content makes merge impossible.",
+      "mechanism": "A PR with zero files changed contains no code to merge. This may indicate an empty branch, a misconfigured PR, or a placeholder submission. Regardless of cause, there is no diff to evaluate or merge. All positive signals (labels, category, size) are irrelevant without file content.",
+      "anti_pattern": "Do not predict merge for any PR with 0 files changed, regardless of size label, category, author association, or feature description. Zero-file PRs cannot be merged.",
+      "confidence": 0.97,
+      "support": 1,
+      "status": "active",
+      "since_round": 3,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 3,
+          "pr_number": 18252,
+          "error_type": "fp",
+          "attribution": "P-3-3",
+          "ambiguous": false,
+          "reason": "PR had 0 files changed. No existing pattern covered this case before round 3; now captured by new pattern P-3-3. Zero-file PRs cannot be merged regardless of labels or size designation. Also partially attributable to P-2-4 (0% merge rate, no engagement) but the zero-file condition is the primary blocker."
+        },
+        {
+          "round": 6,
+          "pr_number": 7872,
+          "error_type": "fn",
+          "attribution": "P-3-3",
+          "ambiguous": false,
+          "reason": "PR shows 0 files changed in features (zero_files_changed=true), consistent with P-3-3 (PRs with 0 files changed cannot be merged). The model predicted merge despite zero files changed. P-3-3 applies as the primary signal; the 6 files listed in the PR description are metadata only."
+        }
+      ]
+    },
+    {
+      "id": "P-3-4",
+      "pattern": "A maintainer comment explicitly stating a PR was 'accidentally merged' and has been reverted indicates the net merge state is non-merged, even though a merge technically occurred.",
+      "evidence": "PR #18414: MEMBER comment 'Reverted in [commit hash] (reverts merge commit [hash]). This PR was an accidental merge; reverting to restore prior behavior.' The PR had been merged but was subsequently reverted, resulting in a net non-merged state. Predicted as FN (non-merge) but should have been predicted as merged based on the initial merge \u2014 however the ground truth reflects the reverted/net state.",
+      "mechanism": "Accidental merges followed by explicit maintainer revert comments indicate the PR's net effect on the codebase is zero. The revert commit undoes the merge, restoring the prior state. If the ground truth label reflects the post-revert state as non-merged, a maintainer revert statement is a terminal signal that the PR's changes did not persist.",
+      "anti_pattern": "When a maintainer comment explicitly states a PR was 'accidentally merged' and references a revert commit hash, treat this as a non-merge outcome. The accidental merge + revert sequence results in a net non-merged state. Do not predict merge based on the initial merge event if a revert comment is present.",
+      "confidence": 0.82,
+      "support": 1,
+      "status": "retired",
+      "since_round": 3,
+      "last_validated": 3,
+      "attributions": [
+        {
+          "round": 3,
+          "pr_number": 18414,
+          "error_type": "fn",
+          "attribution": "P-3-4",
+          "ambiguous": false,
+          "reason": "MEMBER comment explicitly stated the PR was an accidental merge and referenced a revert commit hash. This accidental-merge-plus-revert scenario was not covered by any inherited pattern. New pattern P-3-4 captures this case. The prediction of non-merge was technically correct for the wrong reason \u2014 the PR did merge but was then reverted, with the ground truth reflecting the net non-merged state."
+        },
+        {
+          "round": 4,
+          "pr_number": 18407,
+          "error_type": "fn",
+          "attribution": "P-3-4",
+          "ambiguous": false,
+          "reason": "MEMBER comment explicitly stated 'Reverted in d77194cb9 (reverts merge commit 9aa8db5c8). This PR was merged accidentally, so we reverted to restore the previous loopback gateway auth behavior.' This is the accidental-merge-plus-revert pattern covered by P-3-4. The model correctly predicted non-merge but the attribution was mislabeled as FN \u2014 the PR did technically merge but was reverted, matching P-3-4's mechanism exactly."
+        },
+        {
+          "round": 4,
+          "pr_number": 18621,
+          "error_type": "fn",
+          "attribution": "P-3-4",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) posted two comments explicitly stating the PR was an accidental merge and providing revert commit hashes (d77194cb9 and 726ad45c7). This matches P-3-4 exactly: accidental-merge-plus-revert with explicit maintainer revert statement and commit hash constitutes a terminal non-merge signal for net outcome. The model predicted non-merge (correct) but this was labeled FN indicating the merge technically occurred before the revert."
+        }
+      ]
+    },
+    {
+      "id": "P-3-5",
+      "pattern": "First-time contributors with XS-sized PRs that have only automated reviews, no human reviewer engagement, and failing CI are unlikely to merge despite focused scope.",
+      "evidence": "PR #18507: first-time contributor, XS size (2 files), only automated reviews (greptile + author self-review), 6 failing tests (CI not green), web-ui component. Despite focused scope and author explanation of test failures, the combination of first-time contributor status, no human reviewer, and failing CI resulted in non-merge.",
+      "mechanism": "Failing CI signals broken test assumptions that require maintainer triage to resolve. First-time contributors cannot self-resolve CI failures that stem from broader codebase state without maintainer guidance. Automated reviews alone do not constitute human validation. The combination of these factors leaves the PR stalled without a clear path to merge.",
+      "anti_pattern": "Do not predict merge for first-time contributor PRs with failing CI and no human reviewer engagement, even if the PR scope is narrow (XS) and the author explains the failures as unrelated. Failing CI without a human reviewer to validate the author's explanation is a non-merge signal.",
+      "confidence": 0.78,
+      "support": 1,
+      "status": "active",
+      "since_round": 3,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 3,
+          "pr_number": 18507,
+          "error_type": "fn",
+          "attribution": "P-3-5",
+          "ambiguous": false,
+          "reason": "First-time contributor with XS scope, failing CI (6 test failures), and only automated reviews. New pattern P-3-5 captures this combination. The prediction of non-merge was correct; the FN indicates the model predicted merge when it should have predicted non-merge based on failing CI and absence of human reviewer engagement."
+        }
+      ]
+    },
+    {
+      "id": "P-3-6",
+      "pattern": "Trusted-contributor-labeled PRs with only automated reviews and no human reviewer approval or maintainer comment do not reliably merge despite favorable author history and label.",
+      "evidence": "PR #18513: trusted-contributor label, 57.1% prior merge rate, agents category, size S \u2014 all positive signals. However, only automated reviews (greptile, 2 passes), zero human comments, zero approval. PR not merged. The trusted-contributor label alone without human reviewer engagement was insufficient.",
+      "mechanism": "Trusted-contributor labels lower the bar for merge but do not eliminate the requirement for human reviewer engagement. Automated review tools (greptile) perform code quality checks but cannot approve or merge PRs. Without at least one human reviewer approving or a maintainer comment indicating acceptance, the PR lacks the human validation needed to proceed through the merge pipeline.",
+      "anti_pattern": "Do not predict merge for trusted-contributor-labeled PRs based solely on author merge rate and automated reviews when there are zero human comments and zero human approvals. Require at least one human reviewer comment or maintainer engagement signal.",
+      "confidence": 0.75,
+      "support": 1,
+      "status": "retired",
+      "since_round": 3,
+      "last_validated": 3,
+      "attributions": [
+        {
+          "round": 3,
+          "pr_number": 18513,
+          "error_type": "fp",
+          "attribution": "P-3-6",
+          "ambiguous": false,
+          "reason": "Trusted-contributor label and 57.1% prior merge rate were treated as sufficient for merge prediction, but zero human reviewer comments and zero approvals (only automated greptile reviews) were insufficient for actual merge. New pattern P-3-6 captures that trusted-contributor labels alone without human reviewer engagement do not reliably predict merge."
+        },
+        {
+          "round": 4,
+          "pr_number": 10329,
+          "error_type": "fp",
+          "attribution": "P-3-6",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR association with 25% prior merge rate, XS size, tests present, but zero reviews and zero human comments. No maintainer label, no trusted-contributor label, no human engagement whatsoever. P-3-6 pattern applies: without at least one human reviewer comment or maintainer engagement, PRs lack the human validation needed to proceed regardless of author metrics."
+        },
+        {
+          "round": 4,
+          "pr_number": 14493,
+          "error_type": "fp",
+          "attribution": "P-3-6",
+          "ambiguous": false,
+          "reason": "Author with 100% prior merge rate (1/1 prior PRs) but S-sized PR with no tests, no human reviewer comments, no approval, only automated greptile review. P-3-6 applies: even authors with favorable prior merge rates require at least one human reviewer comment or maintainer engagement to reliably predict merge. 100% rate based on single prior PR is a weak signal."
+        },
+        {
+          "round": 4,
+          "pr_number": 16198,
+          "error_type": "fp",
+          "attribution": "P-3-6",
+          "ambiguous": false,
+          "reason": "Experienced-contributor label, 39.5% prior merge rate, S size, tests, CI green \u2014 but zero reviews and zero human comments. P-3-6 applies: experienced-contributor labels, like trusted-contributor labels, do not eliminate the requirement for human reviewer engagement. Without any human comment or approval, the PR lacks validation needed to proceed."
+        }
+      ]
+    },
+    {
+      "id": "P-4-1",
+      "pattern": "First-time contributors with a maintainer label but zero human reviewer comments or approvals do not reliably merge, even with focused scope and tests.",
+      "evidence": "Round 4: PR #3223 \u2014 first-time contributor (0 prior PRs, 0% merge rate), maintainer label present, S size, 6 files, tests present, agents category, but zero comments and only one automated greptile review. PR not merged despite maintainer label. Round 4: PR #14420 \u2014 first-time contributor, XS size, docs category, zero human comments, only automated review, not merged.",
+      "mechanism": "Maintainer labels indicate a PR topic is within project scope or priority, but they do not constitute a merge commitment. First-time contributors still require human reviewer validation to clear quality and trust thresholds. Automated reviews do not substitute for human approval. Without any human reviewer engagement, even labeled PRs from first-time contributors stall in triage.",
+      "anti_pattern": "Do not predict merge for first-time contributor PRs (0 prior PRs) based solely on a maintainer label when there are zero human reviewer comments and zero human approvals. The maintainer label signals topic relevance, not merge readiness. Require at least one human reviewer comment or explicit maintainer approval alongside the label.",
+      "confidence": 0.8,
+      "support": 2,
+      "status": "retired",
+      "since_round": 4,
+      "last_validated": 5,
+      "attributions": [
+        {
+          "round": 4,
+          "pr_number": 3223,
+          "error_type": "fp",
+          "attribution": "P-4-1",
+          "ambiguous": false,
+          "reason": "First-time contributor with maintainer label but zero human reviewer comments and only automated greptile review. Maintainer label was over-weighted as a merge signal without requiring human reviewer engagement. New pattern P-4-1 captures this case."
+        },
+        {
+          "round": 4,
+          "pr_number": 14420,
+          "error_type": "fp",
+          "attribution": "P-4-1",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs), XS docs PR, zero human comments, only automated greptile review. No maintainer label. Docs category merge baseline was over-weighted. P-4-1 applies: first-time contributors without any human reviewer engagement do not reliably merge regardless of size or category."
+        },
+        {
+          "round": 6,
+          "pr_number": 7286,
+          "error_type": "fn",
+          "attribution": "P-4-1",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate), L-sized feature PR (21 files), zero human reviewer approvals, no maintainer label, no maintainer comment. P-4-1 applies: first-time contributors without human reviewer approval or maintainer label do not reliably merge regardless of comment volume. Additionally, the persistent automated review cycle flagging unresolved architectural bugs reinforces the non-merge signal. The model predicted merge but should have predicted non-merge."
+        },
+        {
+          "round": 7,
+          "pr_number": 18589,
+          "error_type": "fp",
+          "attribution": "P-4-1",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs, 0% merge rate), S-sized PR (8 files), zero comments, zero reviews, no human reviewer engagement, no maintainer label, no maintainer comment. P-4-1 applies: first-time contributors without any human reviewer engagement do not reliably merge regardless of category or focused scope. The docs-category baseline and focused security infrastructure scope were over-weighted."
+        }
+      ]
+    },
+    {
+      "id": "P-4-2",
+      "pattern": "Authors with 0% merge rate across multiple prior PRs who receive a trusted-contributor bulk-landing merge comment with a commit hash are merged, overriding the negative author history signal.",
+      "evidence": "Round 4: PR #14068 \u2014 author WalterSumbon had 0% merge rate across 4 prior PRs, no human reviews, no comments, no maintainer label, is_low_merge_author=true. A CONTRIBUTOR (Takhoffman) comment stated 'Merged via squash in bulk landing. Commit: 39e3d58fe1c7e2dd37963ddea437372accaad92f'. PR was actually merged. The model predicted non-merge based on P-2-4 (0% merge rate + no engagement), missing the merge receipt.",
+      "mechanism": "Bulk landing operations by trusted contributors absorb PRs that may not have received individual maintainer attention. A commit-hash-backed merge receipt from a known landing manager is direct evidence of merge completion regardless of the author's prior merge rate or engagement absence. The merge happened outside the normal review pipeline.",
+      "anti_pattern": "Do not predict non-merge for low-merge-rate authors when a trusted contributor comment includes explicit bulk-landing merge language ('Merged via squash in bulk landing', 'Landed via bulk squash', etc.) accompanied by a commit hash. Treat commit-hash-backed bulk-landing statements as terminal positive merge signals that override author history, engagement absence, and label absence. This extends P-2-2 to explicitly cover bulk-landing scenarios for low-merge-rate authors.",
+      "confidence": 0.9,
+      "support": 1,
+      "status": "active",
+      "since_round": 4,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 5,
+          "pr_number": 13983,
+          "error_type": "fn",
+          "attribution": "P-4-2",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (Takhoffman) posted 'Merged via squash in bulk landing. Commit: b0dfb8395242233fb1ec252a01d5c4f4ff8b69c0'. Despite below-baseline merge rate (15.4%), no maintainer label, no human reviewer, and codex usage limit hit, the bulk-landing merge receipt with commit hash is a terminal positive signal per P-4-2 and P-2-2. The model incorrectly weighted the low merge rate and absence of human reviewer engagement."
+        }
+      ]
+    },
+    {
+      "id": "P-5-1",
+      "pattern": "A member comment explicitly closing a PR as a duplicate of a specific PR number is a terminal non-merge signal, regardless of technical quality, user testimonials, or author engagement.",
+      "evidence": "PR #8638: MEMBER comment 'Closing as duplicate of #8752' \u2014 PR had tests, focused scope, 3 reviews, but was closed. PR #8693: MEMBER comment 'Closing as duplicate of #10742' \u2014 PR had strong user testimonials ('100% addressed my connectivity issue'), maintainer comment present, high community engagement, but was closed as duplicate.",
+      "mechanism": "When a maintainer explicitly closes a PR as a duplicate by referencing a specific PR number, the decision is authoritative and final. User testimonials, technical quality, and community engagement are irrelevant because the duplicate closure means the fix will land via the referenced PR. This is a distinct and stronger signal than P-2-1 ('Fixed in #NNNN') because the closure language is explicit and administrative.",
+      "anti_pattern": "Do not predict merge when a maintainer or member comment explicitly states 'Closing as duplicate of #NNNN' or equivalent, regardless of user testimonials, technical quality, test presence, or community engagement. Explicit duplicate closure comments are terminal non-merge signals that override all positive indicators.",
+      "confidence": 0.95,
+      "support": 2,
+      "status": "retired",
+      "since_round": 5,
+      "last_validated": 5,
+      "attributions": [
+        {
+          "round": 5,
+          "pr_number": 8638,
+          "error_type": "fp",
+          "attribution": "P-5-1",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment explicitly stated 'Closing as duplicate of #8752.' This is a terminal non-merge signal per new pattern P-5-1. The model over-weighted focused scope, tests, and greptile engagement without recognizing the explicit duplicate closure as authoritative."
+        },
+        {
+          "round": 5,
+          "pr_number": 8693,
+          "error_type": "fp",
+          "attribution": "P-5-1",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment explicitly stated 'Closing as duplicate of #10742.' Terminal non-merge signal per new pattern P-5-1. The model over-weighted user testimonials and community engagement without recognizing explicit duplicate closure. User testimonials from non-reviewers do not constitute approval."
+        },
+        {
+          "round": 6,
+          "pr_number": 9382,
+          "error_type": "fp",
+          "attribution": "P-5-1",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment 'Closing as duplicate of #14744. If this is incorrect, comment and we can reopen.' This is an explicit duplicate closure \u2014 a terminal non-merge signal per P-5-1. The model over-weighted critical bug severity and automated reviewer engagement without recognizing the duplicate closure."
+        }
+      ]
+    },
+    {
+      "id": "P-5-2",
+      "pattern": "A trusted contributor bulk-landing merge receipt with commit hash overrides a 0% merge rate signal even when the author has a large number of prior unmerged PRs (50+), no human reviews, and no maintainer label.",
+      "evidence": "PR #12341: author with 65 prior PRs and 0% merge rate, trusted-contributor label, XS size, only an automated review that errored, zero human comments \u2014 but a CONTRIBUTOR (Takhoffman) posted 'Merged via squash. Merge commit: fdacfc571c2556d2eb0f8668ac3c45913db0a2fe'. PR was actually merged. PR #13983: author with 52 prior PRs and 15.4% merge rate, no maintainer label, no human reviewer, codex usage limit hit \u2014 but Takhoffman posted 'Merged via squash in bulk landing. Commit: b0dfb8395242233fb1ec252a01d5c4f4ff8b69c0'. PR was merged.",
+      "mechanism": "Bulk-landing operations by trusted contributors absorb PRs outside normal review pipelines regardless of the author's historical merge rate, even when that rate is 0% across dozens of PRs. The commit-hash-backed merge receipt from a known landing manager is direct, verifiable evidence of merge completion. Extreme author non-acceptance history (0% across 65 PRs) does not prevent bulk-landing absorption.",
+      "anti_pattern": "Do not predict non-merge based on 0% merge rate \u2014 even across 50+ prior PRs \u2014 when a trusted contributor comment includes explicit merge language ('Merged via squash', 'Merged via squash in bulk landing') accompanied by a commit hash. The commit-hash-backed merge receipt is a terminal positive signal that overrides all author history signals, no matter how extreme. Extends P-2-2 and P-4-2 to authors with very large prior PR counts and 0% merge rates.",
+      "confidence": 0.92,
+      "support": 2,
+      "status": "active",
+      "since_round": 5,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 5,
+          "pr_number": 12341,
+          "error_type": "fn",
+          "attribution": "P-5-2",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (Takhoffman) posted 'Merged via squash. Merge commit: fdacfc571c2556d2eb0f8668ac3c45913db0a2fe'. Despite 0% merge rate across 65 prior PRs and only an errored automated review, the commit-hash-backed merge receipt is a terminal positive signal per P-5-2 (extends P-2-2 and P-4-2). The model incorrectly applied P-2-4 (0% merge rate + no engagement) without recognizing the merge receipt override."
+        }
+      ]
+    },
+    {
+      "id": "P-5-3",
+      "pattern": "PRs where a maintainer comment confirms the PR was merged accidentally and subsequently reverted are not in a merged state for prediction purposes, even if the ground-truth data reflects the initial accidental merge.",
+      "evidence": "Round 5: PR #18347 \u2014 MEMBER accidental merge revert with single revert commit. Round 6: PR #18010 \u2014 CONTRIBUTOR batch-accidental-revert with explicit merged SHA and revert SHA. Round 6: PR #18063 \u2014 MEMBER accidental merge revert with two named revert commits. All three resulted in net non-merged state despite prior merge events.",
+      "mechanism": "Accidental merges that are immediately reverted by maintainer/member/contributor action represent net non-merge outcomes regardless of whether the revert is of a single PR or a batch. The revert commit is direct evidence that the change was removed from the repository. Forward-looking language ('temporarily') and batch context do not change the net outcome at prediction time.",
+      "anti_pattern": "Do not predict merge when a maintainer, member, or contributor comment explicitly states the PR was merged accidentally and names a revert commit or revert commit list, regardless of whether the original merge commit SHA is also present, regardless of PR size or scope, and regardless of whether the revert is described as individual or batch. The revert statement and named revert commit(s) are terminal non-merge signals overriding all positive signals including the fact of a prior merge event. Treat 'merged accidentally, reverted' language from any of maintainer/member/contributor roles as equivalent to non-merge. Batch-accidental-revert language ('accidentally merged a batch of PRs') follows the same logic.",
+      "confidence": 0.94,
+      "support": 3,
+      "status": "retired",
+      "since_round": 5,
+      "last_validated": 6,
+      "attributions": [
+        {
+          "round": 5,
+          "pr_number": 18347,
+          "error_type": "fn",
+          "attribution": "P-5-3",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment explicitly stated 'Reverted in d0697d5aa (reverts merge commit 94eecaa446aa04c0d4e8cf7c12a40f8441711191). This PR was merged accidentally, so we reverted it.' The net state is non-merged. New pattern P-5-3 captures this: accidental merge followed by explicit reversion is a terminal non-merge signal. The model may have predicted merge based on the accidental intermediate merge event without recognizing the reversion as authoritative."
+        },
+        {
+          "round": 6,
+          "pr_number": 18063,
+          "error_type": "fn",
+          "attribution": "P-5-3",
+          "ambiguous": false,
+          "reason": "MEMBER (shakkernerd) explicitly stated 'Reverting this PR because it was merged accidentally' with two named revert commits. Terminal non-merge signal per P-5-3 (revised). The model predicted merge despite the explicit authoritative revert with multiple named revert commits."
+        },
+        {
+          "round": 7,
+          "pr_number": 18523,
+          "error_type": "fn",
+          "attribution": "P-5-3",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) explicitly stated 'Reverted in 7a00f056a (reverts f2756118621299aa3f981bc4299adc0ed7603a59). This PR was an accidental merge; the changes have been reverted on main.' Named revert commit SHA present. Terminal non-merge signal per P-5-3. The model predicted non-merge (correct) but ground truth is apparently merge \u2014 however the explicit revert makes the net state non-merged. This is a P-5-3 case where the accidental-merge-then-revert pattern applies."
+        }
+      ]
+    },
+    {
+      "id": "P-5-4",
+      "pattern": "A contributor comment stating 'Fixed in #NNNN. This will go out in the next release' (referencing a successor PR and release cycle) is a terminal non-merge signal for the original PR, equivalent to a supersession notice.",
+      "evidence": "PR #10620: CONTRIBUTOR (Takhoffman) comment 'Fixed in #12988. This will go out in the next OpenClaw release.' \u2014 The fix was absorbed into a successor PR. Despite the first-time contributor submitting a 24-file L-sized PR addressing 5 documented issues, the PR was not merged independently.",
+      "mechanism": "When a trusted contributor confirms the fix landed in a successor PR and will be included in the next release, the original PR is superseded. The successor PR carries the work forward. This is a variant of P-2-1 ('Fixed in #NNNN') but includes forward-looking release language that confirms the work is absorbed. The original PR will not be independently merged.",
+      "anti_pattern": "Do not interpret 'Fixed in #NNNN. This will go out in the next release' as a positive merge signal for the original PR. This language indicates the work was absorbed into a successor PR and the original will be closed without independent merge. Treat as a terminal non-merge signal equivalent to P-2-1 and P-3-1 supersession patterns.",
+      "confidence": 0.88,
+      "support": 1,
+      "status": "active",
+      "since_round": 5,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 5,
+          "pr_number": 10620,
+          "error_type": "fp",
+          "attribution": "P-5-4",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (Takhoffman) comment stated 'Fixed in #12988. This will go out in the next OpenClaw release.' This is a supersession/absorption signal (P-5-4, revised P-2-1), not a merge receipt for the original PR. The model incorrectly interpreted release-cycle confirmation language as equivalent to a commit-hash merge receipt per P-2-2."
+        }
+      ]
+    },
+    {
+      "id": "P-5-5",
+      "pattern": "PRs where a contributor merge receipt comment is present alongside a later critical contributor comment disputing the approach do not reliably indicate a clean merge; the merge receipt takes precedence if it includes a commit hash.",
+      "evidence": "PR #14006: MEMBER (sebslight) posted 'Merged via squash. Merge commit: 66ca5746ce84aeb6b51490f87aef7946f2f7599d' \u2014 an explicit merge receipt. A CONTRIBUTOR (HenryLoenwind) posted a critical comment objecting to the approach ('no need to twiddle with the symptoms'). Despite the critical comment, the PR was actually merged per the commit-hash receipt. The merge receipt with commit hash took precedence over the post-hoc critical commentary.",
+      "mechanism": "A commit-hash-backed merge receipt from a maintainer or member is an authoritative record of a completed merge action. Critical comments posted after the merge receipt reflect retrospective disagreement but do not undo the merge. The causal sequence matters: merge receipt with commit hash = merge already happened, subsequent objections = post-merge commentary only.",
+      "anti_pattern": "Do not let critical contributor comments posted after a commit-hash-backed merge receipt downgrade a merge prediction. If a maintainer or member comment includes explicit merge language and a commit hash, treat the PR as merged regardless of subsequent objections or critical commentary. The commit hash is the authoritative terminal signal.",
+      "confidence": 0.87,
+      "support": 1,
+      "status": "active",
+      "since_round": 5,
+      "last_validated": 10,
+      "attributions": []
+    },
+    {
+      "id": "P-5-6",
+      "pattern": "XS-sized doc-only PRs with CI green, focused scope, and an author with 100% prior merge rate on at least 1 prior PR are predicted as merge, but absent any human reviewer comment or approval they frequently do not merge.",
+      "evidence": "PR #10135: author BunsDev with 1 prior PR at 100% merge rate, XS scope (1 file), docs category, CI green \u2014 predicted as merge (FP). No human reviewer comment, no approval, no maintainer label. Only automated greptile review flagging a documentation inconsistency.",
+      "mechanism": "A single prior merged PR is insufficient to establish a stable 100% merge rate; it may reflect baseline luck or an easy prior contribution. Docs PRs without human reviewer engagement still require a maintainer to notice and approve them. An automated review flagging a documentation inconsistency (even minor) without a human reviewer to confirm the fix is complete leaves the PR in an unvalidated state. The 100% rate from a single prior PR does not carry the predictive weight of a multi-PR track record.",
+      "anti_pattern": "Do not predict merge for docs-only PRs based solely on a 100% merge rate derived from a single prior PR when there is no human reviewer comment and no approval. Require either a human reviewer engagement or a maintainer label to predict merge for authors whose 100% rate is based on fewer than 3 prior PRs.",
+      "confidence": 0.75,
+      "support": 1,
+      "status": "active",
+      "since_round": 5,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 5,
+          "pr_number": 10135,
+          "error_type": "fp",
+          "attribution": "P-5-6",
+          "ambiguous": false,
+          "reason": "Author had 100% merge rate from a single prior PR (insufficient statistical basis), XS docs scope, CI green \u2014 but zero human reviewer comments and no approval. New pattern P-5-6 captures this: 100% rate from a single prior PR does not reliably predict merge without human reviewer engagement. The model over-weighted the merge rate signal."
+        },
+        {
+          "round": 7,
+          "pr_number": 18638,
+          "error_type": "fp",
+          "attribution": "P-5-6",
+          "ambiguous": false,
+          "reason": "Author had 100% merge rate from a single prior PR (insufficient statistical basis per P-5-6), XS-sized PR, zero human reviewer comments, zero reviews, no human approval. P-5-6 applies: 100% merge rate from fewer than 3 prior PRs does not reliably predict merge without human reviewer engagement. The size:XS label is a categorization label, not a maintainer approval signal. The model over-weighted the single-PR 100% rate."
+        },
+        {
+          "round": 9,
+          "pr_number": 11578,
+          "error_type": "fp",
+          "attribution": "P-5-6",
+          "ambiguous": false,
+          "reason": "Author had 100% merge rate from a single prior PR (insufficient statistical basis per P-5-6), S/M-sized PR, zero comments, zero human reviews, no human approval, no maintainer label, no tests. P-5-6 applies: 100% rate from fewer than 3 prior PRs does not reliably predict merge without human reviewer engagement. The model over-weighted the single-PR 100% rate and targeted fix scope."
+        }
+      ]
+    },
+    {
+      "id": "P-6-1",
+      "pattern": "A CONTRIBUTOR comment stating the PR is merging into a new code path with cherry-pick attribution and a commit hash pair is a terminal positive merge signal, even for first-time contributors with no maintainer label.",
+      "evidence": "PR #3711: CONTRIBUTOR (mbelinky) posted 'Merging into new alpha code path, thank you @coder4ever2. Ported into `ios-new-alpha-core` with attribution preserved (cherry-pick): - 5d31a141e27a8bed95ab903455a5f98e87d76c19 -> d4a119191fc84df0e2fcd280e233952e531437be'. Despite first-time contributor (0 prior PRs, 0% merge rate, no maintainer label), the cherry-pick commit hash pair constitutes a verified merge receipt. PR was predicted as merge but actually not merged \u2014 the cherry-pick into a non-main branch (ios-new-alpha-core) does not constitute a merge of the original PR into the main branch.",
+      "mechanism": "Cherry-pick operations into feature/alpha branches are distinct from merging the original PR into the default branch. A CONTRIBUTOR cherry-picking into a side branch preserves attribution but does not close or merge the original PR. The commit hash pair shows the cherry-pick destination commit, not a main-branch merge commit. This distinguishes from P-2-2 which covers merges into main/default branches.",
+      "anti_pattern": "Do not predict merge based on a CONTRIBUTOR comment describing a cherry-pick into a non-default branch (e.g., 'ios-new-alpha-core', 'alpha-*', 'feature/*'). A cherry-pick into a side branch is not equivalent to merging the original PR. Only treat commit-hash-backed merge receipts as terminal positive signals when the merge target is the default/main branch or is unspecified (implying main). Cherry-pick-to-branch language is not a merge receipt for the original PR.",
+      "confidence": 0.82,
+      "support": 1,
+      "status": "active",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 3711,
+          "error_type": "fp",
+          "attribution": "P-6-1",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR cherry-picked into 'ios-new-alpha-core' (non-default branch) with commit hash pair. This is not a merge of the original PR into main. The model incorrectly treated the cherry-pick receipt as a P-2-2 terminal positive signal. P-6-1 captures the distinction between cherry-picks to side branches and merges to main."
+        },
+        {
+          "round": 6,
+          "pr_number": 3711,
+          "error_type": "fp",
+          "attribution": "P-6-1",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (mbelinky) posted a cherry-pick receipt into 'ios-new-alpha-core' (a non-default side branch) with a commit hash pair. This was incorrectly treated as a P-2-2 terminal positive merge signal. P-6-1 captures the distinction: cherry-picks to non-default branches do not constitute merge receipts for the original PR."
+        }
+      ]
+    },
+    {
+      "id": "P-6-2",
+      "pattern": "PRs where a member comment explicitly closes the PR as a duplicate of a specific PR number are not merged, even when the PR addresses a critical bug and has active automated reviewer engagement.",
+      "evidence": "PR #9382: MEMBER (sebslight) comment 'Closing as duplicate of #14744. If this is incorrect, comment and we can reopen.' Despite M-sized critical bug fix (contextWindow collision), greptile and copilot automated reviews, and 3 comments, the explicit duplicate closure is a terminal non-merge signal. This extends P-5-1 with additional evidence from a different bug-fix category.",
+      "mechanism": "Explicit duplicate closure by a member is authoritative regardless of the technical merit of the PR. The fix will land via the referenced PR (#14744). Automated reviewer engagement (greptile, copilot) and bug criticality do not override the administrative closure decision.",
+      "anti_pattern": "Do not predict merge when a member comment explicitly states 'Closing as duplicate of #NNNN', even for critical bug fixes with multiple automated reviewer engagements. Duplicate closure comments from members are terminal non-merge signals that override bug severity, automated review quality, and first-time contributor technical merit. This is a reinforcement of P-5-1.",
+      "confidence": 0.95,
+      "support": 1,
+      "status": "active",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 9382,
+          "error_type": "fp",
+          "attribution": "P-5-1",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment 'Closing as duplicate of #14744.' Terminal non-merge signal per P-5-1. The model over-weighted critical bug severity and member engagement without recognizing the explicit duplicate closure as authoritative."
+        }
+      ]
+    },
+    {
+      "id": "P-6-3",
+      "pattern": "First-time contributors with author self-advocacy comments referencing a related PR but no human reviewer approval or maintainer label do not reliably merge, even for focused critical fixes with tests.",
+      "evidence": "PR #9576: first-time contributor (author_association CONTRIBUTOR but 0 prior PRs), S-sized focused fix (setTimeout overflow), tests present, 3 reviews but all are automated or author self-reviews (pycckuu reviewed own PR twice), only comment is author self-advocacy referencing related PR #10355. No human reviewer approval, no maintainer label. PR not merged.",
+      "mechanism": "Author self-reviews and self-advocacy comments about related PRs do not constitute human reviewer validation. Critical fixes still require a human reviewer to confirm the approach and authorize merge. Automated reviews alone leave the PR in an unvalidated state regardless of technical necessity.",
+      "anti_pattern": "Do not predict merge for first-time contributor PRs based on author self-advocacy comments and self-reviews, even when the fix is technically critical (e.g., overflow prevention, security hardening) and tests are present. Require at least one human reviewer comment or approval that is not from the author. Author self-reviews count as zero human reviewer engagement.",
+      "confidence": 0.78,
+      "support": 1,
+      "status": "active",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 9576,
+          "error_type": "fp",
+          "attribution": "P-6-3",
+          "ambiguous": false,
+          "reason": "First-time contributor with author-only self-reviews and self-advocacy comment about related PR. No human reviewer approval or maintainer label. Critical fix nature and tests were insufficient without human reviewer validation."
+        },
+        {
+          "round": 6,
+          "pr_number": 9576,
+          "error_type": "fp",
+          "attribution": "P-6-3",
+          "ambiguous": false,
+          "reason": "First-time contributor (0 prior PRs) with author-only self-reviews and a single self-advocacy comment referencing a related PR. No human reviewer approval or maintainer label. Critical fix nature and tests were insufficient without human reviewer validation. New pattern P-6-3 captures this case."
+        }
+      ]
+    },
+    {
+      "id": "P-6-4",
+      "pattern": "An author comment explicitly stating the PR is superseded by a specific PR number is a terminal non-merge signal, even when a non-maintainer reviewer has approved the PR with enthusiastic technical endorsement.",
+      "evidence": "PR #13234: author (RocketMan234) comment 'Superseded by #13259 which includes the tryRouteCli lazy import as part of broader lazy-loading work.' Despite an APPROVED review from asklee-klawd with enthusiastic endorsement ('37% startup time reduction', '5642 tests passing'), the author's own supersession statement indicates the work landed in a successor PR. PR not merged.",
+      "mechanism": "When the author themselves declares the PR superseded by referencing a specific successor PR, the original PR is retired regardless of reviewer enthusiasm. The author has the most authoritative knowledge of whether their work has been absorbed elsewhere. A non-maintainer approval, even with strong technical endorsement, does not override the author's own supersession declaration.",
+      "anti_pattern": "Do not predict merge when the PR author explicitly states the PR is superseded by a specific PR number, even when a reviewer has approved with enthusiastic technical praise. Author supersession comments are terminal non-merge signals equivalent to contributor or maintainer supersession comments (see P-1-2, P-3-1). Non-maintainer approvals do not override the author's own declaration that the work landed elsewhere.",
+      "confidence": 0.88,
+      "support": 1,
+      "status": "active",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 13234,
+          "error_type": "fp",
+          "attribution": "P-6-4",
+          "ambiguous": false,
+          "reason": "Author (RocketMan234) comment explicitly stated 'Superseded by #13259'. Despite APPROVED review from asklee-klawd with enthusiastic endorsement, the author's own supersession declaration is a terminal non-merge signal. The model over-weighted the non-maintainer approval without recognizing the author's supersession comment."
+        },
+        {
+          "round": 6,
+          "pr_number": 13234,
+          "error_type": "fp",
+          "attribution": "P-6-4",
+          "ambiguous": false,
+          "reason": "Author (RocketMan234) comment explicitly stated 'Superseded by #13259'. Despite an APPROVED review from a non-maintainer reviewer with enthusiastic endorsement, the author's own supersession declaration is a terminal non-merge signal. New pattern P-6-4 captures: author supersession comments override non-maintainer approvals."
+        }
+      ]
+    },
+    {
+      "id": "P-6-5",
+      "pattern": "A member squash-merge receipt comment with both a prepared head SHA and a merge commit hash is a terminal positive merge signal for first-time contributors with no reviews, comments, or maintainer label.",
+      "evidence": "PR #16620: MEMBER (sebslight) comment 'Merged via squash. - Prepared head SHA: 9ae4394b81bf0a68a5dfbcfe39fb60a21689ac49 - Merge commit: 2c8b9210548da43a5045ffc1b938cfa2663b21ef Thanks @vai-oro!' \u2014 first-time contributor (0 prior PRs, 0% merge rate), XS size (7 files), zero comments prior to merge receipt, zero reviews, no maintainer label. PR was actually merged. The model predicted non-merge based on P-1-10 (zero reviews/comments, first-time contributor).",
+      "mechanism": "A member squash-merge receipt with two distinct commit hashes (prepared head SHA + merge commit) is an externally verifiable record of a completed merge operation. This is even stronger than a single commit hash receipt because it documents both the pre-merge state and the resulting merge commit. The double-hash format confirms the merge happened via a standard squash workflow. Zero prior engagement does not prevent a member from directly merging a PR they find suitable.",
+      "anti_pattern": "Do not predict non-merge based on zero reviews and zero comments when a member comment includes 'Merged via squash' with both a prepared head SHA and a merge commit hash. The double-commit-hash squash receipt is a terminal positive signal overriding all absence-of-engagement signals including first-time contributor status, 0% merge rate, zero reviews, zero comments, and no maintainer label. Extends P-2-2 to explicitly cover the prepared-head-SHA + merge-commit format.",
+      "confidence": 0.95,
+      "support": 1,
+      "status": "active",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 16620,
+          "error_type": "fn",
+          "attribution": "P-6-5",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) posted squash merge receipt with prepared head SHA and merge commit hash. Terminal positive signal per P-2-2 and new P-6-5. The model incorrectly applied P-1-10 (zero reviews/comments from first-time contributor) without recognizing the merge receipt override."
+        },
+        {
+          "round": 6,
+          "pr_number": 16620,
+          "error_type": "fn",
+          "attribution": "P-6-5",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) posted squash merge receipt with both prepared head SHA and merge commit hash. Terminal positive signal per P-2-2 and new P-6-5. The model incorrectly applied P-1-10 (zero reviews/comments from first-time contributor) without recognizing the member merge receipt override."
+        }
+      ]
+    },
+    {
+      "id": "P-6-6",
+      "pattern": "A contributor comment stating 'We accidentally merged a batch of PRs and need to temporarily roll this back' with explicit revert commit SHAs is a terminal non-merge signal, equivalent to P-5-3, even when the original merge SHAs are present.",
+      "evidence": "Round 6: PR #18010 \u2014 CONTRIBUTOR (steipete) 'accidentally merged a batch of PRs' with explicit revert SHA 4fa35d3fd9f6a263f7586f18fbcc9f9b92b30744. Round 9: PR #18097 \u2014 CONTRIBUTOR (steipete) 'accidentally merged a batch of PRs' with explicit revert SHA 563df5638bc8a6fd5cc5fb7c036844ce1f71d573. Round 9: PR #18049 \u2014 CONTRIBUTOR (steipete) 'accidentally merged this but it's problematic' with critical bug list and no explicit revert SHA but author bug acknowledgment and follow-up PR. All three resulted in non-merge of original changes.",
+      "mechanism": "Accidental merge language from a trusted contributor is terminal regardless of whether it is accompanied by an explicit revert SHA. When an explicit revert SHA is present, the revert is documented and verifiable. When absent, a detailed critical bug enumeration with author acknowledgment confirms the implementation is defective and the merge will not stand. The net repository state in both cases is effectively non-merged from the perspective of clean, accepted changes.",
+      "anti_pattern": "Do not predict merge when a contributor or maintainer comment states 'accidentally merged a batch of PRs and need to roll this back' or 'accidentally merged this but it's problematic' with either an explicit revert commit SHA or a detailed critical bug enumeration, even if the original merge commit SHA is also present. The revert or 'problematic' statement is the terminal signal. Treat both explicit-revert-SHA and critical-bug-acknowledgment variants of accidental merge language as terminal non-merge signals per P-5-3. When an explicit revert SHA is present it is a stronger signal; when absent, critical bug enumeration by a trusted contributor combined with author bug acknowledgment is sufficient.",
+      "confidence": 0.9,
+      "support": 3,
+      "status": "revised",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 18010,
+          "error_type": "fn",
+          "attribution": "P-6-6",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (steipete) stated 'We accidentally merged a batch of PRs and need to temporarily roll this back' with revert commit SHA 4fa35d3fd9f6a263f7586f18fbcc9f9b92b30744. Terminal non-merge signal per P-5-3 extended by P-6-6. The model predicted merge based on the merge SHA without recognizing the authoritative revert."
+        },
+        {
+          "round": 6,
+          "pr_number": 18010,
+          "error_type": "fn",
+          "attribution": "P-6-6",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (steipete) stated 'We accidentally merged a batch of PRs and need to temporarily roll this back' with both original merge SHA and revert SHA. Terminal non-merge signal per P-5-3 extended by new P-6-6. The model predicted merge based on the merge SHA presence without recognizing the authoritative batch-revert."
+        },
+        {
+          "round": 9,
+          "pr_number": 18097,
+          "error_type": "fn",
+          "attribution": "P-6-6",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (steipete) stated 'We accidentally merged a batch of PRs and need to temporarily roll this back' with explicit revert SHA 563df5638bc8a6fd5cc5fb7c036844ce1f71d573 and follow-up 'Please re-open this in a new PR, needs far more time to review.' Terminal non-merge signal per P-5-3 and P-6-6. The model predicted non-merge but the accidental merge was counted as merge in ground truth; the revert is the authoritative terminal signal."
+        }
+      ]
+    },
+    {
+      "id": "P-6-7",
+      "pattern": "A member comment explicitly stating revert with named revert commits is a terminal non-merge signal overriding all positive indicators including prior merge events, even for small focused fixes.",
+      "evidence": "PR #18063: MEMBER (shakkernerd) comment 'Reverting this PR because it was merged accidentally. Revert commits: - d8a76282d - dd69fc0ad'. S-sized fix (1 file), first-time contributor. The explicit revert with two named commits is authoritative. The model predicted merge (FN) \u2014 likely based on the prior accidental merge event \u2014 without recognizing the revert as terminal.",
+      "mechanism": "An explicit member revert comment naming specific revert commits constitutes direct evidence that the merge was undone. The net repository state is non-merged. Multiple revert commits (two listed) further confirm the deliberateness of the rollback. This is consistent with P-5-3 but adds evidence that even small single-file fixes that were accidentally merged are subject to this pattern.",
+      "anti_pattern": "Do not predict merge when a member comment names specific revert commits for a PR that was merged accidentally, regardless of PR size, scope, or technical quality. The revert commit list is a terminal non-merge signal. Extends P-5-3 to member-role revert statements with multiple named revert commits.",
+      "confidence": 0.95,
+      "support": 1,
+      "status": "active",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 18063,
+          "error_type": "fn",
+          "attribution": "P-6-7",
+          "ambiguous": false,
+          "reason": "MEMBER (shakkernerd) explicitly stated 'Reverting this PR because it was merged accidentally' with two named revert commits. Terminal non-merge signal per P-5-3 and new P-6-7. The model predicted merge despite the explicit authoritative revert."
+        }
+      ]
+    },
+    {
+      "id": "P-6-8",
+      "pattern": "S-sized PRs from authors with 100% merge rate based on a single prior PR but with failing CI and no human reviewer comments or approvals do not reliably merge.",
+      "evidence": "PR #18951: author with 1 prior PR at 100% merge rate, S-sized (4 files), focused scope, only automated greptile review, ci_green=false, zero comments, zero human reviews, no maintainer label. PR not merged despite perfect prior merge rate.",
+      "mechanism": "A single prior merged PR establishes a 100% merge rate but provides minimal statistical confidence. Failing CI (ci_green=false) signals unresolved test failures. Without a human reviewer to confirm the fix is correct and CI failures are acceptable, the PR stalls. The combination of failing CI and zero human engagement leaves the PR in an unvalidated state regardless of prior merge rate.",
+      "anti_pattern": "Do not predict merge for S-sized PRs based on a 100% merge rate derived from a single prior PR when CI is failing and there are zero human reviewer comments or approvals. Failing CI combined with no human engagement is a non-merge signal that overrides a 100% rate from fewer than 3 prior PRs. See also P-5-6 for the analogous docs-only case.",
+      "confidence": 0.78,
+      "support": 1,
+      "status": "active",
+      "since_round": 6,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 6,
+          "pr_number": 18951,
+          "error_type": "fp",
+          "attribution": "P-6-8",
+          "ambiguous": false,
+          "reason": "Author had 100% merge rate from single prior PR (insufficient statistical basis), S-sized focused fix, but ci_green=false and zero human reviewer comments. New pattern P-6-8 captures: failing CI + no human engagement overrides 100% rate from single prior PR."
+        },
+        {
+          "round": 6,
+          "pr_number": 18951,
+          "error_type": "fp",
+          "attribution": "P-6-8",
+          "ambiguous": false,
+          "reason": "Author had 100% merge rate from a single prior PR (insufficient statistical basis per P-5-6 logic), S-sized focused fix, but ci_green=false and zero human reviewer comments or approvals. New pattern P-6-8: failing CI combined with no human engagement overrides 100% merge rate from a single prior PR."
+        }
+      ]
+    },
+    {
+      "id": "P-7-1",
+      "pattern": "A member comment explicitly stating 'Closing as duplicate of #NNNN. If this is incorrect, comment and we can reopen.' is a terminal non-merge signal, regardless of PR technical merit, author tests, or prior merge rate.",
+      "evidence": "Round 7: PR #4078 (duplicate of #5112), PR #4697 (duplicate of #4693), PR #8658 (duplicate of #8296) \u2014 all had MEMBER (sebslight) comments with the exact 'Closing as duplicate of #NNNN. If this is incorrect, comment and we can reopen.' phrasing. All three were incorrectly predicted as merge. Consistent pattern across multiple PRs in same round.",
+      "mechanism": "The 'Closing as duplicate' phrasing by a member is an administrative closure action, not an approval signal. The 'If this is incorrect, comment and we can reopen' clause is a courtesy offering, not an indication of potential merge. The model misread the member engagement as a positive merge signal. This extends P-6-2 with the specific phrasing pattern that was repeatedly misidentified.",
+      "anti_pattern": "Do not predict merge when a member comment contains 'Closing as duplicate of #NNNN' regardless of whether the comment includes 'If this is incorrect, comment and we can reopen.' The latter clause is a procedural courtesy, not a positive merge signal. Treat this phrasing as equivalent to an explicit duplicate closure per P-6-2.",
+      "confidence": 0.96,
+      "support": 3,
+      "status": "active",
+      "since_round": 7,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 7,
+          "pr_number": 4078,
+          "error_type": "fp",
+          "attribution": "P-7-1",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment 'Closing as duplicate of #5112. If this is incorrect, comment and we can reopen.' is a terminal non-merge signal per new P-7-1. The model misread member engagement as a positive approval signal."
+        },
+        {
+          "round": 7,
+          "pr_number": 4697,
+          "error_type": "fp",
+          "attribution": "P-7-1",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment 'Closing as duplicate of #4693. If this is incorrect, comment and we can reopen.' is a terminal non-merge signal per new P-7-1. The model misread member engagement and presence of tests as merge signals."
+        },
+        {
+          "round": 7,
+          "pr_number": 8658,
+          "error_type": "fp",
+          "attribution": "P-7-1",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) comment 'Closing as duplicate of #8296. If this is incorrect, comment and we can reopen.' is a terminal non-merge signal per new P-7-1. The model misread member engagement and greptile review activity as positive merge signals."
+        }
+      ]
+    },
+    {
+      "id": "P-8-1",
+      "pattern": "Non-maintainer approvals from domain-affected users (users who report being directly impacted by the bug) do not override a 0% merge rate across multiple prior PRs; maintainer engagement or maintainer label is still required.",
+      "evidence": "A PR from a 0% merge rate author (2 prior PRs) received an APPROVED review from a non-maintainer who explicitly described being affected by the bug and having built a workaround. Despite the domain credibility of the approver and the technical validation of the fix, the PR was not merged.",
+      "mechanism": "An affected-user approval demonstrates the bug is real and the fix addresses a genuine pain point, but it does not constitute maintainer authorization to merge. Affected users lack the repository authority to greenlight merges. The 0% merge rate pattern reflects systemic non-acceptance that is not overcome by community validation alone. The approval signal is qualitatively different from a maintainer approval or maintainer label.",
+      "anti_pattern": "Do not predict merge for authors with 0% merge rate across 2+ prior PRs based on a non-maintainer approval, even when the approver is an affected user who explicitly validates the fix addresses a documented pain point. Affected-user endorsements are qualitatively stronger than random non-maintainer approvals but do not substitute for maintainer engagement or maintainer label. Require a maintainer comment, maintainer label, or merge receipt to override the 0% merge rate signal.",
+      "confidence": 0.8,
+      "support": 1,
+      "status": "active",
+      "since_round": 8,
+      "last_validated": 10,
+      "attributions": []
+    },
+    {
+      "id": "P-8-2",
+      "pattern": "First-time contributor PRs with only a non-maintainer approval (CONTRIBUTOR role, not MEMBER or maintainer) and no maintainer comment, no maintainer label, and no tests are unlikely to merge regardless of scope.",
+      "evidence": "A medium-sized feature PR from a first-time contributor with a CONTRIBUTOR-role approval and no maintainer engagement, no tests, no comments from the author, and no maintainer label was not merged.",
+      "mechanism": "CONTRIBUTOR-role approvals do not carry merge authority equivalent to MEMBER or maintainer approvals. First-time contributors have no established trust, and a CONTRIBUTOR approval alone is insufficient to authorize merge for a new feature addition. Without tests, the PR lacks a quality signal that could compensate for the engagement gap.",
+      "anti_pattern": "Do not predict merge for first-time contributor feature PRs based solely on a CONTRIBUTOR-role approval when there is no maintainer comment, no maintainer label, no tests, and no author engagement. CONTRIBUTOR approvals are not equivalent to MEMBER or maintainer approvals for the purpose of predicting merge. Require at minimum a maintainer label or a maintainer/member comment to predict merge for first-time contributor PRs.",
+      "confidence": 0.78,
+      "support": 1,
+      "status": "active",
+      "since_round": 8,
+      "last_validated": 10,
+      "attributions": []
+    },
+    {
+      "id": "P-8-3",
+      "pattern": "Authors with 0% merge rate who repeatedly self-ping automated review bots without any human reviewer engagement are very unlikely to merge even when the PR includes tests and addresses a documented issue.",
+      "evidence": "A PR from a 0% merge rate author (3 prior PRs) showed 13 comments consisting almost entirely of repeated self-pings to an automated review bot, plus a reference to a related issue number. Nine automated reviews were generated. No human reviewer approved or commented. The PR was merged despite these signals \u2014 indicating the model's FN prediction was wrong.",
+      "mechanism": "Repeated automated bot re-triggers without human engagement indicate the author is attempting to compensate for lack of human reviewer attention by generating more automated feedback. This is a form of P-1-11 (self-driven maintenance without maintainer engagement). However, the PR was actually merged, suggesting a maintainer bulk-landing or external merge path not visible in the PR content. When no merge receipt is visible, the 0% rate + bot-ping-only pattern is a reliable non-merge signal.",
+      "anti_pattern": "Do not predict merge for 0% merge rate authors whose engagement consists solely of repeated self-pings to automated review bots with no human reviewer comments or approvals, unless a commit-hash-backed merge receipt is visible in the PR content. Repeated bot re-trigger pings are a compensatory self-advocacy signal, not a human engagement signal. Apply the same logic as P-1-11 and P-2-4.",
+      "confidence": 0.72,
+      "support": 1,
+      "status": "active",
+      "since_round": 8,
+      "last_validated": 10,
+      "attributions": []
+    },
+    {
+      "id": "P-8-4",
+      "pattern": "A top trusted contributor comment stating 'This is inherently UNSAFE and should not be merged' followed by author revision and a subsequent 'Looks good now' comment from the same trusted contributor constitutes a conditional approval that does not constitute a formal merge authorization; the PR still requires a maintainer label or merge receipt.",
+      "evidence": "A first-time contributor PR (0 files changed in features) received a CONTRIBUTOR comment stating the PR was inherently unsafe and should not be merged, followed by author revision and a follow-up 'Looks good now' comment from the same CONTRIBUTOR. No formal approval review was submitted, no maintainer label was present, and no merge receipt was generated. The PR was not merged.",
+      "mechanism": "A trusted contributor's 'Looks good now' comment after a safety concern resolution is a positive engagement signal but not a formal approval review. Without a formal APPROVED review state, a maintainer label, or a merge receipt, the PR lacks a definitive merge authorization. First-time contributors with 0 files changed (potential data artifact) and no formal approval remain in an ambiguous state where the conditional endorsement is insufficient.",
+      "anti_pattern": "Do not predict merge based on a trusted contributor comment saying 'Looks good now' after initially objecting, unless the comment is accompanied by a formal APPROVED review state, a maintainer label, or a merge receipt. Conditional endorsement comments without formal review state change are positive signals but not terminal merge signals for first-time contributors without maintainer label.",
+      "confidence": 0.75,
+      "support": 1,
+      "status": "active",
+      "since_round": 8,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 8,
+          "pr_number": 15454,
+          "error_type": "fp",
+          "attribution": "P-8-4",
+          "ambiguous": false,
+          "reason": "First-time contributor with 0 files changed (data artifact), top trusted contributor (HenryLoenwind CONTRIBUTOR) initially stated 'inherently UNSAFE and should not be merged' then said 'Looks good now' after author revision. No formal APPROVED review state, no maintainer label, no merge receipt. The model predicted merge based on the positive engagement signal from a trusted contributor. New pattern P-8-4 captures: 'Looks good now' without a formal APPROVED review state or maintainer label is insufficient for first-time contributors. No maintainer label present; P-3-3 partially applicable (0 files changed) but likely a data artifact given the PR has substantive content."
+        }
+      ]
+    },
+    {
+      "id": "P-9-1",
+      "pattern": "A trusted contributor bulk-landing merge receipt with commit hash ('Merged via squash. - Merge commit: <hash>') is a terminal positive merge signal even for first-time contributors with 0% merge rate, repeated automated bot self-pings, and no human reviewer approval, overriding all absence-of-engagement signals.",
+      "evidence": "PR #6141: first-time contributor with L-sized PR, 3 repeated author self-pings to greptile bot, no human reviewer approval, no maintainer label, no maintainer comment \u2014 but CONTRIBUTOR (Takhoffman) posted 'Merged via squash. - Merge commit: 57d0f65e7db44b22f3a234835961ea77be1fd819 - Verified: pnpm install --frozen-lockfile, pnpm build, pnpm check, pnpm test'. PR was actually merged. PR #13049: first-time contributor (0 prior PRs, 0% merge rate), XS-sized PR, author self-advocacy ping to '@tmchow', only automated greptile review, no maintainer label \u2014 but CONTRIBUTOR (Takhoffman) posted 'Merged via squash. - Merge commit: 0c7bc303c9ecb1019cae4f21d8f9f38ad163bcbf'. PR was actually merged.",
+      "mechanism": "Takhoffman and similar trusted contributors operate as landing managers who execute squash-merges outside the normal review pipeline. The presence of a verified commit hash in the merge receipt is direct, unfalsifiable evidence that the merge occurred. First-time contributor status, 0% merge rate, bot self-pings, and absence of human reviewer engagement are all pre-merge signals that become irrelevant once a commit-hash-backed merge receipt is posted. The receipt post-dates the merge decision and documents a completed action.",
+      "anti_pattern": "Do not predict non-merge when a trusted contributor comment includes 'Merged via squash' with a commit hash, regardless of first-time contributor status, 0% merge rate, repeated automated bot self-pings, or absence of human reviewer approval. The commit-hash-backed merge receipt is a terminal positive signal that overrides all absence-of-engagement patterns including P-1-12, P-2-4, P-8-3, and P-1-11. Extends P-4-2 and P-5-2 to first-time contributors with bot-ping-only engagement patterns.",
+      "confidence": 0.93,
+      "support": 2,
+      "status": "active",
+      "since_round": 9,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 9,
+          "pr_number": 6141,
+          "error_type": "fn",
+          "attribution": "P-9-1",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (Takhoffman) posted squash merge receipt with commit hash 57d0f65e7db44b22f3a234835961ea77be1fd819. Terminal positive signal per P-4-2/P-5-2 extended by P-9-1. The model incorrectly applied P-1-11 (bot self-pings) and P-2-4 (0% merge rate + no engagement) without recognizing the merge receipt override."
+        },
+        {
+          "round": 9,
+          "pr_number": 13049,
+          "error_type": "fn",
+          "attribution": "P-9-1",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (Takhoffman) posted squash merge receipt with commit hash 0c7bc303c9ecb1019cae4f21d8f9f38ad163bcbf. Terminal positive signal overriding first-time contributor status, 0% merge rate, and absence of human reviewer engagement."
+        },
+        {
+          "round": 9,
+          "pr_number": 6141,
+          "error_type": "fn",
+          "attribution": "P-9-1",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (Takhoffman) posted 'Merged via squash. - Merge commit: 57d0f65e7db44b22f3a234835961ea77be1fd819' with verification details. Terminal positive signal per P-4-2/P-5-2 extended by new P-9-1. The model applied P-1-11 (bot self-pings without maintainer engagement) and P-2-4/P-1-12 (0% merge rate, first-time contributor, no human reviewer) without recognizing the commit-hash-backed merge receipt override."
+        },
+        {
+          "round": 9,
+          "pr_number": 13049,
+          "error_type": "fn",
+          "attribution": "P-9-1",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (Takhoffman) posted 'Merged via squash. - Merge commit: 0c7bc303c9ecb1019cae4f21d8f9f38ad163bcbf'. Terminal positive signal per P-4-2/P-5-2 extended by new P-9-1. The model applied P-1-12 (first-time contributor, no human reviewer) and 0% merge rate signals without recognizing the commit-hash-backed merge receipt override."
+        }
+      ]
+    },
+    {
+      "id": "P-9-2",
+      "pattern": "A CONTRIBUTOR (steipete) comment stating 'Landed via temp rebase onto main' followed by a list of failing tests is not a merge receipt; it describes a rebase attempt with unresolved CI failures and is a non-merge signal.",
+      "evidence": "PR #8914: steipete (CONTRIBUTOR) comment 'Landed via temp rebase onto main.\\n\\n- Gate: pnpm lint && pnpm build && pnpm test (fails: src/auto-reply/command-control.test.ts, src/agents/pi-tools.safe-bins.test.ts, ...)'. The comment lists multiple failing tests after the rebase, indicating the landing was not clean. No commit hash is provided. Author kelvinCB had requested admin help for stuck macOS CI jobs, indicating unresolved CI state. PR was not merged.",
+      "mechanism": "'Landed via temp rebase onto main' without a commit hash and with an explicit list of failing tests indicates a failed or incomplete landing attempt, not a completed merge. The absence of a commit hash means there is no verifiable merge event. The failing test list confirms the rebase introduced or surfaced test failures. This is the inverse of P-2-2/P-4-2: a landing comment that explicitly reports failures and lacks a commit hash is a non-merge signal rather than a positive merge signal.",
+      "anti_pattern": "Do not interpret 'Landed via temp rebase onto main' as a merge receipt when the same comment lists failing tests and does not include a commit hash. A landing comment without a commit hash that includes a failure list is evidence of an incomplete or failed merge attempt, not a completed merge. Require an explicit commit hash to treat any landing/merge comment as a terminal positive signal per P-2-2.",
+      "confidence": 0.82,
+      "support": 1,
+      "status": "active",
+      "since_round": 9,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 9,
+          "pr_number": 8914,
+          "error_type": "fn",
+          "attribution": "P-9-2",
+          "ambiguous": false,
+          "reason": "steipete (CONTRIBUTOR) comment 'Landed via temp rebase onto main' lists multiple failing tests and provides no commit hash. This is not a merge receipt per P-2-2. The model incorrectly treated the landing language as a positive merge signal without verifying the commit hash and noting the explicit failure list."
+        },
+        {
+          "round": 9,
+          "pr_number": 8914,
+          "error_type": "fn",
+          "attribution": "P-9-2",
+          "ambiguous": false,
+          "reason": "steipete (CONTRIBUTOR) comment 'Landed via temp rebase onto main' lists multiple failing tests and provides no commit hash. New P-9-2 captures this as a failed landing attempt, not a merge receipt. The model should not have predicted merge based on the landing language without a commit hash."
+        }
+      ]
+    },
+    {
+      "id": "P-9-3",
+      "pattern": "An author comment explicitly stating 'Closing as duplicate of #NNNN which covers the same fix' is a terminal non-merge signal for the original PR, regardless of reviewer endorsements or CI status.",
+      "evidence": "PR #13906: author (0xRaini) commented 'Closing as duplicate of #13926 which covers the same fix.' Despite a CONTRIBUTOR reviewer (striking) comment endorsing the fix ('This looks right: limitHistoryTurns can definitely orphan tool_result blocks') and CI green status, the author's own self-declared duplicate closure is terminal. The model predicted merge (FP) based on the reviewer endorsement and CI green status.",
+      "mechanism": "Author self-declared duplicate closure is a specific variant of author supersession (P-6-4). When the author themselves identifies a successor PR that covers the same fix, the original PR is retired. The reviewer endorsement was provisional ('once green, I'd be comfortable approving whichever PR') and never converted to a formal APPROVED review state. CI green status and reviewer praise are pre-merge signals that are nullified by the author's own closure declaration.",
+      "anti_pattern": "Do not predict merge when the PR author explicitly states 'Closing as duplicate of #NNNN which covers the same fix' or equivalent self-declared duplicate language, even when a reviewer has endorsed the fix and CI is green. Author self-declared duplicate closure is a terminal non-merge signal equivalent to P-6-4 (author supersession) and P-7-1 (member duplicate closure). A provisional reviewer endorsement pending CI green that was never converted to a formal APPROVED review state does not override the author's own duplicate closure.",
+      "confidence": 0.9,
+      "support": 1,
+      "status": "active",
+      "since_round": 9,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 9,
+          "pr_number": 13906,
+          "error_type": "fp",
+          "attribution": "P-9-3",
+          "ambiguous": false,
+          "reason": "Author (0xRaini) explicitly stated 'Closing as duplicate of #13926 which covers the same fix.' Terminal non-merge signal per P-6-4 extended by P-9-3. The model over-weighted the CONTRIBUTOR reviewer endorsement and CI green status without recognizing the author's own duplicate closure comment."
+        },
+        {
+          "round": 9,
+          "pr_number": 13906,
+          "error_type": "fp",
+          "attribution": "P-9-3",
+          "ambiguous": false,
+          "reason": "Author (0xRaini) explicitly stated 'Closing as duplicate of #13926 which covers the same fix.' Terminal non-merge signal per P-6-4 extended by new P-9-3. The model over-weighted the CONTRIBUTOR reviewer endorsement (striking) and CI green status without recognizing the author's own duplicate closure comment."
+        }
+      ]
+    },
+    {
+      "id": "P-9-4",
+      "pattern": "A member squash-merge receipt with both a prepared head SHA and a merge commit hash is a terminal positive merge signal for first-time contributors with zero reviews, zero comments, and no maintainer label, even for docs-only PRs.",
+      "evidence": "PR #15157: first-time contributor (0 prior PRs, 0% merge rate), XS-sized docs PR (5 files), zero comments visible before merge receipt, zero reviews, no maintainer label \u2014 but MEMBER (sebslight) posted 'Merged via squash. - Prepared head SHA: 3239baaf150f451328d86a0e054ab4a8de264e30 - Merge commit: 8c920b9a181a15a99db22f8cf9cc52771b784161 Thanks @heytulsiprasad!' PR was actually merged. The model predicted non-merge based on zero engagement and 0% prior merge rate.",
+      "mechanism": "Member squash-merge receipts with dual commit hashes (prepared head SHA + merge commit) are externally verifiable records of completed merge operations per P-6-5. This applies to docs-only PRs from first-time contributors just as to code PRs. A member can directly merge a docs PR they find suitable without any prior review pipeline. The docs-only nature may actually accelerate direct member merges for clear, focused fixes.",
+      "anti_pattern": "Do not predict non-merge for docs-only PRs from first-time contributors based on zero reviews, zero comments, 0% prior merge rate, and no maintainer label when a member comment includes 'Merged via squash' with both a prepared head SHA and a merge commit hash. The dual-hash squash receipt is a terminal positive signal per P-6-5 that overrides all absence-of-engagement signals, including for docs-only PRs. Extends P-6-5 to docs-only first-time contributor PRs.",
+      "confidence": 0.93,
+      "support": 1,
+      "status": "active",
+      "since_round": 9,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 9,
+          "pr_number": 15157,
+          "error_type": "fn",
+          "attribution": "P-9-4",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) posted squash merge receipt with both prepared head SHA and merge commit hash. Terminal positive signal per P-6-5 extended by P-9-4 for docs-only first-time contributor PRs. The model incorrectly applied absence-of-engagement patterns (P-1-12, P-2-4) without recognizing the member merge receipt override."
+        },
+        {
+          "round": 9,
+          "pr_number": 15157,
+          "error_type": "fn",
+          "attribution": "P-9-4",
+          "ambiguous": false,
+          "reason": "MEMBER (sebslight) posted squash merge receipt with both prepared head SHA (3239baaf150f451328d86a0e054ab4a8de264e30) and merge commit hash (8c920b9a181a15a99db22f8cf9cc52771b784161). Terminal positive signal per P-6-5 extended by new P-9-4 for docs-only first-time contributor PRs. The model applied absence-of-engagement signals (P-1-12, 0% merge rate) without recognizing the member merge receipt."
+        }
+      ]
+    },
+    {
+      "id": "P-9-5",
+      "pattern": "A contributor comment stating 'accidentally merged this but it's problematic' followed by the author acknowledging critical bugs and promising a follow-up PR is a terminal non-merge signal for the original PR, indicating an accidental merge with unresolved critical issues.",
+      "evidence": "PR #18049: CONTRIBUTOR (steipete) posted 'accidentally merged this but it's problematic' with a detailed bug report (process.cwd() usage, stale transcript issues). Author (irchelper) acknowledged both bugs and submitted a follow-up PR #18914 to fix Bug 1. Author had 0% merge rate across 6 prior PRs. The accidental merge + critical bug acknowledgment pattern matches P-5-3/P-6-6 (accidental merge revert signals) but without an explicit revert commit SHA \u2014 instead, the 'problematic' language and follow-up PR indicate the original PR's changes are not cleanly in the repository.",
+      "mechanism": "When a contributor states a PR was accidentally merged and identifies critical bugs in the implementation, the net state of the repository reflects either a reverted merge or a broken change. The author's acknowledgment of the bugs and submission of a follow-up fix PR confirms the original PR's implementation was defective. This is a soft revert signal (no explicit revert SHA) combined with a critical quality rejection, both indicating the original PR will not remain merged in its submitted form.",
+      "anti_pattern": "Do not predict merge for PRs where a contributor comment states 'accidentally merged this but it's problematic' with specific bug details, even when the author acknowledges the issues and promises fixes via a follow-up PR. The 'accidentally merged + problematic' combination is a non-merge signal even without an explicit revert commit SHA. The follow-up PR language confirms the original PR's changes are defective and not cleanly accepted. Apply the same logic as P-5-3 and P-6-6 for accidental merge signals.",
+      "confidence": 0.82,
+      "support": 1,
+      "status": "active",
+      "since_round": 9,
+      "last_validated": 10,
+      "attributions": [
+        {
+          "round": 9,
+          "pr_number": 18049,
+          "error_type": "fn",
+          "attribution": "P-9-5",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (steipete) stated 'accidentally merged this but it's problematic' with detailed critical bug report. Author acknowledged bugs and submitted follow-up PR #18914. This is an accidental merge + critical defect signal per P-5-3/P-6-6 logic. The model predicted non-merge but ground truth may reflect the accidental merge state; new P-9-5 captures the soft-revert variant without explicit revert SHA."
+        },
+        {
+          "round": 9,
+          "pr_number": 18049,
+          "error_type": "fn",
+          "attribution": "P-9-5",
+          "ambiguous": false,
+          "reason": "CONTRIBUTOR (steipete) stated 'accidentally merged this but it's problematic' with detailed critical bug report. Author acknowledged bugs and submitted follow-up PR #18914. New P-9-5 captures the soft-revert accidental-merge variant. The 0% merge rate author (6 prior PRs) and critical bug acknowledgment make this a non-merge; the model's FN suggests it predicted non-merge but the accidental merge was counted as merge in ground truth."
+        }
+      ]
+    }
+  ],
   "pruning_threshold": 2,
-  "last_round": 0
+  "last_round": 10
 }
