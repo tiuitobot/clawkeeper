@@ -178,5 +178,41 @@
     "date": "2026-02-18",
     "source": "execution_log.txt + /tmp/bootstrap_v3.log",
     "context": "P089 aplicado. Shell do exec session morreu e levou o processo filho. Re-run R5-R10 com setsid."
+  },
+  {
+    "id": "K021",
+    "info": "Greptile Confidence Score (X/5) existe no body das PRs desde ~30 jan 2026. Formato: HTML comment com summary + score. 1746 PRs amostradas (14-18 fev). Score fraco como preditor: 5/5 tem 16.5% merge vs 0/5 0%. Distribuição enviesada: 46% recebem 5/5.",
+    "importance": "medium",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "gh API query + PR #9715 body",
+    "context": "Greptile avalia qualidade de código (ortogonal ao Clawkeeper que avalia probabilidade de merge). Útil como feature complementar, não substituto. Body da PR não está no enrichment atual."
+  },
+  {
+    "id": "K022",
+    "info": "Enrichment atual não captura body da PR. Campos: title, labels, user, dates, comments, reviews, files. Body contém: Greptile summary+score, fixes/closes #N, descrição do autor. Gap significativo.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "data/all_historical_prs_enriched.json schema inspection",
+    "context": "Adicionar body ao enrichment é trivial (campo já vem da API). Permite extrair greptile_confidence, has_linked_issue, e texto descritivo."
+  },
+  {
+    "id": "K023",
+    "info": "closingIssuesReferences (issue linkada) não é preditor forte de merge no OpenClaw: 28.0% com issue vs 31.2% sem issue (N=2000). Hipótese de alto valor preditivo rejeitada para o binário simples.",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "gh GraphQL API, 2000 PRs paginadas",
+    "context": "Possível que issue criada pelo maintainer (vs pelo autor) tenha valor preditivo, mas requer query adicional. O binário has_linked_issue sozinho não discrimina."
+  },
+  {
+    "id": "K024",
+    "info": "Três dimensões ortogonais de avaliação de PR identificadas: (1) qualidade de código (Greptile), (2) probabilidade de merge (Clawkeeper), (3) resolve o problema? (ninguém faz). Dimensão 3 requer análise semântica issue+diff.",
+    "importance": "high",
+    "status": "hypothesis",
+    "date": "2026-02-18",
+    "source": "Discussão Bruno-Tiuito 2026-02-18",
+    "context": "Dimensão 3 seria diferencial real do Clawkeeper. Hard mode: precisa LLM lendo issue+diff. Candidato a Stage 2+."
   }
 ]
