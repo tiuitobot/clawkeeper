@@ -100,16 +100,21 @@ def call_haiku(prompt: str, max_tokens: int = 8000) -> dict:
         text = data["content"][0]["text"]
         if "```json" in text:
             text = text.split("```json", 1)[1].split("```", 1)[0]
+        # Try to repair common JSON issues
+        cleaned = text.strip()
+        # Remove trailing commas before } or ]
+        import re as _re
+        cleaned = _re.sub(r',\s*([}\]])', r'\1', cleaned)
         try:
-            return json.loads(text)
+            return json.loads(cleaned)
         except json.JSONDecodeError as e:
             if attempt < 2:
-                print(f"JSON parse error at char {e.pos}/{len(text)}; retrying (attempt {attempt+1}/3)")
+                print(f"JSON parse error at char {e.pos}/{len(cleaned)}; retrying (attempt {attempt+1}/3)")
                 payload["max_tokens"] = min(payload["max_tokens"] + 2000, 8192)
                 time.sleep(2)
                 continue
-            print(f"JSON parse FATAL: {e}. Last 200 chars: {text[-200:]}")
-            raise
+            print(f"JSON parse FATAL after repair: {e}. Returning empty predictions.")
+            return {"predictions": [], "duplicates": []}
     raise RuntimeError("call_haiku failed after 3 attempts")
 
 
