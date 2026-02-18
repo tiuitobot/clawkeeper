@@ -256,7 +256,11 @@ def main() -> None:
             if src.exists() and not dst.exists():
                 shutil.copy2(src, dst)
 
-    all_prs = {int(p["number"]): p for p in json.load((DATA / "all_historical_prs.json").open())}
+    # Prefer enriched (with comments/reviews/files) if available
+    enriched_path = DATA / "all_historical_prs_enriched.json"
+    base_path = DATA / "all_historical_prs.json"
+    prs_path = enriched_path if enriched_path.exists() else base_path
+    all_prs = {int(p["number"]): p for p in json.load(prs_path.open())}
     author_stats = compute_author_stats(all_prs)
     feature_spec = json.load(MODEL_SPEC.open())["features"]
 
@@ -328,7 +332,7 @@ def main() -> None:
                 "--sample",
                 str(OUT / f"round_{r}_sample.json"),
                 "--all-prs",
-                str(DATA / "all_historical_prs.json"),
+                str(prs_path),
                 "--split",
                 str(DATA / "split.json"),
                 "--output",
@@ -346,7 +350,7 @@ def main() -> None:
                 "--errors",
                 str(errors_path),
                 "--all-prs",
-                str(DATA / "all_historical_prs.json"),
+                str(prs_path),
                 "--patterns-state",
                 str(OUT / "patterns_state.json"),
                 "--round",
@@ -365,7 +369,7 @@ def main() -> None:
             "--bootstrap-dir",
             str(OUT),
             "--all-prs",
-            str(DATA / "all_historical_prs.json"),
+            str(prs_path),
             "--output",
             str(OUT / "consolidated.json"),
             "--errors-output",
