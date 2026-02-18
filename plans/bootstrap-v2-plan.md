@@ -453,23 +453,65 @@ data/
 
 ---
 
-## 14. Sequência de Implementação
+## 14. Stage 0.8 — Ground Truth Enrichment (pré-bootstrap)
+
+### Problema
+Regex encontrou 133 clusters (193 edges) dos ~384 esperados. Os 326 edges dropados referenciavam Issues (não PRs). Além disso, ~425 relações implícitas (superseded sem referência explícita) não são capturáveis por regex. Ground truth incompleto → recall do Haiku medido contra piso, não teto.
+
+### Princípio
+"Deterministic first" ≠ "deterministic only". Regex dá o piso. LLM expande o teto. Quem prepara ground truth deve ser **estritamente mais capaz** que quem é testado — senão é Haiku avaliado contra Haiku.
+
+### Solução
+**Sonnet (sem thinking)** com acesso completo (comments não sanitizados, outcomes visíveis, cross-PR comparison) faz enrichment do ground truth UMA VEZ.
+
+| Aspecto | Ground Truth (Sonnet) | Bootstrap (Haiku) |
+|---------|----------------------|-------------------|
+| Modelo | Sonnet 4.5 (no think) | Haiku 4.5 |
+| Acesso | Completo (outcomes, comments, cross-PR) | Restrito (sanitizado, batch de 10) |
+| Objetivo | Encontrar TODOS os pares | Testar detecção com info limitada |
+| Frequência | Uma vez | 10 rounds |
+
+### Execução
+1. Pegar os 2.263 PRs de treino
+2. Agrupar em batches de ~20-30 PRs (por proximidade temporal ou file overlap pré-computado)
+3. Sonnet (no think) analisa cada batch: "quais destes PRs são duplicados/superseded?"
+4. Union-find nos pares detectados → clusters enriquecidos
+5. Merge com clusters do regex (133 + novos)
+6. Validação manual: sample de 20 pares novos, conferir se são reais
+7. Salvar `data/dedupe_ground_truth_enriched.json`
+
+### Custo estimado
+- ~80-100 batches de 25 PRs
+- Sonnet: ~$0.03/batch (input) + ~$0.01/batch (output) = ~$3-4 total
+- One-shot, não recorrente
+
+### Gate
+Se enrichment encontrar <30 clusters novos: regex já cobria a maioria. Se >100: LLM layer é essencial pro pipeline.
+
+---
+
+## 15. Sequência de Implementação
 
 ```
-1. [ ] build_split.py         — split global 70/30 com cluster constraint + validação
-2. [ ] sanitize.py            — sanitizador de comments + testes
-3. [ ] sample_v2.py           — sampler com injeção DIRIGIDA de dedupe (clusters no mesmo batch)
-4. [ ] extract_patterns.py    — extrai patterns abstratos dos erros (sem PR#, sem outcomes)
-5. [ ] bootstrap_v2.py        — orquestrador: rounds + batches + fases (baseline/learning)
-6. [ ] score_round.py         — scoring merge + dedupe por round
-7. [ ] consolidate_v2.py      — consolidação: learning curve, delta, promoted patterns
-8. [ ] Atualizar model_spec   — adicionar is_low_merge_author como feature #34
-9. [ ] Audit manual           — 10 PRs sanitizados, conferir leakage residual
-10. [ ] Execução              — `python3 scripts/bootstrap_v2.py --rounds 10 --seed 42`
-11. [ ] Report + PDF          — step report com resultados + learning curve
+1. [x] build_split.py         — split global 70/30 com cluster constraint + validação ✅
+2. [x] sanitize.py            — sanitizador de comments + testes ✅
+3. [x] sample_v2.py           — sampler com injeção DIRIGIDA de dedupe ✅
+4. [x] extract_patterns.py    — extrai patterns abstratos dos erros ✅
+5. [x] bootstrap_v2.py        — orquestrador: rounds + batches + fases ✅
+6. [x] score_round.py         — scoring merge + dedupe por round ✅
+7. [x] consolidate_v2.py      — consolidação: learning curve, delta ✅
+8. [x] Atualizar model_spec   — is_low_merge_author como feature #34 ✅
+9. [ ] Fix: PR formatting     — markdown legível em vez de JSON bruto no prompt
+10. [ ] Fix: author stats     — pré-computar author history e injetar no contexto do PR
+11. [ ] Fix: import paths     — resolver `from sanitize import` para ser path-agnostic
+12. [ ] Stage 0.8             — ground truth enrichment (Sonnet no-think, ~$3-4, one-shot)
+13. [ ] Re-gerar samples      — com ground truth enriquecido (mais clusters disponíveis)
+14. [ ] Audit manual          — 10 PRs sanitizados, conferir leakage residual
+15. [ ] Execução              — `python3 scripts/bootstrap_v2.py --rounds 10 --seed 42`
+16. [ ] Report + PDF          — step report com resultados + learning curve
 ```
 
-**Estimativa:** Scripts 1-7 em ~2-3h (Codex). Spec update + audit + execução + report em ~2h. Total: ~5h.
+**Status:** Scripts 1-8 ✅ (Codex, 5min, $0.02). Fixes 9-11 pendentes (~30min). Stage 0.8 (~1h). Execução (~1h). Total restante: ~3h.
 
 ---
 
