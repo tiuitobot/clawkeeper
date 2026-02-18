@@ -454,29 +454,42 @@ def main() -> None:
         if raw_errors and not args.dry_run:
             error_blocks = []
             for e in raw_errors:
+                pr_num = int(e["pr_number"])
+                pr_data = all_prs.get(pr_num, {})
+                pr_content = format_pr_for_prompt(pr_data) if pr_data else "(PR content not available)"
+                error_type_desc = "merged (WRONG — actually closed)" if e["error_type"] == "fp" else "closed (WRONG — actually merged)"
                 error_blocks.append(
-                    f"PR #{e['pr_number']}: You predicted {e['error_type'].upper().replace('FP','merged (WRONG — actually closed)').replace('FN','closed (WRONG — actually merged)')}.\n"
+                    f"PR #{pr_num}: You predicted {error_type_desc}.\n"
                     f"Your original reasoning: {e.get('reasoning', '(empty)')}\n"
-                    f"Features you extracted: {json.dumps(e.get('features', {}))}"
+                    f"Features you extracted: {json.dumps(e.get('features', {}))}\n\n"
+                    f"Full PR content:\n{pr_content}"
                 )
-            reflection_prompt = (
+            refl_header = (
                 "You made prediction errors on the following PRs. For EACH error, explain:\n"
                 "1. What did you miss or weigh incorrectly?\n"
                 "2. What signal in the PR content should have changed your prediction?\n"
                 "3. What pattern or heuristic led you astray?\n\n"
                 "Be specific and self-critical. Reference concrete details from the PR.\n\n"
-                + "\n---\n".join(error_blocks)
-                + "\n\nOutput JSON:\n"
-                '{"reflections": [{"pr_number": 123, "reflection": "I missed X because Y..."}]}'
             )
-            try:
-                refl_out = call_haiku(reflection_prompt)
-                reflections = {r["pr_number"]: r.get("reflection", "") for r in refl_out.get("reflections", []) if isinstance(r, dict)}
-                for e in raw_errors:
-                    e["reflection"] = reflections.get(e["pr_number"], "")
-                log_line(logf, f"round {r} reflections: {len(reflections)} / {len(raw_errors)} errors")
-            except Exception as ex:
-                log_line(logf, f"round {r} reflection failed: {ex}")
+            refl_footer = "\n\nOutput JSON:\n" '{"reflections": [{"pr_number": 123, "reflection": "I missed X because Y..."}]}'
+
+            # Batch reflections to stay under context limits (~80k tokens)
+            reflections: Dict[int, str] = {}
+            batch_size = 10  # ~10 errors per reflection call
+            for i in range(0, len(error_blocks), batch_size):
+                batch_blocks = error_blocks[i:i + batch_size]
+                reflection_prompt = refl_header + "\n---\n".join(batch_blocks) + refl_footer
+                try:
+                    refl_out = call_haiku(reflection_prompt)
+                    for ref in refl_out.get("reflections", []):
+                        if isinstance(ref, dict):
+                            reflections[ref["pr_number"]] = ref.get("reflection", "")
+                except Exception as ex:
+                    log_line(logf, f"round {r} reflection batch failed: {ex}")
+
+            for e in raw_errors:
+                e["reflection"] = reflections.get(int(e["pr_number"]), "")
+            log_line(logf, f"round {r} reflections: {len(reflections)} / {len(raw_errors)} errors")
 
         json.dump({"errors": raw_errors}, errors_path.open("w"), indent=2)
         run_py(
