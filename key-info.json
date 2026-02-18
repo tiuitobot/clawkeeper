@@ -494,7 +494,7 @@
   {
     "id": "K045",
     "title": "v3 vs v4 scores not comparable — different population difficulty",
-    "description": "v3 used full dataset (3233 PRs including pre-Greptile epoch with simpler dynamics). v4 uses population filter (2787 Greptile-only PRs from complex epoch). Pre-Greptile PRs were easier to classify (simpler repo, fewer bots, less triage). v3 accuracy was inflated by easy samples. The drop from v3 R1 (87%) to v4 R1 (80%) is not model regression — it is a harder sample. All v3-calibrated gates (G-ACC >74.6%, G-REG >69.3%) need recalibration for v4 population.",
+    "description": "v3 used full dataset (3233 PRs including pre-Greptile epoch with simpler dynamics). v4 uses population filter (2787 Greptile-only PRs from complex epoch). Pre-Greptile PRs were easier to classify (simpler repo, fewer bots, less triage). v3 accuracy was inflated by easy samples. The drop from v3 R1 (87%) to v4 R1 (80%) is not model regression — it is a harder sample. All v3-calibrated gates (G-ACC >74.6%, G-REG >69.3%) need recalibration for v4 population. Evidence: FP/FN asymmetry inverted between populations — v3 R1 (simple epoch): 3 FP, 10 FN (model conservative, missed merges); v4 R1 (complex epoch): 19 FP, 1 FN (model liberal, predicts merge on PRs closed for organizational reasons). The complex epoch has more surprising closes — PRs with good technical signals (Greptile, CI, review) closed due to management decisions (triage, duplicate, ban, supersession). Model sees merge-like features but close is driven by organizational dynamics not captured in technical features.",
     "category": "econometrics",
     "severity": "high",
     "source": "Bruno correction",
