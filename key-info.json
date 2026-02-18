@@ -474,5 +474,21 @@
       "reasoning",
       "v4"
     ]
+  },
+  {
+    "id": "K044",
+    "title": "Greptile as endogenous variable — confounded with repo epoch/complexity",
+    "description": "Greptile adoption coincided with increased repo management complexity (more contributors, bots, triage policies, organizational closes). greptile_score is not just review quality — it is a proxy for repo epoch. PRs pre-Greptile had simpler dynamics; post-Greptile PRs carry confounders (volume, bot ratio, maintainer count, triage rules). In logit, greptile_score captures epoch variance, not just review signal. Population filter (Greptile-only) homogenizes epoch but does not eliminate within-period evolution. Needs temporal control variable (pr_sequence_number or repo_age_days) to isolate Greptile effect from epoch effect. Classic omitted variable bias in time series.",
+    "category": "econometrics",
+    "severity": "high",
+    "source": "Bruno hypothesis",
+    "date": "2026-02-18",
+    "tags": [
+      "bootstrap",
+      "greptile",
+      "endogeneity",
+      "time-series",
+      "omitted-variable-bias"
+    ]
   }
 ]
