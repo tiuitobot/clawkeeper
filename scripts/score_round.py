@@ -103,7 +103,7 @@ def main() -> None:
                     "pr_number": n,
                     "error_type": "fp" if yhat and not y else "fn",
                     "features": pred.get("features", {}),
-                    "reasoning": pred.get("reasoning", ""),
+                    "reasoning": pred.get("reasoning", "") or pred.get("qualitative_signals", ""),
                 }
             )
 
@@ -120,7 +120,14 @@ def main() -> None:
 
     pred_pairs: Set[Tuple[int, int]] = set()
     for d in results.get("duplicates", []):
-        prs = sorted(int(x) for x in d.get("prs", []))
+        raw_prs = d.get("prs", [])
+        prs = []
+        for x in raw_prs:
+            try:
+                prs.append(int(x))
+            except (TypeError, ValueError):
+                continue
+        prs.sort()
         pred_pairs |= pairs_from_cluster(prs)
 
     dedupe_tp = len(gt_cluster_pairs & pred_pairs)

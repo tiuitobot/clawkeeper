@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 OUT = DATA / "bootstrap_v4"
 SCRIPTS = ROOT / "scripts"
+MODEL_SPEC = ROOT / "model_spec.json"
 MODEL_ID = "claude-haiku-4-5"
 
 sys.path.insert(0, str(SCRIPTS))
@@ -240,10 +241,13 @@ def format_pr_for_prompt(pr: dict) -> str:
     return text
 
 
-def build_prompt(batch: List[dict], patterns: List[Dict[str, str]]) -> str:
+def build_prompt(batch: List[dict], feature_spec: List[dict], patterns: List[Dict[str, str]]) -> str:
+    # Original model_spec features (v3 compatible)
+    ftxt = "\n".join(f"- {f['name']} ({f['type']}/{f['phase']}): {f.get('notes', '')}" for f in feature_spec)
+
     ptxt = ""
     if patterns:
-        ptxt = "\n## Learned Qualitative Patterns\nUse these ONLY for Task B (qualitative judgment). Do NOT use for Task A.\n" + "\n".join(
+        ptxt = "\n## Learned Qualitative Patterns\nUse these for qualitative judgment in your reasoning. Do NOT use mechanically.\n" + "\n".join(
             f"- PATTERN: {p.get('pattern', '')}\n  WHEN NOT TO APPLY: {p.get('anti_pattern', '')}" for p in patterns
         )
 
@@ -252,59 +256,34 @@ def build_prompt(batch: List[dict], patterns: List[Dict[str, str]]) -> str:
     return f"""You are analyzing pull requests from an open-source project.
 Merge rate is approximately 26%. You do not know outcomes.
 
-You have 3 separate tasks. Complete ALL three.
-
-## Task A — Feature Extraction (Deterministic)
-Extract these features MECHANICALLY from the PR content. No judgment — only pattern matching.
-
-Features to extract for each PR:
-- has_merge_receipt (bool): comments/reviews contain merge confirmation language
-- has_closure_signal (bool): comments mention duplicate/superseded/replaced
-- has_revert_signal (bool): comments mention accidental merge or revert
-- has_human_review (bool): at least one non-bot review exists
-- human_review_type (string): "maintainer" if MEMBER/OWNER review, "contributor" if other human, "none" if no human review
-- is_triage_rejected (bool): 0 files changed OR 270+ files changed (mechanical triage rejection signals)
-- greptile_score (int 0-5): extract numeric score from Greptile review in body, 0 if not found
-- is_bot_like (bool): author has max PRs/same day >= 20 OR median interval < 0.5h OR unique repos >= 10
-- has_linked_issue (bool): PR has linked issues (from metadata)
-- issue_is_self_filed (bool): linked issue was filed by the same author as the PR
-
-## Task B — Merge Prediction (Qualitative Judgment)
-For each PR, predict merged/closed with confidence [0,1] and reasoning.
-Focus your reasoning on aspects that FEATURES CANNOT CAPTURE:
-- Subjective code quality signals from review tone
-- Alignment with project direction (inferred from context)
-- Contributor engagement patterns within THIS PR
-- Timing and urgency signals
-Do NOT repeat feature-level observations in your reasoning.
+## Task A — Merge Prediction
+For each PR, predict merged/closed, confidence [0,1], reasoning, and extract all features below.
+Your reasoning should cover BOTH quantitative observations AND qualitative judgment:
+- What do the features tell you?
+- What qualitative signals (review tone, contributor engagement, code quality) go beyond the numbers?
 {ptxt}
 
-## Task C — Duplicate Detection
+## Task B — Duplicate Detection
 Among PRs in this batch, identify possible duplicate/superseded groups.
 Use the Greptile review summary as semantic representation to compare PR purposes.
 
+## Features ({len(feature_spec)} + 10 enrichment)
+{ftxt}
+
+Additional enrichment features to extract:
+- has_merge_receipt (bool): comments/reviews contain merge commit hash or merge confirmation
+- has_closure_signal (bool): comments mention duplicate/superseded/replaced
+- has_revert_signal (bool): comments mention accidental merge or revert
+- has_human_review (bool): at least one non-bot review exists
+- human_review_type (string): "maintainer" if MEMBER/OWNER review, "contributor" if other human, "none"
+- is_triage_rejected (bool): 0 files changed OR 270+ files changed
+- is_bot_like (bool): author has max PRs/same day >= 20 OR median interval < 0.5h OR unique repos >= 10
+- has_linked_issue (bool): PR has linked issues
+- issue_is_self_filed (bool): linked issue filed by same author as PR
+
 Output JSON:
 {{
-  "predictions": [
-    {{
-      "pr_number": 123,
-      "prediction": "merged",
-      "confidence": 0.7,
-      "features": {{
-        "has_merge_receipt": false,
-        "has_closure_signal": false,
-        "has_revert_signal": false,
-        "has_human_review": true,
-        "human_review_type": "maintainer",
-        "is_triage_rejected": false,
-        "greptile_score": 3,
-        "is_bot_like": false,
-        "has_linked_issue": true,
-        "issue_is_self_filed": false
-      }},
-      "qualitative_signals": "reasoning about non-feature aspects..."
-    }}
-  ],
+  "predictions": [{{"pr_number": 123, "prediction": "merged", "confidence": 0.7, "reasoning": "detailed reasoning here covering both features and qualitative judgment", "features": {{}}}}],
   "duplicates": [{{"prs": [123,456], "confidence": 0.6, "evidence": "..."}}]
 }}
 
@@ -368,6 +347,8 @@ def main() -> None:
     else:
         prs_path = pop_path
 
+    feature_spec = json.load(MODEL_SPEC.open())["features"]
+
     # Generate samples for each round
     for r in range(args.start_round, args.rounds + 1):
         sample_path = OUT / f"round_{r}_sample.json"
@@ -414,7 +395,7 @@ def main() -> None:
                 pr.update(st)
                 batch_raw.append(pr)
             batch = sanitize_batch(batch_raw)
-            prompt = build_prompt(batch, patterns)
+            prompt = build_prompt(batch, feature_spec, patterns)
 
             if args.dry_run:
                 out = {
@@ -435,7 +416,7 @@ def main() -> None:
                                 "has_linked_issue": False,
                                 "issue_is_self_filed": False,
                             },
-                            "qualitative_signals": "dry-run",
+                            "reasoning": "dry-run",
                         }
                         for n in nums
                     ],
