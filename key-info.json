@@ -241,5 +241,14 @@
     "date": "2026-02-18",
     "source": "gh GraphQL closingIssuesReferences + author analysis, N=2000",
     "context": "Explica por que community-issue tem merge rate menor que sem issue (26.6% vs 31.2%). Não é que linkar issue é ruim — é que a população está contaminada por farming. Feature author_prior_merge_rate já captura parcialmente, mas has_linked_issue × low_merge_rate é sinal de bot mais específico."
+  },
+  {
+    "id": "K028",
+    "info": "Bot detection features validados: (1) max_prs_same_day (bots 29-80, humanos 2-11) e (2) median_interval_hours (bots <0.2h, humanos >2h) separam quase perfeitamente. Diversidade de área é fraca. Título formulaico não discrimina (bots usam títulos AI-generated descritivos). CV de additions inconclusivo (dados zerados).",
+    "importance": "high",
+    "status": "confirmed",
+    "date": "2026-02-18",
+    "source": "Análise per-author 3233 PRs enriched",
+    "context": "Features imediatas para Stage 1 logit: max_prs_same_day, median_interval_hours, prs_per_day. Velocidade > conteúdo para detecção de bot neste dataset."
   }
 ]
