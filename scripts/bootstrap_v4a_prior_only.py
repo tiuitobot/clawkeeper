@@ -296,9 +296,19 @@ Output JSON:
 """
 
 
-def load_prior_errors_window(out_dir: Path, round_num: int, window: int, max_items: int) -> List[Dict[str, Any]]:
-    """Load compact prior-errors from the last N rounds (most recent first)."""
-    if round_num <= 1 or window <= 0 or max_items <= 0:
+def load_prior_errors_window(
+    out_dir: Path,
+    round_num: int,
+    window: int,
+    per_round: int,
+    seed: int,
+) -> List[Dict[str, Any]]:
+    """Load compact prior-errors from the last N rounds.
+
+    Sampling policy: up to `per_round` random errors from EACH prior round.
+    Example: window=3 and per_round=10 -> up to 30 errors total.
+    """
+    if round_num <= 1 or window <= 0 or per_round <= 0:
         return []
 
     collected: List[Dict[str, Any]] = []
@@ -312,9 +322,14 @@ def load_prior_errors_window(out_dir: Path, round_num: int, window: int, max_ite
         except Exception:
             continue
 
-        for e in errs:
-            if not isinstance(e, dict):
-                continue
+        errs = [e for e in errs if isinstance(e, dict)]
+        if not errs:
+            continue
+
+        rng = random.Random(seed + (round_num * 1000) + rr)
+        sampled = errs if len(errs) <= per_round else rng.sample(errs, per_round)
+
+        for e in sampled:
             refl = str(e.get("reflection", "") or e.get("reasoning", "")).strip()
             compact = {
                 "round": rr,
@@ -323,8 +338,6 @@ def load_prior_errors_window(out_dir: Path, round_num: int, window: int, max_ite
                 "reflection": refl[:260],
             }
             collected.append(compact)
-            if len(collected) >= max_items:
-                return collected
 
     return collected
 
@@ -361,7 +374,7 @@ def main() -> None:
     ap.add_argument("--max-batches", type=int, default=0, help="for test runs")
     ap.add_argument("--prior-start-round", type=int, default=4, help="round from which prior-errors are injected")
     ap.add_argument("--prior-window", type=int, default=3, help="rolling prior-error window in rounds")
-    ap.add_argument("--max-prior-errors", type=int, default=24, help="cap for prior-error examples in prompt")
+    ap.add_argument("--prior-per-round", type=int, default=10, help="random prior-errors sampled per prior round")
     ap.add_argument("--dry-run", action="store_true", help="no remote API calls")
     args = ap.parse_args()
 
@@ -413,9 +426,13 @@ def main() -> None:
                 OUT,
                 r,
                 window=args.prior_window,
-                max_items=args.max_prior_errors,
+                per_round=args.prior_per_round,
+                seed=args.seed,
             )
-        log_line(logf, f"round {r} prior_errors loaded={len(prior_errors)} window={args.prior_window}")
+        log_line(
+            logf,
+            f"round {r} prior_errors loaded={len(prior_errors)} window={args.prior_window} per_round={args.prior_per_round}",
+        )
 
         predictions = []
         dedupes = []
