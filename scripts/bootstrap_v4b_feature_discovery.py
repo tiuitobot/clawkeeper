@@ -246,6 +246,7 @@ def format_pr_for_prompt(pr: dict) -> str:
 def build_prompt(
     batch: List[dict],
     feature_spec: List[dict],
+    feature_schema: Dict[str, Any],
     prior_errors: List[Dict[str, Any]] | None = None,
     discovered_features: List[Dict[str, Any]] | None = None,
 ) -> str:
@@ -283,6 +284,10 @@ def build_prompt(
             + "\n"
         )
 
+    schema_lines = "\n".join(
+        f"- {f.get('name')} ({f.get('value_type','unknown')})" for f in feature_schema.get("fields", [])
+    )
+
     return f"""You are analyzing pull requests from an open-source project.
 Merge rate is approximately 26%. You do not know outcomes.
 
@@ -310,11 +315,15 @@ Additional enrichment features to extract:
 - has_linked_issue (bool): PR has linked issues
 - issue_is_self_filed (bool): linked issue filed by same author as PR
 
-When discovered features are present, also include them in the `features` JSON output.
+## Canonical Feature Schema (STRICT)
+Use ONLY these keys inside `features`.
+Do NOT invent extra keys.
+If uncertain, set value to null.
+{schema_lines}
 
 Output JSON:
 {{
-  "predictions": [{{"pr_number": 123, "prediction": "merged", "confidence": 0.7, "reasoning": "detailed reasoning here covering both features and qualitative judgment", "features": {{}}}}],
+  "predictions": [{{"pr_number": 123, "prediction": "merged", "confidence": 0.7, "reasoning": "detailed reasoning here covering both features and qualitative judgment", "features": {{"feature_name": null}}}}],
   "duplicates": [{{"prs": [123,456], "confidence": 0.6, "evidence": "..."}}]
 }}
 
@@ -390,6 +399,74 @@ def active_discovered_features(registry: Dict[str, Any], limit: int = 20) -> Lis
     ]
     feats.sort(key=lambda x: (int(x.get("introduced_round", 0)), str(x.get("id", ""))))
     return feats[-limit:]
+
+
+ENRICHMENT_SCHEMA = [
+    ("has_merge_receipt", "bool"),
+    ("has_closure_signal", "bool"),
+    ("has_revert_signal", "bool"),
+    ("has_human_review", "bool"),
+    ("human_review_type", "categorical"),
+    ("is_triage_rejected", "bool"),
+    ("is_bot_like", "bool"),
+    ("has_linked_issue", "bool"),
+    ("issue_is_self_filed", "bool"),
+]
+
+
+def build_canonical_feature_schema(feature_spec: List[dict], discovered: List[Dict[str, Any]]) -> Dict[str, Any]:
+    fields: List[Dict[str, Any]] = []
+    seen = set()
+
+    for f in feature_spec:
+        name = str(f.get("name", "")).strip()
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        fields.append({
+            "name": name,
+            "value_type": str(f.get("type", "unknown")),
+            "source": "core",
+        })
+
+    for name, vtype in ENRICHMENT_SCHEMA:
+        if name in seen:
+            continue
+        seen.add(name)
+        fields.append({"name": name, "value_type": vtype, "source": "enrichment"})
+
+    for f in discovered:
+        name = str(f.get("name", "")).strip()
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        fields.append({
+            "name": name,
+            "value_type": str(f.get("value_type", "unknown")),
+            "source": "discovered",
+            "introduced_round": int(f.get("introduced_round", 0) or 0),
+        })
+
+    return {"fields": fields}
+
+
+def enforce_prediction_schema(predictions: List[Dict[str, Any]], feature_schema: Dict[str, Any]) -> List[Dict[str, Any]]:
+    names = [str(f.get("name")) for f in feature_schema.get("fields", []) if f.get("name")]
+    allowed = set(names)
+    out: List[Dict[str, Any]] = []
+
+    for p in predictions:
+        if not isinstance(p, dict):
+            continue
+        fraw = p.get("features", {})
+        fraw = fraw if isinstance(fraw, dict) else {}
+        normalized = {k: fraw.get(k, None) for k in names}
+        # drop freestyle keys by construction
+        p2 = dict(p)
+        p2["features"] = normalized
+        out.append(p2)
+
+    return out
 
 
 def build_sample(population: List[dict], round_num: int, prs_per_round: int, seed: int) -> dict:
@@ -485,9 +562,11 @@ def main() -> None:
                 seed=args.seed,
             )
         discovered = active_discovered_features(registry, limit=args.discover_active_cap)
+        feature_schema = build_canonical_feature_schema(feature_spec, discovered)
+        json.dump(feature_schema, (OUT / "feature_schema.json").open("w"), indent=2)
         log_line(
             logf,
-            f"round {r} prior_errors loaded={len(prior_errors)} window={args.prior_window} per_round={args.prior_per_round}; discovered_features={len(discovered)}",
+            f"round {r} prior_errors loaded={len(prior_errors)} window={args.prior_window} per_round={args.prior_per_round}; discovered_features={len(discovered)} schema_fields={len(feature_schema.get('fields', []))}",
         )
 
         predictions = []
@@ -511,6 +590,7 @@ def main() -> None:
             prompt = build_prompt(
                 batch,
                 feature_spec,
+                feature_schema,
                 prior_errors if prior_errors else None,
                 discovered if discovered else None,
             )
@@ -543,9 +623,10 @@ def main() -> None:
             else:
                 out = call_haiku(prompt)
 
-            predictions.extend(out.get("predictions", []))
+            batch_predictions = enforce_prediction_schema(out.get("predictions", []), feature_schema)
+            predictions.extend(batch_predictions)
             dedupes.extend(out.get("duplicates", []))
-            log_line(logf, f"round {r} batch {bkey} done predictions={len(out.get('predictions', []))}")
+            log_line(logf, f"round {r} batch {bkey} done predictions={len(batch_predictions)}")
             time.sleep(args.sleep_seconds)
 
         round_results = {"round": r, "predictions": predictions, "duplicates": dedupes}
