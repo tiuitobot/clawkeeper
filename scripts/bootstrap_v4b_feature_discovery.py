@@ -425,7 +425,7 @@ def main() -> None:
     ap.add_argument("--prior-start-round", type=int, default=4, help="round from which prior-errors are injected")
     ap.add_argument("--prior-window", type=int, default=3, help="rolling prior-error window in rounds")
     ap.add_argument("--prior-per-round", type=int, default=10, help="random prior-errors sampled per prior round")
-    ap.add_argument("--discover-max-new", type=int, default=2, help="max discovered features proposed per round")
+    ap.add_argument("--discover-max-new", type=int, default=5, help="max discovered features proposed per round (upper bound, optional)")
     ap.add_argument("--discover-active-cap", type=int, default=20, help="cap of active discovered features included in prompt")
     ap.add_argument("--dry-run", action="store_true", help="no remote API calls")
     args = ap.parse_args()
