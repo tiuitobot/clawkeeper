@@ -1,7 +1,7 @@
 {
   "repo": "clawkeeper",
   "version": 1,
-  "lastUpdated": "2026-05-29T10:00:00Z",
+  "lastUpdated": "2026-06-03T00:00:00Z",
   "_cursor": "dc8f933b1ef41b795ddb39ab3d19e529ce9d17c5",
   "keyInfo": [
     {
@@ -149,6 +149,33 @@
       "info": "Reflection vs Reasoning field — Sonnet was reading the wrong field. bootstrap_v4.py has a two-step process: (1) Haiku predicts with 'reasoning', (2) Haiku reflects on errors generating 'reflection'. The reflection is self-critique ('I missed X because Y'). But extract_patterns_v4.py was only reading 'reasoning' (the original WRONG prediction logic), ignoring 'reflection' entirely. This amplified signal inversion (K033): Sonnet read 'Greptile 5/5 → merge' (reasoning) instead of 'I over-trusted Greptile' (reflection). Fix: pass both fields with clear labels, instruct Sonnet to use reflection as primary source.",
       "importance": "critical",
       "status": "confirmed",
+      "_sweepHits": 3
+    },
+    {
+      "id": "K044",
+      "info": "V4B: enforce canonical feature schema; drop freestyle feature keys",
+      "importance": "high",
+      "status": "active",
+      "date": "2026-02-18",
+      "source": "git commit 3eaf168",
+      "_sweepHits": 3
+    },
+    {
+      "id": "K045",
+      "info": "V4A pipeline: prior-errors rolling window (R4+) + post-hoc pattern consolidation",
+      "importance": "high",
+      "status": "active",
+      "date": "2026-02-18",
+      "source": "git commit d8dfd7c",
+      "_sweepHits": 3
+    },
+    {
+      "id": "K046",
+      "info": "V4B: raise discovered-features cap to 5 per round (max, not mandatory)",
+      "importance": "medium",
+      "status": "active",
+      "date": "2026-02-18",
+      "source": "git commit b0572a2",
       "_sweepHits": 3
     }
   ]
