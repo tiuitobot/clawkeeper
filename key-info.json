@@ -1,7 +1,7 @@
 {
   "repo": "clawkeeper",
   "version": 1,
-  "lastUpdated": "2026-06-03T12:00:00Z",
+  "lastUpdated": "2026-06-11T00:00:00Z",
   "_cursor": "dc8f933b1ef41b795ddb39ab3d19e529ce9d17c5",
   "keyInfo": [
     {
@@ -150,33 +150,6 @@
       "importance": "critical",
       "status": "confirmed",
       "_sweepHits": 3
-    },
-    {
-      "id": "K044",
-      "info": "V4B: enforce canonical feature schema; drop freestyle feature keys",
-      "importance": "high",
-      "status": "active",
-      "date": "2026-02-18",
-      "source": "git commit 3eaf168",
-      "_sweepHits": 2
-    },
-    {
-      "id": "K045",
-      "info": "V4A pipeline: prior-errors rolling window (R4+) + post-hoc pattern consolidation",
-      "importance": "high",
-      "status": "active",
-      "date": "2026-02-18",
-      "source": "git commit d8dfd7c",
-      "_sweepHits": 2
-    },
-    {
-      "id": "K046",
-      "info": "V4B: raise discovered-features cap to 5 per round (max, not mandatory)",
-      "importance": "medium",
-      "status": "active",
-      "date": "2026-02-18",
-      "source": "git commit b0572a2",
-      "_sweepHits": 2
     }
   ]
 }
